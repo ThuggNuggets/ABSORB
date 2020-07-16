@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7053792481552195371}
   - component: {fileID: 7054620646995317745}
   m_Layer: 0
-  m_Name: SplashesEmitterDistort
+  m_Name: HairParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7143403640035100061}
   m_LocalRotation: {x: 0.50913286, y: -0.49086034, z: 0.50173175, w: 0.49810144}
   m_LocalPosition: {x: 0, y: 0.619, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25813773, y: 0.15260324, z: 0.32948682}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7143403640035100061}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 0.1
   simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
@@ -721,7 +721,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 80
+      scalar: 300
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -774,7 +774,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 80
+      scalar: 300
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1471,7 +1471,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: -0.0071105957
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1479,14 +1479,14 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.12577376
-          value: 0.2775119
-          inSlope: -2.113014
-          outSlope: -2.113014
+          time: 0.2717145
+          value: 0.49816293
+          inSlope: -9.37405
+          outSlope: -9.37405
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.26247352
+          outWeight: 0.0510313
         - serializedVersion: 3
           time: 1
           value: -1
@@ -3752,8 +3752,8 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.2
+      scalar: 0.1
+      minScalar: 0.001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3806,8 +3806,8 @@ ParticleSystem:
     textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
-    worldSpace: 0
-    dieWithParticles: 1
+    worldSpace: 1
+    dieWithParticles: 0
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
@@ -3880,7 +3880,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
