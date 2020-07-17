@@ -104,4 +104,4 @@ Material:
     - _MainTexSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _MaskTexSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 0, g: 0.75862074, b: 2, a: 1}
+    - _TintColor: {r: 0.016211603, g: 0.004983983, b: 0.1509434, a: 1}

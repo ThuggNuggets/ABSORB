@@ -117,4 +117,4 @@ Material:
     - _NoiseSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _Speed: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 0, g: 1.8965518, b: 5, a: 1}
+    - _TintColor: {r: 0.035634376, g: 0.022771401, b: 0.32183585, a: 1}
