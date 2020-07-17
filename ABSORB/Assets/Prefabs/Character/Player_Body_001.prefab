@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8260815211856568600}
   - component: {fileID: 8260815211856568601}
   m_Layer: 8
-  m_Name: Player
+  m_Name: Player_Body_001
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   freeLookCamera: {fileID: 0}
-  acceleration: 250
+  acceleration: 100
   maxVelocity: 15
   turnSpeed: 0.3
 --- !u!1001 &7652531224809973934
@@ -89,6 +89,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8260815211856568606}
     m_Modifications:
+    - target: {fileID: 466340435653460753, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 36.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 466340435653460753, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: useUnscaledTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 466340435653460753, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1465471847663723219, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
         type: 3}
       propertyPath: m_Name
@@ -148,16 +163,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8751362499135288530, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
-        type: 3}
-      propertyPath: TrailModule.lifetime.scalar
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8751362499135288530, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
-        type: 3}
-      propertyPath: TrailModule.widthOverTrail.scalar
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3, type: 3}
