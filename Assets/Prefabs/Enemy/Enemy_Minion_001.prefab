@@ -102,11 +102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 50
-  maxVelocity: 10
+  maxVelocity: 7.5
   turnSpeed: 0.2
   sprintAcceleration: 100
-  rangeOfSprint: 7.5
-  avoidPushbackForce: 5
+  rangeOfSprint: 10
+  avoidPushbackForce: 10
   attackPushback: 2.5
   attackDistance: 2
 --- !u!114 &888457025188684263
@@ -125,7 +125,7 @@ MonoBehaviour:
   turnSpeed: 0.2
   weaponTrigger: {fileID: 888457026355838924}
   weaponToEnable: {fileID: 888457026355838915}
-  transitionTime: 1
+  transitionTime: 2
   timeBeforeAttack: 0.2
   attackForce: 20
 --- !u!114 &888457025188684249
@@ -280,7 +280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fd5a4c57efcbd14db1c8f313d99653a, type: 2}
+  - {fileID: 2100000, guid: b7124e63c5e0c7c48b547e5813bfa2f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
