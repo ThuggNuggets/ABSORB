@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   printCurrentState: 0
   playerTransform: {fileID: 0}
+  baseDamage: 10
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 3438492787752429404}
@@ -154,6 +155,7 @@ MonoBehaviour:
   maxVelocity: 10
   turnSpeed: 0.2
   attackDistance: 15
+  retreatDistance: 15
   beforeAttackTimer: 0.7
 --- !u!114 &3438492787752429410
 MonoBehaviour:
@@ -225,6 +227,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3438492785836997246}
     m_Modifications:
+    - target: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyElite
+      objectReference: {fileID: 0}
     - target: {fileID: 1447683862994585691, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: m_IsActive

@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     //public float maxHealth = 100.0f;
     private float damageTaken = 0.0f;
     private SpecialParryBlock player;
-    private GameObject collidedObject;
+    private GameObject collidedObject = null;
 
     enum EnemyType
     {
@@ -77,6 +77,9 @@ public class Health : MonoBehaviour
 
     private void Function()
     {
+        if (!collidedObject)
+            return;
+
         switch (enemy)
         {
             case EnemyType.None:
@@ -91,35 +94,37 @@ public class Health : MonoBehaviour
                 EliteDamage();
                 break;
         }
+        
     }
 
     private float TakeDamage(float damageAmount)
     {
+        collidedObject = null;
         return currentHealth -= damageAmount;
     }
 
     private void MinionDamage()
     {
-        //float damage = collidedObject.GetComponent<AIBrain>().GetDamage();        
-        //TakeDamage(damage);
+        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        TakeDamage(damage);
         enemy = EnemyType.None;
-        //Debug.Log("Damage taken: " + damage);
+        Debug.Log("Damage taken: " + damage);
     }
 
     private void SpecialDamage()
     {
-        //float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
-        //TakeDamage(damage);
+        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        TakeDamage(damage);
         enemy = EnemyType.None;
-        //Debug.Log("Damage taken: " + damage);
+        Debug.Log("Damage taken: " + damage);
     }
 
     private void EliteDamage()
     {
-        //float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
-        //TakeDamage(damage);
+        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        TakeDamage(damage);
         enemy = EnemyType.None;
-        //Debug.Log("Damage taken: " + damage);
+        Debug.Log("Damage taken: " + damage);
     }
 }
 

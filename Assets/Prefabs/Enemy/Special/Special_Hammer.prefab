@@ -49,8 +49,8 @@ GameObject:
   - component: {fileID: 8677661987734016577}
   - component: {fileID: 8677661987734016587}
   m_Layer: 9
-  m_Name: Special_Hammer_001
-  m_TagString: Untagged
+  m_Name: Special_Hammer
+  m_TagString: EnemySpecial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   printCurrentState: 0
   playerTransform: {fileID: 0}
+  baseDamage: 10
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 8677661987734016628}
@@ -213,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Special_Body_001_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792953060312167034, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemySpecial
       objectReference: {fileID: 0}
     - target: {fileID: 3281224920130873536, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
