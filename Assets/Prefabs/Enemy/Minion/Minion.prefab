@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739028750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.203, z: 0}
+  m_LocalPosition: {x: 0, y: 1.63, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 888457025188684251}
@@ -169,13 +169,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888457025188684252}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 327357d9a5ec18842a9df9cf29327863, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!95 &2158594309783822410
 Animator:
   serializedVersion: 3
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54a9b24c15ec0c4d83ffa7141ce64b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDetectionDistance: 15
+  initialDetectionDistance: 20
 --- !u!114 &888457025188684248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,15 +244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782a85988aaa1304f87db71288be5993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
-  maxVelocity: 7.5
-  turnSpeed: 0.2
-  sprintAcceleration: 100
+  acceleration: 5
+  maxVelocity: 5
+  turnSpeed: 1
+  sprintAcceleration: 30
   sprintMaxVelocity: 15
-  rangeOfSprint: 10
+  rangeOfSprint: 20
   avoidPushbackForce: 10
   attackPushback: 2.5
-  attackDistance: 2
+  attackDistance: 1.5
 --- !u!114 &888457025188684263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888457027035413703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2847013945716485815}

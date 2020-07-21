@@ -42,12 +42,12 @@ GameObject:
   - component: {fileID: 8677661987734016585}
   - component: {fileID: 8677661987734016584}
   - component: {fileID: 84937217034869717}
-  - component: {fileID: 171003032}
   - component: {fileID: 8677661987734016591}
   - component: {fileID: 8677661987734016628}
   - component: {fileID: 8677661987734016576}
   - component: {fileID: 8677661987734016577}
   - component: {fileID: 8677661987734016587}
+  - component: {fileID: 1669274403}
   m_Layer: 9
   m_Name: Special_Hammer
   m_TagString: EnemySpecial
@@ -97,28 +97,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
---- !u!95 &171003032
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8677661987734016590}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6da5e8bc66a743478c6cd53ea28ba26, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8677661987734016591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 40
-  maxVelocity: 10
+  maxVelocity: 15
   turnSpeed: 0.2
-  attackDistance: 10
-  beforeAttackTimer: 0.7
+  attackDistance: 15
+  beforeAttackTimer: 1
 --- !u!114 &8677661987734016577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,12 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684d0a572d4286340ac403540841c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hammerAnimator: {fileID: 5525937816015755485}
-  lungeForce: 22
-  turnSpeed: 0.2
-  animationTriggerTime: 0.3
-  returnToChaseTime: 0.4
-  retreatTime: 0.3
+  hammerAnimator: {fileID: 1669274403}
+  lungeForce: 35
+  turnSpeed: 1
+  animationTriggerTime: 0
+  returnToChaseTime: 2
+  retreatTime: 1
 --- !u!114 &8677661987734016587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +184,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220e8c962d26f4b4999392623d53b049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1669274403
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677661987734016590}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6da5e8bc66a743478c6cd53ea28ba26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5525937816012236359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,6 +210,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 888457025746905341}
     m_Modifications:
+    - target: {fileID: 39226598138119162, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.227
+      objectReference: {fileID: 0}
+    - target: {fileID: 39226598138119162, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.196
+      objectReference: {fileID: 0}
     - target: {fileID: 2792953060312167034, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: m_Name
@@ -275,17 +285,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 13303450, guid: beaf0944877d2be41a542b2bb70f9408, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: beaf0944877d2be41a542b2bb70f9408, type: 3}
 --- !u!4 &7005722523342065287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3281224920130873536, guid: beaf0944877d2be41a542b2bb70f9408,
-    type: 3}
-  m_PrefabInstance: {fileID: 5525937816012236359}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5525937816015755485 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 13303450, guid: beaf0944877d2be41a542b2bb70f9408,
     type: 3}
   m_PrefabInstance: {fileID: 5525937816012236359}
   m_PrefabAsset: {fileID: 0}

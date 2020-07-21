@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4133530613702595917}
   - component: {fileID: 1117947240453676357}
   - component: {fileID: 4886717474919163629}
-  - component: {fileID: 1741023565990975808}
   m_Layer: 14
   m_Name: Mesh
   m_TagString: EnemyElite
@@ -81,19 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1741023565990975808
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5949421008787667267}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8840168797588337650
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8840168797588337650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.314, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4133530613702595917}
@@ -244,11 +230,44 @@ PrefabInstance:
       propertyPath: ShapeModule.m_MeshRenderer
       value: 
       objectReference: {fileID: 4886717474919163629}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.lifetime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.sizeAffectsWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.textureMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19862312, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
+      propertyPath: TrailModule.sizeAffectsLifetime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1213769095096802, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114981097972649144, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
 --- !u!4 &3764559341423174482 stripped
 Transform:
