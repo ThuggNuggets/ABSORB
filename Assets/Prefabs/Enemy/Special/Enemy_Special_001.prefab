@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 888457025188684263}
   - component: {fileID: 888457025188684249}
   m_Layer: 9
-  m_Name: Enemy_Minion_001
+  m_Name: Enemy_Special_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookAtPlayer: 1
   turnSpeed: 0.2
-  weaponTrigger: {fileID: 7928694651821825914}
-  weaponToEnable: {fileID: 2169842745120083500}
+  weaponTrigger: {fileID: 0}
+  weaponToEnable: {fileID: 0}
   transitionTime: 2
   timeBeforeAttack: 0.2
   attackForce: 20
@@ -280,21 +280,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 723919243209131639}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2169842745120083500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1447683862994585691, guid: beaf0944877d2be41a542b2bb70f9408,
-    type: 3}
-  m_PrefabInstance: {fileID: 723919243209131639}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7928694651821825914 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7206746147966015757, guid: beaf0944877d2be41a542b2bb70f9408,
-    type: 3}
-  m_PrefabInstance: {fileID: 723919243209131639}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169842745120083500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10163a67d75a59e498486d622cd85d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+--- !u!1001 &8003771602658455406
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2847013945716485815}
+    m_Modifications:
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.169
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.249
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.216
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.28317738
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6479279
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.28317735
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.64792794
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319377475054152419, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 47.216003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987265486258270297, guid: b5dca9063a0d67f4abe1ad1890f330ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Special_Weapon_001_Mesh
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5dca9063a0d67f4abe1ad1890f330ba, type: 3}
