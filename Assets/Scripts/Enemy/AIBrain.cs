@@ -13,6 +13,9 @@ public class AIBrain : MonoBehaviour
     // The player the AI will detect
     public Transform playerTransform;
 
+    [Header("Damage")]
+    public float baseDamage = 10.0f;
+
     // Array list of information to fill the dictionary with
     [System.Serializable]
     public struct AIBehaviourInfo
@@ -119,6 +122,12 @@ public class AIBrain : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
             Destroy(this.gameObject);
+    }
+
+    // Returns the base damage of the enemy.
+    public float GetDamage()
+    {
+        return baseDamage;
     }
 }
 
