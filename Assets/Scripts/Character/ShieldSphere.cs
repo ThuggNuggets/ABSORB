@@ -8,7 +8,7 @@ public class ShieldSphere : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (player.playerShielded && other.gameObject.CompareTag("EnemyWeapon"))
+        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && other.gameObject.CompareTag("EnemyWeapon"))
         {
             player.specialAttackParried = true;
             Debug.Log("Attack Parried!");
