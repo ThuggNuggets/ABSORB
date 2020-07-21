@@ -11,6 +11,7 @@ public class EliteProjectile : MonoBehaviour
     private bool _isActive = false;
     private float _lifeTime = 0.0f;
     private Transform _parentTransform;
+    private float _damage;
 
     // Gets called on awake
     private void Awake()
@@ -19,7 +20,7 @@ public class EliteProjectile : MonoBehaviour
     }
 
     // Sets up the direction for the projectile
-    public void InitialiseProjectile(Transform parentTransform, Vector3 playerPosition, Transform projectileStartPoint, float speed, float lifeTime)
+    public void InitialiseProjectile(Transform parentTransform, Vector3 playerPosition, Transform projectileStartPoint, float speed, float lifeTime, float damage)
     {
         transform.position = projectileStartPoint.position;
         transform.rotation = projectileStartPoint.rotation;
@@ -28,6 +29,7 @@ public class EliteProjectile : MonoBehaviour
         _direction = (playerPosition - transform.position).normalized;
         _speed = speed;
         _lifeTime = lifeTime;
+        _damage = damage;
         StartCoroutine(LifeTimer());
     }
 
@@ -36,6 +38,12 @@ public class EliteProjectile : MonoBehaviour
     {
         if(_isActive)
             _rb.MovePosition(transform.position + _direction * _speed * Time.deltaTime);
+    }
+
+    // Returns the damage of this projectile
+    public float GetDamage()
+    {
+        return _damage;
     }
 
     // Returns true if the projectile is still active within the scene.

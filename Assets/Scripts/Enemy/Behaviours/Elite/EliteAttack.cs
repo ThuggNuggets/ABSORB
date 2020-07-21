@@ -9,6 +9,7 @@ public class EliteAttack : AIBehaviour
     public float justFiredProjectileTimer = 1.0f;
     public float projectileSpeed = 150.0f;
     public float projectileLifeTime = 4.0f;
+    public float projectileDamage = 10.0f;
     public float dashCancelRange = 10.0f;
     public GameObject projectilePrefab;
     public Transform projectileStartPoint;
@@ -16,7 +17,7 @@ public class EliteAttack : AIBehaviour
     public override void OnEnter() 
     {
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
-        eliteProjectile.InitialiseProjectile(transform, brain.playerTransform.position, projectileStartPoint, projectileSpeed, projectileLifeTime);
+        eliteProjectile.InitialiseProjectile(transform, brain.playerTransform.position, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 
