@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class AIBrain : MonoBehaviour
 {
+    [Header("Debug Options")]
+    public bool printCurrentState = false;
+
     [Header("References")]
     // The player the AI will detect
     public Transform playerTransform;
@@ -53,7 +56,12 @@ public class AIBrain : MonoBehaviour
     }
 
     // Called before the current state update
-    private void AnyStateUpdate() {}
+    private void AnyStateUpdate() 
+    {
+        // Debug option to print current state
+        if (printCurrentState)
+            DebugStateMachine();
+    }
 
     // Called every frame
     private void Update()
@@ -98,6 +106,19 @@ public class AIBrain : MonoBehaviour
     internal Transform GetTransform()
     {
         return _transform;
+    }
+
+    // Prints a debug message to unity's console
+    public void DebugStateMachine()
+    {
+        Debug.Log(_currentBehaviourID);
+    }
+
+    // Currently just destroying the enemy if the player attacks them
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
+            Destroy(this.gameObject);
     }
 }
 

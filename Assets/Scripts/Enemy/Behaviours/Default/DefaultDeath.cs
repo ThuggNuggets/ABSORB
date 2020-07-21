@@ -6,6 +6,7 @@ public class DefaultDeath : AIBehaviour
 {
     public override void OnEnter()
     {
+        Destroy(this.gameObject);
     }
 
     public override void OnExit()

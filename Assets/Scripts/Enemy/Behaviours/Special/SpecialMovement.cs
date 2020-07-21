@@ -28,13 +28,22 @@ public class SpecialMovement : AIBehaviour
 
     [Header("Attack")]
     public float attackDistance = 10.0f;
+    public float beforeAttackTimer = 0.7f;
+    private bool _isWaitingToAttack = false;
     
     public override void OnEnter() {}
 
-    public override void OnExit() {}
+    public override void OnExit() 
+    {
+        _isWaitingToAttack = false;
+    }
 
     public override void OnFixedUpdate() 
     {
+        // If the enemy is already waiting to attack, then exit this out of this function
+        if (_isWaitingToAttack)
+            return;
+
         // Get direction and distance from player
         Vector3 dir = brain.GetDirectionToPlayer();
         float dist  = brain.GetDistanceToPlayer();
@@ -42,7 +51,7 @@ public class SpecialMovement : AIBehaviour
         // Rotate to face direction
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed);
 
-        // Only adding force if velocity is under max
+        // Only adding force if velocity is under max velocity
         if (rigidbody.velocity.magnitude < maxVelocity)
         {
             // Moving towards player if out of attack distance
@@ -53,8 +62,17 @@ public class SpecialMovement : AIBehaviour
         }
 
         // If the enemy is at the optimal attack range, enter the attack state
-        brain.SetBehaviour("Attack");
+        if (Mathf.Ceil(dist) == attackDistance)
+            StartCoroutine(BeforeAttackTimer());
     }
 
-    public override void OnUpdate() {}
+    public override void OnUpdate() { }
+    
+    public IEnumerator BeforeAttackTimer()
+    {
+        _isWaitingToAttack = true;
+        yield return new WaitForSecondsRealtime(beforeAttackTimer);
+        brain.SetBehaviour("Attack");
+        _isWaitingToAttack = false;
+    }
 }
