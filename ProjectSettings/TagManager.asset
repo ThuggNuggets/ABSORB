@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - EnemyWeapon
+  - EnemyMinion
+  - EnemySpecial
+  - EnemyElite
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - ArenaBarrier
   - PlayerWeapon
   - Shield
-  - 
+  - EnemyProjectile
   - 
   - 
   - 
