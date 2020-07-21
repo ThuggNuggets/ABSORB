@@ -89,7 +89,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628532870}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -211,14 +211,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7978608643619185047}
-  m_LocalRotation: {x: 0.6123725, y: 0.61237246, z: 0.35355338, w: 0.35355335}
+  m_LocalRotation: {x: -0.09020831, y: -0.09020838, z: 0.70132905, w: 0.70132905}
   m_LocalPosition: {x: 0.516, y: 1.5, z: 0.777}
   m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
   m_Children:
   - {fileID: 5004942142970301271}
   m_Father: {fileID: 8260815211856568606}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 120.00001, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: 0, y: -14.659, z: 90.00001}
 --- !u!65 &503527065225526947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3737401793661719183}
-  animationSpeedMultiplier: 1.5
+  animationSpeedMultiplier: 1
 --- !u!114 &1869582312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,8 +366,8 @@ MonoBehaviour:
   sphereRenderer: {fileID: 1628532873}
   shieldTimer: 0.75
   shieldCooldown: 1
-  maxSlowAcceleration: 10
-  timeToAcceleration: 0.2
+  maxSlowAcceleration: 7.5
+  timeToAcceleration: 0.1
   specialAttackParried: 0
   shieldState: 0
 --- !u!1001 &7652531224809973934
@@ -406,6 +406,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MESH_retop (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771901678294084078, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771901678294084078, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771901678294084078, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771901678294084078, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: ForceModule.y.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771901678294084078, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1897542031603947792, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
         type: 3}
@@ -560,7 +585,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6a7eba3173546e74593ff8251e16dee6,
         type: 3}
       propertyPath: m_Name
-      value: MESH_retop (3)
+      value: Temp_Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7eba3173546e74593ff8251e16dee6, type: 3}
