@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Max health
-    // Heal from absorb
-
+    // Change currentHealth to maxHealth in future builds
     [Range(0, 100)]
     public float currentHealth = 100.0f;
     [Range(0, 100)]
     public float healthFromAbsorb = 30.0f;
 
     //public float maxHealth = 100.0f;
-    private float damageTaken = 0.0f;
     private SpecialParryBlock player;
     private GameObject collidedObject = null;
 
@@ -34,18 +31,18 @@ public class Health : MonoBehaviour
         //currentHealth = maxHealth;
     }
 
-    void Update()
-    {
-        Function();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        collidedObject = collision.collider.gameObject;
+        // Change this in the future, uses too much processing power
+        GameObject temp = collision.collider.gameObject;
 
+        // Check the layer of the object we collided with
         if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&
-            collidedObject.layer == LayerMask.NameToLayer("EnemyWeapon"))
+            temp.layer == LayerMask.NameToLayer("EnemyWeapon"))
         {
+            // Only assign collidedObject if we collided with the correct layer
+            collidedObject = collision.collider.gameObject;
+            // Check what tag was assigned to it
             switch (collidedObject.tag)
             {
                 case "EnemyMinion":
@@ -57,10 +54,14 @@ public class Health : MonoBehaviour
                 default:
                     break;
             }
+            // Run the function cause we expected to hit a enemy attack
+            Function(); 
         }
         else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&
-            collidedObject.layer == LayerMask.NameToLayer("EnemyProjectile"))
+            temp.layer == LayerMask.NameToLayer("EnemyProjectile"))
         {
+            // Only assign collidedObject if we collided with the correct layer
+            collidedObject = collision.collider.gameObject;
             switch (collidedObject.tag)
             {
                 case "EnemySpecial":
@@ -72,6 +73,8 @@ public class Health : MonoBehaviour
                 default:
                     break;
             }
+            // Run the function cause we expected to hit a enemy attack
+            Function();
         }
     }
 
@@ -97,6 +100,7 @@ public class Health : MonoBehaviour
         
     }
 
+    // Return the amount of damage the player should take
     private float TakeDamage(float damageAmount)
     {
         collidedObject = null;
@@ -121,7 +125,7 @@ public class Health : MonoBehaviour
 
     private void EliteDamage()
     {
-        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        float damage = collidedObject.GetComponent<EliteProjectile>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
         Debug.Log("Damage taken: " + damage);
