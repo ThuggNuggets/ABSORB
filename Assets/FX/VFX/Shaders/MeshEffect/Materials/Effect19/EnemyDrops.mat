@@ -115,7 +115,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _HeightUVScrollDistort: {r: 8, g: 12, b: 0, a: 0}
-    - _MainColor: {r: 4.677225, g: 4.677225, b: 1.3016806, a: 1}
+    - _MainColor: {r: 0.008299424, g: 0.0050017894, b: 0.11781997, a: 1}
     - _NoiseScale: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.4779412, g: 0.586714, b: 0.7647059, a: 1}
     - _Speed: {r: 0, g: 0, b: 0, a: 0}

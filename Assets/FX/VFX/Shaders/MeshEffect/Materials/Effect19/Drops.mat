@@ -76,7 +76,7 @@ Material:
     - _BumpAmt: 30
     - _BumpScale: 1
     - _ColorStrength: 1.2
-    - _CullMode: 0
+    - _CullMode: 2
     - _Cutoff: 0.5
     - _Cutout: 1
     - _CutoutThreshold: 0.015
