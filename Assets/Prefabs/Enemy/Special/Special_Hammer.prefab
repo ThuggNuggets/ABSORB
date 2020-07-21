@@ -113,8 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printCurrentState: 0
-  playerTransform: {fileID: 0}
+  maxHealth: 100
   baseDamage: 10
+  playerTransform: {fileID: 0}
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 8677661987734016628}
