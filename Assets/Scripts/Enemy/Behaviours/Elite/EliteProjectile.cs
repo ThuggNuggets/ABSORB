@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EliteProjectile : MonoBehaviour
 {
+    [Header("Preferences")]
+    public Vector3 directionOffset = Vector3.zero;
+
+
     private Rigidbody _rb;
     private Vector3 _direction = Vector3.zero;
     private float _speed = 0.0f;
@@ -26,7 +30,10 @@ public class EliteProjectile : MonoBehaviour
         transform.rotation = projectileStartPoint.rotation;
         _parentTransform = parentTransform;
         _isActive = true;
-        _direction = (playerPosition - transform.position).normalized;
+
+        Vector3 playerPos = playerPosition + directionOffset;
+        _direction = (playerPos - transform.position).normalized;
+
         _speed = speed;
         _lifeTime = lifeTime;
         _damage = damage;

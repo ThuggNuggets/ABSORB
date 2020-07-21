@@ -53,10 +53,10 @@ public class EliteMovement : AIBehaviour
         if (dist < attackDistance)
         {
             // Only adding force if velocity is under max velocity
-            if (rigidbody.velocity.magnitude < retreatMaxVelocity && dist > attackDistance)
+            if (rigidbody.velocity.magnitude < retreatMaxVelocity)
             {
                 // Moving towards player if out of attack distance
-                rigidbody.AddForce(transform.forward * retreatDashAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
+                rigidbody.AddForce(-transform.forward * retreatDashAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
             }
         }
 

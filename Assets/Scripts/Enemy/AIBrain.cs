@@ -9,12 +9,14 @@ public class AIBrain : MonoBehaviour
     [Header("Debug Options")]
     public bool printCurrentState = false;
 
-    [Header("References")]
-    // The player the AI will detect
-    public Transform playerTransform;
-
-    [Header("Damage")]
+    [Header("Overall Properties")]
+    public float maxHealth = 100.0f;
     public float baseDamage = 10.0f;
+    private float currentHealth;
+
+    [Header("References")]
+    // The transom the enemy will target
+    public Transform playerTransform;
 
     // Array list of information to fill the dictionary with
     [System.Serializable]
@@ -37,6 +39,9 @@ public class AIBrain : MonoBehaviour
     // Current state ID of the fsm
     private string _currentBehaviourID = "";
 
+    // Determines if the loop should exit
+    private bool _isAlive = true;
+
     // Called on initialise
     private void Awake()
     {
@@ -56,6 +61,9 @@ public class AIBrain : MonoBehaviour
 
         // Set current behaviour state
         _currentBehaviourID = behaviourInformation[0].name;
+
+        // Setting the current health to be max
+        currentHealth = maxHealth;
     }
 
     // Called before the current state update
@@ -64,6 +72,10 @@ public class AIBrain : MonoBehaviour
         // Debug option to print current state
         if (printCurrentState)
             DebugStateMachine();
+
+        // Check if the AI is still alive
+        if (!_isAlive)
+            SetBehaviour("Death");
     }
 
     // Called every frame
@@ -121,13 +133,23 @@ public class AIBrain : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
-            Destroy(this.gameObject);
+        {
+            currentHealth -= 25.0f;
+            if(currentHealth <= 0)
+                _isAlive = false;
+        }
     }
 
     // Returns the base damage of the enemy.
     public float GetDamage()
     {
         return baseDamage;
+    }
+
+    // Returns true if the entity is still alive
+    public bool IsAlive()
+    {
+        return _isAlive;
     }
 }
 
