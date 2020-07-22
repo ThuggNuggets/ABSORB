@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     public Transform[] spawnerPositions;
 
     private string spawnTag;
-    private int numberOfTaggedObjects = 0;
+    public int numberOfTaggedObjects = 0;
     private float tempSpawnTimer = 0.0f;
 
     // Use this for initialization
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
             // - Potentially spawn more enemies if 1 dies (e.g. 1 enemy dies, 2 more spawn)
 
             // Only run if we haven't reached the max number or we haven't set a max number
-            if (numberOfTaggedObjects != maxNumberOfSpawns || maxNumberOfSpawns == 0)
+            if (numberOfTaggedObjects <= maxNumberOfSpawns || maxNumberOfSpawns == 0)
             {
                 tempSpawnTimer -= Time.deltaTime;
 
