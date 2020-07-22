@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Uriah/FP_Test.unity
+    guid: 90e4f567f7861bd468ddbd1338a25d36
   m_configObjects: {}

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b50c487270cd974b9d7d0f7c105fa66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directionOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &3764559341423575694
 PrefabInstance:
   m_ObjectHideFlags: 0
