@@ -6,12 +6,22 @@ public class ShieldSphere : MonoBehaviour
 {
     public SpecialParryBlock player;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && other.gameObject.CompareTag("EnemyWeapon"))
+        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && 
+            collision.collider.gameObject.layer == LayerMask.NameToLayer("EnemyWeapon"))
         {
-            player.specialAttackParried = true;
+            //player.specialAttackParried = true;
             Debug.Log("Attack Parried!");
-        }    
+        }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && other.gameObject.CompareTag("EnemyWeapon"))
+    //    {
+    //        player.specialAttackParried = true;
+    //        Debug.Log("Attack Parried!");
+    //    }    
+    //}
 }

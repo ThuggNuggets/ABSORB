@@ -58,7 +58,8 @@ public class Health : MonoBehaviour
             Function(); 
         }
         else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&
-            temp.layer == LayerMask.NameToLayer("EnemyProjectile"))
+            temp.layer == LayerMask.NameToLayer("EnemyProjectile") ||
+            temp.layer == LayerMask.NameToLayer("EnemyProjectile") && temp.CompareTag("EnemyElite"))
         {
             // Only assign collidedObject if we collided with the correct layer
             collidedObject = collision.collider.gameObject;
