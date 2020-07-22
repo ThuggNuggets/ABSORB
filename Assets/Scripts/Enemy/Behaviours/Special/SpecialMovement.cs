@@ -61,8 +61,6 @@ public class SpecialMovement : AIBehaviour
                 rigidbody.AddForce(-transform.forward * acceleration * Time.fixedDeltaTime, ForceMode.Impulse);
         }
 
-        Debug.Log(dist);
-
         // If the enemy is at the optimal attack range, enter the attack state
         if (Mathf.Ceil(dist) == attackDistance)
             StartCoroutine(BeforeAttackTimer());

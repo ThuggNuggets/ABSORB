@@ -117,7 +117,7 @@ public class Health : MonoBehaviour
 
     private void SpecialDamage()
     {
-        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        float damage = collidedObject.GetComponentInParent<AIBrain>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
         Debug.Log("Damage taken: " + damage);

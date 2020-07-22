@@ -8,7 +8,6 @@ public class EliteProjectile : MonoBehaviour
     [Header("Preferences")]
     public Vector3 directionOffset = Vector3.zero;
 
-
     private Rigidbody _rb;
     private Vector3 _direction = Vector3.zero;
     private float _speed = 0.0f;

@@ -18,6 +18,9 @@ public class AIBrain : MonoBehaviour
     // The transom the enemy will target
     public Transform playerTransform;
 
+    // The collider of this enemies weapon
+    public Collider weaponCollider;
+
     // Array list of information to fill the dictionary with
     [System.Serializable]
     public struct AIBehaviourInfo
@@ -150,6 +153,18 @@ public class AIBrain : MonoBehaviour
     public bool IsAlive()
     {
         return _isAlive;
+    }
+
+    // Activates the weapons collider
+    public void ActivateWeaponCollider()
+    {
+        weaponCollider.enabled = true;
+    }
+    
+    // Deactivates the weapons collider
+    public void DeactiveWeaponCollider()
+    {
+        weaponCollider.enabled = false;
     }
 }
 
