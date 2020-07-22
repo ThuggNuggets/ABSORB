@@ -5,9 +5,13 @@ using UnityEngine;
 public abstract class AIBehaviour : MonoBehaviour
 {
     protected AIBrain brain;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     protected Rigidbody rigidbody;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     protected Transform player;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     protected Transform transform;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
     public void InitialiseState(AIBrain brain)
     {
