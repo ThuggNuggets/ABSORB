@@ -211,6 +211,7 @@ MonoBehaviour:
   maxHealth: 100
   baseDamage: 10
   playerTransform: {fileID: 0}
+  weaponCollider: {fileID: 0}
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 888457025188684262}
