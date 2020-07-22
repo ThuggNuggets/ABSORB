@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printCurrentState: 0
-  maxHealth: 100
-  baseDamage: 10
+  maxHealth: 75
+  baseDamage: 2
   playerTransform: {fileID: 0}
   weaponCollider: {fileID: 0}
   behaviourInformation:
@@ -251,7 +251,7 @@ MonoBehaviour:
   turnSpeed: 1
   sprintAcceleration: 30
   sprintMaxVelocity: 15
-  rangeOfSprint: 20
+  rangeOfSprint: 30
   avoidPushbackForce: 10
   attackPushback: 2.5
   attackDistance: 1.5

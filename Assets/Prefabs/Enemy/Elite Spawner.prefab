@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4911677704292951086}
   - component: {fileID: 4911677704292951087}
   m_Layer: 0
-  m_Name: Minion Spawner
+  m_Name: Elite Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  objectToSpawn: {fileID: 888457025188684252, guid: 07f1e4e685e39d44192151e31d52f06e,
+  objectToSpawn: {fileID: 3438492787752429414, guid: 0363b18a660ce2b4f93504c85cf853d9,
     type: 3}
   numberOfEnemies: 1
-  maxNumberOfSpawns: 6
+  maxNumberOfSpawns: 1
   addNumberOfEnemies: 0
   timeBetweenEachEnemySpawn: 5
   waitForSpawn: 1

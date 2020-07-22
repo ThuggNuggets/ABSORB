@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4911677704292951086}
   - component: {fileID: 4911677704292951087}
   m_Layer: 0
-  m_Name: Minion Spawner
+  m_Name: Special Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,12 +78,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  objectToSpawn: {fileID: 888457025188684252, guid: 07f1e4e685e39d44192151e31d52f06e,
+  objectToSpawn: {fileID: 8677661987734016590, guid: d99e7a3ca18ca9c4199d4aeef584dea6,
     type: 3}
   numberOfEnemies: 1
-  maxNumberOfSpawns: 6
+  maxNumberOfSpawns: 1
   addNumberOfEnemies: 0
-  timeBetweenEachEnemySpawn: 5
+  timeBetweenEachEnemySpawn: 3
   waitForSpawn: 1
   spawnerPositions:
   - {fileID: 4911677705079426473}
