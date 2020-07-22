@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public bool debug = false;
+
     // Change currentHealth to maxHealth in future builds
     [Range(0, 100)]
     public float currentHealth = 100.0f;
@@ -112,7 +114,8 @@ public class Health : MonoBehaviour
         float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
-        Debug.Log("Damage taken: " + damage);
+        if(debug)
+            Debug.Log("Player damage taken: " + damage);
     }
 
     private void SpecialDamage()
@@ -120,7 +123,8 @@ public class Health : MonoBehaviour
         float damage = collidedObject.GetComponentInParent<AIBrain>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
-        Debug.Log("Damage taken: " + damage);
+        if (debug)
+            Debug.Log("Player damage taken: " + damage);
     }
 
     private void EliteDamage()
@@ -128,7 +132,8 @@ public class Health : MonoBehaviour
         float damage = collidedObject.GetComponent<EliteProjectile>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
-        Debug.Log("Damage taken: " + damage);
+        if (debug)
+            Debug.Log("Player damage taken: " + damage);
     }
 }
 

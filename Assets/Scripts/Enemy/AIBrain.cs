@@ -8,6 +8,7 @@ public class AIBrain : MonoBehaviour
 {
     [Header("Debug Options")]
     public bool printCurrentState = false;
+    public bool printHealthStats = false;
 
     [Header("Overall Properties")]
     public float maxHealth = 100.0f;
@@ -144,6 +145,9 @@ public class AIBrain : MonoBehaviour
             currentHealth -= 25.0f; // 25 needs to be replaced with player damage
             if(currentHealth <= 0)
                 _isAlive = false;
+
+            if (printHealthStats)
+                Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
         }
     }
 
