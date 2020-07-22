@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 0.5
-  justFiredProjectileTimer: 1
+  justFiredProjectileTimer: 2
   projectileSpeed: 50
   projectileLifeTime: 3
   projectileDamage: 10
