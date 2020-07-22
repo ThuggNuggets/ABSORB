@@ -45,6 +45,9 @@ public class AIBrain : MonoBehaviour
     // Determines if the loop should exit
     private bool _isAlive = true;
 
+    // Flag to hold if the enemy has been attacked
+    internal bool _hasBeenAttacked = false;
+
     // Called on initialise
     private void Awake()
     {
@@ -137,7 +140,8 @@ public class AIBrain : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
         {
-            currentHealth -= 25.0f;
+            SetBehaviour("Stagger");
+            currentHealth -= 25.0f; // 25 needs to be replaced with player damage
             if(currentHealth <= 0)
                 _isAlive = false;
         }

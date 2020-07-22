@@ -23,15 +23,18 @@ public class EliteProjectile : MonoBehaviour
     }
 
     // Sets up the direction for the projectile
-    public void InitialiseProjectile(Transform parentTransform, Vector3 playerPosition, Transform projectileStartPoint, float speed, float lifeTime, float damage)
+    public void InitialiseProjectile(Transform parentTransform, Transform playerTransform, Transform projectileStartPoint, float speed, float lifeTime, float damage)
     {
         transform.position = projectileStartPoint.position;
         transform.rotation = projectileStartPoint.rotation;
         _parentTransform = parentTransform;
         _isActive = true;
 
-        Vector3 playerPos = playerPosition + directionOffset;
-        _direction = (playerPos - transform.position).normalized;
+        float distance = Vector3.Distance(playerTransform.position, transform.position);
+
+        Rigidbody rb = playerTransform.GetComponent<Rigidbody>();
+        Vector3 playerPos = playerTransform.position + directionOffset;
+        _direction = ((playerPos + ((rb.velocity.normalized * (speed + distance)) * Time.fixedDeltaTime)) - transform.position).normalized;
 
         _speed = speed;
         _lifeTime = lifeTime;

@@ -17,7 +17,7 @@ public class EliteAttack : AIBehaviour
     public override void OnEnter() 
     {
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
-        eliteProjectile.InitialiseProjectile(transform, brain.playerTransform.position, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
+        eliteProjectile.InitialiseProjectile(transform, brain.playerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 

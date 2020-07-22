@@ -67,13 +67,6 @@ public class EliteMovement : AIBehaviour
             rigidbody.AddForce(transform.forward * acceleration * Time.fixedDeltaTime, ForceMode.Impulse);
         }
 
-        //
-        //else if(rigidbody.velocity.magnitude < retreatMaxVelocity)
-        //{
-        //    // Moving away player if within of attack distance
-        //    rigidbody.AddForce(-transform.forward * retreatDashAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
-        //}
-
         // If the enemy is at the optimal attack range, enter the attack state
         if (Mathf.Ceil(dist) == attackDistance)
             StartCoroutine(AttackSequence());
