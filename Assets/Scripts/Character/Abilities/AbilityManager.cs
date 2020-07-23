@@ -96,7 +96,5 @@ public class AbilityManager : MonoBehaviour
 
         if (_currentAbility != E_Ability.NONE)
             _abilityDictionary[_currentAbility].OnEnter();
-
-
     }
 }

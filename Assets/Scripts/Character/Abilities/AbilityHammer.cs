@@ -15,6 +15,9 @@ public class AbilityHammer : Ability
     [Header("Sphere Cast")]
     public float radius = 10.0f;
 
+    [Header("Debug")]
+    public bool drawSphereGizmo = false;
+
     private bool _check = false;
 
     public override void OnEnter() {}
@@ -79,7 +82,7 @@ public class AbilityHammer : Ability
 
     private void OnDrawGizmos()
     {
-        if(active)
+        if(active || drawSphereGizmo)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
