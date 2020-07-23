@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 739028752}
   - component: {fileID: 739028751}
   - component: {fileID: 739028755}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: EnemyMinion
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739028750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.63, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 888457025188684251}
@@ -124,7 +124,8 @@ GameObject:
   - component: {fileID: 888457025188684263}
   - component: {fileID: 888457025188684249}
   - component: {fileID: 5760204340909872188}
-  m_Layer: 10
+  - component: {fileID: 888457026463146825}
+  m_Layer: 9
   m_Name: Minion
   m_TagString: EnemyMinion
   m_Icon: {fileID: 0}
@@ -177,7 +178,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!95 &2158594309783822410
 Animator:
   serializedVersion: 3
@@ -209,8 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printCurrentState: 0
-  printHealthStats: 0
+  typeOfEnemy: 0
   maxHealth: 75
   baseDamage: 2
   playerTransform: {fileID: 0}
@@ -225,7 +225,9 @@ MonoBehaviour:
   - name: Death
     behaviour: {fileID: 888457025188684249}
   - name: Stagger
-    behaviour: {fileID: 5760204340909872188}
+    behaviour: {fileID: 888457026463146825}
+  printCurrentState: 0
+  printHealthStats: 0
 --- !u!114 &888457025188684262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +256,7 @@ MonoBehaviour:
   acceleration: 5
   maxVelocity: 5
   turnSpeed: 1
-  randomJumpForce: 20
+  randomJumpForce: 50
   sprintAcceleration: 30
   sprintMaxVelocity: 15
   rangeOfSprint: 25
@@ -305,6 +307,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staggerTime: 1
+--- !u!114 &888457026463146825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888457025188684252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staggerTime: 2
 --- !u!1 &888457027035413703
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,8 +344,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888457027035413703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 2847013945716485815}
   m_Father: {fileID: 888457025188684251}
@@ -426,7 +441,7 @@ PrefabInstance:
     - target: {fileID: 5078779838207941734, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5078779838207941734, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
@@ -493,10 +508,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion_Body_001_Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 5562125817539757788, guid: 4c471951e7231de428921e1ae63e3c09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607699502413933788, guid: 4c471951e7231de428921e1ae63e3c09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607699502414146320, guid: 4c471951e7231de428921e1ae63e3c09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5607699502414155818, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607699502414155818, guid: 4c471951e7231de428921e1ae63e3c09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5607699502433266142, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
@@ -512,6 +547,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ForceModule.enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608984431175745466, guid: 4c471951e7231de428921e1ae63e3c09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5697317000073189664, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}

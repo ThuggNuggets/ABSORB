@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 8677661987734016587}
   - component: {fileID: 1669274403}
   - component: {fileID: 6696119718319513112}
+  - component: {fileID: 1491251932}
   m_Layer: 9
   m_Name: Special_Hammer
   m_TagString: EnemySpecial
@@ -209,8 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printCurrentState: 0
-  printHealthStats: 0
+  typeOfEnemy: 1
   maxHealth: 100
   baseDamage: 5
   playerTransform: {fileID: 0}
@@ -226,6 +226,10 @@ MonoBehaviour:
     behaviour: {fileID: 8677661987734016587}
   - name: Stagger
     behaviour: {fileID: 6696119718319513112}
+  - name: Parried
+    behaviour: {fileID: 1491251932}
+  printCurrentState: 0
+  printHealthStats: 1
 --- !u!114 &8677661987734016628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54a9b24c15ec0c4d83ffa7141ce64b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDetectionDistance: 50
+  initialDetectionDistance: 30
 --- !u!114 &8677661987734016576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +323,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staggerTime: 1
+  staggerTime: 3
+--- !u!114 &1491251932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677661987734016590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a626e2603a56a429a913c6e43d5ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5525937816012236359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,6 +362,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 785910243937417613, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 785910243937417613, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 785910243937417613, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}

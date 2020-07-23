@@ -28,10 +28,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1628532871}
-  - {fileID: 3031869742155519629}
   - {fileID: 5288999041118486993}
   m_Father: {fileID: 8260815211856568606}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7624231667439061254
 GameObject:
@@ -43,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5288999041118486993}
   - component: {fileID: 7144649163089497226}
+  - component: {fileID: 1618518661}
   m_Layer: 12
   m_Name: Abilities
   m_TagString: Untagged
@@ -63,7 +63,7 @@ Transform:
   m_Children:
   - {fileID: 8260815210886465264}
   m_Father: {fileID: 3553320352021312036}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7144649163089497226
 MonoBehaviour:
@@ -81,8 +81,38 @@ MonoBehaviour:
   mouseButtonInput: 1
   abilityInformation:
   - e_Ability: 1
-    ability: {fileID: 0}
+    ability: {fileID: 1618518661}
   printCurrentState: 1
+--- !u!114 &1618518661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624231667439061254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e88a4e9ac5da974d8b688073abb003d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToMinion: 75
+  damageToSpecial: 10
+  damageToElite: 50
+  turnOffTime: 0.7
+  radius: 15
+  drawSphereGizmo: 0
+--- !u!114 &1678099591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260815210886465265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10163a67d75a59e498486d622cd85d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8260815211856568604
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8443957757623046343}
+  - {fileID: 3031869742155519629}
   - {fileID: 3553320352021312036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -183,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fb6d4a0b56d2c4f9ceb9fad70d8525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityManager: {fileID: 0}
+  abilityManager: {fileID: 7144649163089497226}
   debug: 0
   currentHealth: 100
   healthFromAbsorb: 20
@@ -202,7 +233,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   freeLookCamera: {fileID: 0}
   acceleration: 100
-  maxVelocity: 15
+  maxVelocity: 20
   turnSpeed: 0.3
 --- !u!114 &2468281286964091614
 MonoBehaviour:
@@ -217,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3052371918198772990}
-  animationSpeedMultiplier: 1
+  animationSpeedMultiplier: 1.5
 --- !u!114 &1869582312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +279,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hammer Ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813612838509370764, guid: 163bed93bef2c8249879f4a8b051b7d6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813612838509370764, guid: 163bed93bef2c8249879f4a8b051b7d6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6813612838509370765, guid: 163bed93bef2c8249879f4a8b051b7d6,
         type: 3}
@@ -304,8 +345,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6813612838509370766, guid: 163bed93bef2c8249879f4a8b051b7d6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163bed93bef2c8249879f4a8b051b7d6, type: 3}
+--- !u!1 &8260815210886465265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6813612838509370764, guid: 163bed93bef2c8249879f4a8b051b7d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3182531374580783997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8260815210886465264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6813612838509370765, guid: 163bed93bef2c8249879f4a8b051b7d6,
@@ -317,12 +369,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3553320352021312036}
+    m_TransformParent: {fileID: 8260815211856568606}
     m_Modifications:
     - target: {fileID: 135627812964976856, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_Name
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 135627812964976856, guid: b6d0cc6fa054683498478b99d3392351,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerMelee
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
@@ -378,6 +435,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -75.771
+      objectReference: {fileID: 0}
+    - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6764401
+      objectReference: {fileID: 0}
+    - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6764399
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d0cc6fa054683498478b99d3392351, type: 3}
