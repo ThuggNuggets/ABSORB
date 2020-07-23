@@ -21,6 +21,9 @@ public class AbilityManager : MonoBehaviour
     [Range(0, 2)]
     public int mouseButtonInput = 1;
 
+    // The last enemy we parried
+    private AIBrain _lastParriedEnemy = null;
+
     // Array to fill out ability dictionary with
     [System.Serializable]
     public struct AbilityInformation
@@ -57,9 +60,20 @@ public class AbilityManager : MonoBehaviour
     // Called every frame
     private void Update()
     {
+        // Debug printing if option enabled
+        if (printCurrentState)
+            Debug.Log(_currentAbility);
+
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
+        {
+            if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput))
+            {
+                _lastParriedEnemy.SetBehaviour("Absorbed");
+                SetAbility(AbilityManager.E_Ability.HAMMER);
+            }
             return;
+        }
 
         // Checks if the player uses the ability
         if (!_abilityDictionary[_currentAbility].Active)
@@ -69,10 +83,6 @@ public class AbilityManager : MonoBehaviour
         }
         else
             _abilityDictionary[_currentAbility].OnUpdate();
-
-        // Debug printing if option enabled
-        if (printCurrentState)
-            Debug.Log(_currentAbility);
     }
 
     // Called every physics update
@@ -96,5 +106,12 @@ public class AbilityManager : MonoBehaviour
 
         if (_currentAbility != E_Ability.NONE)
             _abilityDictionary[_currentAbility].OnEnter();
+    }
+
+    // Sets and gets the last parried enemy
+    public AIBrain LastParriedEnemy
+    {
+        get { return _lastParriedEnemy; }
+        set { _lastParriedEnemy = value; }
     }
 }

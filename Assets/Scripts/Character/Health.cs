@@ -84,8 +84,8 @@ public class Health : MonoBehaviour
         // Checking if the special enemy hits the player while shielding
         if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon") && collision.collider.gameObject.CompareTag("EnemySpecial"))
         {
-            collision.collider.GetComponentInParent<AIBrain>().SetBehaviour("Stagger");
-            abilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
+            abilityManager.LastParriedEnemy = collision.collider.GetComponentInParent<AIBrain>();
+            abilityManager.LastParriedEnemy.SetBehaviour("Parried");
         }
     }
 
