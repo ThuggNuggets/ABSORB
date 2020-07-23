@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printCurrentState: 0
+  printHealthStats: 0
   maxHealth: 100
   baseDamage: 5
   playerTransform: {fileID: 0}
@@ -252,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 40
   maxVelocity: 15
-  turnSpeed: 0.2
+  turnSpeed: 1
   attackDistance: 15
   beforeAttackTimer: 1
 --- !u!114 &8677661987734016577

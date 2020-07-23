@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 739028755}
   m_Layer: 9
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: EnemyMinion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printCurrentState: 0
+  printHealthStats: 0
   maxHealth: 75
   baseDamage: 2
   playerTransform: {fileID: 0}
@@ -359,12 +360,13 @@ MonoBehaviour:
   acceleration: 5
   maxVelocity: 5
   turnSpeed: 1
+  randomJumpForce: 10
   sprintAcceleration: 30
   sprintMaxVelocity: 15
-  rangeOfSprint: 30
-  avoidPushbackForce: 10
+  rangeOfSprint: 25
+  avoidPushbackForce: 25
   attackPushback: 2.5
-  attackDistance: 1.5
+  attackDistance: 2
 --- !u!114 &888457025188684263
 MonoBehaviour:
   m_ObjectHideFlags: 0

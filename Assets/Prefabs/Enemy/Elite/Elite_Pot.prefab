@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printCurrentState: 0
+  printHealthStats: 0
   maxHealth: 150
   baseDamage: 10
   playerTransform: {fileID: 0}
