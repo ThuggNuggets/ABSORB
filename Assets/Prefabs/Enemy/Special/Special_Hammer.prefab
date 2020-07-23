@@ -352,9 +352,39 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EnemySpecial
       objectReference: {fileID: 0}
+    - target: {fileID: 2657928986363669894, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657928986363669894, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2747405813856852090, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747405813875793272, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747405813875793272, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747405813875793272, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747405813875793272, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: ForceModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2792953060312167034, guid: beaf0944877d2be41a542b2bb70f9408,

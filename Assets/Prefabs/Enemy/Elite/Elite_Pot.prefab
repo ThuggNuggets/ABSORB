@@ -402,9 +402,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f08029cb14c17d742b54e1600e93a1d8, type: 2}
+    - target: {fileID: 7284527019548824080, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284527019548824080, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7482086355499821036, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482086355517973230, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482086355517973230, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482086355517973230, guid: 1c8ef75a08dbd52449f2f2f1572fb871,
+        type: 3}
+      propertyPath: ForceModule.enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
