@@ -6,11 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class AIBrain : MonoBehaviour
 {
-    [Header("Debug Options")]
-    public bool printCurrentState = false;
-    public bool printHealthStats = false;
+    // Enemy type
+    public enum EnemyType
+    {
+        MINION,
+        SPECIAL,
+        ELITE,
+    }
 
     [Header("Overall Properties")]
+    public EnemyType typeOfEnemy;
     public float maxHealth = 100.0f;
     public float baseDamage = 10.0f;
     private float currentHealth;
@@ -33,6 +38,11 @@ public class AIBrain : MonoBehaviour
 
     // The public list of behaviours setup by user
     public Dictionary<string, AIBehaviour> _aiBehaviours = new Dictionary<string, AIBehaviour>();
+
+    // Options to assist with debugging
+    [Header("Debug Options")]
+    public bool printCurrentState = false;
+    public bool printHealthStats = false;
 
     // Rigidbody attached to this object
     private Rigidbody _rigidbody;
@@ -139,16 +149,26 @@ public class AIBrain : MonoBehaviour
     // Currently just destroying the enemy if the player attacks them
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
-        {
-            SetBehaviour("Stagger");
-            currentHealth -= 25.0f; // 25 needs to be replaced with player damage
-            if(currentHealth <= 0)
-                _isAlive = false;
+        if (other.gameObject.tag == "PlayerMelee" && other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
+            TakeDamage(25.0f);
+    }
 
-            if (printHealthStats)
-                Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
-        }
+    // Makes the enemy take damage
+    public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+            _isAlive = false;
+
+        if (typeOfEnemy != EnemyType.ELITE)
+            SetBehaviour("Stagger");
+
+        else if(e_Ability == AbilityManager.E_Ability.HAMMER)
+            SetBehaviour("Stagger");
+
+
+        if (printHealthStats)
+            Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
     }
 
     // Returns the base damage of the enemy.

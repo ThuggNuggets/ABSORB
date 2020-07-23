@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header("References")]
+    public AbilityManager abilityManager;
+
+    [Header("Properties")]
     public bool debug = false;
 
     // Change currentHealth to maxHealth in future builds
@@ -38,8 +42,7 @@ public class Health : MonoBehaviour
         GameObject temp = collision.collider.gameObject;
 
         // Check the layer of the object we collided with
-        if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&
-            temp.layer == LayerMask.NameToLayer("EnemyWeapon"))
+        if (player.shieldState != SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon"))
         {
             // Only assign collidedObject if we collided with the correct layer
             collidedObject = collision.collider.gameObject;
@@ -58,9 +61,7 @@ public class Health : MonoBehaviour
             // Run the function cause we expected to hit a enemy attack
             Function(); 
         }
-        else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&
-            temp.layer == LayerMask.NameToLayer("EnemyProjectile") ||
-            temp.layer == LayerMask.NameToLayer("EnemyProjectile") && temp.CompareTag("EnemyElite"))
+        else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&  temp.layer == LayerMask.NameToLayer("EnemyProjectile") ||  temp.layer == LayerMask.NameToLayer("EnemyProjectile") && temp.CompareTag("EnemyElite"))
         {
             // Only assign collidedObject if we collided with the correct layer
             collidedObject = collision.collider.gameObject;
@@ -75,8 +76,16 @@ public class Health : MonoBehaviour
                 default:
                     break;
             }
+
             // Run the function cause we expected to hit a enemy attack
             Function();
+        }
+
+        // Checking if the special enemy hits the player while shielding
+        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon") && collision.collider.gameObject.CompareTag("EnemySpecial"))
+        {
+            collision.collider.GetComponentInParent<AIBrain>().SetBehaviour("Stagger");
+            abilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
         }
     }
 
