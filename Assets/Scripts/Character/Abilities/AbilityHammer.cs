@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilityHammer : Ability
 {
     [Header("References")]
+    public GameObject hammerGameObject;
     public ParticleSystem groundSmashParticleSystem;
     public AudioSource groundSmashAudio;
 
@@ -27,8 +28,13 @@ public class AbilityHammer : Ability
         animator = this.GetComponent<Animator>();
     }
 
-    public override void OnEnter() {}
+    public override void OnEnter() 
+    {
+        hammerGameObject.SetActive(true);
+    }
+
     public override void OnExit() {}
+
     public override void OnFixedUpdate() 
     {
         if (!_hasRan)
@@ -77,6 +83,11 @@ public class AbilityHammer : Ability
         active = false;
         _hasRan = true;
         abilityManager.SetAbility(AbilityManager.E_Ability.NONE);
+    }
+
+    public void DeactivateHammerGameobject()
+    {
+        hammerGameObject.SetActive(false);
     }
 
     public void ActivateHammerCheck()

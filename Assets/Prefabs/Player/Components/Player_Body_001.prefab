@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e88a4e9ac5da974d8b688073abb003d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hammerGameObject: {fileID: 7682716948547883129}
   groundSmashParticleSystem: {fileID: 4524855565189441220}
   groundSmashAudio: {fileID: 6949235920792189909}
   damageToMinion: 75
@@ -885,6 +886,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51608ad8214ae164aa6f8908bde758ab, type: 3}
+--- !u!1 &7682716948547883129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 135627812964976856, guid: 51608ad8214ae164aa6f8908bde758ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7746093068102736033}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2921832374615793553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896478817500317488, guid: 51608ad8214ae164aa6f8908bde758ab,
