@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staggerTime: 3
+  staggerTime: 2
 --- !u!114 &8677661987734016576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   turnSpeed: 0.2
   lungeDistancePadding: 1
   startAnimationDistance: 8
-  cancelAndRetreatDistance: 2
+  cancelAndRetreatDistance: 1
 --- !u!114 &1491251932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1669274403}
-  exitTime: 1
+  exitTime: 2
 --- !u!114 &1491251933
 MonoBehaviour:
   m_ObjectHideFlags: 0

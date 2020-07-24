@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &209823880
 Transform:
   m_ObjectHideFlags: 0
@@ -1300,6 +1300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elite_Pot_001
       objectReference: {fileID: 0}
+    - target: {fileID: 3438492787752429414, guid: 0363b18a660ce2b4f93504c85cf853d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3438492787752429415, guid: 0363b18a660ce2b4f93504c85cf853d9,
         type: 3}
       propertyPath: playerTransform
@@ -1731,6 +1736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Minion_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 888457025188684252, guid: 07f1e4e685e39d44192151e31d52f06e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 888457025188684253, guid: 07f1e4e685e39d44192151e31d52f06e,
         type: 3}
@@ -10816,12 +10826,12 @@ PrefabInstance:
     - target: {fileID: 5360399261179087857, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.009901905
+      value: 0.009901911
       objectReference: {fileID: 0}
     - target: {fileID: 5360399261179087857, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000007606839
+      value: -0.000007606843
       objectReference: {fileID: 0}
     - target: {fileID: 5360399261179087857, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
@@ -10836,17 +10846,17 @@ PrefabInstance:
     - target: {fileID: 5360399261477726846, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0069510387
+      value: 0.0069510336
       objectReference: {fileID: 0}
     - target: {fileID: 5360399261477726846, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000022404782
+      value: -7.069928e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5360399261477726846, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.5574026e-11
+      value: 4.9144495e-12
       objectReference: {fileID: 0}
     - target: {fileID: 5360399261477726846, guid: 92a760f26b1b8f14f93c8667f8bd1069,
         type: 3}
