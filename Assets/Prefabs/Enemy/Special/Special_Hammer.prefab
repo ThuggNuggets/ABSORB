@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 8677661987734016584}
   - component: {fileID: 84937217034869717}
   - component: {fileID: 1669274403}
+  - component: {fileID: 6989334769506331493}
   - component: {fileID: 8677661987734016591}
   - component: {fileID: 8677661987734016628}
   - component: {fileID: 8677661987734016587}
@@ -219,6 +220,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6989334769506331493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677661987734016590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfEnemy: 1
+  maxHealth: 100
+  baseDamage: 25
+  printHealthStats: 0
+  weaponCollider: {fileID: 5068816883515678666}
 --- !u!114 &8677661987734016591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,11 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfEnemy: 1
-  maxHealth: 100
-  baseDamage: 5
   playerTransform: {fileID: 0}
-  weaponCollider: {fileID: 5068816883515678666}
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 8677661987734016628}
@@ -252,7 +266,6 @@ MonoBehaviour:
   - name: Absorbed
     behaviour: {fileID: 1491251933}
   printCurrentState: 0
-  printHealthStats: 1
 --- !u!114 &8677661987734016628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EnemySpecial
+      objectReference: {fileID: 0}
+    - target: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2657928986363669894, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}

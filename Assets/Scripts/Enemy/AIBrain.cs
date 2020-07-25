@@ -6,26 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class AIBrain : MonoBehaviour
 {
-    // Enemy type
-    public enum EnemyType
-    {
-        MINION,
-        SPECIAL,
-        ELITE,
-    }
-
-    [Header("Overall Properties")]
-    public EnemyType typeOfEnemy;
-    public float maxHealth = 100.0f;
-    public float baseDamage = 10.0f;
-    private float currentHealth;
-
     [Header("References")]
     // The transom the enemy will target
     public Transform playerTransform;
-
-    // The collider of this enemies weapon
-    public Collider weaponCollider;
 
     // Array list of information to fill the dictionary with
     [System.Serializable]
@@ -42,7 +25,6 @@ public class AIBrain : MonoBehaviour
     // Options to assist with debugging
     [Header("Debug Options")]
     public bool printCurrentState = false;
-    public bool printHealthStats = false;
 
     // Rigidbody attached to this object
     private Rigidbody _rigidbody;
@@ -52,12 +34,6 @@ public class AIBrain : MonoBehaviour
 
     // Current state ID of the fsm
     private string _currentBehaviourID = "";
-
-    // Determines if the loop should exit
-    private bool _isAlive = true;
-
-    // Flag to hold if the enemy has been attacked
-    internal bool _hasBeenAttacked = false;
 
     // Called on initialise
     private void Awake()
@@ -80,25 +56,16 @@ public class AIBrain : MonoBehaviour
         _currentBehaviourID = behaviourInformation[0].name;
 
         // Setting the current health to be max
-        currentHealth = maxHealth;
-    }
-
-    // Called before the current state update
-    private void AnyStateUpdate() 
-    {
-        // Debug option to print current state
-        if (printCurrentState)
-            DebugStateMachine();
-
-        // Check if the AI is still alive
-        if (!_isAlive)
-            SetBehaviour("Death");
+        // currentHealth = maxHealth;
     }
 
     // Called every frame
     private void Update()
     {
-        AnyStateUpdate();
+        // Debug option to print current state
+        if (printCurrentState)
+            DebugStateMachine();
+
         _aiBehaviours[_currentBehaviourID].OnUpdate();
     }
 
@@ -146,53 +113,46 @@ public class AIBrain : MonoBehaviour
         Debug.Log(_currentBehaviourID);
     }
 
-    // Currently just destroying the enemy if the player attacks them
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "PlayerMelee" && other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
-            TakeDamage(25.0f);
-    }
+    //// Makes the enemy take damage
+    //public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
+    //{
+    //    currentHealth -= damage;
+    //    if (currentHealth <= 0)
+    //        _isAlive = false;
 
-    // Makes the enemy take damage
-    public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-            _isAlive = false;
+    //    if (typeOfEnemy != EnemyType.ELITE)
+    //        SetBehaviour("Stagger");
 
-        if (typeOfEnemy != EnemyType.ELITE)
-            SetBehaviour("Stagger");
-
-        else if(e_Ability == AbilityManager.E_Ability.HAMMER)
-            SetBehaviour("Stagger");
+    //    else if(e_Ability == AbilityManager.E_Ability.HAMMER)
+    //        SetBehaviour("Stagger");
 
 
-        if (printHealthStats)
-            Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
-    }
+    //    if (printHealthStats)
+    //        Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
+    //}
 
-    // Returns the base damage of the enemy.
-    public float GetDamage()
-    {
-        return baseDamage;
-    }
+    //// Returns the base damage of the enemy.
+    //public float GetDamage()
+    //{
+    //    return baseDamage;
+    //}
 
-    // Returns true if the entity is still alive
-    public bool IsAlive()
-    {
-        return _isAlive;
-    }
+    //// Returns true if the entity is still alive
+    //public bool IsAlive()
+    //{
+    //    return _isAlive;
+    //}
 
-    // Activates the weapons collider
-    public void ActivateWeaponCollider()
-    {
-        weaponCollider.enabled = true;
-    }
+    //// Activates the weapons collider
+    //public void ActivateWeaponCollider()
+    //{
+    //    weaponCollider.enabled = true;
+    //}
     
-    // Deactivates the weapons collider
-    public void DeactiveWeaponCollider()
-    {
-        weaponCollider.enabled = false;
-    }
+    //// Deactivates the weapons collider
+    //public void DeactiveWeaponCollider()
+    //{
+    //    weaponCollider.enabled = false;
+    //}
 }
 

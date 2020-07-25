@@ -62,7 +62,7 @@ public class AbilityHammer : Ability
                             damage = damageToElite;
                             break;
                     }
-                    hit.transform.gameObject.GetComponent<AIBrain>().TakeDamage(damage, AbilityManager.E_Ability.HAMMER);
+                    hit.transform.gameObject.GetComponent<EnemyHandler>().TakeDamage(damage, AbilityManager.E_Ability.HAMMER);
                 }
             }
             _hasRan = true;

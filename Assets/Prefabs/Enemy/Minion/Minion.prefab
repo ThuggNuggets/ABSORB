@@ -118,13 +118,13 @@ GameObject:
   - component: {fileID: 888457025188684250}
   - component: {fileID: 6528944317236568781}
   - component: {fileID: 2158594309783822410}
+  - component: {fileID: 6508031036771759353}
   - component: {fileID: 888457025188684253}
   - component: {fileID: 888457025188684262}
-  - component: {fileID: 888457025188684248}
-  - component: {fileID: 888457025188684263}
   - component: {fileID: 888457025188684249}
   - component: {fileID: 5760204340909872188}
-  - component: {fileID: 888457026463146825}
+  - component: {fileID: 888457025188684248}
+  - component: {fileID: 888457025188684263}
   m_Layer: 9
   m_Name: Minion
   m_TagString: EnemyMinion
@@ -198,6 +198,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6508031036771759353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888457025188684252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfEnemy: 0
+  maxHealth: 100
+  baseDamage: 10
+  printHealthStats: 0
+  weaponCollider: {fileID: 145121469}
 --- !u!114 &888457025188684253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,11 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfEnemy: 0
-  maxHealth: 75
-  baseDamage: 2
   playerTransform: {fileID: 0}
-  weaponCollider: {fileID: 0}
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 888457025188684262}
@@ -225,9 +238,8 @@ MonoBehaviour:
   - name: Death
     behaviour: {fileID: 888457025188684249}
   - name: Stagger
-    behaviour: {fileID: 888457026463146825}
+    behaviour: {fileID: 5760204340909872188}
   printCurrentState: 0
-  printHealthStats: 0
 --- !u!114 &888457025188684262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +253,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialDetectionDistance: 50
+--- !u!114 &888457025188684249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888457025188684252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220e8c962d26f4b4999392623d53b049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5760204340909872188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888457025188684252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staggerTime: 2
 --- !u!114 &888457025188684248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,44 +319,6 @@ MonoBehaviour:
   transitionTime: 2
   timeBeforeAttack: 0.2
   attackForce: 20
---- !u!114 &888457025188684249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888457025188684252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 220e8c962d26f4b4999392623d53b049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5760204340909872188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888457025188684252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staggerTime: 1
---- !u!114 &888457026463146825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888457025188684252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staggerTime: 2
 --- !u!1 &888457027035413703
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,11 +417,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinionWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 1776783443654265285, guid: 6405543b787666341912d40ee606d95d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6405543b787666341912d40ee606d95d, type: 3}
 --- !u!4 &145121467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1776783443654265280, guid: 6405543b787666341912d40ee606d95d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1776783443781790075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &145121469 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1776783443654265286, guid: 6405543b787666341912d40ee606d95d,
     type: 3}
   m_PrefabInstance: {fileID: 1776783443781790075}
   m_PrefabAsset: {fileID: 0}

@@ -120,7 +120,7 @@ public class Health : MonoBehaviour
 
     private void MinionDamage()
     {
-        float damage = collidedObject.GetComponent<AIBrain>().GetDamage();
+        float damage = collidedObject.GetComponent<EnemyHandler>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
         if(debug)
@@ -129,7 +129,7 @@ public class Health : MonoBehaviour
 
     private void SpecialDamage()
     {
-        float damage = collidedObject.GetComponentInParent<AIBrain>().GetDamage();
+        float damage = collidedObject.GetComponentInParent<EnemyHandler>().GetDamage();
         TakeDamage(damage);
         enemy = EnemyType.None;
         if (debug)

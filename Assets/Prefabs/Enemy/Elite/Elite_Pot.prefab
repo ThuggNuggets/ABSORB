@@ -43,13 +43,13 @@ GameObject:
   - component: {fileID: 3438492787752429408}
   - component: {fileID: 7793452807309044309}
   - component: {fileID: 3438492787752429415}
+  - component: {fileID: 3112311254176356897}
   - component: {fileID: 3438492787752429404}
   - component: {fileID: 3438492787752429405}
   - component: {fileID: 3438492787752429410}
   - component: {fileID: 3438492787752429411}
   - component: {fileID: 2015930785}
   - component: {fileID: 587815119550088634}
-  - component: {fileID: 1301302}
   - component: {fileID: 5845809475913347839}
   m_Layer: 9
   m_Name: Elite_Pot
@@ -115,11 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfEnemy: 2
-  maxHealth: 150
-  baseDamage: 10
   playerTransform: {fileID: 0}
-  weaponCollider: {fileID: 0}
   behaviourInformation:
   - name: Idle
     behaviour: {fileID: 3438492787752429404}
@@ -132,7 +128,23 @@ MonoBehaviour:
   - name: Death
     behaviour: {fileID: 3438492787752429411}
   printCurrentState: 0
-  printHealthStats: 1
+--- !u!114 &3112311254176356897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438492787752429414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfEnemy: 2
+  maxHealth: 100
+  baseDamage: 50
+  printHealthStats: 0
+  weaponCollider: {fileID: 0}
 --- !u!114 &3438492787752429404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,19 +326,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1301302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3438492787752429414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28f86b66e07db14b896497d85d8065c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staggerTime: 0
 --- !u!114 &5845809475913347839
 MonoBehaviour:
   m_ObjectHideFlags: 0
