@@ -22,6 +22,7 @@ public class Spawner : MonoBehaviour
     [Space]
     public Transform[] spawnerPositions;
 
+    public Dictionary<string, List<GameObject>> gameObjectsByTag;
     private string spawnTag;
     public int numberOfTaggedObjects = 0;
     private float tempSpawnTimer = 0.0f;
@@ -29,6 +30,7 @@ public class Spawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameObjectsByTag = new Dictionary<string, List<GameObject>>();
         tempSpawnTimer = timeBetweenEachEnemySpawn;
         spawnTag = objectToSpawn.tag;
     }
@@ -42,35 +44,66 @@ public class Spawner : MonoBehaviour
             // TODO:
             // - Potentially spawn more enemies if 1 dies (e.g. 1 enemy dies, 2 more spawn)
 
-            // Only run if we haven't reached the max number or we haven't set a max number
-            if (numberOfTaggedObjects <= maxNumberOfSpawns || maxNumberOfSpawns == 0)
+            tempSpawnTimer -= Time.deltaTime;
+
+            if (tempSpawnTimer <= 0.0f)
             {
-                tempSpawnTimer -= Time.deltaTime;
-
-                if (tempSpawnTimer <= 0.0f)
-                {
-                    waitForSpawn = false;
-                }
-
-                // Allows the first wave to be spawned instantly instead of waiting
-                // for the time between each enemy to reach 0 seconds
-                if (!waitForSpawn)
-                {
-                    tempSpawnTimer -= Time.deltaTime;
-                    for (int i = 0; i < (int)numberOfEnemies; i++)
-                    {
-                        int spawnNumber = Random.Range(0, spawnerPositions.Count());
-
-                        Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>().playerTransform = this.playerTransform;
-                    }
-
-                    tempSpawnTimer = timeBetweenEachEnemySpawn;
-                    numberOfEnemies += addNumberOfEnemies;
-                    waitForSpawn = true;
-                }
+                waitForSpawn = false;
             }
 
+            // Allows the first wave to be spawned instantly instead of waiting
+            // for the time between each enemy to reach 0 seconds
+            if (!waitForSpawn)
+            {
+                tempSpawnTimer -= Time.deltaTime;
+                for (int i = 0; i < (int)numberOfEnemies; i++)
+                {
+                    AddEnemy(objectToSpawn);
+                }
+
+                tempSpawnTimer = timeBetweenEachEnemySpawn;
+                numberOfEnemies += addNumberOfEnemies;
+                waitForSpawn = true;
+            }
+
+            //numberOfTaggedObjects = GetEnemyFromTag(spawnTag).Count;
             numberOfTaggedObjects = GameObject.FindGameObjectsWithTag(spawnTag).Length;
         }
     }
+
+    // Come back to try and get working
+    public void AddEnemy(GameObject enemy)
+    {
+        if (!gameObjectsByTag.ContainsKey(enemy.tag))
+            gameObjectsByTag.Add(enemy.tag, new List<GameObject>());
+
+        // Only run if we haven't reached the max number
+        if (gameObjectsByTag[enemy.tag].Count < maxNumberOfSpawns || maxNumberOfSpawns == 0)
+        {
+            gameObjectsByTag[enemy.tag].Add(enemy);
+            int spawnNumber = Random.Range(0, spawnerPositions.Count());
+            Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>().playerTransform = this.playerTransform;
+        }
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        if (gameObjectsByTag.ContainsKey(enemy.tag) && gameObjectsByTag[enemy.tag].Contains(enemy))
+            gameObjectsByTag[enemy.tag].Remove(enemy);
+    }
+    public List<GameObject> GetEnemyFromTag(string tag)
+    {
+        if (!gameObjectsByTag.ContainsKey(tag))
+            return null;
+        else
+            return gameObjectsByTag[tag];
+    }
+
+    //public void MoveEnemyToLayer(GameObject enemy, int newLayer)
+    //{
+    //    RemoveEnemy(enemy);
+    //    enemy.layer = newLayer;
+    //    AddEnemy(enemy);
+    //}
+
 }

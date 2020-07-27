@@ -50,7 +50,7 @@ public class MinionAttack : AIBehaviour
 
         if (weaponTrigger.Enabled && weaponTrigger.Collider != null && _canAttack)
         {
-            if (weaponTrigger.Collider.gameObject.tag == "Player" && !_hasAttacked)
+            if (weaponTrigger.Collider.gameObject.CompareTag("Player") && !_hasAttacked)
             {
                 brain.playerTransform.GetComponent<Rigidbody>().AddForce(dir * attackForce, ForceMode.Impulse);
                 _hasAttacked = true;

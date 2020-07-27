@@ -48,7 +48,7 @@ public class EnemyHandler : MonoBehaviour
     // Currently just destroying the enemy if the player attacks them
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "PlayerMelee" && other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
+        if (other.gameObject.CompareTag("PlayerMelee") && other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
             TakeDamage(25.0f);
     }
 
