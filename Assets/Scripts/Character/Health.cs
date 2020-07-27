@@ -117,7 +117,7 @@ public class Health : MonoBehaviour
     public float TakeDamage(float damageAmount)
     {
         hitParticleSystem.Play();
-        // hitSoundEffect.Play();
+        hitSoundEffect.Play();
         collidedObject = null;
         if (debug)
             Debug.Log("Player damage taken: " + damageAmount);

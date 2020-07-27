@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 5803590788216193643}
   typeOfEnemy: 1
   maxHealth: 100
   baseDamage: 25
@@ -713,6 +714,12 @@ PrefabInstance:
 --- !u!4 &5933942372407865249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6244723209411074247, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 355836638982043494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5803590788216193643 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6087266473159226637, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
     type: 3}
   m_PrefabInstance: {fileID: 355836638982043494}
   m_PrefabAsset: {fileID: 0}

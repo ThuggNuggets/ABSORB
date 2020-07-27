@@ -41,7 +41,7 @@ ParticleSystem:
   m_GameObject: {fileID: 863107255475491247}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 3
+  simulationSpeed: 4
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -4989,6 +4989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 259572212970434151}
   typeOfEnemy: 2
   maxHealth: 100
   baseDamage: 50
@@ -5229,7 +5230,7 @@ ParticleSystem:
   m_GameObject: {fileID: 4209009950584701940}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 3
+  simulationSpeed: 4
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -10170,6 +10171,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3438492787752429409}
     m_Modifications:
+    - target: {fileID: 6086646682053332993, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6244308761173774119, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10250,6 +10256,12 @@ PrefabInstance:
 --- !u!4 &92827068776268717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6244723209411074247, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6332200810199833450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &259572212970434151 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6087266473159226637, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
     type: 3}
   m_PrefabInstance: {fileID: 6332200810199833450}
   m_PrefabAsset: {fileID: 0}
