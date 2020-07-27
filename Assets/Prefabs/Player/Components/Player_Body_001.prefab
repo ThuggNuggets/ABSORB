@@ -404,7 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityManager: {fileID: 1195099963130281862}
   debug: 0
-  currentHealth: -35
+  currentHealth: -105
   healthFromAbsorb: 20
 --- !u!114 &8260815211856568601
 MonoBehaviour:
@@ -520,6 +520,7 @@ MonoBehaviour:
   force: 50
   cooldownTime: 0
   inputKey: 304
+  distance: 20
 --- !u!1001 &1699744714667175672
 PrefabInstance:
   m_ObjectHideFlags: 0
