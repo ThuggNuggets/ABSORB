@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 2468281286964091614}
   - component: {fileID: 1869582312}
   - component: {fileID: 1545456481}
+  - component: {fileID: 1481806156}
   m_Layer: 8
   m_Name: Player_Body_001
   m_TagString: Player
@@ -362,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affde042c56d82444817b1f15d7c4693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingAbility: 1
+  startingAbility: 0
   mouseButtonInput: 1
   abilityInformation:
   - e_Ability: 1
@@ -402,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityManager: {fileID: 1195099963130281862}
   debug: 0
-  currentHealth: 100
+  currentHealth: 20
   healthFromAbsorb: 20
 --- !u!114 &8260815211856568601
 MonoBehaviour:
@@ -503,6 +504,21 @@ MonoBehaviour:
   m_UseImpactDirection: 0
   m_ScaleImpactWithMass: 0
   m_ScaleImpactWithSpeed: 0
+--- !u!114 &1481806156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260815211856568604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ec381f815f7b74a8479efa76a49bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 50
+  cooldownTime: 0
+  inputKey: 304
 --- !u!1001 &1699744714667175672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,6 +670,21 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8555626321921202272, guid: 349c252aee0d9c443ac0784b5c1a99ac,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 22.563313
+      objectReference: {fileID: 0}
+    - target: {fileID: 8555626321921202272, guid: 349c252aee0d9c443ac0784b5c1a99ac,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.2091494
+      objectReference: {fileID: 0}
+    - target: {fileID: 8555626321921202272, guid: 349c252aee0d9c443ac0784b5c1a99ac,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 22.563313
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 349c252aee0d9c443ac0784b5c1a99ac, type: 3}

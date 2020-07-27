@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfEnemy: 0
-  maxHealth: 100
-  baseDamage: 10
+  maxHealth: 75
+  baseDamage: 2
   printHealthStats: 0
   weaponCollider: {fileID: 145121469}
 --- !u!114 &888457025188684253
@@ -501,17 +501,17 @@ PrefabInstance:
     - target: {fileID: 5078779838207941734, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0593147
+      value: 0.93840456
       objectReference: {fileID: 0}
     - target: {fileID: 5078779838207941734, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.0593147
+      value: 0.93840456
       objectReference: {fileID: 0}
     - target: {fileID: 5078779838207941734, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0593147
+      value: 0.93840456
       objectReference: {fileID: 0}
     - target: {fileID: 5562125817539757788, guid: 4c471951e7231de428921e1ae63e3c09,
         type: 3}
