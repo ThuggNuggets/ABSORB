@@ -62,7 +62,7 @@ public class AbilityManager : MonoBehaviour
     {
         // Debug printing if option enabled
         if (printCurrentState)
-            Debug.Log(_currentAbility);
+            Debug.Log(_currentAbility + " TIME");
 
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
