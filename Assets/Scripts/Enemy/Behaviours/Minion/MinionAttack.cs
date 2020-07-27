@@ -73,7 +73,6 @@ public class MinionAttack : AIBehaviour
     public void DeactivateCheck()
     {
         _canAttack = false;
-        _animator.SetBool("Attacking", false);
         brain.SetBehaviour("Movement");
     }
 }

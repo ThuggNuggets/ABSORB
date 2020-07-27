@@ -13,6 +13,7 @@ public class Dash : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;
+    private bool _haveReset = false;
 
     private void Awake()
     {
@@ -32,11 +33,12 @@ public class Dash : MonoBehaviour
         
         if(!_canDash)
         {
-            if(Vector3.Distance(transform.position, _initialPosition) > distance)
+            if(Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
             {
                 _rigidbody.velocity = _initialVelocity;
                 _initialVelocity = Vector3.zero;
                 _initialPosition = Vector3.zero;
+                _haveReset = true;
             }
         }
     }
@@ -45,6 +47,7 @@ public class Dash : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(cooldownTime);
         _canDash = true;
+        _haveReset = false;
         Debug.Log("Dash ready...");
     }
 }

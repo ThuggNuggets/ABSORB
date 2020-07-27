@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
 {
     [Header("References")]
     public AbilityManager abilityManager;
+    public ParticleSystem hitParticleSystem;
+    public AudioSource hitSoundEffect;
 
     [Header("Properties")]
     public bool debug = false;
@@ -114,11 +116,15 @@ public class Health : MonoBehaviour
     // Return the amount of damage the player should take
     public float TakeDamage(float damageAmount)
     {
+        hitParticleSystem.Play();
+        // hitSoundEffect.Play();
         collidedObject = null;
+        if (debug)
+            Debug.Log("Player damage taken: " + damageAmount);
         return currentHealth -= damageAmount;
     }
 
-    private void MinionDamage()
+    public void MinionDamage()
     {
         float damage = collidedObject.GetComponent<EnemyHandler>().GetDamage();
         TakeDamage(damage);
