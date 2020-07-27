@@ -69,7 +69,8 @@ public class Spawner : MonoBehaviour
                 waitForSpawn = true;
             }
 
-            numberOfTaggedObjects = GetEnemyFromTag(spawnTag).Count;
+            if (GetEnemyFromTag(spawnTag) != null)
+                numberOfTaggedObjects = GetEnemyFromTag(spawnTag).Count;
             //numberOfTaggedObjects = GameObject.FindGameObjectsWithTag(spawnTag).Length;
         }
     }

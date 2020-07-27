@@ -12,15 +12,7 @@ public class SpecialParryBlock : MonoBehaviour
     [Range(0.1f, 5f)]
     public float shieldCooldown = 1.0f;
 
-    [Header("Acceleration Properties", order = 1)]
-    public float maxSlowAcceleration = 10.0f;
-    public float timeToAcceleration = 0.2f; // Approx time for the player acceleration to reach the slow/default amount
-
-    float speedSmoothVelocity;
-    float speedSmoothVelocityN;
-
-    private Movement playerMovement;
-    private float tempPlayerAcceleration;
+    private PlayerSlowdown playerSlowdown;
     private float tempShieldTimer;
     private float tempShieldCDTimer;
 
@@ -39,14 +31,11 @@ public class SpecialParryBlock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<Movement>();
-        speedSmoothVelocity = playerMovement.maxVelocity;
-        speedSmoothVelocityN = -playerMovement.maxVelocity;
+        playerSlowdown = GetComponent<PlayerSlowdown>();
         // Make sure the blocking sphere is turned off by default
         sphereRenderer.enabled = false;
         shieldState = ShieldState.Default;
 
-        tempPlayerAcceleration = playerMovement.acceleration;
         // Set temp timers
         tempShieldTimer = shieldTimer;
         tempShieldCDTimer = shieldCooldown;
@@ -55,12 +44,6 @@ public class SpecialParryBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO:
-        // when the shield is finished, shieldOnCooldown = true, while its true shieldCooldown will deplete
-        // - Slowdown player when shielding (send data to Player Movement script)
-        // Change acceleration in movement script
-        // playerAcceleration -= shieldAcceleration * time.deltatime
-
         switch (shieldState)
         {
             case ShieldState.Default:
@@ -72,13 +55,6 @@ public class SpecialParryBlock : MonoBehaviour
             case ShieldState.Cooldown:
                 Cooldown();
                 break;
-        }
-
-
-        // If specialAttack has been parried send data to enemy
-        if (specialAttackParried)
-        {
-            //enemyState = staggered;
         }
     }
 
@@ -95,9 +71,8 @@ public class SpecialParryBlock : MonoBehaviour
         shieldTimer -= Time.deltaTime;
 
         // Slow down the player when shielding
-        //if (!(playerMovement.acceleration <= slowAcceleration))
-        //playerMovement.acceleration -= slowAcceleration * Time.deltaTime;
-        playerMovement.acceleration = Mathf.SmoothDamp(playerMovement.acceleration, maxSlowAcceleration, ref speedSmoothVelocity, timeToAcceleration);
+        playerSlowdown.SetSlowdown();
+        playerSlowdown.slowState = PlayerSlowdown.SlowState.Slowdown;
 
         if (shieldTimer <= 0)
         {
@@ -110,12 +85,15 @@ public class SpecialParryBlock : MonoBehaviour
     private void Cooldown()
     {
         shieldCooldown -= Time.deltaTime;
-        playerMovement.acceleration = Mathf.SmoothDamp(playerMovement.acceleration, tempPlayerAcceleration, ref speedSmoothVelocity, timeToAcceleration);
+
+        // Speed up the player after shield has expired
+        playerSlowdown.SetSpeedUp();
+        playerSlowdown.slowState = PlayerSlowdown.SlowState.SpeedUp;
 
         if (shieldCooldown <= 0)
         {
             shieldCooldown = tempShieldCDTimer;
-            playerMovement.acceleration = tempPlayerAcceleration;
+            playerSlowdown.slowState = PlayerSlowdown.SlowState.Default;
             shieldState = ShieldState.Default;
         }
     }
