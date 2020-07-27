@@ -35,7 +35,7 @@ public class Dash : MonoBehaviour
         {
             if(Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
             {
-                _rigidbody.velocity = _initialVelocity;
+                //_rigidbody.velocity = _initialVelocity;
                 _initialVelocity = Vector3.zero;
                 _initialPosition = Vector3.zero;
                 _haveReset = true;

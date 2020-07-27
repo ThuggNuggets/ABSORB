@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 135627812964976856}
   m_LocalRotation: {x: -0.08101835, y: 0.104126774, z: -0.60871905, w: 0.7823393}
   m_LocalPosition: {x: 2.57, y: 2.48, z: -0.73}
-  m_LocalScale: {x: 0.67644006, y: 1.3845524, z: 0.67643994}
+  m_LocalScale: {x: 2.5794575, y: 2.6025429, z: 2.1817894}
   m_Children:
   - {fileID: 6992454105156787290}
   m_Father: {fileID: 0}
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135627812964976856}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -1627617328657501697, guid: df02c7e38646cfa41b5fb9cec16b12a2, type: 3}
 --- !u!23 &3161483331865878755
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135627812964976856}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -92,10 +92,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  m_Radius: 1.6759818
-  m_Height: 2.8509948
+  m_Radius: 0.40927762
+  m_Height: 1.6560962
   m_Direction: 1
-  m_Center: {x: 0.37778986, y: 0.109842926, z: -0.28583375}
+  m_Center: {x: 0.0061425106, y: 0.0042497804, z: -0.05172811}
 --- !u!82 &7629261583880238095
 AudioSource:
   m_ObjectHideFlags: 0
