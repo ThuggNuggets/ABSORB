@@ -27,7 +27,10 @@ public class EnemyHandler : MonoBehaviour
     public Collider weaponCollider;
 
     // The brain of this enemy
-    private AIBrain aiBrain;
+    private AIBrain _aiBrain;
+
+    // Reference to the spawner which created this enemy
+    private Spawner _spawner;
 
 
     private void Awake()
@@ -36,13 +39,14 @@ public class EnemyHandler : MonoBehaviour
         _currentHealth = maxHealth;
 
         // Getting the components
-        aiBrain = this.GetComponent<AIBrain>();
+        _aiBrain = this.GetComponent<AIBrain>();
     }
 
     private void Update()
     {
+        // Checking if the enemy is still alive
         if (!_isAlive)
-            aiBrain.SetBehaviour("Death");
+            _aiBrain.SetBehaviour("Death");
     }
 
     // Currently just destroying the enemy if the player attacks them
@@ -60,10 +64,10 @@ public class EnemyHandler : MonoBehaviour
             _isAlive = false;
 
         if (typeOfEnemy != EnemyType.ELITE)
-            aiBrain.SetBehaviour("Stagger");
+            _aiBrain.SetBehaviour("Stagger");
 
         else if (e_Ability == AbilityManager.E_Ability.HAMMER)
-            aiBrain.SetBehaviour("Stagger");
+            _aiBrain.SetBehaviour("Stagger");
 
         if (printHealthStats)
             Debug.Log(gameObject.tag + " took damage. Current health: " + _currentHealth);
@@ -91,5 +95,17 @@ public class EnemyHandler : MonoBehaviour
     public void DeactiveWeaponCollider()
     {
         weaponCollider.enabled = false;
+    }
+
+    // Sets up the spawner
+    public void SetupSpawner(Spawner spawner)
+    {
+        _spawner = spawner;
+    }
+
+    // Returns the spawner
+    public Spawner GetSpawner()
+    {
+        return _spawner;
     }
 }

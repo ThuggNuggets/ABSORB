@@ -39,8 +39,6 @@ public class AbilityHammer : Ability
     {
         if (!_hasRan)
         {
-            //StartCoroutine(TurnOffSequence());
-
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.0f);
             foreach (RaycastHit hit in hits)
             {
@@ -104,7 +102,7 @@ public class AbilityHammer : Ability
 
     private void OnDrawGizmos()
     {
-        if(active || drawSphereGizmo)
+        if(!_hasRan || drawSphereGizmo)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);

@@ -112,47 +112,5 @@ public class AIBrain : MonoBehaviour
     {
         Debug.Log(_currentBehaviourID);
     }
-
-    //// Makes the enemy take damage
-    //public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
-    //{
-    //    currentHealth -= damage;
-    //    if (currentHealth <= 0)
-    //        _isAlive = false;
-
-    //    if (typeOfEnemy != EnemyType.ELITE)
-    //        SetBehaviour("Stagger");
-
-    //    else if(e_Ability == AbilityManager.E_Ability.HAMMER)
-    //        SetBehaviour("Stagger");
-
-
-    //    if (printHealthStats)
-    //        Debug.Log(gameObject.tag + " took damage. Current health: " + currentHealth);
-    //}
-
-    //// Returns the base damage of the enemy.
-    //public float GetDamage()
-    //{
-    //    return baseDamage;
-    //}
-
-    //// Returns true if the entity is still alive
-    //public bool IsAlive()
-    //{
-    //    return _isAlive;
-    //}
-
-    //// Activates the weapons collider
-    //public void ActivateWeaponCollider()
-    //{
-    //    weaponCollider.enabled = true;
-    //}
-    
-    //// Deactivates the weapons collider
-    //public void DeactiveWeaponCollider()
-    //{
-    //    weaponCollider.enabled = false;
-    //}
 }
 

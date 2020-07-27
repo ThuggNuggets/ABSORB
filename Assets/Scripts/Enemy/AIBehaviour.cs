@@ -12,6 +12,7 @@ public abstract class AIBehaviour : MonoBehaviour
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     protected Transform transform;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+    protected EnemyHandler enemyHandler;
 
     public void InitialiseState(AIBrain brain)
     {
@@ -19,6 +20,7 @@ public abstract class AIBehaviour : MonoBehaviour
         this.player = brain.playerTransform;
         this.rigidbody = brain.GetRigidbody();
         this.transform = brain.GetTransform();
+        this.enemyHandler = brain.GetComponent<EnemyHandler>(); // move this into enemy brain and call getcomponent() once. this calls it every init
     }
 
     abstract public void OnEnter();
