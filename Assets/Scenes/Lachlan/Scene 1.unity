@@ -121,24 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &67792167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 145121466, guid: 07f1e4e685e39d44192151e31d52f06e,
+--- !u!135 &110023881 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 1628532872, guid: cead3e10cfb8e6245bfce3328d73617a,
     type: 3}
-  m_PrefabInstance: {fileID: 888457026463146822}
+  m_PrefabInstance: {fileID: 1808555908}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &67792169 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 145121468, guid: 07f1e4e685e39d44192151e31d52f06e,
+--- !u!198 &397410509 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5803590788216193643, guid: d99e7a3ca18ca9c4199d4aeef584dea6,
     type: 3}
-  m_PrefabInstance: {fileID: 888457026463146822}
+  m_PrefabInstance: {fileID: 1491251930}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67792167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10163a67d75a59e498486d622cd85d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &447423599
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,17 +245,17 @@ PrefabInstance:
     - target: {fileID: 4172848110952313914, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.006951022
+      value: 0.0069510224
       objectReference: {fileID: 0}
     - target: {fileID: 4172848110952313914, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000019766717
+      value: -0.000000002240478
       objectReference: {fileID: 0}
     - target: {fileID: 4172848110952313914, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.3740221e-11
+      value: 1.5573988e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4172848110952313914, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
@@ -346,12 +340,12 @@ PrefabInstance:
     - target: {fileID: 4172848112149176622, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000037231387
+      value: 0.000000003723139
       objectReference: {fileID: 0}
     - target: {fileID: 4172848112149176622, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.2659068e-10
+      value: -1.265907e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4172848112149176622, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
@@ -371,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 4172848112790214069, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.009901892
+      value: 0.0099019
       objectReference: {fileID: 0}
     - target: {fileID: 4172848112790214069, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
@@ -381,7 +375,7 @@ PrefabInstance:
     - target: {fileID: 4172848112790214069, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000034725474
+      value: -0.0000034725497
       objectReference: {fileID: 0}
     - target: {fileID: 4172848112790214069, guid: a34469a43874cff45b00ab3407b26109,
         type: 3}
@@ -430,6 +424,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &894801185 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 259572212970434151, guid: 0363b18a660ce2b4f93504c85cf853d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5845809475913347837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1310739447 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4172848111794815059, guid: a34469a43874cff45b00ab3407b26109,
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 0}
   typeOfEnemy: 0
   maxHealth: 100
   baseDamage: 10
@@ -483,6 +484,11 @@ PrefabInstance:
       propertyPath: printHealthStats
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6989334769506331493, guid: d99e7a3ca18ca9c4199d4aeef584dea6,
+        type: 3}
+      propertyPath: damageEffect
+      value: 
+      objectReference: {fileID: 397410509}
     - target: {fileID: 8677661987734016585, guid: d99e7a3ca18ca9c4199d4aeef584dea6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -942,7 +948,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633709865}
-  m_LocalRotation: {x: 0.009901889, y: 0.00035067814, z: -0.0000034725488, w: 0.99995095}
+  m_LocalRotation: {x: 0.009901904, y: 0.00035067814, z: -0.000003472554, w: 0.99995095}
   m_LocalPosition: {x: -11.25, y: 2.4, z: 35.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1246,6 +1252,14 @@ PrefabInstance:
       propertyPath: cooldownTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1628532872, guid: cead3e10cfb8e6245bfce3328d73617a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869582312, guid: cead3e10cfb8e6245bfce3328d73617a, type: 3}
+      propertyPath: sphereCollider
+      value: 
+      objectReference: {fileID: 110023881}
     - target: {fileID: 503527065225526947, guid: cead3e10cfb8e6245bfce3328d73617a,
         type: 3}
       propertyPath: m_Enabled
@@ -1780,48 +1794,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
         type: 3}
-      propertyPath: turnSpeed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: acceleration
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: sprintAcceleration
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: dodgeChance
-      value: 0.111
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: dodgeMaxVelocity
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: dodgeAcceleration
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: rangeOfSprint
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: maxVelocity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684248, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: sprintMaxVelocity
-      value: 20
+      propertyPath: dodgeDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 888457025188684251, guid: 07f1e4e685e39d44192151e31d52f06e,
         type: 3}
@@ -1923,16 +1897,6 @@ PrefabInstance:
       propertyPath: printCurrentState
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 888457025188684263, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: weaponToEnable
-      value: 
-      objectReference: {fileID: 67792167}
-    - target: {fileID: 888457025188684263, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: weaponTrigger
-      value: 
-      objectReference: {fileID: 67792169}
     - target: {fileID: 888457027035413700, guid: 07f1e4e685e39d44192151e31d52f06e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1982,11 +1946,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6508031036771759353, guid: 07f1e4e685e39d44192151e31d52f06e,
-        type: 3}
-      propertyPath: printHealthStats
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6528944317236568781, guid: 07f1e4e685e39d44192151e31d52f06e,
         type: 3}
@@ -2074,6 +2033,11 @@ PrefabInstance:
       propertyPath: printHealthStats
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3112311254176356897, guid: 0363b18a660ce2b4f93504c85cf853d9,
+        type: 3}
+      propertyPath: damageEffect
+      value: 
+      objectReference: {fileID: 894801185}
     - target: {fileID: 3438492787752429405, guid: 0363b18a660ce2b4f93504c85cf853d9,
         type: 3}
       propertyPath: retreatMaxVelocity

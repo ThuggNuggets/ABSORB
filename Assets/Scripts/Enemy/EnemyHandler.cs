@@ -12,6 +12,9 @@ public class EnemyHandler : MonoBehaviour
         ELITE,
     }
 
+    [Header("References")]
+    public ParticleSystem damageEffect;
+
     [Header("Properties")]
     public EnemyType typeOfEnemy;
     public float maxHealth = 100.0f;
@@ -31,6 +34,8 @@ public class EnemyHandler : MonoBehaviour
 
     // Reference to the spawner which created this enemy
     private Spawner _spawner;
+
+    //
 
 
     private void Awake()
@@ -68,6 +73,8 @@ public class EnemyHandler : MonoBehaviour
 
         else if (e_Ability == AbilityManager.E_Ability.HAMMER)
             _aiBrain.SetBehaviour("Stagger");
+
+        damageEffect.Play();
 
         if (printHealthStats)
             Debug.Log(gameObject.tag + " took damage. Current health: " + _currentHealth);

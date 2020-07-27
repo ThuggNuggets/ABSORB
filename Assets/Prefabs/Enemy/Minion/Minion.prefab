@@ -104,10 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 1912839310510974004}
   typeOfEnemy: 0
   maxHealth: 75
   baseDamage: 2
-  printHealthStats: 0
+  printHealthStats: 1
   weaponCollider: {fileID: 145121469}
 --- !u!114 &888457025188684253
 MonoBehaviour:
@@ -184,17 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782a85988aaa1304f87db71288be5993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 5
-  maxVelocity: 5
-  turnSpeed: 1
-  randomJumpForce: 50
-  sprintAcceleration: 30
-  sprintMaxVelocity: 15
-  rangeOfSprint: 25
-  avoidPushbackForce: 25
-  attackPushback: 2.5
-  attackDistance: 2
-  attackPushBackTimer: 0.7
+  acceleration: 50
+  maxVelocity: 10
+  turnSpeed: 0.2
+  sprintAcceleration: 75
+  sprintMaxVelocity: 20
+  rangeOfSprint: 15
+  dodgeChance: 0.111
+  dodgeAcceleration: 60
+  dodgeMaxVelocity: 20
+  dodgeDistance: 10
+  attackRange: 2
 --- !u!114 &888457025188684263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +472,12 @@ PrefabInstance:
 --- !u!4 &1754190540438604286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6244723209411074247, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5688492373913637177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1912839310510974004 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6087266473159226637, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
     type: 3}
   m_PrefabInstance: {fileID: 5688492373913637177}
   m_PrefabAsset: {fileID: 0}

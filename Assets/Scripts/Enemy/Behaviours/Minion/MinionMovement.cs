@@ -32,25 +32,6 @@ public class MinionMovement : AIBehaviour
 
     public override void OnFixedUpdate() 
     {
-        /*
-         * 
-         * This is fairly jank, need to implement some "steps" to take rather than just checking distance.
-         * 
-         * Also the attack / avoid RNG is stupid. Should probably just check if the player is within a "danger range" and make the minion
-         * flee from that distance.
-         * 
-         * 
-         * TODO:
-         *  Sprint from a distance - Have the minion move faster towards the player when at a distance.
-         *  Move slower towards player when out of sprint range.
-         *  Enter attack phase when within a attack range.
-         *  
-         *  Optional:
-         *      Have the minion move more randomly than just in a straight line.
-         *      
-         *      
-         */
-
         // Get distance and direction towards player
         float dist = brain.GetDistanceToPlayer();
         Vector3 dir = brain.GetDirectionToPlayer();
@@ -69,9 +50,9 @@ public class MinionMovement : AIBehaviour
                 brain.SetBehaviour("Attack");
                 _shouldDodge = true;
             }
-
         }
 
+        // Checking if the minion should dodge
         if(_shouldDodge)
         {
             // Move towards player faster if out of sprint range
@@ -98,50 +79,7 @@ public class MinionMovement : AIBehaviour
         {
             rigidbody.AddForce(transform.forward * acceleration * Time.fixedDeltaTime, ForceMode.Impulse);
         }
-
-        //// Jump randomly left and right - This is gross atm, need t-o think of a better way to implement.
-        //if(dist > attackDistance)
-        //{
-        //    _jumpRng = Random.Range(0, 10);
-        //    if(_jumpRng >= 4)
-        //    {
-        //        _jumpRng = Random.Range(0, 4);
-        //        if (_jumpRng >= 2)
-        //            rigidbody.AddForce((transform.forward + -transform.right).normalized * randomJumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-        //        else
-        //            rigidbody.AddForce((transform.forward + transform.right).normalized * randomJumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-        //    }
-        //}
-
-        //// Move rigidbody forwards
-        //else if (rigidbody.velocity.magnitude < maxVelocity && dist < rangeOfSprint)
-        //    rigidbody.AddForce(transform.forward * acceleration * Time.fixedDeltaTime, ForceMode.Impulse); 
-
-        //else if (rigidbody.velocity.magnitude < sprintMaxVelocity)
-        //    rigidbody.AddForce(transform.forward * sprintAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
-
-        //// Check if close enough to enter attack state
-        //if (brain.GetDistanceToPlayer() < attackDistance)
-        //{
-        //    if(_attackRng > 1)
-        //    {
-        //        brain.SetBehaviour("Attack");
-        //        StartCoroutine(PushBackSequence(dir));
-        //        _attackRng = Random.Range(0, 20);
-        //    }
-        //    else
-        //    {
-        //        rigidbody.AddForce(-dir * avoidPushbackForce, ForceMode.Impulse);
-        //        _attackRng = Random.Range(0, 20);
-        //    }
-        //}
     }
 
     public override void OnUpdate() {}
-
-    //public IEnumerator PushBackSequence(Vector3 dir)
-    //{
-    //    yield return new WaitForSecondsRealtime(attackPushBackTimer);
-    //    rigidbody.AddForce(-dir * attackPushback, ForceMode.Impulse);
-    //}
 }

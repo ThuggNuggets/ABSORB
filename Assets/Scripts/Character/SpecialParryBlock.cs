@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpecialParryBlock : MonoBehaviour
 {
     public MeshRenderer sphereRenderer;
+    public Collider sphereCollider;
 
     [Header("Timers", order = 0)]
     [Range(0.1f, 5f)]
@@ -68,6 +69,7 @@ public class SpecialParryBlock : MonoBehaviour
     private void Shielding()
     {
         sphereRenderer.enabled = true;
+        sphereCollider.enabled = true;
         shieldTimer -= Time.deltaTime;
 
         // Slow down the player when shielding
@@ -77,6 +79,7 @@ public class SpecialParryBlock : MonoBehaviour
         if (shieldTimer <= 0)
         {
             sphereRenderer.enabled = false;
+            sphereCollider.enabled = false;
             shieldTimer = tempShieldTimer;
             shieldState = ShieldState.Cooldown;
         }
