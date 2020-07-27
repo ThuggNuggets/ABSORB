@@ -54,9 +54,6 @@ public class AIBrain : MonoBehaviour
 
         // Set current behaviour state
         _currentBehaviourID = behaviourInformation[0].name;
-
-        // Setting the current health to be max
-        // currentHealth = maxHealth;
     }
 
     // Called every frame

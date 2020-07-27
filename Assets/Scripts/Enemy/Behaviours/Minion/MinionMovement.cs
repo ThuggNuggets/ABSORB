@@ -22,6 +22,7 @@ public class MinionMovement : AIBehaviour
     public float avoidPushbackForce = 5.0f;
     public float attackPushback = 2.5f;
     public float attackDistance = 2.0f;
+    public float attackPushBackTimer = 0.7f;
 
     // RNG
     private int _attackRng = 0;
@@ -55,7 +56,7 @@ public class MinionMovement : AIBehaviour
         }
 
         // Move rigidbody forwards
-        if (rigidbody.velocity.magnitude < maxVelocity && dist < rangeOfSprint)
+        else if (rigidbody.velocity.magnitude < maxVelocity && dist < rangeOfSprint)
             rigidbody.AddForce(transform.forward * acceleration * Time.fixedDeltaTime, ForceMode.Impulse); 
         
         else if (rigidbody.velocity.magnitude < sprintMaxVelocity)
@@ -64,19 +65,25 @@ public class MinionMovement : AIBehaviour
         // Check if close enough to enter attack state
         if (brain.GetDistanceToPlayer() < attackDistance)
         {
-            if(_attackRng < 1)
+            if(_attackRng > 1)
             {
                 brain.SetBehaviour("Attack");
-                rigidbody.AddForce(-dir * attackPushback, ForceMode.Impulse);
-                _attackRng = Random.Range(0, 3);
+                StartCoroutine(PushBackSequence(dir));
+                _attackRng = Random.Range(0, 20);
             }
             else
             {
                 rigidbody.AddForce(-dir * avoidPushbackForce, ForceMode.Impulse);
-                _attackRng = Random.Range(0, 3);
+                _attackRng = Random.Range(0, 20);
             }
         }
     }
 
     public override void OnUpdate() {}
+
+    public IEnumerator PushBackSequence(Vector3 dir)
+    {
+        yield return new WaitForSecondsRealtime(attackPushBackTimer);
+        rigidbody.AddForce(-dir * attackPushback, ForceMode.Impulse);
+    }
 }

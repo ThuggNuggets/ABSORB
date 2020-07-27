@@ -32,8 +32,7 @@ public class Dash : MonoBehaviour
         
         if(!_canDash)
         {
-            float d = Vector3.Distance(transform.position, _initialPosition);
-            if(d > distance)
+            if(Vector3.Distance(transform.position, _initialPosition) > distance)
             {
                 _rigidbody.velocity = _initialVelocity;
                 _initialVelocity = Vector3.zero;

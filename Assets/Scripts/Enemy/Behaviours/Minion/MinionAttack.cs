@@ -11,6 +11,7 @@ public class MinionAttack : AIBehaviour
     [Header("References")]
     public Trigger weaponTrigger;
     public GameObject weaponToEnable;
+    private Animator _animator;
 
     [Header("Timers")]
     public float transitionTime = 2.0f;
@@ -22,17 +23,22 @@ public class MinionAttack : AIBehaviour
     private bool _hasAttacked = false;
     private bool _canAttack = false;
 
+    private void Awake()
+    {
+        _animator = this.GetComponent<Animator>();
+    }
+
     public override void OnEnter()
     {
         weaponToEnable.SetActive(true);
+        _animator.SetBool("Attacking", true);
         _hasAttacked = false;
-        StartCoroutine(TransitionTimer());
-        StartCoroutine(BeforeAttackTimer());
     }
 
     public override void OnExit()
     {
         weaponToEnable.SetActive(false);
+        _animator.SetBool("Attacking", false);
         _hasAttacked = false;
         _canAttack = false;
     }
@@ -52,23 +58,22 @@ public class MinionAttack : AIBehaviour
         {
             if (weaponTrigger.Collider.gameObject.CompareTag("Player") && !_hasAttacked)
             {
-                brain.playerTransform.GetComponent<Rigidbody>().AddForce(dir * attackForce, ForceMode.Impulse);
+                brain.playerTransform.GetComponent<Health>().TakeDamage(enemyHandler.GetDamage());
                 _hasAttacked = true;
                 _canAttack = false;
             }
-
         }
     }
 
-    private IEnumerator TransitionTimer()
+    public void ActivateCheck()
     {
-        yield return new WaitForSecondsRealtime(transitionTime);
-        brain.SetBehaviour("Idle");
+        _canAttack = true;
     }
 
-    private IEnumerator BeforeAttackTimer()
+    public void DeactivateCheck()
     {
-        yield return new WaitForSecondsRealtime(timeBeforeAttack);
-        _canAttack = true;
+        _canAttack = false;
+        _animator.SetBool("Attacking", false);
+        brain.SetBehaviour("Movement");
     }
 }

@@ -112,7 +112,7 @@ public class Health : MonoBehaviour
     }
 
     // Return the amount of damage the player should take
-    private float TakeDamage(float damageAmount)
+    public float TakeDamage(float damageAmount)
     {
         collidedObject = null;
         return currentHealth -= damageAmount;
