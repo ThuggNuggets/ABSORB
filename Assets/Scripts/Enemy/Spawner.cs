@@ -38,6 +38,9 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Delete))
+            RemoveEnemy(objectToSpawn);
+
         // Only run if a objectToSpawn has been assigned
         if (objectToSpawn != null)
         {
@@ -66,8 +69,8 @@ public class Spawner : MonoBehaviour
                 waitForSpawn = true;
             }
 
-            //numberOfTaggedObjects = GetEnemyFromTag(spawnTag).Count;
-            numberOfTaggedObjects = GameObject.FindGameObjectsWithTag(spawnTag).Length;
+            numberOfTaggedObjects = GetEnemyFromTag(spawnTag).Count;
+            //numberOfTaggedObjects = GameObject.FindGameObjectsWithTag(spawnTag).Length;
         }
     }
 
@@ -82,7 +85,9 @@ public class Spawner : MonoBehaviour
         {
             gameObjectsByTag[enemy.tag].Add(enemy);
             int spawnNumber = Random.Range(0, spawnerPositions.Count());
-            Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>().playerTransform = this.playerTransform;
+            AIBrain aIBrain = Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>();
+            aIBrain.playerTransform = playerTransform;
+            aIBrain.GetComponent<EnemyHandler>().SetupSpawner(this);
         }
     }
 
@@ -91,6 +96,7 @@ public class Spawner : MonoBehaviour
         if (gameObjectsByTag.ContainsKey(enemy.tag) && gameObjectsByTag[enemy.tag].Contains(enemy))
             gameObjectsByTag[enemy.tag].Remove(enemy);
     }
+
     public List<GameObject> GetEnemyFromTag(string tag)
     {
         if (!gameObjectsByTag.ContainsKey(tag))
