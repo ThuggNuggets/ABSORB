@@ -22,7 +22,7 @@ public class Dash : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(inputKey) && _canDash)
+        if (Input.GetKeyDown(inputKey) && _canDash)
         {
             _initialVelocity = _rigidbody.velocity;
             _initialPosition = transform.position;
@@ -30,12 +30,12 @@ public class Dash : MonoBehaviour
             _canDash = false;
             StartCoroutine(CoolDownSequence());
         }
-        
-        if(!_canDash)
+
+        if (!_canDash)
         {
-            if(Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
+            if (Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
             {
-                //_rigidbody.velocity = _initialVelocity;
+                _rigidbody.velocity = _initialVelocity;
                 _initialVelocity = Vector3.zero;
                 _initialPosition = Vector3.zero;
                 _haveReset = true;
