@@ -408,7 +408,7 @@ MonoBehaviour:
   hitParticleSystem: {fileID: 6036508664455776698}
   hitSoundEffect: {fileID: 994534940}
   debug: 1
-  currentHealth: 70
+  currentHealth: 100
   healthFromAbsorb: 20
 --- !u!114 &8260815211856568601
 MonoBehaviour:
