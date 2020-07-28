@@ -83,7 +83,8 @@ MonoBehaviour:
   numberOfEnemies: 1
   maxNumberOfSpawns: 1
   addNumberOfEnemies: 0
-  timeBetweenEachEnemySpawn: 5
+  timeBetweenEachEnemySpawn: 15
+  setSpawnAmount: 0
   waitForSpawn: 1
   spawnerPositions:
   - {fileID: 4911677705079426473}
@@ -115,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911677704767799632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.03, y: 0, z: -33.85}
+  m_LocalPosition: {x: 20.03, y: 0, z: -19.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4911677704292951086}
@@ -145,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911677705026580198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.68, y: 0, z: -33.9}
+  m_LocalPosition: {x: -13.68, y: 0, z: -20.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4911677704292951086}

@@ -42,9 +42,9 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 0
     m_StartRange: 0.2
-    m_EndRange: 9.94
+    m_EndRange: 26.87485
     m_Length: 1
-    m_GravityFocus: 1
+    m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
     m_DirectionCurveX:
       serializedVersion: 2
@@ -208,7 +208,7 @@ ParticleSystemForceField:
     m_GravityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -314,7 +314,7 @@ ParticleSystemForceField:
     m_RotationAttractionCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -367,7 +367,7 @@ ParticleSystemForceField:
     m_DragCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -613,7 +613,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.901
+      value: 0.505
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
   hitParticleSystem: {fileID: 2611148032779699210}
   hitSoundEffect: {fileID: 994534940}
   debug: 1
-  currentHealth: 100
+  currentHealth: 66
   healthFromAbsorb: 20
 --- !u!114 &8260815211856568601
 MonoBehaviour:
@@ -953,7 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   freeLookCamera: {fileID: 0}
-  acceleration: 100
+  acceleration: 99.99996
   maxVelocity: 20
   turnSpeed: 0.3
 --- !u!114 &2468281286964091614
@@ -1049,8 +1049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ec381f815f7b74a8479efa76a49bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 75
-  cooldownTime: 0.5
+  force: 50
+  cooldownTime: 1
   inputKey: 304
   distance: 10
 --- !u!114 &1988362626
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ac52dde9f0b7842bb99f8c954c53c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowState: 0
+  slowState: 2
 --- !u!114 &1550219202718577141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,7 +1381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4895746141155894, guid: 69e06db049e1dad41ba18f8793aec2f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2.108
       objectReference: {fileID: 0}
     - target: {fileID: 4895746141155894, guid: 69e06db049e1dad41ba18f8793aec2f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1418,6 +1418,26 @@ PrefabInstance:
     - target: {fileID: 4895746141155894, guid: 69e06db049e1dad41ba18f8793aec2f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198385859520346864, guid: 69e06db049e1dad41ba18f8793aec2f6,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198385859520346864, guid: 69e06db049e1dad41ba18f8793aec2f6,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 12.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198385859520346864, guid: 69e06db049e1dad41ba18f8793aec2f6,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198385859520346864, guid: 69e06db049e1dad41ba18f8793aec2f6,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69e06db049e1dad41ba18f8793aec2f6, type: 3}
@@ -2120,6 +2140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235696173743212130, guid: 51608ad8214ae164aa6f8908bde758ab,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.415
       objectReference: {fileID: 0}
     - target: {fileID: 4664638610745760202, guid: 51608ad8214ae164aa6f8908bde758ab,
         type: 3}

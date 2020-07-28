@@ -10,10 +10,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 67aef289c876e604cab7efedd0bd3442, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b3b72671d5ee3344286777d749161288, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.386
-  m_Pitch: 1
+  m_Volume: 1
+  m_Pitch: 1.13
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -56,7 +56,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.751
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5091,8 +5091,8 @@ MonoBehaviour:
   parryAudio: {fileID: 0}
   hasParryEffect: 0
   typeOfEnemy: 2
-  maxHealth: 100
-  baseDamage: 50
+  maxHealth: 150
+  baseDamage: 10
   printHealthStats: 0
   weaponCollider: {fileID: 0}
 --- !u!114 &3438492787752429404
@@ -5126,8 +5126,8 @@ MonoBehaviour:
   maxVelocity: 15
   turnSpeed: 0.2
   attackDistance: 20
-  retreatDistance: 10
-  beforeAttackTimer: 0.3
+  retreatDistance: 15
+  beforeAttackTimer: 0.2
 --- !u!114 &3438492787752429410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5141,11 +5141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 0.5
-  justFiredProjectileTimer: 2
+  justFiredProjectileTimer: 3
   projectileSpeed: 50
   projectileLifeTime: 3
   projectileDamage: 10
-  dashCancelRange: 10
+  dashCancelRange: 12
   projectilePrefab: {fileID: 8840168797588337650, guid: ffb8b15cf86e8a14b9050cde0f60e0ee,
     type: 3}
   projectileStartPoint: {fileID: 1308321090764061105}
@@ -10272,6 +10272,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3438492787752429409}
     m_Modifications:
+    - target: {fileID: 654517386193325328, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6086646682053332993, guid: 7fc2390ac3c037a4ca973b5774ddd9b2,
         type: 3}
       propertyPath: simulationSpeed
@@ -10352,7 +10357,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Hit_001_VFX
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5763069888326044299, guid: 7fc2390ac3c037a4ca973b5774ddd9b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7fc2390ac3c037a4ca973b5774ddd9b2, type: 3}
 --- !u!4 &92827068776268717 stripped
 Transform:
