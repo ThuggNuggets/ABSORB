@@ -106,12 +106,9 @@ public class Spawner : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
-        if (gameObjectsByTag.ContainsKey(enemy.tag))
+        if (gameObjectsByTag.ContainsKey(enemy.tag) && gameObjectsByTag[enemy.tag].Contains(enemy))
         {
-            if(gameObjectsByTag[enemy.tag].Contains(enemy))
-            {
-                gameObjectsByTag[enemy.tag].Remove(enemy);
-            }
+            gameObjectsByTag[enemy.tag].Remove(enemy);
         }
     }
 

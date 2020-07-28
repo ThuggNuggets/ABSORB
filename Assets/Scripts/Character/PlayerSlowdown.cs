@@ -53,6 +53,7 @@ public class PlayerSlowdown : MonoBehaviour
     {
         maxSlowAcceleration = slowAccelerationAmount;
         timeToAcceleration = timeToSlowdown;
+        slowState = SlowState.Slowdown;
         return;
     }
 
@@ -60,6 +61,7 @@ public class PlayerSlowdown : MonoBehaviour
     public float SetSpeedUp(float timeToSpeedUp = 0.2f)
     {
         timeToAcceleration = timeToSpeedUp;
+        slowState = SlowState.SpeedUp;
         return timeToAcceleration;
     }
 

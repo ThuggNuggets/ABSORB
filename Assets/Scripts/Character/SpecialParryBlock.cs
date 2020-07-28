@@ -74,7 +74,6 @@ public class SpecialParryBlock : MonoBehaviour
 
         // Slow down the player when shielding
         playerSlowdown.SetSlowdown();
-        playerSlowdown.slowState = PlayerSlowdown.SlowState.Slowdown;
 
         if (shieldTimer <= 0)
         {
@@ -91,12 +90,11 @@ public class SpecialParryBlock : MonoBehaviour
 
         // Speed up the player after shield has expired
         playerSlowdown.SetSpeedUp();
-        playerSlowdown.slowState = PlayerSlowdown.SlowState.SpeedUp;
 
         if (shieldCooldown <= 0)
         {
             shieldCooldown = tempShieldCDTimer;
-            playerSlowdown.slowState = PlayerSlowdown.SlowState.Default;
+            //playerSlowdown.slowState = PlayerSlowdown.SlowState.Default; failsafe
             shieldState = ShieldState.Default;
         }
     }
