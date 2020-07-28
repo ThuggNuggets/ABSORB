@@ -94,11 +94,11 @@ public class Spawner : MonoBehaviour
             // Only run if we haven't reached the max number
             if (gameObjectsByTag[enemy.tag].Count < maxNumberOfSpawns || maxNumberOfSpawns == 0)
             {
-                gameObjectsByTag[enemy.tag].Add(enemy);
                 int spawnNumber = Random.Range(0, spawnerPositions.Count());
                 AIBrain aIBrain = Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>();
                 aIBrain.playerTransform = playerTransform;
                 aIBrain.GetComponent<EnemyHandler>().SetupSpawner(this); // Clean this up sometime
+                gameObjectsByTag[enemy.tag].Add(aIBrain.gameObject);
                 _checkAmountOfSpawns += 1;
             }
         }
@@ -106,8 +106,13 @@ public class Spawner : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
-        if (gameObjectsByTag.ContainsKey(enemy.tag) && gameObjectsByTag[enemy.tag].Contains(enemy))
-            gameObjectsByTag[enemy.tag].Remove(enemy);
+        if (gameObjectsByTag.ContainsKey(enemy.tag))
+        {
+            if(gameObjectsByTag[enemy.tag].Contains(enemy))
+            {
+                gameObjectsByTag[enemy.tag].Remove(enemy);
+            }
+        }
     }
 
     public List<GameObject> GetEnemyFromTag(string tag)
