@@ -17,6 +17,9 @@ public class AbilityManager : MonoBehaviour
     public E_Ability startingAbility = E_Ability.NONE;
     private E_Ability _currentAbility;
 
+    // The players absorb force feild
+    public GameObject playerForceField;
+
     // The mouse button that controls the use of the ability
     [Range(0, 2)]
     public int mouseButtonInput = 1;

@@ -91,6 +91,52 @@ public class Health : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        // Change this in the future, uses too much processing power
+        GameObject temp = collision.gameObject;
+
+        // Check the layer of the object we collided with
+        if (player.shieldState != SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon"))
+        {
+            // Only assign collidedObject if we collided with the correct layer
+            collidedObject = collision.gameObject;
+            // Check what tag was assigned to it
+            switch (collidedObject.tag)
+            {
+                case "EnemyMinion":
+                    enemy = EnemyType.Minion;
+                    break;
+                case "EnemySpecial":
+                    enemy = EnemyType.Special;
+                    break;
+                default:
+                    break;
+            }
+            // Run the function cause we expected to hit a enemy attack
+            Function();
+        }
+        else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyProjectile") || temp.layer == LayerMask.NameToLayer("EnemyProjectile") && temp.CompareTag("EnemyElite"))
+        {
+            // Only assign collidedObject if we collided with the correct layer
+            collidedObject = collision.gameObject;
+            switch (collidedObject.tag)
+            {
+                case "EnemySpecial":
+                    enemy = EnemyType.Special;
+                    break;
+                case "EnemyElite":
+                    enemy = EnemyType.Elite;
+                    break;
+                default:
+                    break;
+            }
+
+            // Run the function cause we expected to hit a enemy attack
+            Function();
+        }
+    }
+
     private void Function()
     {
         if (!collidedObject)

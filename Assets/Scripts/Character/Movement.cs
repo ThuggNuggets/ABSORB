@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
             _rigidbody.AddForce(_direction.normalized * acceleration * Time.fixedDeltaTime, ForceMode.Impulse);
 
         // Rotate player to face direction
-        if (_direction.magnitude > 0.1F && !_absorb.IsActive())
+        if (_direction.magnitude > 0.1F)
             _transform.rotation = Quaternion.Slerp(_transform.rotation, Quaternion.LookRotation(_direction), turnSpeed);
     }
 

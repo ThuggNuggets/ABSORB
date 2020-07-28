@@ -134,7 +134,7 @@ MonoBehaviour:
     behaviour: {fileID: 888457025188684249}
   - name: Stagger
     behaviour: {fileID: 5760204340909872188}
-  printCurrentState: 1
+  printCurrentState: 0
 --- !u!114 &888457025188684262
 MonoBehaviour:
   m_ObjectHideFlags: 0

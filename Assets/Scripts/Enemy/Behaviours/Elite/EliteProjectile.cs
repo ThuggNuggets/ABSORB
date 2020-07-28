@@ -5,8 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EliteProjectile : MonoBehaviour
 {
-    [Header("Preferences")]
+    [Header("VFX References")]
+    public GameObject waterHitEffectGO;
+    public ParticleSystem waterHitEffect;
+    public AudioSource waterHitAudio;
+
+    [Header("Properties")]
     public Vector3 directionOffset = Vector3.zero;
+    public float effectTime = 2.0f;
 
     private Rigidbody _rb;
     private Vector3 _direction = Vector3.zero;
@@ -25,6 +31,7 @@ public class EliteProjectile : MonoBehaviour
     // Sets up the direction for the projectile
     public void InitialiseProjectile(Transform parentTransform, Transform playerTransform, Transform projectileStartPoint, float speed, float lifeTime, float damage)
     {
+
         transform.position = projectileStartPoint.position;
         transform.rotation = projectileStartPoint.rotation;
         _parentTransform = parentTransform;
@@ -62,8 +69,12 @@ public class EliteProjectile : MonoBehaviour
         set { _isActive = value; }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
+        waterHitEffect.Play();
+        waterHitAudio.Play();
+        waterHitEffectGO.transform.SetParent(null);
+        Destroy(waterHitEffectGO, effectTime);
         Destroy(this.gameObject);
     }
 

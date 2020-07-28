@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Enem_MeshEffect 1
   m_Shader: {fileID: 4800000, guid: 972a05a1fafc1c54d8287892f2a939b6, type: 3}
-  m_ShaderKeywords: USE_ALPHA_CLIPING USE_FRESNEL USE_HEIGHT USE_REFRACTIVE
+  m_ShaderKeywords: USE_ALPHA_CLIPING USE_CUTOUT USE_FRESNEL USE_HEIGHT USE_REFRACTIVE
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -82,7 +82,7 @@ Material:
     - _ColorStrength: 0.5
     - _CullMode: 2
     - _Cutoff: 1
-    - _Cutout: 1.042
+    - _Cutout: 1.2
     - _CutoutThreshold: 0
     - _DetailNormalMapScale: 1
     - _Distortion: 200
@@ -106,7 +106,7 @@ Material:
     - _UVSec: 0
     - _UseAlphaCliping: 1
     - _UseBlending: 0
-    - _UseCutout: 0
+    - _UseCutout: 1
     - _UseFresnel: 1
     - _UseHeight: 1
     - _UseMainTex: 0

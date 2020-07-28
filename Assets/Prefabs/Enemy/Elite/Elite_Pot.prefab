@@ -5049,6 +5049,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8840168797588337650, guid: ffb8b15cf86e8a14b9050cde0f60e0ee,
     type: 3}
   projectileStartPoint: {fileID: 1308321090764061105}
+  waterFireEffect: {fileID: 7153272508618846877}
 --- !u!114 &3438492787752429411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10404,3 +10405,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5461c2624a82024ca974ff0402fc332, type: 3}
+--- !u!198 &7153272508618846877 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198159679915390242, guid: b5461c2624a82024ca974ff0402fc332,
+    type: 3}
+  m_PrefabInstance: {fileID: 7027170539313711039}
+  m_PrefabAsset: {fileID: 0}

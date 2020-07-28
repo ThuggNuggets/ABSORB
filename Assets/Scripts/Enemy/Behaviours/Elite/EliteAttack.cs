@@ -11,11 +11,14 @@ public class EliteAttack : AIBehaviour
     public float projectileLifeTime = 4.0f;
     public float projectileDamage = 10.0f;
     public float dashCancelRange = 10.0f;
+    [Header("References")]
     public GameObject projectilePrefab;
     public Transform projectileStartPoint;
+    public ParticleSystem waterFireEffect;
 
     public override void OnEnter() 
     {
+        waterFireEffect.Play();
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
         eliteProjectile.InitialiseProjectile(transform, brain.playerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());

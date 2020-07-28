@@ -47,9 +47,6 @@ public class Absorb : MonoBehaviour
                 Activate();
                 StartCoroutine(WaitFor(animationTime));
             }
-
-            Vector3 dir = (_targetEnemy.transform.position - transform.position).normalized;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed);
         }
     }
 

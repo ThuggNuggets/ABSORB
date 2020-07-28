@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class SpecialAbsorbed : AIBehaviour
 {
-    [Header("References")]
+    [Header("Graphic References")]
     public Material bodyMaterial;
     public Renderer bodyRenderer;
     public Material weaponMaterial;
     public Renderer weaponRenderer;
+
+    [Header("VFX Refereneces")]
+    public GameObject absorbGameObject;
+    public ParticleSystem absorbParticleEffect;
     private AbilityManager _playerAbilityManager;
     private SpecialParried _specialParried;
     private Animator _animator;
@@ -17,6 +21,7 @@ public class SpecialAbsorbed : AIBehaviour
     public float cutoffMax = 1.2f;
     public float cutOutSpeed = 1.0f;
     public float cutOffSpeed = 1.5f;
+    public float destoryAbsorbEffectAfter = 4.0f;
 
     private bool _enabled = false;
     private float _cutOutTimer = 0.0f;
@@ -48,6 +53,12 @@ public class SpecialAbsorbed : AIBehaviour
         _animator.enabled = false;
         _cutOutTimer = cutoffMax;
         _enabled = true;
+        //_playerAbilityManager.playerForceField.SetActive(true);
+
+
+        absorbParticleEffect.Play();
+        absorbGameObject.SetActive(true);
+        absorbGameObject.transform.SetParent(null);
     }
 
     public override void OnExit() {}
@@ -67,8 +78,11 @@ public class SpecialAbsorbed : AIBehaviour
             }
             else
             {
+                absorbParticleEffect.Stop();
+               // _playerAbilityManager.playerForceField.SetActive(false);
                 _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
                 enemyHandler.Kill();
+                Destroy(absorbGameObject, destoryAbsorbEffectAfter);
             }
         }
     }
