@@ -267,7 +267,7 @@ MonoBehaviour:
     behaviour: {fileID: 1491251932}
   - name: Absorbed
     behaviour: {fileID: 1491251933}
-  printCurrentState: 0
+  printCurrentState: 1
 --- !u!114 &8677661987734016628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,9 +373,9 @@ MonoBehaviour:
   bodyRenderer: {fileID: 8174736293639370216}
   weaponMaterial: {fileID: 2100000, guid: 0927619f10823e3499f6749859ac79aa, type: 2}
   weaponRenderer: {fileID: 6660933339502108370}
-  totalTime: 3
   cutoffMax: 1.2
-  cutoffSpeed: 1
+  cutOutSpeed: 1
+  cutOffSpeed: 1.5
 --- !u!82 &2015221482
 AudioSource:
   m_ObjectHideFlags: 0

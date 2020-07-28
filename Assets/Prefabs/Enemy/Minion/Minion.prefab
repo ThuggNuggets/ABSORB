@@ -191,7 +191,7 @@ MonoBehaviour:
   sprintAcceleration: 75
   sprintMaxVelocity: 20
   rangeOfSprint: 15
-  dodgeChance: 0.2
+  dodgeChance: 0.3
   dodgeAcceleration: 60
   dodgeMaxVelocity: 20
   dodgeDistance: 5
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 888457027035413703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.0808554, y: 1.0808554, z: 1.0808554}
   m_Children:
   - {fileID: 2847013945716485815}
   m_Father: {fileID: 888457025188684251}
