@@ -12,6 +12,8 @@ public class MinionAttack : AIBehaviour
     public Trigger weaponTrigger;
     public GameObject weaponToEnable;
     private Animator _animator;
+    private SpecialParryBlock _specialParry;
+    private Health _playerHealth;
 
     [Header("Timers")]
     public float transitionTime = 2.0f;
@@ -26,6 +28,12 @@ public class MinionAttack : AIBehaviour
     private void Awake()
     {
         _animator = this.GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        _specialParry = this.brain.playerTransform.GetComponent<SpecialParryBlock>();
+        _playerHealth = this.brain.playerTransform.GetComponent<Health>();
     }
 
     public override void OnEnter()
@@ -58,7 +66,11 @@ public class MinionAttack : AIBehaviour
         {
             if (weaponTrigger.Collider.gameObject.CompareTag("Player") && !_hasAttacked)
             {
-                brain.playerTransform.GetComponent<Health>().TakeDamage(enemyHandler.GetDamage());
+                if(_specialParry.shieldState == SpecialParryBlock.ShieldState.Shielding)
+                    enemyHandler.PlayHitParryEffect();
+                else
+                    _playerHealth.TakeDamage(enemyHandler.GetDamage());
+
                 _hasAttacked = true;
                 _canAttack = false;
             }

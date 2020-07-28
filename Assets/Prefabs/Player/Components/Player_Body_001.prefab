@@ -41,11 +41,11 @@ ParticleSystemForceField:
   m_Enabled: 1
   m_Parameters:
     m_Shape: 0
-    m_StartRange: 2
+    m_StartRange: 0.5
     m_EndRange: 6
     m_Length: 1
     m_GravityFocus: 0
-    m_RotationRandomness: {x: 0, y: 0}
+    m_RotationRandomness: {x: 1, y: 1}
     m_DirectionCurveX:
       serializedVersion: 2
       minMaxState: 0
@@ -261,7 +261,7 @@ ParticleSystemForceField:
     m_RotationSpeedCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -314,7 +314,7 @@ ParticleSystemForceField:
     m_RotationAttractionCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2314,6 +2314,11 @@ PrefabInstance:
     - target: {fileID: 8469116965315809715, guid: 42fc188a46eef33488230d24ade6207b,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469116965315809715, guid: 42fc188a46eef33488230d24ade6207b,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8469116965315809724, guid: 42fc188a46eef33488230d24ade6207b,

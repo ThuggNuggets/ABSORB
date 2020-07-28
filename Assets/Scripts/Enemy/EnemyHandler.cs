@@ -14,6 +14,12 @@ public class EnemyHandler : MonoBehaviour
 
     [Header("References")]
     public ParticleSystem damageEffect;
+    public AudioSource damageEffectAudio;
+
+    [Header("Parry Effect")]
+    public ParticleSystem parryEffect;
+    public AudioSource parryAudio;
+    public bool hasParryEffect = false;
 
     [Header("Properties")]
     public EnemyType typeOfEnemy;
@@ -75,9 +81,20 @@ public class EnemyHandler : MonoBehaviour
             _aiBrain.SetBehaviour("Stagger");
 
         damageEffect.Play();
+        damageEffectAudio.Play();
 
         if (printHealthStats)
             Debug.Log(gameObject.tag + " took damage. Current health: " + _currentHealth);
+    }
+
+    // Plays the hit parry effect
+    public void PlayHitParryEffect()
+    {
+        if(hasParryEffect)
+        { 
+            parryEffect.Play();
+            parryAudio.Play();
+        }
     }
 
     // Returns true if the entity is still alive
