@@ -14,7 +14,6 @@ public class SpecialAbsorbed : AIBehaviour
     private Animator _animator;
 
     [Header("Properties")]
-    public float totalTime = 3.0f;
     public float cutoffMax = 1.2f;
     public float cutOutSpeed = 1.0f;
     public float cutOffSpeed = 1.5f;
@@ -48,7 +47,7 @@ public class SpecialAbsorbed : AIBehaviour
     {
         _animator.enabled = false;
         _cutOutTimer = cutoffMax;
-        StartCoroutine(WaitFor(totalTime));
+        _enabled = true;
     }
 
     public override void OnExit() {}
@@ -59,21 +58,18 @@ public class SpecialAbsorbed : AIBehaviour
     {
         if (_enabled)
         {
-            if(_cutOutTimer > 0.0f)
+            if (_cutOutTimer > 0.7f)
             {
                 _cutOutTimer -= Time.deltaTime * cutOutSpeed;
                 _cutOffTimer -= Time.deltaTime * cutOffSpeed;
                 bodyRenderer.material.SetFloat("_Cutout", _cutOutTimer);
                 weaponRenderer.material.SetFloat("_Cutoff", _cutOffTimer);
             }
+            else
+            {
+                _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
+                enemyHandler.Kill();
+            }
         }
-    }
-
-    private IEnumerator WaitFor(float seconds)
-    {
-        _enabled = true;
-        yield return new WaitForSecondsRealtime(seconds);
-        _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
-        enemyHandler.Kill();
     }
 }

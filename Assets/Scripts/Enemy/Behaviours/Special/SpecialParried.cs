@@ -10,7 +10,14 @@ public class SpecialParried : AIBehaviour
     [Header("Properties")]
     public float exitTime = 3.0f;
 
+    private AbilityManager playerAbililtyManager;
+
     private bool _isAbsorbable = false;
+
+    private void Start()
+    {
+        playerAbililtyManager = brain.playerTransform.GetComponent<AbilityManager>();
+    }
 
     public override void OnEnter() 
     {
@@ -33,7 +40,8 @@ public class SpecialParried : AIBehaviour
         if(!_isAbsorbable)
         {
             brain.SetBehaviour("Idle");
-            brain.playerTransform.GetComponentInChildren<AbilityManager>().LastParriedEnemy = null;
+            playerAbililtyManager.LastParriedEnemy = null;
+            playerAbililtyManager.SetAbsorbTarget(null);
         }
     }
 

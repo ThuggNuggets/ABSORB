@@ -13,8 +13,6 @@ public class Absorb : MonoBehaviour
      * Kill enemy.
      */
 
-    [Header("References")]
-    public PlayerSlowdown playerSlowdown;
 
     // The enemy which we will abosrb
     private AIBrain _targetEnemy = null;
@@ -28,18 +26,30 @@ public class Absorb : MonoBehaviour
     // The mouse button that controls the activation of the absorb.
     [Range(0, 2)]
     public int mouseButtonInput = 1;
+    public float turnSpeed = 0.5F;
     public float animationTime = 2.0f;
     private bool _isAbosrbing = false;
+    private PlayerSlowdown playerSlowdown;
+
+    private void Awake()
+    {
+        playerSlowdown = this.GetComponent<PlayerSlowdown>();
+    }
 
     // Called every frame
     private void Update()
     {
-        // Check if we should start abosrbing
-        if(_targetEnemy && Input.GetMouseButtonDown(mouseButtonInput) && !_isAbosrbing)
+        if(_targetEnemy)
         {
-            playerSlowdown.SetSlowdown();
-            _isAbosrbing = true;
-            StartCoroutine(WaitFor(animationTime));
+            // Check if we should start abosrbing
+            if (Input.GetMouseButtonDown(mouseButtonInput) && !_isAbosrbing)
+            {
+                Activate();
+                StartCoroutine(WaitFor(animationTime));
+            }
+
+            Vector3 dir = (_targetEnemy.transform.position - transform.position).normalized;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed);
         }
     }
 
@@ -47,5 +57,23 @@ public class Absorb : MonoBehaviour
     private IEnumerator WaitFor(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
+        Deactivate();
+    }
+
+    public void Activate()
+    {
+        playerSlowdown.SetSlowdown();
+        _isAbosrbing = true;
+    }
+
+    public void Deactivate()
+    {
+        playerSlowdown.SetSpeedUp();
+        _isAbosrbing = false;
+    }
+
+    public bool IsActive()
+    {
+        return _isAbosrbing;
     }
 }

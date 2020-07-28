@@ -24,6 +24,9 @@ public class AbilityManager : MonoBehaviour
     // The last enemy we parried
     private AIBrain _lastParriedEnemy = null;
 
+    // The abosrb ability
+    private Absorb _absorb;
+
     // Array to fill out ability dictionary with
     [System.Serializable]
     public struct AbilityInformation
@@ -44,6 +47,9 @@ public class AbilityManager : MonoBehaviour
     // Called on initialise
     private void Awake()
     {
+        // Get the absorb ability
+        _absorb = this.GetComponent<Absorb>();
+
         // Fill out dictionary
         foreach (AbilityInformation ai in abilityInformation)
             _abilityDictionary.Add(ai.e_Ability, ai.ability);
@@ -70,6 +76,7 @@ public class AbilityManager : MonoBehaviour
             if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput))
             {
                 // Getting ability
+                SetAbsorbTarget(_lastParriedEnemy);
                 _lastParriedEnemy.SetBehaviour("Absorbed");
             }
             return;
@@ -114,5 +121,10 @@ public class AbilityManager : MonoBehaviour
     {
         get { return _lastParriedEnemy; }
         set { _lastParriedEnemy = value; }
+    }
+
+    public void SetAbsorbTarget(AIBrain target)
+    {
+        _absorb.TargetEnemy = target;
     }
 }

@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     public CinemachineFreeLook freeLookCamera;
     private Rigidbody _rigidbody;
     private Transform _transform;
+    private Absorb _absorb;
 
     [Header("Attributes")]
     public float acceleration = 100.0f;
@@ -29,6 +30,7 @@ public class Movement : MonoBehaviour
         // Getting components attached to gameobject.
         _rigidbody = this.GetComponent<Rigidbody>();
         _transform = this.GetComponent<Transform>();
+        _absorb = this.GetComponent<Absorb>();
     }
 
     // Returns the forward direction of the camera.
@@ -61,7 +63,7 @@ public class Movement : MonoBehaviour
             _rigidbody.AddForce(_direction.normalized * acceleration * Time.fixedDeltaTime, ForceMode.Impulse);
 
         // Rotate player to face direction
-        if (_direction.magnitude > 0.1F)
+        if (_direction.magnitude > 0.1F && !_absorb.IsActive())
             _transform.rotation = Quaternion.Slerp(_transform.rotation, Quaternion.LookRotation(_direction), turnSpeed);
     }
 
