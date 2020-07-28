@@ -89,7 +89,7 @@ Material:
     - _DstBlend: 0
     - _FPOW: 0.3
     - _FresnelDistort: -300
-    - _FresnelPow: 6.6
+    - _FresnelPow: 3
     - _FresnelR0: -0.2
     - _Glossiness: 0.5
     - _Height: -0.1
@@ -119,9 +119,9 @@ Material:
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _DropWavesScale: {r: 1, g: 0.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 23.968628, g: 23.341177, b: 4.894118, a: 1}
+    - _FresnelColor: {r: 24.754717, g: 22.262506, b: 1.284443, a: 1}
     - _HeightUVScrollDistort: {r: 0, g: 5, b: 0, a: 0}
-    - _MainColor: {r: 0.3590301, g: 0.33842117, b: 0.6132076, a: 1}
+    - _MainColor: {r: 0.3027116, g: 0.44832975, b: 1.2583307, a: 1}
     - _NoiseScale: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _RimColor: {r: 0.057093438, g: 0.06710122, b: 0.08088237, a: 1}
