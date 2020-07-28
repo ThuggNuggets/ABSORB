@@ -369,6 +369,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efcc8fd570dffcc4baf53fee535bf148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyMaterial: {fileID: 2100000, guid: b7124e63c5e0c7c48b547e5813bfa2f4, type: 2}
+  bodyRenderer: {fileID: 8174736293639370216}
+  weaponMaterial: {fileID: 2100000, guid: 0927619f10823e3499f6749859ac79aa, type: 2}
+  weaponRenderer: {fileID: 6660933339502108370}
+  totalTime: 3
+  cutoffMax: 1.2
+  cutoffSpeed: 1
 --- !u!82 &2015221482
 AudioSource:
   m_ObjectHideFlags: 0
@@ -894,6 +901,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5525937816012236359}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &8174736293639370216 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4450238621035828143, guid: beaf0944877d2be41a542b2bb70f9408,
+    type: 3}
+  m_PrefabInstance: {fileID: 5525937816012236359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5147790179766632199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
@@ -903,6 +916,12 @@ GameObject:
 --- !u!4 &5493071342935451069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 39226598138119162, guid: beaf0944877d2be41a542b2bb70f9408,
+    type: 3}
+  m_PrefabInstance: {fileID: 5525937816012236359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6660933339502108370 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1207088664633079957, guid: beaf0944877d2be41a542b2bb70f9408,
     type: 3}
   m_PrefabInstance: {fileID: 5525937816012236359}
   m_PrefabAsset: {fileID: 0}

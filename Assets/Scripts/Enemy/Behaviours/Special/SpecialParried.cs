@@ -28,14 +28,19 @@ public class SpecialParried : AIBehaviour
 
     public override void OnFixedUpdate() {}
 
-    public override void OnUpdate() {}
+    public override void OnUpdate() 
+    {
+        if(!_isAbsorbable)
+        {
+            brain.SetBehaviour("Idle");
+            brain.playerTransform.GetComponentInChildren<AbilityManager>().LastParriedEnemy = null;
+        }
+    }
 
     private IEnumerator ExitSequence()
     {
         yield return new WaitForSecondsRealtime(exitTime);
         _isAbsorbable = false;
-        brain.SetBehaviour("Idle");
-        brain.playerTransform.GetComponentInChildren<AbilityManager>().LastParriedEnemy = null;
     }
 
     public bool GetAbsorbable()

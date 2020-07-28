@@ -4,28 +4,76 @@ using UnityEngine;
 
 public class SpecialAbsorbed : AIBehaviour
 {
+    [Header("References")]
+    public Material bodyMaterial;
+    public Renderer bodyRenderer;
+    public Material weaponMaterial;
+    public Renderer weaponRenderer;
+    private AbilityManager _playerAbilityManager;
+    private SpecialParried _specialParried;
+    private Animator _animator;
 
-    /*
-     * 
-     *  Currently just destroying the object. Will implement the shader manipulation in here somewhere.
-     * 
-     * 
-     */
+    [Header("Properties")]
+    public float totalTime = 3.0f;
+    public float cutoffMax = 1.2f;
+    public float cutOutSpeed = 1.0f;
+    public float cutOffSpeed = 1.5f;
+
+    private bool _enabled = false;
+    private float _cutOutTimer = 0.0f;
+    private float _cutOffTimer = 0.0f;
+
+    private void Awake()
+    {
+        // Getting the other behaviour
+        _specialParried = this.GetComponent<SpecialParried>();
+
+        // Getting the animator
+        _animator = this.GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        // Creating and assigning a new material
+        bodyRenderer.material = Instantiate(bodyMaterial);
+
+        // Creating and assigning a new material
+        weaponRenderer.material = Instantiate(weaponMaterial);
+
+        // Getting the ability manager from the player
+        _playerAbilityManager = brain.playerTransform.GetComponent<AbilityManager>();
+    }
 
     public override void OnEnter()
     {
-        Destroy(this.gameObject);
+        _animator.enabled = false;
+        _cutOutTimer = cutoffMax;
+        StartCoroutine(WaitFor(totalTime));
     }
 
-    public override void OnExit()
+    public override void OnExit() {}
+
+    public override void OnFixedUpdate() {}
+
+    public override void OnUpdate() 
     {
+        if (_enabled)
+        {
+            if(_cutOutTimer > 0.0f)
+            {
+                _cutOutTimer -= Time.deltaTime * cutOutSpeed;
+                _cutOffTimer -= Time.deltaTime * cutOffSpeed;
+                bodyRenderer.material.SetFloat("_Cutout", _cutOutTimer);
+                weaponRenderer.material.SetFloat("_Cutoff", _cutOffTimer);
+            }
+        }
     }
 
-    public override void OnFixedUpdate()
+    private IEnumerator WaitFor(float seconds)
     {
-    }
-
-    public override void OnUpdate()
-    {
+        _enabled = true;
+        yield return new WaitForSecondsRealtime(seconds);
+        _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
+        enemyHandler.Kill();
     }
 }

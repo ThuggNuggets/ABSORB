@@ -115,4 +115,13 @@ public class EnemyHandler : MonoBehaviour
     {
         return _spawner;
     }
+
+    // Kills the enemy
+    public void Kill()
+    {
+        if (_spawner != null)
+            _spawner.RemoveEnemy(this.gameObject);
+
+        Destroy(this.gameObject);
+    }
 }

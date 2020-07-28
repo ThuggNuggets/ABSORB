@@ -69,8 +69,8 @@ public class AbilityManager : MonoBehaviour
         {
             if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput))
             {
+                // Getting ability
                 _lastParriedEnemy.SetBehaviour("Absorbed");
-                SetAbility(AbilityManager.E_Ability.HAMMER);
             }
             return;
         }
@@ -78,6 +78,7 @@ public class AbilityManager : MonoBehaviour
         // Checks if the player uses the ability
         if (!_abilityDictionary[_currentAbility].Active)
         {
+            // Using ability
             if (Input.GetMouseButtonDown(mouseButtonInput))
                 _abilityDictionary[_currentAbility].Activate();
         }

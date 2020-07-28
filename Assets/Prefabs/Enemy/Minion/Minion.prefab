@@ -134,7 +134,7 @@ MonoBehaviour:
     behaviour: {fileID: 888457025188684249}
   - name: Stagger
     behaviour: {fileID: 5760204340909872188}
-  printCurrentState: 0
+  printCurrentState: 1
 --- !u!114 &888457025188684262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   dodgeChance: 0.2
   dodgeAcceleration: 60
   dodgeMaxVelocity: 20
-  dodgeDistance: 10
+  dodgeDistance: 5
   attackRange: 2
 --- !u!114 &888457025188684263
 MonoBehaviour:
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 888457027035413703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1.097479, y: 1.097479, z: 1.097479}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 2847013945716485815}
   m_Father: {fileID: 888457025188684251}
@@ -261,7 +261,7 @@ PrefabInstance:
     - target: {fileID: 1776783443654265280, guid: 6405543b787666341912d40ee606d95d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.913
+      value: 2.249
       objectReference: {fileID: 0}
     - target: {fileID: 1776783443654265280, guid: 6405543b787666341912d40ee606d95d,
         type: 3}
@@ -326,12 +326,12 @@ PrefabInstance:
     - target: {fileID: 1776783443654265281, guid: 6405543b787666341912d40ee606d95d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776783443654265285, guid: 6405543b787666341912d40ee606d95d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776783443654265286, guid: 6405543b787666341912d40ee606d95d,
         type: 3}
@@ -362,6 +362,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.z
       value: 0.0779463
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776783443654265286, guid: 6405543b787666341912d40ee606d95d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776783443654265286, guid: 6405543b787666341912d40ee606d95d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6405543b787666341912d40ee606d95d, type: 3}
@@ -739,6 +749,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4400272939499418, guid: 9d6a03e8d6b4de848bb92881ec061d9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198046211461368048, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198301646188567992, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198395343420053408, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198403053718469016, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198446167873143646, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198518443770478000, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198672786027874266, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198684447454888778, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198864362703663848, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198904123013970014, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198933913124568968, guid: 9d6a03e8d6b4de848bb92881ec061d9b,
+        type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

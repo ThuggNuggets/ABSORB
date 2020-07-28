@@ -7,12 +7,7 @@ public class DefaultDeath : AIBehaviour
     // Currently just destorying the game object.
     public override void OnEnter()
     {
-        if(enemyHandler.GetSpawner() != null)
-        {
-            enemyHandler.GetSpawner().RemoveEnemy(this.gameObject);
-        }
-
-        Destroy(this.gameObject);
+        enemyHandler.Kill();
     }
 
     public override void OnExit() {}

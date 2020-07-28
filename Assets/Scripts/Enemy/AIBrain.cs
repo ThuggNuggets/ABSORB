@@ -32,6 +32,9 @@ public class AIBrain : MonoBehaviour
     // Transform attached to this object
     private Transform _transform;
 
+    // This enemy's handler.
+    private EnemyHandler _handler;
+
     // Current state ID of the fsm
     private string _currentBehaviourID = "";
 
@@ -43,6 +46,9 @@ public class AIBrain : MonoBehaviour
 
         // Get the transform of the gameobject
         _transform = this.GetComponent<Transform>();
+
+        // Get the enemy handler
+        _handler = this.GetComponent<EnemyHandler>();
 
         // Fill out dictionary
         foreach (AIBehaviourInfo bi in behaviourInformation)
@@ -102,6 +108,12 @@ public class AIBrain : MonoBehaviour
     internal Transform GetTransform()
     {
         return _transform;
+    }    
+    
+    // Returns this enemy's handler
+    internal EnemyHandler GetHandler()
+    {
+        return _handler;
     }
 
     // Prints a debug message to unity's console

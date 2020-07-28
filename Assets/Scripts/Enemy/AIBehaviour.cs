@@ -20,7 +20,7 @@ public abstract class AIBehaviour : MonoBehaviour
         this.player = brain.playerTransform;
         this.rigidbody = brain.GetRigidbody();
         this.transform = brain.GetTransform();
-        this.enemyHandler = brain.GetComponent<EnemyHandler>(); // move this into enemy brain and call getcomponent() once. this calls it every init
+        this.enemyHandler = brain.GetHandler();
     }
 
     abstract public void OnEnter();
