@@ -11,6 +11,7 @@ public class Dash : MonoBehaviour
     public float distance = 20.0f;
     private bool _canDash = true;
     private Rigidbody _rigidbody;
+    private SpecialParryBlock _specialParry;
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;
     private bool _haveReset = false;
@@ -18,11 +19,12 @@ public class Dash : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _specialParry = GetComponent<SpecialParryBlock>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(inputKey) && _canDash)
+        if (Input.GetKeyDown(inputKey) && _canDash && _specialParry.shieldState != SpecialParryBlock.ShieldState.Shielding)
         {
             _initialVelocity = _rigidbody.velocity;
             _initialPosition = transform.position;
