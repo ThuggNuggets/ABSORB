@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 7d1668a77dfb2214d9f0e5cb773dbb04
+guid: 8fc5110f454c4984da870a0dd3b79a9d
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 362897156675822948
+    second: RightHook
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -90,7 +93,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
