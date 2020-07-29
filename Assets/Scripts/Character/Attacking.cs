@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Attacking : MonoBehaviour
 {
+
+    [Header("References")]
+    public GameObject playerWeapon;
+    public AudioSource weaponSwingAudio;
+
+
     public Animator playerAnimator;
     [Range(0f, 3f)]
     public float animationSpeedMultiplier = 1.0f;
@@ -30,5 +36,20 @@ public class Attacking : MonoBehaviour
                 playerAnimator.SetTrigger("playAttack");
         //}
 
+    }
+
+    public void EnablePlayerWeaponObject()
+    {
+        playerWeapon.SetActive(true);
+    }
+
+    public void DisableWeaponObject()
+    {
+        playerWeapon.SetActive(false);
+    }
+
+    public void PlayWeaponSound()
+    {
+        weaponSwingAudio.Play();
     }
 }

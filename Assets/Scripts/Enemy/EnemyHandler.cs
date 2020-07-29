@@ -83,6 +83,7 @@ public class EnemyHandler : MonoBehaviour
     public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
     {
         _currentHealth -= damage;
+
         if (_currentHealth <= 0)
             _isAlive = false;
 
