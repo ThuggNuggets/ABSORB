@@ -698,7 +698,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 535cdb6adb51c364ab05d68078eaf3ad, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.34
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -741,7 +741,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.915
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   hitParticleSystem: {fileID: 2611148032779699210}
   hitSoundEffect: {fileID: 994534940}
   debug: 1
-  currentHealth: -134
+  currentHealth: -288
   healthFromAbsorb: 20
 --- !u!114 &8260815211856568601
 MonoBehaviour:
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   freeLookCamera: {fileID: 0}
-  acceleration: 99.99995
+  acceleration: 99.99993
   maxVelocity: 20
   turnSpeed: 0.3
 --- !u!114 &2468281286964091614
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ac52dde9f0b7842bb99f8c954c53c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowState: 0
+  slowState: 2
 --- !u!114 &1550219202718577141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,37 +1621,37 @@ PrefabInstance:
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.804
+      value: 2.46
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.542
+      value: 2.48
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.793
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.08101835
+      value: 0.14548649
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.104126774
+      value: -0.17491561
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.60871905
+      value: -0.612411
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7823393
+      value: 0.7570938
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
@@ -1661,17 +1661,17 @@ PrefabInstance:
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 1
+      value: 0.347
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 15.163001
+      value: -26.299002
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -55.959003
+      value: -78.020004
       objectReference: {fileID: 0}
     - target: {fileID: 4896478817500317488, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
@@ -1696,7 +1696,7 @@ PrefabInstance:
     - target: {fileID: 5402589727025173842, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
       propertyPath: lengthInSec
-      value: 0.35
+      value: 2.18
       objectReference: {fileID: 0}
     - target: {fileID: 5402589727025173842, guid: b6d0cc6fa054683498478b99d3392351,
         type: 3}
