@@ -5091,7 +5091,9 @@ MonoBehaviour:
   parryAudio: {fileID: 0}
   hasParryEffect: 0
   deathSound: {fileID: 8208777940480100912}
+  deathSoundLength: 2
   deathParticleEffect: {fileID: 259572212970434151}
+  deathParticleLength: 2
   typeOfEnemy: 2
   maxHealth: 150
   baseDamage: 10
@@ -5123,7 +5125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 75
-  retreatDashAcceleration: 100
+  retreatDashAcceleration: 200
   retreatMaxVelocity: 30
   maxVelocity: 15
   turnSpeed: 0.2

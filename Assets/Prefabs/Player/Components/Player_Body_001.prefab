@@ -914,8 +914,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerGameObject: {fileID: 7682716948547883129}
+  groundSmashTransform: {fileID: 4358028683618006462}
+  groundSmashParent: {fileID: 5880300499705173239}
   groundSmashParticleSystem: {fileID: 4524855565189441220}
   groundSmashAudio: {fileID: 6949235920792189909}
+  groundSmashReparentTimer: 2
+  groundSmashImpactLocation: {x: 0, y: 0, z: 1.75}
   damageToMinion: 75
   damageToSpecial: 50
   damageToElite: 75
