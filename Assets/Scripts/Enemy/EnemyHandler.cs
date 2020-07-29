@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +18,11 @@ public class EnemyHandler : MonoBehaviour
     public AudioSource damageEffectAudio;
 
     [Header("Parry Effect")]
+    public bool hasParryEffect = false;
     public ParticleSystem parryEffect;
     public AudioSource parryAudio;
-    public bool hasParryEffect = false;
+    public float parryHitEffectTime = 2.0f;
+    private Transform _parryParticleParent;
 
     [Header("Death FX")]
     public AudioSource deathSound;
@@ -57,6 +60,9 @@ public class EnemyHandler : MonoBehaviour
 
         // Getting the components
         _aiBrain = this.GetComponent<AIBrain>();
+
+        // Get the particle parent
+        _parryParticleParent = parryEffect.transform.parent;
     }
 
     private void Update()
@@ -97,10 +103,18 @@ public class EnemyHandler : MonoBehaviour
     public void PlayHitParryEffect()
     {
         if(hasParryEffect)
-        { 
+        {
+            parryEffect.transform.SetParent(null);
             parryEffect.Play();
             parryAudio.Play();
+            StartCoroutine(ReparentHitEffect());
         }
+    }
+
+    private IEnumerator ReparentHitEffect()
+    {
+        yield return new WaitForSecondsRealtime(parryHitEffectTime);
+        parryEffect.transform.SetParent(_parryParticleParent);
     }
 
     // Returns true if the entity is still alive
@@ -131,6 +145,12 @@ public class EnemyHandler : MonoBehaviour
     public void SetupSpawner(Spawner spawner)
     {
         _spawner = spawner;
+    }
+
+    // Returns the brain of this enemy
+    internal AIBrain GetBrain()
+    {
+        return _aiBrain;
     }
 
     // Returns the spawner

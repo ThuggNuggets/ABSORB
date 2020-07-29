@@ -5087,9 +5087,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageEffect: {fileID: 259572212970434151}
   damageEffectAudio: {fileID: 8208777940480100912}
+  hasParryEffect: 0
   parryEffect: {fileID: 0}
   parryAudio: {fileID: 0}
-  hasParryEffect: 0
+  parryHitEffectTime: 0
   deathSound: {fileID: 8208777940480100912}
   deathSoundLength: 2
   deathParticleEffect: {fileID: 259572212970434151}
