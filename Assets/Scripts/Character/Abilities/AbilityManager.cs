@@ -30,6 +30,9 @@ public class AbilityManager : MonoBehaviour
     // The abosrb ability
     private Absorb _absorb;
 
+    // The players shield
+    private SpecialParryBlock _specialParryBlock;
+
     // Array to fill out ability dictionary with
     [System.Serializable]
     public struct AbilityInformation
@@ -53,6 +56,9 @@ public class AbilityManager : MonoBehaviour
         // Get the absorb ability
         _absorb = this.GetComponent<Absorb>();
 
+        // Get the special parry block ability
+        _specialParryBlock = this.GetComponent<SpecialParryBlock>();
+
         // Fill out dictionary
         foreach (AbilityInformation ai in abilityInformation)
             _abilityDictionary.Add(ai.e_Ability, ai.ability);
@@ -69,6 +75,10 @@ public class AbilityManager : MonoBehaviour
     // Called every frame
     private void Update()
     {
+        // Exiting function if shield is active
+        if (_specialParryBlock.shieldState == SpecialParryBlock.ShieldState.Shielding)
+            return;
+
         // Debug printing if option enabled
         if (printCurrentState)
             Debug.Log(_currentAbility + " TIME");
@@ -76,7 +86,7 @@ public class AbilityManager : MonoBehaviour
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
         {
-            if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput))
+            if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput) && !_absorb.IsActive())
             {
                 // Getting ability
                 SetAbsorbTarget(_lastParriedEnemy);
@@ -85,8 +95,8 @@ public class AbilityManager : MonoBehaviour
             return;
         }
 
-        // Checks if the player uses the ability
-        if (!_abilityDictionary[_currentAbility].Active)
+        // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
+        if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
         {
             // Using ability
             if (Input.GetMouseButtonDown(mouseButtonInput))

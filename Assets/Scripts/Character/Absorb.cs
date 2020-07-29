@@ -59,6 +59,7 @@ public class Absorb : MonoBehaviour
 
     public void Activate()
     {
+        Debug.Log("Activate");
         playerSlowdown.SetSlowdown();
         _isAbosrbing = true;
     }
