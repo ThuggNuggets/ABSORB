@@ -108,4 +108,4 @@ Material:
     - _FresnelColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _HeightUVScrollDistort: {r: 1, g: -4.41, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0.79607844}
-    - _TintColor: {r: 11.27958, g: 10.469343, b: 4.8417068, a: 1}
+    - _TintColor: {r: 19.698313, g: 18.2466, b: 7.5262423, a: 1}
