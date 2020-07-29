@@ -81,6 +81,11 @@ public class AIBrain : MonoBehaviour
     // Sets the current state to the next state, calling exit/enter functions
     internal void SetBehaviour(string behaviour)
     {
+        // Absorb quick fix: if in end state of machine, do NOT change state.
+        if (_currentBehaviourID == "Absorbed")
+            return;
+
+
         _aiBehaviours[_currentBehaviourID].OnExit();
         _currentBehaviourID = behaviour;
         _aiBehaviours[_currentBehaviourID].OnEnter();

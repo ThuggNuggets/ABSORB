@@ -6,10 +6,16 @@ public class AbilityHammer : Ability
 {
     [Header("References")]
     public GameObject hammerGameObject;
+    public Transform groundSmashTransform;
+    public Transform groundSmashParent;
     public ParticleSystem groundSmashParticleSystem;
     public AudioSource groundSmashAudio;
 
     [Header("Properties")]
+    public float groundSmashReparentTimer = 2.0f;
+    public Vector3 groundSmashImpactLocation = new Vector3();
+
+    [Header("Damage Properties")]
     public float damageToMinion = 50.0f;
     public float damageToSpecial = 20.0f;
     public float damageToElite = 100.0f;
@@ -71,15 +77,16 @@ public class AbilityHammer : Ability
 
     public override void Activate()
     {
-        animator.SetBool("HammerAttack", true);
         active = true;
+        animator.SetBool("HammerAttack", true);
     }
 
     public override void Deactivate()
     {
-        animator.SetBool("HammerAttack", false);
         active = false;
         _hasRan = true;
+        hammerGameObject.SetActive(false);
+        animator.SetBool("HammerAttack", false);
         abilityManager.SetAbility(AbilityManager.E_Ability.NONE);
     }
 
@@ -96,8 +103,10 @@ public class AbilityHammer : Ability
 
     public void ActivateHammerGroundSmash()
     {
+        groundSmashTransform.SetParent(null);
         groundSmashParticleSystem.Play();
         groundSmashAudio.Play();
+        StartCoroutine(ReparentGroundSmash());
     }
 
     private void OnDrawGizmos()
@@ -107,5 +116,13 @@ public class AbilityHammer : Ability
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
         }
+    }
+
+    private IEnumerator ReparentGroundSmash()
+    {
+        yield return new WaitForSecondsRealtime(groundSmashReparentTimer);
+        groundSmashTransform.SetParent(groundSmashParent);
+        groundSmashTransform.transform.localPosition = groundSmashImpactLocation;
+        groundSmashTransform.transform.localRotation = Quaternion.identity;
     }
 }

@@ -5090,6 +5090,8 @@ MonoBehaviour:
   parryEffect: {fileID: 0}
   parryAudio: {fileID: 0}
   hasParryEffect: 0
+  deathSound: {fileID: 8208777940480100912}
+  deathParticleEffect: {fileID: 259572212970434151}
   typeOfEnemy: 2
   maxHealth: 150
   baseDamage: 10

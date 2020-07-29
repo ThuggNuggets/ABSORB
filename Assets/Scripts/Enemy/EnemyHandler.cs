@@ -21,6 +21,12 @@ public class EnemyHandler : MonoBehaviour
     public AudioSource parryAudio;
     public bool hasParryEffect = false;
 
+    [Header("Death FX")]
+    public AudioSource deathSound;
+    public float deathSoundLength = 2.0f;
+    public ParticleSystem deathParticleEffect;
+    public float deathParticleLength = 2.0f;
+
     [Header("Properties")]
     public EnemyType typeOfEnemy;
     public float maxHealth = 100.0f;
@@ -136,9 +142,19 @@ public class EnemyHandler : MonoBehaviour
     // Kills the enemy
     public void Kill()
     {
+        // Remove enemy spawner
         if (_spawner != null)
             _spawner.RemoveEnemy(this.gameObject);
 
+        // Playing VFX
+        deathParticleEffect.transform.SetParent(null);
+        deathSound.transform.SetParent(null);
+        deathParticleEffect.Play();
+        deathSound.Play();
+
+        // Destroying everything
+        Destroy(deathParticleEffect.gameObject, deathParticleLength);
+        Destroy(deathSound.gameObject, deathSoundLength);
         Destroy(this.gameObject);
     }
 }

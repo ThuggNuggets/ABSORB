@@ -29,6 +29,8 @@ public class SpecialParried : AIBehaviour
 
     public override void OnExit() 
     {
+        playerAbililtyManager.LastParriedEnemy = null;
+        playerAbililtyManager.SetAbsorbTarget(null);
         animator.SetBool("Parried", false);
         _isAbsorbable = false;
     }
