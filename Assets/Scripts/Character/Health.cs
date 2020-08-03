@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Health : MonoBehaviour
 {
@@ -22,7 +20,7 @@ public class Health : MonoBehaviour
     private SpecialParryBlock player;
     private GameObject collidedObject = null;
 
-    enum EnemyType
+    private enum EnemyType
     {
         None,
         Minion,
@@ -61,7 +59,7 @@ public class Health : MonoBehaviour
                     break;
             }
             // Run the function cause we expected to hit a enemy attack
-            Function(); 
+            Function();
         }
         else if (player.shieldState != SpecialParryBlock.ShieldState.Shielding &&  temp.layer == LayerMask.NameToLayer("EnemyProjectile") ||  temp.layer == LayerMask.NameToLayer("EnemyProjectile") && temp.CompareTag("EnemyElite"))
         {

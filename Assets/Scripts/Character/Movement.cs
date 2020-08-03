@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 
 public class Movement : MonoBehaviour
@@ -9,6 +6,7 @@ public class Movement : MonoBehaviour
     [Header("References")]
     public Transform cameraTransform;
     public CinemachineFreeLook freeLookCamera;
+    public InputManager inputManager;
     private Rigidbody _rigidbody;
     private Transform _transform;
     private Absorb _absorb;
@@ -19,7 +17,7 @@ public class Movement : MonoBehaviour
     public float turnSpeed = 0.20f;
 
     // --
-    private float _vAxis, _hAxis;
+    private Vector2 _inputDirection = Vector2.zero;
     private Vector3 _direction = Vector3.zero;
 
     void Awake()
@@ -31,6 +29,7 @@ public class Movement : MonoBehaviour
         _rigidbody = this.GetComponent<Rigidbody>();
         _transform = this.GetComponent<Transform>();
         _absorb = this.GetComponent<Absorb>();
+        inputManager = FindObjectOfType<InputManager>();
     }
 
     // Returns the forward direction of the camera.
@@ -43,14 +42,19 @@ public class Movement : MonoBehaviour
 
     void UpdateInputDirection()
     {
-        // Get input direction
-        _vAxis = Input.GetAxisRaw("Vertical");
-        _hAxis = Input.GetAxisRaw("Horizontal");
+
+        //_inputDirection.x = Input.GetAxisRaw("Horizontal");
+        //_inputDirection.y = Input.GetAxisRaw("Vertical");
+
+
+        _inputDirection = inputManager.GetMovementDirectionFromInput();
+
+
 
         // Get the forward direction
         Vector3 forward = GetForwardViaCamera();
         Vector3 right = Quaternion.AngleAxis(90, Vector3.up) * forward;
-        _direction = (forward * _vAxis) + (right * _hAxis);
+        _direction = (forward * _inputDirection.y) + (right * _inputDirection.x);
     }
 
     private void FixedUpdate()
