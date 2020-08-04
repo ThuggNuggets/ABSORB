@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
     [Header("References")]
     public Transform cameraTransform;
     public CinemachineFreeLook freeLookCamera;
-    public InputManager inputManager;
+    private InputManager _inputManager;
     private Rigidbody _rigidbody;
     private Transform _transform;
     private Absorb _absorb;
@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
         _rigidbody = this.GetComponent<Rigidbody>();
         _transform = this.GetComponent<Transform>();
         _absorb = this.GetComponent<Absorb>();
-        inputManager = FindObjectOfType<InputManager>();
+        _inputManager = FindObjectOfType<InputManager>();
     }
 
     // Returns the forward direction of the camera.
@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
         //_inputDirection.y = Input.GetAxisRaw("Vertical");
 
 
-        _inputDirection = inputManager.GetMovementDirectionFromInput();
+        _inputDirection = _inputManager.GetMovementDirectionFromInput();
 
 
 

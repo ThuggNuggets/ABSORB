@@ -857,8 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   freeLookCamera: {fileID: 0}
-  inputManager: {fileID: 0}
-  acceleration: 99.99982
+  acceleration: 100
   maxVelocity: 20
   turnSpeed: 0.3
 --- !u!114 &2468281286964091614
@@ -958,7 +957,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 50
   cooldownTime: 1
-  inputKey: 304
   distance: 10
 --- !u!114 &1988362626
 MonoBehaviour:

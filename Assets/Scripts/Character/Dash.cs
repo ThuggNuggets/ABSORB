@@ -7,11 +7,11 @@ public class Dash : MonoBehaviour
     [Header("Properties")]
     public float force = 50.0f;
     public float cooldownTime = 5.0f;
-    public KeyCode inputKey;
     public float distance = 20.0f;
     private bool _canDash = true;
     private Rigidbody _rigidbody;
     private SpecialParryBlock _specialParry;
+    private InputManager _inputManager;
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;
     private bool _haveReset = false;
@@ -20,11 +20,12 @@ public class Dash : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _specialParry = GetComponent<SpecialParryBlock>();
+        _inputManager = FindObjectOfType<InputManager>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(inputKey) && _canDash && _specialParry.shieldState != SpecialParryBlock.ShieldState.Shielding)
+        if (_inputManager.GetDashButtonPress() && _canDash && _specialParry.shieldState != SpecialParryBlock.ShieldState.Shielding)
         {
             _initialVelocity = _rigidbody.velocity;
             _initialPosition = transform.position;
