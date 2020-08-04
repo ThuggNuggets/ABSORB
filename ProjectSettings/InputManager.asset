@@ -468,7 +468,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
-    joyNum: 2
+    joyNum: 1
   - serializedVersion: 3
     m_Name: CameraHorizontal
     descriptiveName: 
@@ -484,7 +484,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 2
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Debug Vertical
     descriptiveName: 

@@ -35,19 +35,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: attackXboxKey
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: attackKey
-    value: 0
+    value: 323
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: splAttackXboxKey
-    value: 0
+    value: 9
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: splAttackKey
-    value: 0
+    value: 324
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: shieldXboxKey

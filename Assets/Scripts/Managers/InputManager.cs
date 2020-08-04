@@ -4,7 +4,7 @@ using Cinemachine;
 
 public class InputManager : MonoBehaviour
 {
-    /*
+    /* This is just here for copy and pasting
       private InputManager _inputManager;
       _inputManager = FindObjectOfType<InputManager>();
     */
@@ -126,5 +126,10 @@ public class InputManager : MonoBehaviour
     public bool GetPauseButtonPress()
     {
         return (isControllerConnected) ? XCI.GetButtonDown(pauseXboxKey, XboxController.First) : Input.GetKeyDown(pauseKey);
+    }
+
+    public bool GetControllerConnected()
+    {
+        return isControllerConnected;
     }
 }
