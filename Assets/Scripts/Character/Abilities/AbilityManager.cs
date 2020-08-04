@@ -20,10 +20,6 @@ public class AbilityManager : MonoBehaviour
     // The players absorb force feild
     public GameObject playerForceField;
 
-    // The mouse button that controls the use of the ability
-    [Range(0, 2)]
-    public int mouseButtonInput = 1;
-
     // The last enemy we parried
     private AIBrain _lastParriedEnemy = null;
 
@@ -32,6 +28,9 @@ public class AbilityManager : MonoBehaviour
 
     // The players shield
     private SpecialParryBlock _specialParryBlock;
+
+    // Input manager to checking if button is pressed
+    private InputManager _inputManager;
 
     // Array to fill out ability dictionary with
     [System.Serializable]
@@ -70,6 +69,8 @@ public class AbilityManager : MonoBehaviour
         // Set the current ability to the starting ability
         if(startingAbility != E_Ability.NONE)
             SetAbility(startingAbility);
+
+        _inputManager = FindObjectOfType<InputManager>();
     }
 
     // Called every frame
@@ -86,7 +87,7 @@ public class AbilityManager : MonoBehaviour
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
         {
-            if (_lastParriedEnemy && Input.GetMouseButtonDown(mouseButtonInput) && !_absorb.IsActive())
+            if (_lastParriedEnemy && _inputManager.GetSpecialAttackButtonPress() && !_absorb.IsActive())
             {
                 // Getting ability
                 SetAbsorbTarget(_lastParriedEnemy);
@@ -99,7 +100,7 @@ public class AbilityManager : MonoBehaviour
         if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
         {
             // Using ability
-            if (Input.GetMouseButtonDown(mouseButtonInput))
+            if (_inputManager.GetSpecialAttackButtonPress())
                 _abilityDictionary[_currentAbility].Activate();
         }
         else

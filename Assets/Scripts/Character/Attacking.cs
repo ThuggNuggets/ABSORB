@@ -15,10 +15,12 @@ public class Attacking : MonoBehaviour
     public float animationSpeedMultiplier = 1.0f;
 
     private SpecialParryBlock _specialParry;
+    private InputManager _inputManager;
 
     void Start()
     {
         _specialParry = GetComponent<SpecialParryBlock>();
+        _inputManager = FindObjectOfType<InputManager>();
     }
 
     // Update is called once per frame
@@ -31,9 +33,9 @@ public class Attacking : MonoBehaviour
         // Check if the animation is currently in play
         //if (!(playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) && !playerAnimator.IsInTransition(0))
         //{
-            //animationFinished = true;
-            if (Input.GetMouseButtonDown(0) && _specialParry.shieldState != SpecialParryBlock.ShieldState.Shielding)
-                playerAnimator.SetTrigger("playAttack");
+        //animationFinished = true;
+        if (_inputManager.GetAttackButtonPress() && _specialParry.shieldState != SpecialParryBlock.ShieldState.Shielding)
+            playerAnimator.SetTrigger("playAttack");
         //}
 
     }

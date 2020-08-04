@@ -23,17 +23,16 @@ public class Absorb : MonoBehaviour
     }
 
     [Header("Properties")]
-    // The mouse button that controls the activation of the absorb.
-    [Range(0, 2)]
-    public int mouseButtonInput = 1;
     public float turnSpeed = 0.5F;
     public float animationTime = 2.0f;
     private bool _isAbosrbing = false;
-    private PlayerSlowdown playerSlowdown;
+    private PlayerSlowdown playerSlowdown; 
+    private InputManager _inputManager;
 
     private void Awake()
     {
         playerSlowdown = this.GetComponent<PlayerSlowdown>();
+        _inputManager = FindObjectOfType<InputManager>();
     }
 
     // Called every frame
@@ -42,7 +41,7 @@ public class Absorb : MonoBehaviour
         if(_targetEnemy)
         {
             // Check if we should start abosrbing
-            if (Input.GetMouseButtonDown(mouseButtonInput) && !_isAbosrbing)
+            if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
             {
                 Activate();
                 StartCoroutine(WaitFor(animationTime));
