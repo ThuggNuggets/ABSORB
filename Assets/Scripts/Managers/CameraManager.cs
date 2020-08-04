@@ -15,35 +15,46 @@ public class CameraManager : MonoBehaviour
     // Input Manager script
     public InputManager inputManager;
 
-    private bool controllerUpdated = false;
-
     // Only show on menu when controller is connected?
     public bool overrideController = false;
+
+    private bool controllerUpdated = false;
+    private bool overrideUpdated = false;
 
     // Start is called before the first frame update
     void Start()
     {
         // If controller is connected and not overridden
-        if (inputManager.GetControllerConnected()/* && !overrideController*/)
+        if (inputManager.GetControllerConnected() && !overrideController)
             SetControllerCamera();
-        else if (!inputManager.GetControllerConnected()/* || overrideController*/) // If no controller is connected or player has selected to use keyboard controls
+        // If no controller is connected or player has selected to use keyboard controls
+        else if (!inputManager.GetControllerConnected() || overrideController)
             SetMouseCamera();
 
         controllerUpdated = inputManager.GetControllerConnected();
+        overrideUpdated = overrideController;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Run when the inputManager and local var dont match
+        // Run when the inputManager and controllerUpdated dont match
         // (Basically this should on run once when a controller is connected/disconnected)
-        if (inputManager.GetControllerConnected() != controllerUpdated)
+        // Also run if overrideController has been turned on/off
+        if (inputManager.GetControllerConnected() != controllerUpdated || overrideController != overrideUpdated)
         {
-            if (inputManager.GetControllerConnected())
+            if (inputManager.GetControllerConnected() && !overrideController)
+            {
+                controllerCamera.transform.position = mouseCamera.transform.position;
                 SetControllerCamera();
-            else if (!inputManager.GetControllerConnected())
+            }
+            else if (!inputManager.GetControllerConnected() || overrideController)
+            {
+                mouseCamera.transform.position = controllerCamera.transform.position;
                 SetMouseCamera();
+            }
 
+            overrideUpdated = overrideController;
             controllerUpdated = inputManager.GetControllerConnected();
             Debug.LogWarning("Controller changed");
         }
@@ -52,8 +63,10 @@ public class CameraManager : MonoBehaviour
     void SetControllerCamera()
     {
         // Enable/disable correct camera
-        controllerCamera.gameObject.SetActive(true);
-        mouseCamera.gameObject.SetActive(false);
+        //controllerCamera.gameObject.SetActive(true);
+        //mouseCamera.gameObject.SetActive(false);
+        controllerCamera.Priority = 1;
+        mouseCamera.Priority = 0;
 
         // Set player movement cameras
         playerMovement.freeLookCamera = controllerCamera;
@@ -66,8 +79,10 @@ public class CameraManager : MonoBehaviour
     void SetMouseCamera()
     {
         // Enable/disable correct camera
-        mouseCamera.gameObject.SetActive(true);
-        controllerCamera.gameObject.SetActive(false);
+        //mouseCamera.gameObject.SetActive(true);
+        //controllerCamera.gameObject.SetActive(false);
+        mouseCamera.Priority = 1;
+        controllerCamera.Priority = 0;
 
         // Set player movement cameras
         playerMovement.freeLookCamera = mouseCamera;
