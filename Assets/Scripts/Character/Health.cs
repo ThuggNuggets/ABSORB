@@ -88,6 +88,7 @@ public class Health : MonoBehaviour
             specialEnemy.PlayHitParryEffect();
             abilityManager.LastParriedEnemy = specialEnemy.GetBrain();
             abilityManager.LastParriedEnemy.SetBehaviour("Parried");
+            abilityManager.SetAbsorbTarget(specialEnemy.GetBrain());
         }
     }
 

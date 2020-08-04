@@ -17,6 +17,7 @@ public class SpecialParryBlock : MonoBehaviour
     private InputManager _inputManager;
     private float _tempShieldTimer;
     private float _tempShieldCDTimer;
+    private Animator _animator;
 
     [HideInInspector]
     public bool specialAttackParried = false;
@@ -30,11 +31,16 @@ public class SpecialParryBlock : MonoBehaviour
     [HideInInspector]
     public ShieldState shieldState;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _playerSlowdown = GetComponent<PlayerSlowdown>();
         _inputManager = FindObjectOfType<InputManager>();
+        _animator = GetComponent<Animator>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         // Make sure the blocking sphere is turned off by default
         sphereRenderer.enabled = false;
         shieldState = ShieldState.Default;
@@ -65,7 +71,11 @@ public class SpecialParryBlock : MonoBehaviour
     {
         // When the player hits the shield key
         if (_inputManager.GetShieldButtonPress())
+        {
             shieldState = ShieldState.Shielding;
+            _animator.SetBool("Defence", true);
+        }
+
 
         //if (Input.GetKeyDown(KeyCode.Space))
         //    shieldState = ShieldState.Shielding;
@@ -82,6 +92,7 @@ public class SpecialParryBlock : MonoBehaviour
 
         if (shieldTimer <= 0)
         {
+            _animator.SetBool("Defence", false);
             sphereRenderer.enabled = false;
             sphereCollider.enabled = false;
             shieldTimer = _tempShieldTimer;

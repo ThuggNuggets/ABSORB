@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -86,18 +87,20 @@ public class AbilityManager : MonoBehaviour
 
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
-        {
-            if (_lastParriedEnemy && _inputManager.GetSpecialAttackButtonPress() && !_absorb.IsActive())
-            {
-                // Getting ability
-                SetAbsorbTarget(_lastParriedEnemy);
-                _lastParriedEnemy.SetBehaviour("Absorbed");
-            }
             return;
-        }
+            //if (_currentAbility == E_Ability.NONE)
+            //{
+            //    if (_lastParriedEnemy && _inputManager.GetSpecialAttackButtonPress() && !_absorb.IsActive())
+            //    {
+            //        // Getting ability
+            //        SetAbsorbTarget(_lastParriedEnemy);
+            //        _lastParriedEnemy.SetBehaviour("Absorbed");
+            //    }
+            //    return;
+            //}
 
-        // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
-        if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
+            // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
+            if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
         {
             // Using ability
             if (_inputManager.GetSpecialAttackButtonPress())
@@ -140,5 +143,10 @@ public class AbilityManager : MonoBehaviour
     public void SetAbsorbTarget(AIBrain target)
     {
         _absorb.TargetEnemy = target;
+    }
+
+    public bool IsActive()
+    {
+        return !(_currentAbility == AbilityManager.E_Ability.NONE);
     }
 }

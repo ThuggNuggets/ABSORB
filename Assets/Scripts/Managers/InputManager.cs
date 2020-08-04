@@ -60,20 +60,19 @@ public class InputManager : MonoBehaviour
             {
                 Debug.Log(_queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
                 isControllerConnected = true;
+                XCI.DEBUG_LogControllerNames();
             }
-
-            XCI.DEBUG_LogControllerNames();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Update isControllerConnected to allow the use of keyboard buttons if there is no controller connected
-        if (XCI.IsPluggedIn(_queriedNumberOfCtrlrs))
-            isControllerConnected = true;
-        else
-            isControllerConnected = false;
+        //// Update isControllerConnected to allow the use of keyboard buttons if there is no controller connected
+        //if (XCI.IsPluggedIn(_queriedNumberOfCtrlrs))
+        //    isControllerConnected = true;
+        //else
+        //    isControllerConnected = false;
     }
 
     public Vector2 GetMovementDirectionFromInput()

@@ -28,24 +28,31 @@ public class Absorb : MonoBehaviour
     private bool _isAbosrbing = false;
     private PlayerSlowdown playerSlowdown; 
     private InputManager _inputManager;
+    private Animator _animator;
+    private AbilityManager _abilityManager;
 
     private void Awake()
     {
         playerSlowdown = this.GetComponent<PlayerSlowdown>();
         _inputManager = FindObjectOfType<InputManager>();
+        _animator = this.GetComponent<Animator>();
+        _abilityManager = this.GetComponent<AbilityManager>();
     }
 
     // Called every frame
     private void Update()
     {
-        if(_targetEnemy)
+        if (_abilityManager.IsActive())
+            return;
+
+        if (!_targetEnemy)
+            return;
+
+        // Check if we should start abosrbing
+        if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
         {
-            // Check if we should start abosrbing
-            if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
-            {
-                Activate();
-                StartCoroutine(WaitFor(animationTime));
-            }
+            Activate();
+            StartCoroutine(WaitFor(animationTime));
         }
     }
 
@@ -58,15 +65,19 @@ public class Absorb : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("Activate");
         playerSlowdown.SetSlowdown();
+        _targetEnemy.SetBehaviour("Absorbed");
+        _animator.SetBool("AbsorbPose", true);
         _isAbosrbing = true;
+        _targetEnemy = null;
     }
 
     public void Deactivate()
     {
         playerSlowdown.SetSpeedUp();
+        _animator.SetBool("AbsorbPose", false);
         _isAbosrbing = false;
+        _targetEnemy = null;
     }
 
     public bool IsActive()
