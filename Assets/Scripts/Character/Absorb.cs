@@ -42,16 +42,13 @@ public class Absorb : MonoBehaviour
     // Called every frame
     private void Update()
     {
-        if (_abilityManager.IsActive())
-            return;
-
-        if (!_targetEnemy)
+        if (_abilityManager.IsActive() || !_targetEnemy)
             return;
 
         // Check if we should start abosrbing
         if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
         {
-            Activate();
+            ActivateAbsorb();
             StartCoroutine(WaitFor(animationTime));
         }
     }
@@ -60,21 +57,19 @@ public class Absorb : MonoBehaviour
     private IEnumerator WaitFor(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
-        Deactivate();
+        DeactivateAbsorb();
     }
 
-    public void Activate()
+    public void ActivateAbsorb()
     {
-        if(_targetEnemy)
-            _targetEnemy.SetBehaviour("Absorbed");
-
+        _targetEnemy.SetBehaviour("Absorbed");
         playerSlowdown.SetSlowdown();
         _animator.SetBool("AbsorbPose", true);
         _isAbosrbing = true;
         _targetEnemy = null;
     }
 
-    public void Deactivate()
+    public void DeactivateAbsorb()
     {
         playerSlowdown.SetSpeedUp();
         _animator.SetBool("AbsorbPose", false);

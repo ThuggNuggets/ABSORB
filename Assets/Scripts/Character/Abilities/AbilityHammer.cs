@@ -13,7 +13,7 @@ public class AbilityHammer : Ability
 
     [Header("Properties")]
     public float groundSmashReparentTimer = 2.0f;
-    public Vector3 groundSmashImpactLocation = new Vector3();
+    private Vector3 _groundSmashImpactLocation = Vector3.zero;
 
     [Header("Damage Properties")]
     public float damageToMinion = 50.0f;
@@ -32,6 +32,7 @@ public class AbilityHammer : Ability
     private void Awake()
     {
         animator = this.GetComponent<Animator>();
+        _groundSmashImpactLocation = groundSmashTransform.position;
     }
 
     public override void OnEnter() 
@@ -83,11 +84,9 @@ public class AbilityHammer : Ability
 
     public override void Deactivate()
     {
-        active = false;
         _hasRan = true;
         hammerGameObject.SetActive(false);
         animator.SetBool("HammerAttack", false);
-        abilityManager.SetAbility(AbilityManager.E_Ability.NONE);
     }
 
     public void DeactivateHammerGameobject()
@@ -104,8 +103,13 @@ public class AbilityHammer : Ability
     public void ActivateHammerGroundSmash()
     {
         groundSmashTransform.SetParent(null);
+        Vector3 fixY = groundSmashTransform.position;
+        fixY.y = 0.997f;
+        groundSmashTransform.position = fixY;
         groundSmashParticleSystem.Play();
         groundSmashAudio.Play();
+        active = false;
+        abilityManager.SetAbility(AbilityManager.E_Ability.NONE);
         StartCoroutine(ReparentGroundSmash());
     }
 
@@ -122,7 +126,7 @@ public class AbilityHammer : Ability
     {
         yield return new WaitForSecondsRealtime(groundSmashReparentTimer);
         groundSmashTransform.SetParent(groundSmashParent);
-        groundSmashTransform.transform.localPosition = groundSmashImpactLocation;
+        groundSmashTransform.transform.localPosition = _groundSmashImpactLocation;
         groundSmashTransform.transform.localRotation = Quaternion.identity;
     }
 }

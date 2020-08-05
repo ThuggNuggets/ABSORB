@@ -76,18 +76,13 @@ public class AbilityManager : MonoBehaviour
     // Called every frame
     private void Update()
     {
-        // Exiting function if shield is active
-        if (_specialParryBlock.shieldState == SpecialParryBlock.ShieldState.Shielding)
+        // Exiting function if shield is active or if the player doesn't have an active ability
+        if (_specialParryBlock.shieldState == SpecialParryBlock.ShieldState.Shielding || _currentAbility == E_Ability.NONE)
             return;
 
         // Debug printing if option enabled
         if (printCurrentState)
             Debug.Log(_currentAbility + " TIME");
-
-        // Exit function if player doesn't have an active ability
-        if (_currentAbility == E_Ability.NONE)
-            return;
-
 
         // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
         if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
@@ -140,6 +135,7 @@ public class AbilityManager : MonoBehaviour
     // Returns true if the player has an assigned ability
     public bool IsActive()
     {
+        Debug.Log("Ability Manager returing: " + !(_currentAbility == AbilityManager.E_Ability.NONE));
         return !(_currentAbility == AbilityManager.E_Ability.NONE);
     }
 }
