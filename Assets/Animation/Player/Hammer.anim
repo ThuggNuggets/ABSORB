@@ -19932,7 +19932,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.5416666
+  - time: 1.4583334
     functionName: Deactivate
     data: 
     objectReferenceParameter: {fileID: 0}
