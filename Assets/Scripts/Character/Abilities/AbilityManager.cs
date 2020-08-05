@@ -9,7 +9,6 @@ public class AbilityManager : MonoBehaviour
     {
         NONE,
         HAMMER,
-        // NEW_ABILITY_HERE,
         COUNT,
     }
 
@@ -88,19 +87,10 @@ public class AbilityManager : MonoBehaviour
         // Exit function if player doesn't have an active ability
         if (_currentAbility == E_Ability.NONE)
             return;
-            //if (_currentAbility == E_Ability.NONE)
-            //{
-            //    if (_lastParriedEnemy && _inputManager.GetSpecialAttackButtonPress() && !_absorb.IsActive())
-            //    {
-            //        // Getting ability
-            //        SetAbsorbTarget(_lastParriedEnemy);
-            //        _lastParriedEnemy.SetBehaviour("Absorbed");
-            //    }
-            //    return;
-            //}
 
-            // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
-            if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
+
+        // Checks if the player uses the ability. ( Can't activate while using abosrb or shield )
+        if (!_abilityDictionary[_currentAbility].Active && !_absorb.IsActive())
         {
             // Using ability
             if (_inputManager.GetSpecialAttackButtonPress())
@@ -140,11 +130,14 @@ public class AbilityManager : MonoBehaviour
         set { _lastParriedEnemy = value; }
     }
 
+
+    // Sets the abosrb components target
     public void SetAbsorbTarget(AIBrain target)
     {
         _absorb.TargetEnemy = target;
     }
 
+    // Returns true if the player has an assigned ability
     public bool IsActive()
     {
         return !(_currentAbility == AbilityManager.E_Ability.NONE);

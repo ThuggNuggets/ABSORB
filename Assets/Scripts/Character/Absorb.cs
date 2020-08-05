@@ -65,8 +65,10 @@ public class Absorb : MonoBehaviour
 
     public void Activate()
     {
+        if(_targetEnemy)
+            _targetEnemy.SetBehaviour("Absorbed");
+
         playerSlowdown.SetSlowdown();
-        _targetEnemy.SetBehaviour("Absorbed");
         _animator.SetBool("AbsorbPose", true);
         _isAbosrbing = true;
         _targetEnemy = null;

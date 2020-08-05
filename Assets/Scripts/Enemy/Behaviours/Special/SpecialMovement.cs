@@ -62,7 +62,7 @@ public class SpecialMovement : AIBehaviour
         }
 
         // If the enemy is at the optimal attack range, enter the attack state
-        if (Mathf.Ceil(dist) == attackDistance)
+        if (Mathf.Ceil(dist) < attackDistance)
             StartCoroutine(BeforeAttackTimer());
     }
 

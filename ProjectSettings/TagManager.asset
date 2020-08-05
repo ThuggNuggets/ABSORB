@@ -27,7 +27,7 @@ TagManager:
   - EnemyProjectile
   - PlayerMelee
   - Ground
-  - 
+  - EnemyMovementRaycast
   - 
   - 
   - 
