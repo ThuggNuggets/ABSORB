@@ -45,12 +45,16 @@ public class CameraManager : MonoBehaviour
         {
             if (inputManager.GetControllerConnected() && !overrideController)
             {
-                controllerCamera.transform.position = mouseCamera.transform.position;
+                //controllerCamera.transform.position = mouseCamera.transform.position;
+                controllerCamera.m_YAxis.Value = mouseCamera.m_YAxis.Value;
+                controllerCamera.m_XAxis.Value = mouseCamera.m_XAxis.Value;
                 SetControllerCamera();
             }
             else if (!inputManager.GetControllerConnected() || overrideController)
             {
-                mouseCamera.transform.position = controllerCamera.transform.position;
+                //mouseCamera.transform.position = controllerCamera.transform.position;
+                mouseCamera.m_YAxis.Value = controllerCamera.m_YAxis.Value;
+                mouseCamera.m_XAxis.Value = controllerCamera.m_XAxis.Value;
                 SetMouseCamera();
             }
 
