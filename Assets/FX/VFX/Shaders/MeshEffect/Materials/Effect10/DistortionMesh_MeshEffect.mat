@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: DistortionMesh_MeshEffect
   m_Shader: {fileID: 4800000, guid: 972a05a1fafc1c54d8287892f2a939b6, type: 3}
-  m_ShaderKeywords: USE_FRESNEL USE_HEIGHT USE_MAINTEX _ZWRITEMODE_ON
+  m_ShaderKeywords: USE_HEIGHT USE_MAINTEX _ZWRITEMODE_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,12 +48,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3616e344c64235044b5e3595d37d53ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 9332d9446c927ae41a8724b0654172b9, type: 3}
-        m_Scale: {x: 7, y: 3}
+        m_Scale: {x: 15.67, y: 36.73}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -101,7 +101,7 @@ Material:
     - _UseAlphaCliping: 0
     - _UseBlending: 0
     - _UseCutout: 0
-    - _UseFresnel: 1
+    - _UseFresnel: 0
     - _UseHeight: 1
     - _UseMainTex: 1
     - _UseRefractive: 0
@@ -112,9 +112,9 @@ Material:
     - _Color: {r: 0, g: 0.17241406, b: 1, a: 1}
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 1.006897, b: 2, a: 1}
-    - _HeightUVScrollDistort: {r: 1, g: 12, b: 0, a: 0}
-    - _MainColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HeightUVScrollDistort: {r: 0.44, g: 0.35, b: 0.06, a: 1.4}
+    - _MainColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
     - _RimColor: {r: 0.41911763, g: 0.41911763, b: 0.41911763, a: 0.5}
     - _Speed: {r: 0, g: 5, b: 0, a: 0}
-    - _TintColor: {r: 0.25761536, g: 0.14489618, b: 0.49264705, a: 0.737}
+    - _TintColor: {r: 0.07315173, g: 0.026432894, b: 0.16981131, a: 1}
