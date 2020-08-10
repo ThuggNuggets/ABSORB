@@ -13,7 +13,6 @@ public class AbilityHammer : Ability
 
     [Header("Properties")]
     public float groundSmashReparentTimer = 2.0f;
-    private Vector3 _groundSmashImpactLocation = Vector3.zero;
 
     [Header("Damage Properties")]
     public float damageToMinion = 50.0f;
@@ -24,15 +23,18 @@ public class AbilityHammer : Ability
     public float radius = 10.0f;
 
     [Header("Debug")]
-    public bool drawSphereGizmo = false;
+    public bool alwaysDrawSphereGizmo = false;
 
-    private bool _hasRan = true;
     private Animator animator;
+    private Vector3 _groundSmashImpactLocation = Vector3.zero;
+    private bool _hasRan = true;
+    private float _groundSmashInitY = 0.0f;
 
     private void Awake()
     {
         animator = this.GetComponent<Animator>();
         _groundSmashImpactLocation = groundSmashTransform.position;
+        _groundSmashInitY = groundSmashTransform.position.y;
     }
 
     public override void OnEnter() 
@@ -42,37 +44,7 @@ public class AbilityHammer : Ability
 
     public override void OnExit() {}
 
-    public override void OnFixedUpdate() 
-    {
-        if (!_hasRan)
-        {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.0f);
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                {
-                    float damage = 0.0f;
-
-                    switch (hit.transform.gameObject.tag)
-                    {
-                        case "EnemyMinion":
-                            damage = damageToMinion;
-                            break;
-
-                        case "EnemySpecial":
-                            damage = damageToSpecial;
-                            break;
-
-                        case "EnemyElite":
-                            damage = damageToElite;
-                            break;
-                    }
-                    hit.transform.gameObject.GetComponent<EnemyHandler>().TakeDamage(damage, AbilityManager.E_Ability.HAMMER);
-                }
-            }
-            _hasRan = true;
-        }
-    }
+    public override void OnFixedUpdate(){}
 
     public override void OnUpdate() {}
 
@@ -103,9 +75,16 @@ public class AbilityHammer : Ability
     public void ActivateHammerGroundSmash()
     {
         groundSmashTransform.SetParent(null);
+
+        //
+        /* Gross Y fix for the ground smash effect. Need to look into the actual problem, this is a bandaid fix.*/
         Vector3 fixY = groundSmashTransform.position;
-        fixY.y = 0.997f;
+        fixY.y = _groundSmashInitY; 
         groundSmashTransform.position = fixY;
+        //
+
+        CheckForEnemyHit();
+
         groundSmashParticleSystem.Play();
         groundSmashAudio.Play();
         active = false;
@@ -115,7 +94,7 @@ public class AbilityHammer : Ability
 
     private void OnDrawGizmos()
     {
-        if(!_hasRan || drawSphereGizmo)
+        if(!_hasRan || alwaysDrawSphereGizmo)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
@@ -128,5 +107,33 @@ public class AbilityHammer : Ability
         groundSmashTransform.SetParent(groundSmashParent);
         groundSmashTransform.transform.localPosition = _groundSmashImpactLocation;
         groundSmashTransform.transform.localRotation = Quaternion.identity;
+    }
+
+    private void CheckForEnemyHit()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0.0f);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                float damage = 0.0f;
+
+                switch (hit.transform.gameObject.tag)
+                {
+                    case "EnemyMinion":
+                        damage = damageToMinion;
+                        break;
+
+                    case "EnemySpecial":
+                        damage = damageToSpecial;
+                        break;
+
+                    case "EnemyElite":
+                        damage = damageToElite;
+                        break;
+                }
+                hit.transform.gameObject.GetComponent<EnemyHandler>().TakeDamage(damage, AbilityManager.E_Ability.HAMMER);
+            }
+        }
     }
 }
