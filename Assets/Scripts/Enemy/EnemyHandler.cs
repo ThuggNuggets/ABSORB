@@ -48,7 +48,7 @@ public class EnemyHandler : MonoBehaviour
     private AIBrain _aiBrain;
 
     // Reference to the spawner which created this enemy
-    private Spawner _spawner;
+    private SpawnerV2 _spawner;
 
     //
 
@@ -143,7 +143,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Sets up the spawner
-    public void SetupSpawner(Spawner spawner)
+    public void SetupSpawner(SpawnerV2 spawner)
     {
         _spawner = spawner;
     }
@@ -155,7 +155,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Returns the spawner
-    public Spawner GetSpawner()
+    public SpawnerV2 GetSpawner()
     {
         return _spawner;
     }
@@ -164,8 +164,8 @@ public class EnemyHandler : MonoBehaviour
     public void Kill()
     {
         // Remove enemy spawner
-        if (_spawner != null)
-            _spawner.RemoveEnemy(this.gameObject);
+        //if (_spawner != null)
+        //    _spawner.RemoveEnemy(this.gameObject);
 
         // Playing VFX
         deathParticleEffect.transform.SetParent(null);
@@ -174,8 +174,12 @@ public class EnemyHandler : MonoBehaviour
         deathSound.Play();
 
         // Destroying everything
-        Destroy(deathParticleEffect.gameObject, deathParticleLength);
-        Destroy(deathSound.gameObject, deathSoundLength);
-        Destroy(this.gameObject);
+        //Destroy(deathParticleEffect.gameObject, deathParticleLength);
+        //Destroy(deathSound.gameObject, deathSoundLength);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
+        _currentHealth = 75;
+        _aiBrain.SetBehaviour("Idle");
+        ObjectPooler.Instance.poolDictionary[gameObject.tag].Enqueue(gameObject);
     }
 }
