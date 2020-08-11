@@ -18,11 +18,9 @@ public class SpawnerV2 : MonoBehaviour
     [Space]
     public Transform[] spawnerPositions;
 
-    //public int numberOfTaggedObjects = 0;
-    private float _tempSpawnTimer = 0.0f;
-    public int objectPoolCount;
-    private int checkAmountOfSpawns;
     public int numberOfTaggedObjects;
+    private int _objectPoolCount;
+    private int _checkAmountOfSpawns;
 
     ObjectPooler objectPooler;
 
@@ -30,8 +28,7 @@ public class SpawnerV2 : MonoBehaviour
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
-        _tempSpawnTimer = timeBetweenEachEnemySpawn;
-        objectPoolCount = objectPooler.objectPool.Count();
+        _objectPoolCount = objectPooler.objectPool.Count();
     }
 
     // Update is called once per frame
@@ -39,32 +36,33 @@ public class SpawnerV2 : MonoBehaviour
     {
         // TODO:
         // - Potentially spawn more enemies if 1 dies (e.g. 1 enemy dies, 2 more spawn)
-        _tempSpawnTimer -= Time.deltaTime;
 
-
-        if (_tempSpawnTimer <= 0.0f)
+        // If it hasnt reached the max amount of spawns, keep running or if it's set to false
+        if (setSpawnAmount && _checkAmountOfSpawns != _objectPoolCount || !setSpawnAmount)
         {
-            waitForSpawn = false;
-        }
-
-        // Allows the first wave to be spawned instantly instead of waiting
-        // for the time between each enemy to reach 0 seconds
-        if (!waitForSpawn)
-        {
-            if (numberOfTaggedObjects < objectPoolCount && objectPooler.objectPool.Count() > 0)
+            // Make sure there is an object to spawn before running the coroutine
+            if (!waitForSpawn && objectPooler.objectPool.Count() > 0)
             {
-                //_tempSpawnTimer -= Time.deltaTime;
-                //for (int i = 0; i < ObjectPooler.Instance.poolDictionary.Count(); i++)
-                //{
-                int spawnNumber = Random.Range(0, spawnerPositions.Count());
-                objectPooler.SpawnFromPool(objectToSpawnTag, spawnerPositions[spawnNumber].transform.position, Quaternion.identity);
-                //}
-
-                _tempSpawnTimer = timeBetweenEachEnemySpawn;
+                StartCoroutine(SpawnSequence());
                 waitForSpawn = true;
             }
         }
 
+        // Keep track of the number of enemies currently active in the scene
         numberOfTaggedObjects = GameObject.FindGameObjectsWithTag(objectToSpawnTag).Length;
+    }
+
+    IEnumerator SpawnSequence()
+    {
+        // Wait for set amount of seconds before we spawn a new enemy
+        yield return new WaitForSeconds(timeBetweenEachEnemySpawn);
+        // Choose a random position from the array to spawn them at
+        int spawnNumber = Random.Range(0, spawnerPositions.Count());
+        objectPooler.SpawnFromPool(objectToSpawnTag, spawnerPositions[spawnNumber].transform.position, Quaternion.identity);
+        waitForSpawn = false;
+
+        // Increment to keep track of max amount of spawns
+        if (setSpawnAmount)
+            _checkAmountOfSpawns += 1;
     }
 }

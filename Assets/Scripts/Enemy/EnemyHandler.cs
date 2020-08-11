@@ -179,6 +179,7 @@ public class EnemyHandler : MonoBehaviour
         //Destroy(this.gameObject);
         gameObject.SetActive(false);
         _currentHealth = 75;
+        _isAlive = true;
         _aiBrain.SetBehaviour("Idle");
         ObjectPooler.Instance.poolDictionary[gameObject.tag].Enqueue(gameObject);
     }

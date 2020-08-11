@@ -135,7 +135,7 @@ public class AbilityManager : MonoBehaviour
     // Returns true if the player has an assigned ability
     public bool IsActive()
     {
-        Debug.Log("Ability Manager returing: " + !(_currentAbility == AbilityManager.E_Ability.NONE));
+        //Debug.Log("Ability Manager returing: " + !(_currentAbility == AbilityManager.E_Ability.NONE));
         return !(_currentAbility == AbilityManager.E_Ability.NONE);
     }
 }

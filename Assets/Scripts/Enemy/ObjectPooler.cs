@@ -15,8 +15,8 @@ public class ObjectPooler : MonoBehaviour
 
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
-    private SpawnerV2 spawner;
     public Queue<GameObject> objectPool;
+    private SpawnerV2 spawner;
 
     public static ObjectPooler Instance;
 
@@ -46,39 +46,25 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-        
-    }
-
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
+        // Throw a warning if there is no pool with that tag
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogWarning("Pool with tag " + tag + " doesn't exist");
             return null;
         }
 
+        // Remove the object from the dictionary
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        //if (!objectToSpawn.activeInHierarchy)
-        //{
+        // Basically activate the enemy
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-
+        
         //poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
-        //}
-        //else
-        //    return null;
     }
 }
