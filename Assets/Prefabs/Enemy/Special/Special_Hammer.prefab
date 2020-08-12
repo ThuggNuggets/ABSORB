@@ -331,11 +331,11 @@ MonoBehaviour:
   hasParryEffect: 1
   parryEffect: {fileID: 198403054455981164}
   parryAudio: {fileID: 2015221482}
-  parryHitEffectTime: 2
+  parryReparentTime: 1
   deathSound: {fileID: 5407316882577128941}
   deathSoundLength: 2
   deathParticleEffect: {fileID: 5803590788216193643}
-  deathParticleLength: 2
+  overallFXTime: 1
   typeOfEnemy: 1
   maxHealth: 125
   baseDamage: 4

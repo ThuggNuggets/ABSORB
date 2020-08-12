@@ -79,10 +79,11 @@ public class SpecialAbsorbed : AIBehaviour
             else
             {
                 absorbParticleEffect.Stop();
-               // _playerAbilityManager.playerForceField.SetActive(false);
                 _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
+                absorbGameObject.SetActive(true);
+                absorbGameObject.transform.SetParent(this.gameObject.transform);
                 enemyHandler.Kill();
-                Destroy(absorbGameObject, destoryAbsorbEffectAfter);
+                _enabled = false;
             }
         }
     }

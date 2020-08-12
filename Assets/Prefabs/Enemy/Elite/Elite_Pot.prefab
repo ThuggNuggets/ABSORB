@@ -5187,15 +5187,16 @@ MonoBehaviour:
   hasParryEffect: 0
   parryEffect: {fileID: 259572212970434151}
   parryAudio: {fileID: 8208777940480100912}
-  parryHitEffectTime: 0
+  parryReparentTime: 1
   deathSound: {fileID: 354879985}
   deathSoundLength: 2
   deathParticleEffect: {fileID: 259572212970434151}
-  deathParticleLength: 2
+  deathVFXParent: {fileID: 3438492787752429409}
+  overallFXTime: 1
   typeOfEnemy: 2
   maxHealth: 150
   baseDamage: 10
-  printHealthStats: 1
+  printHealthStats: 0
   weaponCollider: {fileID: 0}
 --- !u!114 &3438492787752429404
 MonoBehaviour:
@@ -5227,7 +5228,6 @@ MonoBehaviour:
   retreatMaxVelocity: 30
   maxVelocity: 15
   turnSpeed: 0.2
-  wallCheckDistance: 2
   attackDistance: 20
   retreatDistance: 15
   beforeAttackTimer: 1

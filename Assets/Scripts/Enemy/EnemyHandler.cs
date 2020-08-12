@@ -13,22 +13,24 @@ public class EnemyHandler : MonoBehaviour
         ELITE,
     }
 
-    [Header("References")]
+    [Header("Damage FX")]
     public ParticleSystem damageEffect;
     public AudioSource damageEffectAudio;
 
-    [Header("Parry Effect")]
+    [Header("Parry FX")]
     public bool hasParryEffect = false;
     public ParticleSystem parryEffect;
     public AudioSource parryAudio;
-    public float parryHitEffectTime = 2.0f;
+    public float parryReparentTime = 1.0f;
     private Transform _parryParticleParent;
 
     [Header("Death FX")]
     public AudioSource deathSound;
     public float deathSoundLength = 2.0f;
     public ParticleSystem deathParticleEffect;
-    public float deathParticleLength = 2.0f;
+
+    [Header("Overall FX Properties")]
+    public float overallFXTime = 1.0f;
 
     [Header("Properties")]
     public EnemyType typeOfEnemy;
@@ -49,9 +51,6 @@ public class EnemyHandler : MonoBehaviour
 
     // Reference to the spawner which created this enemy
     private SpawnerV2 _spawner;
-
-    //
-
 
     private void Awake()
     {
@@ -114,7 +113,7 @@ public class EnemyHandler : MonoBehaviour
 
     private IEnumerator ReparentHitEffect()
     {
-        yield return new WaitForSecondsRealtime(parryHitEffectTime);
+        yield return new WaitForSecondsRealtime(parryReparentTime);
         parryEffect.transform.SetParent(_parryParticleParent);
     }
 
@@ -163,24 +162,47 @@ public class EnemyHandler : MonoBehaviour
     // Kills the enemy
     public void Kill()
     {
-        // Remove enemy spawner
-        //if (_spawner != null)
-        //    _spawner.RemoveEnemy(this.gameObject);
+        // Playing death VFX
+        PlayDeathFX();
 
-        // Playing VFX
+        // Resetting all stats and adding the enemy back into the object pool
+        ResetAndAddToQueue();
+    }
+
+    private void PlayDeathFX()
+    {
+        // Playing death VFX
         deathParticleEffect.transform.SetParent(null);
-        deathSound.transform.SetParent(null);
         deathParticleEffect.Play();
         deathSound.Play();
 
-        // Destroying everything
-        //Destroy(deathParticleEffect.gameObject, deathParticleLength);
-        //Destroy(deathSound.gameObject, deathSoundLength);
-        //Destroy(this.gameObject);
+        // Reparenting the VFX after N amount of time
+        var cam = Camera.main.GetComponent<MonoBehaviour>();
+        cam.StartCoroutine(ReparentVFX());
+    }
+
+    public void ResetAndAddToQueue()
+    {
+        _currentHealth = maxHealth;
+        _isAlive = true;
+
+        deathParticleEffect.transform.SetParent(this.gameObject.transform);
+        deathParticleEffect.Stop();
+        deathSound.Stop();
+
         gameObject.SetActive(false);
-        _currentHealth = 75;
         _isAlive = true;
         _aiBrain.SetBehaviour("Idle");
+
+
         ObjectPooler.Instance.poolDictionary[gameObject.tag].Enqueue(gameObject);
+    }
+
+    private IEnumerator ReparentVFX()
+    {
+        yield return new WaitForSecondsRealtime(overallFXTime);
+        deathParticleEffect.transform.SetParent(this.gameObject.transform);
+        deathParticleEffect.Stop();
+        deathSound.Stop();
     }
 }
