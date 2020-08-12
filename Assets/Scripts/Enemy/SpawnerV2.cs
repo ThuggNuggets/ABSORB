@@ -21,6 +21,7 @@ public class SpawnerV2 : MonoBehaviour
     public int numberOfTaggedObjects;
     private int _objectPoolCount;
     private int _checkAmountOfSpawns;
+    private float _tempTime;
 
     ObjectPooler objectPooler;
 
@@ -28,7 +29,14 @@ public class SpawnerV2 : MonoBehaviour
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
-        _objectPoolCount = objectPooler.objectPool.Count();
+        _objectPoolCount = objectPooler.poolDictionary[objectToSpawnTag].Count;
+        _tempTime = timeBetweenEachEnemySpawn;
+
+        if (waitForSpawn)
+        {
+            timeBetweenEachEnemySpawn = 0.0f;
+            waitForSpawn = false;
+        }
     }
 
     // Update is called once per frame
@@ -41,10 +49,10 @@ public class SpawnerV2 : MonoBehaviour
         if (setSpawnAmount && _checkAmountOfSpawns != _objectPoolCount || !setSpawnAmount)
         {
             // Make sure there is an object to spawn before running the coroutine
-            if (!waitForSpawn && objectPooler.objectPool.Count() > 0)
+            if (!waitForSpawn && objectPooler.poolDictionary[objectToSpawnTag].Count > 0)
             {
-                StartCoroutine(SpawnSequence());
                 waitForSpawn = true;
+                StartCoroutine(SpawnSequence());
             }
         }
 
@@ -56,11 +64,12 @@ public class SpawnerV2 : MonoBehaviour
     {
         // Wait for set amount of seconds before we spawn a new enemy
         yield return new WaitForSeconds(timeBetweenEachEnemySpawn);
+        timeBetweenEachEnemySpawn = _tempTime;
         // Choose a random position from the array to spawn them at
         int spawnNumber = Random.Range(0, spawnerPositions.Count());
         objectPooler.SpawnFromPool(objectToSpawnTag, spawnerPositions[spawnNumber].transform.position, Quaternion.identity);
         waitForSpawn = false;
-
+        
         // Increment to keep track of max amount of spawns
         if (setSpawnAmount)
             _checkAmountOfSpawns += 1;
