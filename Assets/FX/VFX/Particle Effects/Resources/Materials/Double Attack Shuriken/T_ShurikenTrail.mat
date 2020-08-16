@@ -140,7 +140,7 @@ Material:
     - _Depthpower: 1
     - _DetailNormalMapScale: 1
     - _DissolveAmount: 0
-    - _DissolveEdgeWidth: 0.7
+    - _DissolveEdgeWidth: 0.375
     - _Distortion: 0.05
     - _DstBlend: 0
     - _Emission: 1
@@ -154,7 +154,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _InvFade: 1
+    - _InvFade: 6.5
     - _MainTexOffsetX: 1.99
     - _MainTexOffsetY: 0
     - _MaskAppearAxis: 2
@@ -189,11 +189,11 @@ Material:
     - _Color0: {r: 0.04411757, g: 1.1097364, b: 2, a: 1}
     - _ColorEnd: {r: 0, g: 0, b: 0, a: 0}
     - _ColorStart: {r: 0, g: 0, b: 0, a: 0}
-    - _DissolveColor: {r: 0, g: 0, b: 0, a: 1}
+    - _DissolveColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EndColor: {r: 1, g: 1, b: 0, a: 1}
     - _FlowMapSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _MainSpeed: {r: -0.5, g: 0.2, b: 0, a: 0}
+    - _MainSpeed: {r: -0.11, g: -0.01, b: 0, a: 0}
     - _MainTexSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _MainTilingOffset: {r: 0.5, g: 1, b: 0, a: 0}
     - _MaskSize: {r: 0.08, g: 0.2, b: 0, a: 0}
@@ -205,4 +205,4 @@ Material:
     - _SpeedMainTexUVNoiseZW: {r: -1, g: 0, b: -0.5, a: 0}
     - _StartColor: {r: 1, g: 0, b: 0, a: 1}
     - _Tint: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 0.066176355, g: 1.6646048, b: 3, a: 1}
+    - _TintColor: {r: 1.1335573, g: 1.1335573, b: 1.1335573, a: 1}
