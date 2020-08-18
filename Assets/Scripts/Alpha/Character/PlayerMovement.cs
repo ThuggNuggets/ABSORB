@@ -53,19 +53,31 @@ public class PlayerMovement : MonoBehaviour
     public float turnSpeed = 0.20f;
     private float _currentAcceleration = 0.0f;
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, 0.2f);
+    }
+
     // Returns the forward direction of the camera.
     Vector3 GetCalculatedForward()
     {
+        // Get the camera forward
+        Vector3 zeroCam = thirdPersonCamera.position;
+        zeroCam.y = _transform.position.y;
+        Vector3 cameraForward = (_transform.position - zeroCam).normalized;
 
+        // Get the ground forward
         RaycastHit hit;
-        Physics.SphereCast(_transform.position, 12.0f, Vector3.down, out hit, 1.0f);
+        if(Physics.SphereCast(_transform.position + Vector3.up,  0.2f, Vector3.down, out hit, 1.0f))
+        {
+            // Return calculated forward
+            Vector3 groundForward = Quaternion.AngleAxis(90, thirdPersonCamera.right) * hit.normal;
+            return cameraForward + groundForward;
+        }
 
-        Debug.Log(hit.normal);
-
-
-        Vector3 flatCam = thirdPersonCamera.position;
-        flatCam.y = 0;
-        return (_transform.position - flatCam).normalized;
+        // Return cameras forward
+        return cameraForward;
     }
 
     public Vector3 GetInputDirection()
