@@ -18,7 +18,11 @@ public class PlayerShield : StateMachineBehaviour
         {
             playerHandler.sphereRenderer.enabled = true;
             playerHandler.sphereCollider.enabled = true;
+            Debug.Log("Player Shielding");
+            animator.SetBool("Shield", false);
         }
+        else
+            Debug.LogWarning("Player Handler not found.");
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -34,7 +38,11 @@ public class PlayerShield : StateMachineBehaviour
         {
             playerHandler.sphereRenderer.enabled = false;
             playerHandler.sphereCollider.enabled = false;
-        }
+            Debug.Log("Player Not Shielding");
+            playerHandler.SetCanShield(false);
+        }       
+        else
+            Debug.LogWarning("Player Handler not found.");
     }
 
     // //OnStateMove is called right after Animator.OnAnimatorMove()

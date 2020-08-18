@@ -26,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         // Getting all required references
-        _animator   = this.GetComponent<Animator>();
-        _rigidbody  = this.GetComponent<Rigidbody>();
-        _transform  = this.GetComponent<Transform>();
+        _animator = this.GetComponent<Animator>();
+        _rigidbody = this.GetComponent<Rigidbody>();
+        _transform = this.GetComponent<Transform>();
         _inputManager = FindObjectOfType<InputManager>();
         _currentAcceleration = acceleration;
         _tempPlayerAcceleration = acceleration;
@@ -37,12 +37,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateSlowdownFSM();
     }
 
     // Fixed update called every physics tick
     void FixedUpdate()
     {
+        UpdateSlowdownFSM();
         FixedUpdateGeneralMovement();
     }
 
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 100.0f;
     public float maxVelocity = 10.0f;
     public float turnSpeed = 0.20f;
-    private float _currentAcceleration = 0.0f;
+    public float _currentAcceleration = 0.0f;
 
     private void OnDrawGizmos()
     {
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Get the ground forward
         RaycastHit hit;
-        if(Physics.SphereCast(_transform.position + Vector3.up,  0.2f, Vector3.down, out hit, 1.0f))
+        if (Physics.SphereCast(_transform.position + Vector3.up, 0.2f, Vector3.down, out hit, 1.0f))
         {
             // Return calculated forward
             Vector3 groundForward = Quaternion.AngleAxis(90, thirdPersonCamera.right) * hit.normal;
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         Slowdown,   // Slow down the player
         SpeedUp     // Speed up the player
     }
-    [HideInInspector]
+    //[HideInInspector]
     public SlowState slowState;
 
     [Header("Slowdown Properties")]
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
                 ResetPlayer();
                 break;
             case SlowState.Slowdown:
-                SetSlowdown();
+                SlowdownPlayer();
                 break;
             case SlowState.SpeedUp:
                 SpeedUpPlayer();
@@ -144,30 +144,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void SetSlowdown(float slowAccelerationAmount = 10.0f, float timeToSlowdown = 0.2f)
+    private void SlowdownPlayer()
     {
-        maxSlowAcceleration = slowAccelerationAmount;
-        timeToAcceleration = timeToSlowdown;
-        slowState = SlowState.Slowdown;
-        return;
+        _currentAcceleration = Mathf.SmoothDamp(_currentAcceleration, maxSlowAcceleration, ref _speedSmoothVelocity, timeToAcceleration);
     }
 
     private void SpeedUpPlayer()
     {
         _currentAcceleration = Mathf.SmoothDamp(_currentAcceleration, _tempPlayerAcceleration, ref _speedSmoothVelocity, timeToAcceleration);
-        _resetPlayerAcceleration = true;
+        //if (!_resetPlayerAcceleration)
 
         // Failsafe to set back to default state so the slowdown state can be called again
         // It just makes sense that it goes back to normal once you reach normal speed again
-        if (_currentAcceleration >= _tempPlayerAcceleration)
+        if (_currentAcceleration >= (_tempPlayerAcceleration * 0.95)) // When it's reached above 95% of the normal speed
+        {
+            _resetPlayerAcceleration = true;
             slowState = SlowState.Default;
+        }
     }
 
     private void ResetPlayer()
     {
         if (_resetPlayerAcceleration)
         {
-            //_playerMovement.acceleration = _tempPlayerAcceleration;
+            _currentAcceleration = _tempPlayerAcceleration;
             _resetPlayerAcceleration = false;
         }
     }

@@ -9,9 +9,10 @@ public class PlayerHandler : MonoBehaviour
     public Collider sphereCollider;
 
     private Animator _animator;
+    private PlayerMovement _playerMovement;
     private bool isAlive = false;
     private int currentHealth = 10;
-    private bool canShield = false;
+    private bool canShield = true;
 
     #region Shield
 
@@ -42,29 +43,15 @@ public class PlayerHandler : MonoBehaviour
             shieldState = ShieldState.Shielding;
             _animator.SetBool("Shield", true);
         }
-
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    shieldState = ShieldState.Shielding;
     }
 
     private void Shielding()
     {
-        sphereRenderer.enabled = true;
-        sphereCollider.enabled = true;
-        shieldTimer -= Time.deltaTime;
+        // Slowdown the player while shielding
+        _playerMovement.Key_ActivateSlowdown();
 
-        // Slow down the player when shielding
-        //_playerSlowdown.SetSlowdown();
-
-        if (shieldTimer <= 0)
-        {
-            _animator.SetBool("Shield", false);
-            sphereRenderer.enabled = false;
-            sphereCollider.enabled = false;
-            shieldTimer = _tempShieldTimer;
+        if (!canShield)
             shieldState = ShieldState.Cooldown;
-        }
     }
 
     private void Cooldown()
@@ -72,18 +59,19 @@ public class PlayerHandler : MonoBehaviour
         shieldCooldown -= Time.deltaTime;
 
         // Speed up the player after shield has expired
-        //_playerSlowdown.SetSpeedUp();
+        _playerMovement.Key_DeactivateSlowdown();
 
         if (shieldCooldown <= 0)
         {
             shieldCooldown = _tempShieldCDTimer;
-            //playerSlowdown.slowState = PlayerSlowdown.SlowState.Default; failsafe
             shieldState = ShieldState.Default;
+            canShield = true;
         }
     }
 
     public bool SetCanShield(bool shieldState)
     {
+        Debug.Log("canShield set to " + shieldState);
         return canShield = shieldState;
     }
 
@@ -98,11 +86,12 @@ public class PlayerHandler : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _inputManager = FindObjectOfType<InputManager>();
 
         // Make sure the blocking sphere is turned off by default
         sphereRenderer.enabled = false;
         shieldState = ShieldState.Default;
-        _inputManager = FindObjectOfType<InputManager>();
         // Set temp timers
         _tempShieldTimer = shieldTimer;
         _tempShieldCDTimer = shieldCooldown;
