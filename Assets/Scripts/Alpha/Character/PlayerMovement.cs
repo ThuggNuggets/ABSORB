@@ -37,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Checks if the player is moving, and sets the animator accordingly
+        if(_rigidbody.velocity.magnitude > 0.1F)
+            _animator.SetBool("Movement", true);
+        else
+            _animator.SetBool("Movement", false);
     }
 
     // Fixed update called every physics tick

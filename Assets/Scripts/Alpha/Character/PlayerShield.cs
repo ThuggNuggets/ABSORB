@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class PlayerShield : StateMachineBehaviour
 {
-    PlayerHandler playerHandler;
-
+    PlayerHandler _playerHandler;
     void Awake()
     {
-        playerHandler = FindObjectOfType<PlayerHandler>();
+        _playerHandler = FindObjectOfType<PlayerHandler>();
     }
 
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (playerHandler != null)
+        // Setting the current state within the player handler
+        _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.SHIELD);
+
+        if (_playerHandler != null)
         {
-            playerHandler.sphereRenderer.enabled = true;
-            playerHandler.sphereCollider.enabled = true;
+            _playerHandler.sphereRenderer.enabled = true;
+            _playerHandler.sphereCollider.enabled = true;
             Debug.Log("Player Shielding");
             animator.SetBool("Shield", false);
         }
@@ -34,12 +36,12 @@ public class PlayerShield : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //         _animator.SetBool("Defence", false);
-        if (playerHandler != null)
+        if (_playerHandler != null)
         {
-            playerHandler.sphereRenderer.enabled = false;
-            playerHandler.sphereCollider.enabled = false;
+            _playerHandler.sphereRenderer.enabled = false;
+            _playerHandler.sphereCollider.enabled = false;
             Debug.Log("Player Not Shielding");
-            playerHandler.SetCanShield(false);
+            _playerHandler.SetCanShield(false);
         }       
         else
             Debug.LogWarning("Player Handler not found.");

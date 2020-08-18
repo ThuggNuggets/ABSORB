@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class PlayerIdle : StateMachineBehaviour
 {
+    
+    PlayerHandler _playerHandler;
+    void Awake()
+    {
+        _playerHandler = FindObjectOfType<PlayerHandler>();
+    }
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // Setting the current state within the player handler
+       _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.IDLE);
+    }
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{

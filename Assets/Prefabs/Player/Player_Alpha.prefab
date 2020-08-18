@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 3746689148225198915}
   - component: {fileID: 3746689148225198912}
   - component: {fileID: 3746689148225198913}
+  - component: {fileID: 2195634935824272583}
+  - component: {fileID: 5816771675285186420}
+  - component: {fileID: 4505043746152684483}
   - component: {fileID: 3746689148225198918}
   m_Layer: 0
   m_Name: Player_Alpha
@@ -64,6 +67,49 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2195634935824272583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746689148225198919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaffd2019b48afd4894ad4bbca772596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  maxHealth: 10
+  sphereRenderer: {fileID: 0}
+  sphereCollider: {fileID: 0}
+  shieldTimer: 1
+  shieldCooldown: 1
+  shieldState: 0
+--- !u!114 &5816771675285186420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746689148225198919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0765e98c5641ca141a1a3362b5721c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4505043746152684483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746689148225198919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75152ee4e3fa1a4aaeb05a994d0ba56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3746689148225198918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +126,7 @@ MonoBehaviour:
   acceleration: 100
   maxVelocity: 10
   turnSpeed: 0.2
+  _currentAcceleration: 0
   slowState: 0
   maxSlowAcceleration: 10
   timeToAcceleration: 0.2

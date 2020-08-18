@@ -4,25 +4,79 @@ using UnityEngine;
 
 public class PlayerHandler : MonoBehaviour
 {
-    public int maxHealth = 10;
+    public enum PlayerAnimatorState
+    {
+        IDLE,
+        ATTACK,
+        SHIELD,
+        DASH,
+        ABSORB,
+        DEATH,
+    }
+    private PlayerAnimatorState _currentState;
+
+
+    [Header("References")]
     public MeshRenderer sphereRenderer;
     public Collider sphereCollider;
 
-    private Animator _animator;
-    private PlayerMovement _playerMovement;
-    private bool isAlive = false;
+    [Header("Properties")]
+    public int maxHealth = 10;
+
+    // Attributes
     private int currentHealth = 10;
+
+    // References
+    private Animator _animator;
+    private InputManager _inputManager;
+    private PlayerMovement _playerMovement;
+
+    // Flags
+    private bool isAlive = false;
     private bool canShield = true;
 
-    #region Shield
+    // Start is called before the first frame update
+    void Start()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _animator = GetComponent<Animator>();
+        _inputManager = FindObjectOfType<InputManager>();
 
+        // Make sure the blocking sphere is turned off by default
+        sphereRenderer.enabled = false;
+        shieldState = ShieldState.Default;
+        // Set temp timers
+        _tempShieldTimer = shieldTimer;
+        _tempShieldCDTimer = shieldCooldown;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (shieldState)
+        {
+            case ShieldState.Default:
+                EnableShield();
+                break;
+            case ShieldState.Shielding:
+                Shielding();
+                break;
+            case ShieldState.Cooldown:
+                Cooldown();
+                break;
+        }
+    }
+
+    #region Shield
+    // Attributes
     [Header("Timers", order = 0)]
     [Range(0.1f, 5f)]
     public float shieldTimer = 1.0f;
     [Range(0.1f, 5f)]
     public float shieldCooldown = 1.0f;
 
-    private InputManager _inputManager;
+    // Properties
     private float _tempShieldTimer;
     private float _tempShieldCDTimer;
 
@@ -82,39 +136,7 @@ public class PlayerHandler : MonoBehaviour
 
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _animator = GetComponent<Animator>();
-        _playerMovement = GetComponent<PlayerMovement>();
-        _inputManager = FindObjectOfType<InputManager>();
-
-        // Make sure the blocking sphere is turned off by default
-        sphereRenderer.enabled = false;
-        shieldState = ShieldState.Default;
-        // Set temp timers
-        _tempShieldTimer = shieldTimer;
-        _tempShieldCDTimer = shieldCooldown;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        switch (shieldState)
-        {
-            case ShieldState.Default:
-                EnableShield();
-                break;
-            case ShieldState.Shielding:
-                Shielding();
-                break;
-            case ShieldState.Cooldown:
-                Cooldown();
-                break;
-        }
-    }
-
+    #region Getters and setters
     public bool GetIsAlive()
     {
         return isAlive;
@@ -124,4 +146,26 @@ public class PlayerHandler : MonoBehaviour
     {
         return currentHealth;
     }
+
+    public void SetState(PlayerAnimatorState state)
+    {
+        _currentState = state;
+    }
+
+    public PlayerAnimatorState GetState()
+    {
+        return _currentState;
+    }
+
+    public Animator GetAnimator()
+    {
+        return _animator;
+    }
+
+    public InputManager GetInputManager()
+    {
+        return _inputManager;
+    }
+
+    #endregion
 }
