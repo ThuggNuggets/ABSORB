@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         _transform  = this.GetComponent<Transform>();
         _inputManager = FindObjectOfType<InputManager>();
         _currentAcceleration = acceleration;
+        _tempPlayerAcceleration = acceleration;
     }
 
     // Update is called once per frame
