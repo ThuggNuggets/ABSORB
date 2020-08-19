@@ -18,9 +18,9 @@ public class PlayerShield : StateMachineBehaviour
 
         if (_playerHandler != null)
         {
-            _playerHandler.sphereRenderer.enabled = true;
-            _playerHandler.sphereCollider.enabled = true;
-            Debug.Log("Player Shielding");
+            _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = true;
+            _playerHandler.GetCombatHandler().enabled = true;
+            //Debug.Log("Player Shielding");
             animator.SetBool("Shield", false);
         }
         else
@@ -38,10 +38,10 @@ public class PlayerShield : StateMachineBehaviour
         //         _animator.SetBool("Defence", false);
         if (_playerHandler != null)
         {
-            _playerHandler.sphereRenderer.enabled = false;
-            _playerHandler.sphereCollider.enabled = false;
-            Debug.Log("Player Not Shielding");
-            _playerHandler.SetCanShield(false);
+            _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = false;
+            _playerHandler.GetCombatHandler().shieldSphereCollider.enabled = false;
+            //Debug.Log("Player Not Shielding");
+            _playerHandler.GetCombatHandler().SetCanShield(false);
         }       
         else
             Debug.LogWarning("Player Handler not found.");

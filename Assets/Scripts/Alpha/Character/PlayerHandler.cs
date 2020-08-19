@@ -15,126 +15,32 @@ public class PlayerHandler : MonoBehaviour
     }
     private PlayerAnimatorState _currentState;
 
-
-    [Header("References")]
-    public MeshRenderer sphereRenderer;
-    public Collider sphereCollider;
-
-    [Header("Properties")]
-    public int maxHealth = 10;
-
     // Attributes
+    [Header("Attributes")]
+    public int maxHealth = 10;
     private int currentHealth = 10;
 
     // References
     private Animator _animator;
+    private Rigidbody _rigidbody;
+    private Transform _transform;
+    private LocomotionHandler _locomotionHandler;
+    private CombatHandler _combatHandler;
     private InputManager _inputManager;
-    private PlayerMovement _playerMovement;
 
     // Flags
     private bool isAlive = false;
-    private bool canShield = true;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _animator = GetComponent<Animator>();
+        // Getting the required components
+        _animator = this.GetComponent<Animator>();
+        _rigidbody = this.GetComponent<Rigidbody>();
+        _transform = this.GetComponent<Transform>();
+        _locomotionHandler = this.GetComponent<LocomotionHandler>();
+        _combatHandler = this.GetComponent<CombatHandler>();
         _inputManager = FindObjectOfType<InputManager>();
-
-        // Make sure the blocking sphere is turned off by default
-        sphereRenderer.enabled = false;
-        shieldState = ShieldState.Default;
-        // Set temp timers
-        _tempShieldTimer = shieldTimer;
-        _tempShieldCDTimer = shieldCooldown;
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        switch (shieldState)
-        {
-            case ShieldState.Default:
-                EnableShield();
-                break;
-            case ShieldState.Shielding:
-                Shielding();
-                break;
-            case ShieldState.Cooldown:
-                Cooldown();
-                break;
-        }
-    }
-
-    #region Shield
-    // Attributes
-    [Header("Timers", order = 0)]
-    [Range(0.1f, 5f)]
-    public float shieldTimer = 1.0f;
-    [Range(0.1f, 5f)]
-    public float shieldCooldown = 1.0f;
-
-    // Properties
-    private float _tempShieldTimer;
-    private float _tempShieldCDTimer;
-
-    public enum ShieldState
-    {
-        Default,    // Shield can be used & Checking for input
-        Shielding,  // Player is currently shielded
-        Cooldown    // Shield is currently on cooldown
-    }
-    [HideInInspector]
-    public ShieldState shieldState;
-
-    private void EnableShield()
-    {
-        // When the player hits the shield key
-        if (_inputManager.GetShieldButtonPress())
-        {
-            shieldState = ShieldState.Shielding;
-            _animator.SetBool("Shield", true);
-        }
-    }
-
-    private void Shielding()
-    {
-        // Slowdown the player while shielding
-        _playerMovement.Key_ActivateSlowdown();
-
-        if (!canShield)
-            shieldState = ShieldState.Cooldown;
-    }
-
-    private void Cooldown()
-    {
-        shieldCooldown -= Time.deltaTime;
-
-        // Speed up the player after shield has expired
-        _playerMovement.Key_DeactivateSlowdown();
-
-        if (shieldCooldown <= 0)
-        {
-            shieldCooldown = _tempShieldCDTimer;
-            shieldState = ShieldState.Default;
-            canShield = true;
-        }
-    }
-
-    public bool SetCanShield(bool shieldState)
-    {
-        Debug.Log("canShield set to " + shieldState);
-        return canShield = shieldState;
-    }
-
-    public bool GetCanShield()
-    {
-        return canShield;
-    }
-
-    #endregion
 
     #region Getters and setters
     public bool GetIsAlive()
@@ -165,6 +71,26 @@ public class PlayerHandler : MonoBehaviour
     public InputManager GetInputManager()
     {
         return _inputManager;
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return _rigidbody;
+    }
+
+    public Transform GetTransform()
+    {
+        return _transform;
+    }
+
+    public LocomotionHandler GetLocomotionHandler()
+    {
+        return _locomotionHandler;
+    }
+
+    public CombatHandler GetCombatHandler()
+    {
+        return _combatHandler;
     }
 
     #endregion
