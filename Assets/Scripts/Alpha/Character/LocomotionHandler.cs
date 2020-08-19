@@ -49,11 +49,11 @@ public class LocomotionHandler : MonoBehaviour
     {
         // Updates the players slow down FSM
         UpdateSlowdownFSM();
-
+        
         // Checks if the player is moving, and sets the animator accordingly
         if (_rigidbody.velocity.magnitude > 0.1F)
             _animator.SetBool("Movement", true);
-        else
+        else if(_animator.GetBool("Movement"))
             _animator.SetBool("Movement", false);
     }
 
@@ -110,7 +110,6 @@ public class LocomotionHandler : MonoBehaviour
         Vector3 inputDirection = _inputManager.GetMovementDirectionFromInput();
         Vector3 forward = GetCalculatedForward();
         Vector3 right = Quaternion.AngleAxis(90, Vector3.up) * forward;
-
         return (forward * inputDirection.y) + (right * inputDirection.x);
     }
 

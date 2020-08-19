@@ -36,7 +36,7 @@ public class CombatHandler : MonoBehaviour
         shieldMeshRenderer.enabled = false;
         shieldState = ShieldState.Default;
         
-        // Set temp timers for shield
+        // Set temp timers
         _tempShieldTimer = shieldTimer;
         _tempShieldCDTimer = shieldCooldown;
     }
@@ -65,7 +65,6 @@ public class CombatHandler : MonoBehaviour
     }
 
     #region Shield
-
     // Attributes
     [Header("Timers", order = 0)]
     [Range(0.1f, 5f)]
@@ -99,7 +98,7 @@ public class CombatHandler : MonoBehaviour
     private void Shielding()
     {
         // Slowdown the player while shielding
-        //_playerMovement.Key_ActivateSlowdown();
+        _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
 
         if (!_canShield)
             shieldState = ShieldState.Cooldown;
@@ -110,7 +109,7 @@ public class CombatHandler : MonoBehaviour
         shieldCooldown -= Time.deltaTime;
 
         // Speed up the player after shield has expired
-        //_playerMovement.Key_DeactivateSlowdown();
+        _playerHandler.GetLocomotionHandler().Key_DeactivateSlowdown();
 
         if (shieldCooldown <= 0)
         {
@@ -122,6 +121,7 @@ public class CombatHandler : MonoBehaviour
 
     public bool SetCanShield(bool shieldState)
     {
+        //Debug.Log("canShield set to " + shieldState);
         return _canShield = shieldState;
     }
 
