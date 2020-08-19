@@ -29,17 +29,19 @@ public class LocomotionHandler : MonoBehaviour
     {
         // Setting the current acceleration
         _currentAcceleration = acceleration;
+        _tempPlayerAcceleration = acceleration;
     }
 
     // Start is called before first frame
     private void Start()
     {
         // Getting the required references
-        _playerHandler  = this.GetComponent<PlayerHandler>();
+        _playerHandler = this.GetComponent<PlayerHandler>();
         _rigidbody = _playerHandler.GetRigidbody();
         _transform = _playerHandler.GetTransform();
         _animator = _playerHandler.GetAnimator();
-        _inputManager   = _playerHandler.GetInputManager();
+        _inputManager = _playerHandler.GetInputManager();
+        _combatHandler = _playerHandler.GetComponent<CombatHandler>();
     }
 
     // Update is called once per frame
@@ -49,7 +51,7 @@ public class LocomotionHandler : MonoBehaviour
         UpdateSlowdownFSM();
 
         // Checks if the player is moving, and sets the animator accordingly
-        if(_rigidbody.velocity.magnitude > 0.1F)
+        if (_rigidbody.velocity.magnitude > 0.1F)
             _animator.SetBool("Movement", true);
         else
             _animator.SetBool("Movement", false);
@@ -60,9 +62,13 @@ public class LocomotionHandler : MonoBehaviour
     {
         // Updating the general movement
         FixedUpdateGeneralMovement();
+
+        // Updating Dash
+        UpdateDash();
     }
 
     #region General Movement
+
     private void FixedUpdateGeneralMovement()
     {
         // Updates the input direction from the scenes input manager
@@ -107,16 +113,18 @@ public class LocomotionHandler : MonoBehaviour
 
         return (forward * inputDirection.y) + (right * inputDirection.x);
     }
+
     #endregion
 
     #region Slowdown   
+
     public enum SlowState
     {
         Default,    // Default to chill on until another state is called
         Slowdown,   // Slow down the player
         SpeedUp     // Speed up the player
     }
-    //[HideInInspector]
+    [HideInInspector]
     public SlowState slowState;
 
     [Header("Slowdown Properties")]
@@ -173,8 +181,6 @@ public class LocomotionHandler : MonoBehaviour
         }
     }
 
-    #endregion
-
     // Key Event function: Slows the player down to shield and absorb speed
     public void Key_ActivateSlowdown()
     {
@@ -186,4 +192,53 @@ public class LocomotionHandler : MonoBehaviour
     {
         slowState = SlowState.SpeedUp;
     }
+
+    #endregion
+
+    #region Dash
+
+    [Header("Dash Attributes")]
+    public float force = 50.0f;
+    public float cooldownTime = 5.0f;
+    public float distance = 20.0f;
+    private bool _canDash = true;
+    private Vector3 _initialVelocity = Vector3.zero;
+    private Vector3 _initialPosition = Vector3.zero;
+    private bool _haveReset = false;
+    private CombatHandler _combatHandler;
+
+    private void UpdateDash()
+    {
+        if (_inputManager.GetDashButtonPress() && _canDash && _combatHandler.shieldState != CombatHandler.ShieldState.Shielding)
+        {
+            _initialVelocity = _rigidbody.velocity;
+            _initialPosition = transform.position;
+            _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
+            _animator.SetBool("Dash", true);
+            _canDash = false;
+            StartCoroutine(CoolDownSequence());
+        }
+
+        if (!_canDash)
+        {
+            if (Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
+            {
+                _rigidbody.velocity = _initialVelocity;
+                _initialVelocity = Vector3.zero;
+                _initialPosition = Vector3.zero;
+                _animator.SetBool("Dash", false);
+                _haveReset = true;
+            }
+        }
+    }
+
+    private IEnumerator CoolDownSequence()
+    {
+        yield return new WaitForSecondsRealtime(cooldownTime);
+        _canDash = true;
+        _haveReset = false;
+        Debug.Log("Dash ready...");
+    }
+
+    #endregion
 }

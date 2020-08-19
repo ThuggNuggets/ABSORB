@@ -36,7 +36,7 @@ public class CombatHandler : MonoBehaviour
         shieldMeshRenderer.enabled = false;
         shieldState = ShieldState.Default;
         
-        // Set temp timers
+        // Set temp timers for shield
         _tempShieldTimer = shieldTimer;
         _tempShieldCDTimer = shieldCooldown;
     }
@@ -65,6 +65,7 @@ public class CombatHandler : MonoBehaviour
     }
 
     #region Shield
+
     // Attributes
     [Header("Timers", order = 0)]
     [Range(0.1f, 5f)]
@@ -121,7 +122,6 @@ public class CombatHandler : MonoBehaviour
 
     public bool SetCanShield(bool shieldState)
     {
-        Debug.Log("canShield set to " + shieldState);
         return _canShield = shieldState;
     }
 

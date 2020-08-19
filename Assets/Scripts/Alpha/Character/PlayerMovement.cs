@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 100.0f;
     public float maxVelocity = 10.0f;
     public float turnSpeed = 0.20f;
-    public float _currentAcceleration = 0.0f;
+    private float _currentAcceleration = 0.0f;
 
     private void OnDrawGizmos()
     {
@@ -114,14 +114,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Slowdown   
-    public enum SlowState
+    private enum SlowState
     {
         Default,    // Default to chill on until another state is called
         Slowdown,   // Slow down the player
         SpeedUp     // Speed up the player
     }
-    //[HideInInspector]
-    public SlowState slowState;
+    private SlowState slowState;
 
     [Header("Slowdown Properties")]
     public float maxSlowAcceleration = 10.0f;  // Lowest speed the player will be slowed down to

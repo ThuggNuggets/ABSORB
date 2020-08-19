@@ -33,6 +33,9 @@ public class PlayerHandler : MonoBehaviour
 
     void Awake()
     {
+        // Temporarily setting cursor locked state within this script.
+        Cursor.lockState = CursorLockMode.Locked;
+
         // Getting the required components
         _animator = this.GetComponent<Animator>();
         _rigidbody = this.GetComponent<Rigidbody>();
@@ -43,6 +46,7 @@ public class PlayerHandler : MonoBehaviour
     }
 
     #region Getters and setters
+    
     public bool GetIsAlive()
     {
         return isAlive;
