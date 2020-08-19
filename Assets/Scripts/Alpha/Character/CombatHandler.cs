@@ -20,7 +20,7 @@ public class CombatHandler : MonoBehaviour
     private Animator _animator;
 
     // Attributes
-    private bool _canShield = true;
+    private bool _canShield = false;
 
     // Start is called before first frame
     private void Start()
@@ -98,7 +98,7 @@ public class CombatHandler : MonoBehaviour
     private void Shielding()
     {
         // Slowdown the player while shielding
-        _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
+        _playerHandler.GetLocomotionHandler().ActivateSlowdown();
 
         if (!_canShield)
             shieldState = ShieldState.Cooldown;
@@ -109,10 +109,11 @@ public class CombatHandler : MonoBehaviour
         shieldCooldown -= Time.deltaTime;
 
         // Speed up the player after shield has expired
-        _playerHandler.GetLocomotionHandler().Key_DeactivateSlowdown();
+        _playerHandler.GetLocomotionHandler().DeactivateSlowdown();
 
         if (shieldCooldown <= 0)
         {
+            _animator.SetBool("Shield", false);
             shieldCooldown = _tempShieldCDTimer;
             shieldState = ShieldState.Default;
             _canShield = true;
@@ -128,6 +129,11 @@ public class CombatHandler : MonoBehaviour
     public bool GetCanShield()
     {
         return _canShield;
+    }
+
+    public float GetMaxShieldTimer()
+    {
+        return _tempShieldTimer;
     }
 
     #endregion

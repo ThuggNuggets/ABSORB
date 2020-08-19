@@ -41,7 +41,6 @@ public class LocomotionHandler : MonoBehaviour
         _transform = _playerHandler.GetTransform();
         _animator = _playerHandler.GetAnimator();
         _inputManager = _playerHandler.GetInputManager();
-        _combatHandler = _playerHandler.GetComponent<CombatHandler>();
     }
 
     // Update is called once per frame
@@ -180,14 +179,14 @@ public class LocomotionHandler : MonoBehaviour
         }
     }
 
-    // Key Event function: Slows the player down to shield and absorb speed
-    public void Key_ActivateSlowdown()
+    // Slows the player down to shield and absorb speed
+    public void ActivateSlowdown()
     {
         slowState = SlowState.Slowdown;
     }
 
-    // Key Event function: Slows the player down to shield and absorb speed
-    public void Key_DeactivateSlowdown()
+    // Speeds the player back up to normal acceleration
+    public void DeactivateSlowdown()
     {
         slowState = SlowState.SpeedUp;
     }
@@ -204,11 +203,10 @@ public class LocomotionHandler : MonoBehaviour
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;
     private bool _haveReset = false;
-    private CombatHandler _combatHandler;
 
     private void UpdateDash()
     {
-        if (_inputManager.GetDashButtonPress() && _canDash && _combatHandler.shieldState != CombatHandler.ShieldState.Shielding)
+        if (_inputManager.GetDashButtonPress() && _canDash && _playerHandler.GetCombatHandler().shieldState != CombatHandler.ShieldState.Shielding)
         {
             _initialVelocity = _rigidbody.velocity;
             _initialPosition = transform.position;

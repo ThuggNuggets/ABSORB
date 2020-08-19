@@ -20,17 +20,18 @@ public class PlayerShield : StateMachineBehaviour
         {
             _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = true;
             _playerHandler.GetCombatHandler().enabled = true;
-            //Debug.Log("Player Shielding");
-            animator.SetBool("Shield", false);
         }
         else
             Debug.LogWarning("Player Handler not found.");
+
+        
+        _playerHandler.StartCoroutine(Cooldown());
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
+    // override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // {
+    // }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -41,10 +42,16 @@ public class PlayerShield : StateMachineBehaviour
             _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = false;
             _playerHandler.GetCombatHandler().shieldSphereCollider.enabled = false;
             //Debug.Log("Player Not Shielding");
-            _playerHandler.GetCombatHandler().SetCanShield(false);
+            //_playerHandler.GetCombatHandler().SetCanShield(false);
         }       
         else
             Debug.LogWarning("Player Handler not found.");
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSecondsRealtime(_playerHandler.GetCombatHandler().GetMaxShieldTimer());
+        _playerHandler.GetCombatHandler().SetCanShield(false);
     }
 
     // //OnStateMove is called right after Animator.OnAnimatorMove()
