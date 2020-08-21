@@ -5,6 +5,15 @@ using UnityEngine;
 public class PlayerAttack : StateMachineBehaviour
 {
     PlayerHandler _playerHandler;
+
+    private enum AttackState
+    {
+        Attack1,
+        Attack2,
+        Attack3
+    }
+    private AttackState attackState;
+
     void Awake()
     {
         _playerHandler = FindObjectOfType<PlayerHandler>();
@@ -15,6 +24,7 @@ public class PlayerAttack : StateMachineBehaviour
     {
         // Setting the current state within the player handler
        _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.ATTACK);
+       animator.SetBool("Attack", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
