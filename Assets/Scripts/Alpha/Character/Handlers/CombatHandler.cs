@@ -34,7 +34,7 @@ public class CombatHandler : MonoBehaviour
         _animator = _playerHandler.GetAnimator();
         _inputManager = _playerHandler.GetInputManager();
 
-        // Make sure the blocking sphere is turned off by default
+        // Make sure the shield sphere is turned off by default
         shieldMeshRenderer.enabled = false;
         shieldState = ShieldState.Default;
 

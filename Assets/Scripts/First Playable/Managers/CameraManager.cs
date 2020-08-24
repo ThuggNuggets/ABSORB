@@ -6,7 +6,7 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     // Player movement script
-    public Movement playerMovement;
+    public LocomotionHandler playerMovement;
 
     // Player cameras
     public CinemachineFreeLook controllerCamera;
@@ -73,8 +73,8 @@ public class CameraManager : MonoBehaviour
         mouseCamera.Priority = 0;
 
         // Set player movement cameras
-        playerMovement.freeLookCamera = controllerCamera;
-        playerMovement.cameraTransform = controllerCamera.transform;
+        //playerMovement.freeLookCamera = controllerCamera;
+        //playerMovement.mainPlayerCamera = controllerCamera.transform;
 
         // Set InputManager camera
         inputManager.cinemachine = controllerCamera;
@@ -89,8 +89,8 @@ public class CameraManager : MonoBehaviour
         controllerCamera.Priority = 0;
 
         // Set player movement cameras
-        playerMovement.freeLookCamera = mouseCamera;
-        playerMovement.cameraTransform = mouseCamera.transform;
+        //playerMovement.freeLookCamera = mouseCamera;
+        //playerMovement.mainPlayerCamera = mouseCamera.transform;
 
         // Set InputManager camera
         inputManager.cinemachine = mouseCamera;
