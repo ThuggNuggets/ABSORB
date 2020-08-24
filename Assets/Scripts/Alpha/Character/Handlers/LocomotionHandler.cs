@@ -180,13 +180,13 @@ public class LocomotionHandler : MonoBehaviour
     }
 
     // Slows the player down to shield and absorb speed
-    public void ActivateSlowdown()
+    public void Key_ActivateSlowdown()
     {
         slowState = SlowState.Slowdown;
     }
 
     // Speeds the player back up to normal acceleration
-    public void DeactivateSlowdown()
+    public void Key_DeactivateSlowdown()
     {
         slowState = SlowState.SpeedUp;
     }

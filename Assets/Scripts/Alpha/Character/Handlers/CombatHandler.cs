@@ -76,38 +76,49 @@ public class CombatHandler : MonoBehaviour
     public float maxTimeBetweenAttack = 1.0f;
     private float _attackTimer = 0.0f;
     private bool _runAttackTimer = false;
+    private bool _comboStart = true;
+
+    public enum AttackState
+    {
+        None,
+        Attack1,
+        Attack2,
+        Attack3
+    }
+    public AttackState attackState;
 
     private void UpdateAttack()
     {
         _animator.speed = animationSpeedMultiplier;
 
-        if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding)
+        if (_comboStart)
         {
-            _animator.SetBool("Attack", true);
+            if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _comboStart)
+            {
+                //_animator.SetBool("Attack", true);
+                _comboStart = false;
+                _runAttackTimer = true;
+                attackState += 1;
+            }
+        }
+        else if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _attackTimer >= minTimeBetweenAttack)
+        {
             _runAttackTimer = true;
+            attackState += 1;
         }
 
         if (_runAttackTimer)
+        {
             _attackTimer += Time.deltaTime;
+        }
+
+        if (_attackTimer >= maxTimeBetweenAttack)
+            ResetAttackTimer();
 
         // If an attack is within the min and max times, continue the attack state +1
-        // If it goes over the max time, reset the state and timeer
+        // If it goes over the max time, reset the state and timer
     }
 
-    public void EnablePlayerWeaponObject()
-    {
-        playerWeapon.SetActive(true);
-    }
-
-    public void DisableWeaponObject()
-    {
-        playerWeapon.SetActive(false);
-    }
-
-    public void PlayWeaponSound()
-    {
-        weaponSwingAudio.Play();
-    }
 
     public float GetAttackTimer()
     {
@@ -117,6 +128,46 @@ public class CombatHandler : MonoBehaviour
     public float ResetAttackTimer()
     {
         return _attackTimer = 0.0f;
+    }
+
+    public void AttackComboFinish()
+    {
+        if (attackState == AttackState.Attack3)
+            _animator.SetBool("Attack3", false);
+
+        _comboStart = true;
+        attackState = AttackState.None;
+        ResetAttackTimer();
+    }
+
+    public void Key_EnablePlayerWeaponObject()
+    {
+        playerWeapon.SetActive(true);
+    }
+
+    public void Key_DisableWeaponObject()
+    {
+        playerWeapon.SetActive(false);
+    }
+
+    public void Key_PlayWeaponSound()
+    {
+        weaponSwingAudio.Play();
+    }
+
+    public void Key_SetAttack1Bool()
+    {
+        _animator.SetBool("Attack1", false);
+    }
+
+    public void Key_SetAttack2Bool()
+    {
+        _animator.SetBool("Attack2", false);
+    }
+
+    public void Key_SetAttack3Bool()
+    {
+        _animator.SetBool("Attack3", false);
     }
 
     #endregion
@@ -154,8 +205,8 @@ public class CombatHandler : MonoBehaviour
 
     private void Shielding()
     {
-        // Slowdown the player while shielding
-        _playerHandler.GetLocomotionHandler().ActivateSlowdown();
+        // // Slowdown the player while shielding
+        // _playerHandler.GetLocomotionHandler().ActivateSlowdown();
 
         if (!_canShield)
             shieldState = ShieldState.Cooldown;
@@ -165,8 +216,8 @@ public class CombatHandler : MonoBehaviour
     {
         shieldCooldown -= Time.deltaTime;
 
-        // Speed up the player after shield has expired
-        _playerHandler.GetLocomotionHandler().DeactivateSlowdown();
+        // // Speed up the player after shield has expired
+        // _playerHandler.GetLocomotionHandler().DeactivateSlowdown();
 
         if (shieldCooldown <= 0)
         {
