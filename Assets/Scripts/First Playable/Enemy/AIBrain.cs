@@ -25,6 +25,7 @@ public class AIBrain : MonoBehaviour
     // Options to assist with debugging
     [Header("Debug Options")]
     public bool printCurrentState = false;
+    public string currentStateReadOnly = "NULL";
 
     // Rigidbody attached to this object
     private Rigidbody _rigidbody;
@@ -85,10 +86,13 @@ public class AIBrain : MonoBehaviour
         if (_currentBehaviourID == "Absorbed")
             return;
 
-
+        // Call OnExit() before the state switch, then call OnEnter() after.
         _aiBehaviours[_currentBehaviourID].OnExit();
         _currentBehaviourID = behaviour;
         _aiBehaviours[_currentBehaviourID].OnEnter();
+
+        // Setting the new current state ID for debugging purposes.
+        currentStateReadOnly = _currentBehaviourID;
     }
 
     // Returns the distance from this enemy and the player

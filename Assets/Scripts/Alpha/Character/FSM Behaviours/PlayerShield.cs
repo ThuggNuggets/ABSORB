@@ -16,6 +16,9 @@ public class PlayerShield : StateMachineBehaviour
         // Setting the current state within the player handler
         _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.SHIELD);
 
+        // Setting the animator bool false so this state duration equals the animation time
+        animator.SetBool("Shield", false);
+
         if (_playerHandler != null)
         {
             _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = true;
@@ -23,9 +26,6 @@ public class PlayerShield : StateMachineBehaviour
         }
         else
             Debug.LogWarning("Player Handler not found.");
-
-        
-        _playerHandler.StartCoroutine(Cooldown());
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,12 +46,6 @@ public class PlayerShield : StateMachineBehaviour
         }       
         else
             Debug.LogWarning("Player Handler not found.");
-    }
-
-    private IEnumerator Cooldown()
-    {
-        yield return new WaitForSecondsRealtime(_playerHandler.GetCombatHandler().GetMaxShieldTimer());
-        _playerHandler.GetCombatHandler().SetCanShield(false);
     }
 
     // //OnStateMove is called right after Animator.OnAnimatorMove()

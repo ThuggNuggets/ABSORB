@@ -70,7 +70,6 @@ public class CombatHandler : MonoBehaviour
     #region Attacking 
 
     [Header("Attack Attributes")]
-    public Animator playerAnimator;
     [Range(0f, 3f)]
     public float animationSpeedMultiplier = 1.0f;
     public float minTimeBetweenAttack = 0.1f;
@@ -80,7 +79,7 @@ public class CombatHandler : MonoBehaviour
 
     private void UpdateAttack()
     {
-        playerAnimator.speed = animationSpeedMultiplier;
+        _animator.speed = animationSpeedMultiplier;
 
         if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding)
         {
