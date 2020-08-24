@@ -95,7 +95,7 @@ public class CombatHandler : MonoBehaviour
         {
             if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _comboStart)
             {
-                //_animator.SetBool("Attack", true);
+                _animator.SetBool("Attack", true);
                 _comboStart = false;
                 _runAttackTimer = true;
                 attackState += 1;
@@ -113,7 +113,7 @@ public class CombatHandler : MonoBehaviour
         }
 
         if (_attackTimer >= maxTimeBetweenAttack)
-            ResetAttackTimer();
+            AttackComboFinish();
 
         // If an attack is within the min and max times, continue the attack state +1
         // If it goes over the max time, reset the state and timer
@@ -157,7 +157,7 @@ public class CombatHandler : MonoBehaviour
 
     public void Key_SetAttack1Bool()
     {
-        _animator.SetBool("Attack1", false);
+        _animator.SetBool("Attack", false);
     }
 
     public void Key_SetAttack2Bool()

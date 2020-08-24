@@ -19288,8 +19288,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7083333
+  - time: 0.75
     functionName: PlayWeaponSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.25
+    functionName: Key_SetAttack1Bool
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
