@@ -19282,14 +19282,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: EnablePlayerWeaponObject
+    functionName: Key_EnablePlayerWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.75
-    functionName: PlayWeaponSound
+    functionName: Key_PlayWeaponSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -19303,7 +19303,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.5416666
-    functionName: DisableWeaponObject
+    functionName: Key_DisableWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -77,15 +77,7 @@ public class CombatHandler : MonoBehaviour
     private float _attackTimer = 0.0f;
     private bool _runAttackTimer = false;
     private bool _comboStart = true;
-
-    public enum AttackState
-    {
-        None,
-        Attack1,
-        Attack2,
-        Attack3
-    }
-    public AttackState attackState;
+    public int attackIndex = 0;
 
     private void UpdateAttack()
     {
@@ -98,14 +90,16 @@ public class CombatHandler : MonoBehaviour
                 _animator.SetBool("Attack", true);
                 _comboStart = false;
                 _runAttackTimer = true;
-                attackState += 1;
+                ResetAttackTimer();
+                attackIndex++;
             }
         }
-        else if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _attackTimer >= minTimeBetweenAttack)
-        {
-            _runAttackTimer = true;
-            attackState += 1;
-        }
+        // else if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && !_comboStart && _attackTimer >= minTimeBetweenAttack)
+        // {
+        //     _runAttackTimer = true;
+        //     ResetAttackTimer();
+        //     attackIndex++;
+        // }
 
         if (_runAttackTimer)
         {
@@ -132,11 +126,11 @@ public class CombatHandler : MonoBehaviour
 
     public void AttackComboFinish()
     {
-        if (attackState == AttackState.Attack3)
-            _animator.SetBool("Attack3", false);
-
         _comboStart = true;
-        attackState = AttackState.None;
+        attackIndex = 0;
+        _animator.SetBool("Attack", false);
+        _animator.SetBool("Attack2", false);
+        _animator.SetBool("Attack3", false);
         ResetAttackTimer();
     }
 
@@ -158,17 +152,29 @@ public class CombatHandler : MonoBehaviour
     public void Key_SetAttack1Bool()
     {
         _animator.SetBool("Attack", false);
+        Debug.Log("Weapon attack 1 played");
     }
 
     public void Key_SetAttack2Bool()
     {
         _animator.SetBool("Attack2", false);
+        Debug.Log("Weapon attack 2 played");
     }
 
     public void Key_SetAttack3Bool()
     {
         _animator.SetBool("Attack3", false);
+        Debug.Log("Weapon attack 3 played");
     }
+
+    // bool isPlaying(Animator anim, string stateName)
+    // {
+    //     if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+    //             anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+    //         return true;
+    //     else
+    //         return false;
+    // }
 
     #endregion
 
