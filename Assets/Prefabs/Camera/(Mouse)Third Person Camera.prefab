@@ -150,7 +150,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5360399260528557932}
-  m_LocalRotation: {x: -0.09599753, y: 0.0029609057, z: 0.0002855597, w: 0.9953771}
+  m_LocalRotation: {x: 0.03398144, y: -2.2178814e-16, z: 1.2130039e-18, w: 0.9994225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -350,7 +350,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5360399261179087859}
-  m_LocalRotation: {x: -0.11994164, y: 0.0037155875, z: 0.00044889745, w: 0.9927739}
+  m_LocalRotation: {x: 0.009901889, y: 0.0007679259, z: -0.000007604291, w: 0.9999507}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -424,7 +424,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5360399261477726784}
-  m_LocalRotation: {x: -0.12287106, y: 0.0029521072, z: 0.00036549967, w: 0.9924182}
+  m_LocalRotation: {x: 0.006951019, y: -1.9247194e-10, z: 1.3379084e-12, w: 0.99997586}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -767,10 +767,10 @@ MonoBehaviour:
   m_CollideAgainst:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IgnoreTag: Player
+  m_IgnoreTag: EnemyWeapon
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 196384
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_CameraRadius: 0.5
   m_Strategy: 0
   m_MaximumEffort: 10
-  m_SmoothingTime: 0.2
-  m_Damping: 0.6
-  m_DampingWhenOccluded: 0.6
+  m_SmoothingTime: 0
+  m_Damping: 5
+  m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0

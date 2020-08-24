@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837256414056443265}
-  m_LocalRotation: {x: -0.09599753, y: 0.0029609054, z: 0.0002855597, w: 0.9953771}
+  m_LocalRotation: {x: 0.03398144, y: -2.2178814e-16, z: 1.2130039e-18, w: 0.9994225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -224,7 +224,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837256414749186334}
-  m_LocalRotation: {x: -0.11994163, y: 0.0037155875, z: 0.00044889742, w: 0.9927739}
+  m_LocalRotation: {x: 0.009901904, y: 0.0007679259, z: -0.0000076043025, w: 0.9999507}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -424,7 +424,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837256415523846317}
-  m_LocalRotation: {x: -0.12287105, y: 0.0029520972, z: 0.00036549836, w: 0.9924182}
+  m_LocalRotation: {x: 0.0069510303, y: 0.000000002672244, z: -1.8575298e-11, w: 0.99997586}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -611,6 +611,7 @@ GameObject:
   - component: {fileID: 8837256415780228345}
   - component: {fileID: 8837256415780228346}
   - component: {fileID: 3515001617382065247}
+  - component: {fileID: 1909757583}
   m_Layer: 0
   m_Name: (Controller)Third Person Camera
   m_TagString: Untagged
@@ -751,3 +752,33 @@ MonoBehaviour:
   m_ChannelMask: 1
   m_Gain: 1
   m_Use2DDistance: 0
+--- !u!114 &1909757583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8837256415780228347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IgnoreTag: EnemyWeapon
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 196384
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.5
+  m_Strategy: 0
+  m_MaximumEffort: 10
+  m_SmoothingTime: 0
+  m_Damping: 5
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
