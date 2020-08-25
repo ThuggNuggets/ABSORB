@@ -151,8 +151,12 @@ MonoBehaviour:
   maxSlowAcceleration: 10
   timeToAcceleration: 0.2
   force: 75
-  cooldownTime: 2
-  distance: 20
+  cooldownTime: 1
+  distance: 15
+  smoothTime: 0.5
+  disableVelocityReset: 0
+  smoothDamp: 0
+  lerp: 1
 --- !u!114 &4505043746152684483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,11 +173,9 @@ MonoBehaviour:
   shieldSphereCollider: {fileID: 2950940807683710224}
   playerWeapon: {fileID: 0}
   weaponSwingAudio: {fileID: 0}
-  animationSpeedMultiplier: 1
-  minTimeBetweenAttack: 0.1
+  minTimeBetweenAttack: 0.01
   maxTimeBetweenAttack: 1
-  attackState: 0
-  shieldTimer: 1
+  attackIndex: 0
   shieldCooldown: 1
   shieldState: 0
 --- !u!1001 &1947700942
@@ -309,6 +311,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3746689148225198915}
     m_Modifications:
+    - target: {fileID: 519548961, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 254145530660810548, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -599,6 +605,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.9896521
       objectReference: {fileID: 0}
+    - target: {fileID: 6495866348861742848, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a87002ffa7ecce343a2b6f4dc4c68820, type: 2}
     - target: {fileID: 6830251707326808495, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
         type: 3}
       propertyPath: m_LocalRotation.y
