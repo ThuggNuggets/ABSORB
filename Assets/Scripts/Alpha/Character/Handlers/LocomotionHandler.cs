@@ -200,9 +200,10 @@ public class LocomotionHandler : MonoBehaviour
     public float cooldownTime = 5.0f;
     public float distance = 20.0f;
     public float smoothTime = 0.5f;
+    public bool lerp = false;
+    [Header("Debug Optionals")]
     public bool disableVelocityReset = false;
     public bool smoothDamp = false;
-    public bool lerp = false;
     private bool _canDash = true;
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;

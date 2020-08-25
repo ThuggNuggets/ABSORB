@@ -38,6 +38,8 @@ public class CombatHandler : MonoBehaviour
         // Set temp timers
         //_tempShieldTimer = shieldTimer;
         _tempShieldCDTimer = shieldCooldown;
+
+        currentTimeScale = Time.timeScale;
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class CombatHandler : MonoBehaviour
     {
         UpdateShieldFSM();
         UpdateAttack();
+        UpdateSlowMo();
     }
 
     // Updates the shields FSM
@@ -131,7 +134,8 @@ public class CombatHandler : MonoBehaviour
 
     public void Key_PlayWeaponSound()
     {
-        weaponSwingAudio.Play();
+        if (weaponSwingAudio != null)
+            weaponSwingAudio.Play();
     }
 
     public void Key_SetAttack1Bool()
@@ -220,6 +224,43 @@ public class CombatHandler : MonoBehaviour
 
     #endregion
 
+    #region SlowMotion
+
+    [Range(1, 100)]
+    public int slowMotionPercentage = 50;
+    public AnimationCurve tweenEase;
+    private float tempSlowMoPercentage = 0.0f;
+    private float currentTimeScale;
+    private float defaultTimeScale = 1.0f;
+    private bool activateSlowmo = false;
+
+    private void UpdateSlowMo()
+    {
+        tempSlowMoPercentage = slowMotionPercentage / 100.0f;
+
+        if (activateSlowmo)
+        {
+            currentTimeScale = Mathf.Lerp(currentTimeScale, tempSlowMoPercentage, tweenEase.Evaluate(Time.time));
+            Time.timeScale = currentTimeScale;
+        }
+        else if (!activateSlowmo && currentTimeScale < defaultTimeScale)
+        {
+            currentTimeScale = Mathf.Lerp(currentTimeScale, defaultTimeScale, 0.2f);
+            Time.timeScale = currentTimeScale;
+        }
+    }
+
+    public bool Key_ActivateSlowMotion()
+    {
+        return activateSlowmo = true;
+    }
+
+    public bool Key_DeactivateSlowMotion()
+    {
+        return activateSlowmo = false;
+    }
+
+    #endregion
     // Function I found online that checks if an animation is currently playing
     // Figured it might be handy sometime
     bool isPlaying(Animator anim, string stateName)
