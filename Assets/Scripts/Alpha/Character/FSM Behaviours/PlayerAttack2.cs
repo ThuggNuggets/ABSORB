@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerAttack2 : StateMachineBehaviour
 {
-    PlayerHandler _playerHandler;
-    CombatHandler _combatHandler;
-    InputManager _inputManager;
-    int index;
+    private PlayerHandler _playerHandler;
+    private CombatHandler _combatHandler;
+    private InputManager _inputManager;
 
     void Awake()
     {
         _playerHandler = FindObjectOfType<PlayerHandler>();
-        index = 0;
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -22,17 +20,12 @@ public class PlayerAttack2 : StateMachineBehaviour
         _inputManager = _playerHandler.GetInputManager();
         // Setting the current state within the player handler
         _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.ATTACK);
-        // if (index == 2)
-        // {
-        //     animator.SetBool("Attack" + index, true);
-        //     index = 0;
-        //     // _combatHandler.ResetAttackTimer();
-        // }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // Check for: input, not shielding, attack not getting spammed
         if (_inputManager.GetAttackButtonPress() && _combatHandler.shieldState != CombatHandler.ShieldState.Shielding && _combatHandler.GetAttackTimer() >= _combatHandler.minTimeBetweenAttack)
         {
             _combatHandler.ResetAttackTimer();
@@ -40,22 +33,4 @@ public class PlayerAttack2 : StateMachineBehaviour
             animator.SetBool("Attack3", true);
         }
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

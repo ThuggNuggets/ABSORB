@@ -89,12 +89,6 @@ public class CombatHandler : MonoBehaviour
                 attackIndex++;
             }
         }
-        // else if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && !_comboStart && _attackTimer >= minTimeBetweenAttack)
-        // {
-        //     _runAttackTimer = true;
-        //     ResetAttackTimer();
-        //     attackIndex++;
-        // }
 
         if (_runAttackTimer)
         {
@@ -104,8 +98,6 @@ public class CombatHandler : MonoBehaviour
         if (_attackTimer >= maxTimeBetweenAttack)
             AttackComboFinish();
 
-        // If an attack is within the min and max times, continue the attack state +1
-        // If it goes over the max time, reset the state and timer
     }
 
 
@@ -162,15 +154,6 @@ public class CombatHandler : MonoBehaviour
         Debug.Log("Weapon attack 3 played");
     }
 
-    // bool isPlaying(Animator anim, string stateName)
-    // {
-    //     if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
-    //             anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-    //         return true;
-    //     else
-    //         return false;
-    // }
-
     #endregion
 
     #region Shield
@@ -192,13 +175,13 @@ public class CombatHandler : MonoBehaviour
         Shielding,  // Player is currently shielded
         Cooldown    // Shield is currently on cooldown
     }
-    //[HideInInspector]
+    [HideInInspector]
     public ShieldState shieldState;
 
     private void EnableShield()
     {
         // When the player hits the shield key
-        if (_inputManager.GetShieldButtonPress())
+        if (_inputManager.GetShieldButtonPress() && _comboStart)
         {
             shieldState = ShieldState.Shielding;
             _animator.SetBool("Shield", true);
@@ -207,9 +190,7 @@ public class CombatHandler : MonoBehaviour
 
     private void Shielding()
     {
-        // // Slowdown the player while shielding
-        // _playerHandler.GetLocomotionHandler().ActivateSlowdown();
-
+        // This is only here just to check the bool so it can move onto cooldown
         if (!_canShield)
             shieldState = ShieldState.Cooldown;
     }
@@ -217,9 +198,6 @@ public class CombatHandler : MonoBehaviour
     private void Cooldown()
     {
         shieldCooldown -= Time.deltaTime;
-
-        // // Speed up the player after shield has expired
-        // _playerHandler.GetLocomotionHandler().DeactivateSlowdown();
 
         if (shieldCooldown <= 0)
         {
@@ -247,4 +225,15 @@ public class CombatHandler : MonoBehaviour
     // }
 
     #endregion
+
+    // Function I found online that checks if an animation is currently playing
+    // Figured it might be handy sometime
+    bool isPlaying(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            return true;
+        else
+            return false;
+    }
 }
