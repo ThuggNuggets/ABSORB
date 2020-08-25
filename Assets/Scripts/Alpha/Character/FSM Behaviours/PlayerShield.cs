@@ -42,7 +42,7 @@ public class PlayerShield : StateMachineBehaviour
             _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = false;
             _playerHandler.GetCombatHandler().shieldSphereCollider.enabled = false;
             //Debug.Log("Player Not Shielding");
-            //_playerHandler.GetCombatHandler().SetCanShield(false);
+            _playerHandler.GetCombatHandler().SetCanShield(false);
         }       
         else
             Debug.LogWarning("Player Handler not found.");

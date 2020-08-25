@@ -21,9 +21,6 @@ public class CombatHandler : MonoBehaviour
     private Transform _transform;
     private Animator _animator;
 
-    // Attributes
-    private bool _canShield = false;
-
     // Start is called before first frame
     private void Start()
     {
@@ -39,7 +36,7 @@ public class CombatHandler : MonoBehaviour
         shieldState = ShieldState.Default;
 
         // Set temp timers
-        _tempShieldTimer = shieldTimer;
+        //_tempShieldTimer = shieldTimer;
         _tempShieldCDTimer = shieldCooldown;
     }
 
@@ -81,8 +78,6 @@ public class CombatHandler : MonoBehaviour
 
     private void UpdateAttack()
     {
-        _animator.speed = animationSpeedMultiplier;
-
         if (_comboStart)
         {
             if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _comboStart)
@@ -181,13 +176,14 @@ public class CombatHandler : MonoBehaviour
     #region Shield
     // Attributes
     [Header("Timers", order = 0)]
-    [Range(0.1f, 5f)]
-    public float shieldTimer = 1.0f;
+    // [Range(0.1f, 5f)]
+    // public float shieldTimer = 1.0f;
     [Range(0.1f, 5f)]
     public float shieldCooldown = 1.0f;
+    private bool _canShield = true;
 
     // Properties
-    private float _tempShieldTimer;
+    //private float _tempShieldTimer;
     private float _tempShieldCDTimer;
 
     public enum ShieldState
@@ -196,7 +192,7 @@ public class CombatHandler : MonoBehaviour
         Shielding,  // Player is currently shielded
         Cooldown    // Shield is currently on cooldown
     }
-    [HideInInspector]
+    //[HideInInspector]
     public ShieldState shieldState;
 
     private void EnableShield()
@@ -245,10 +241,10 @@ public class CombatHandler : MonoBehaviour
         return _canShield;
     }
 
-    public float GetMaxShieldTimer()
-    {
-        return _tempShieldTimer;
-    }
+    // public float GetMaxShieldTimer()
+    // {
+    //     return _tempShieldTimer;
+    // }
 
     #endregion
 }
