@@ -48,11 +48,11 @@ public class LocomotionHandler : MonoBehaviour
     {
         // Updates the players slow down FSM
         UpdateSlowdownFSM();
-        
+
         // Checks if the player is moving, and sets the animator accordingly
         if (_rigidbody.velocity.magnitude > 0.1F)
             _animator.SetBool("Movement", true);
-        else if(_animator.GetBool("Movement"))
+        else if (_animator.GetBool("Movement"))
             _animator.SetBool("Movement", false);
     }
 
@@ -199,6 +199,10 @@ public class LocomotionHandler : MonoBehaviour
     public float force = 50.0f;
     public float cooldownTime = 5.0f;
     public float distance = 20.0f;
+    public float smoothTime = 0.5f;
+    public bool disableVelocityReset = false;
+    public bool smoothDamp = false;
+    public bool lerp = false;
     private bool _canDash = true;
     private Vector3 _initialVelocity = Vector3.zero;
     private Vector3 _initialPosition = Vector3.zero;
@@ -206,6 +210,28 @@ public class LocomotionHandler : MonoBehaviour
 
     private void UpdateDash()
     {
+        // if (_inputManager.GetDashButtonPress() && _canDash && _playerHandler.GetCombatHandler().shieldState != CombatHandler.ShieldState.Shielding)
+        // {
+        //     _initialVelocity = _rigidbody.velocity;
+        //     _initialPosition = transform.position;
+        //     _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
+        //     _animator.SetBool("Dash", true);
+        //     _canDash = false;
+        //     StartCoroutine(CoolDownSequence());
+        // }
+
+        // if (!_canDash)
+        // {
+        //     if (Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
+        //     {
+        //         _rigidbody.velocity = _initialVelocity;
+        //         _initialVelocity = Vector3.zero;
+        //         _initialPosition = Vector3.zero;
+        //         _animator.SetBool("Dash", false);
+        //         _haveReset = true;
+        //     }
+        // }
+
         if (_inputManager.GetDashButtonPress() && _canDash && _playerHandler.GetCombatHandler().shieldState != CombatHandler.ShieldState.Shielding)
         {
             _initialVelocity = _rigidbody.velocity;
@@ -220,7 +246,18 @@ public class LocomotionHandler : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
             {
-                _rigidbody.velocity = _initialVelocity;
+                if (!disableVelocityReset)
+                {
+                    //_rigidbody.velocity = _initialVelocity;
+                    if (smoothDamp)
+                        _rigidbody.velocity = new Vector3(Mathf.SmoothDamp(_rigidbody.velocity.x, _initialVelocity.x, ref _speedSmoothVelocity, smoothTime), 0,
+                        Mathf.SmoothDamp(_rigidbody.velocity.z, _initialVelocity.z, ref _speedSmoothVelocity, smoothTime));
+                    else if (lerp)
+                        _rigidbody.velocity = new Vector3(Mathf.LerpUnclamped(_rigidbody.velocity.x, _initialVelocity.x, smoothTime), 0,
+                        Mathf.LerpUnclamped(_rigidbody.velocity.z, _initialVelocity.z, smoothTime));
+                    else
+                        _rigidbody.velocity = _initialVelocity;
+                }
                 _initialVelocity = Vector3.zero;
                 _initialPosition = Vector3.zero;
                 _animator.SetBool("Dash", false);
@@ -234,7 +271,6 @@ public class LocomotionHandler : MonoBehaviour
         yield return new WaitForSecondsRealtime(cooldownTime);
         _canDash = true;
         _haveReset = false;
-        Debug.Log("Dash ready...");
     }
 
     #endregion

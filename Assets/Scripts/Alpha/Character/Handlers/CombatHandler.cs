@@ -67,9 +67,7 @@ public class CombatHandler : MonoBehaviour
     #region Attacking 
 
     [Header("Attack Attributes")]
-    [Range(0f, 3f)]
-    public float animationSpeedMultiplier = 1.0f;
-    public float minTimeBetweenAttack = 0.1f;
+    public float minTimeBetweenAttack = 0.05f;
     public float maxTimeBetweenAttack = 1.0f;
     private float _attackTimer = 0.0f;
     private bool _runAttackTimer = false;
@@ -139,19 +137,16 @@ public class CombatHandler : MonoBehaviour
     public void Key_SetAttack1Bool()
     {
         _animator.SetBool("Attack", false);
-        Debug.Log("Weapon attack 1 played");
     }
 
     public void Key_SetAttack2Bool()
     {
         _animator.SetBool("Attack2", false);
-        Debug.Log("Weapon attack 2 played");
     }
 
     public void Key_SetAttack3Bool()
     {
         _animator.SetBool("Attack3", false);
-        Debug.Log("Weapon attack 3 played");
     }
 
     #endregion
@@ -210,7 +205,6 @@ public class CombatHandler : MonoBehaviour
 
     public bool SetCanShield(bool shieldState)
     {
-        //Debug.Log("canShield set to " + shieldState);
         return _canShield = shieldState;
     }
 
