@@ -226,6 +226,7 @@ public class CombatHandler : MonoBehaviour
 
     #region SlowMotion
 
+    [Header("Slow Motion Attributes")]
     [Range(1, 100)]
     public int slowMotionPercentage = 50;
     public AnimationCurve tweenEase;
