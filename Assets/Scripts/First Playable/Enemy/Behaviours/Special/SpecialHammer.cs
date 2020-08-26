@@ -32,22 +32,27 @@ public class SpecialHammer : AIBehaviour
      *  - (Will need to exit the attacking function when this happens, to prevent from misfiring)
      */
 
-    public override void OnEnter() 
+    public override void OnStateEnter() 
     {
         _onEnterDistance = brain.GetDistanceToPlayer();
         _onEnterDirection = brain.GetDirectionToPlayer();
-        _targetPosition = brain.playerTransform.position;
+        _targetPosition = brain.PlayerTransform.position;
+
+        brain.GetNavMeshAgent().isStopped = true;
     }
 
-    public override void OnExit() 
+    public override void OnStateExit() 
     {
         _onEnterDistance = 0.0f;
         _onEnterDirection = Vector3.zero;
         _targetPosition = Vector3.zero;
         _isAttacking = false;
+
+        
+        brain.GetNavMeshAgent().isStopped = false;
     }
 
-    public override void OnFixedUpdate()
+    public override void OnStateFixedUpdate()
     {
         // Gets distance from player realtime
         float distFromTarget = GetDistanceFromTarget();
@@ -76,11 +81,11 @@ public class SpecialHammer : AIBehaviour
                     hammerAnimator.SetBool(swingAnimation, true);
             }
 
-            // Start attacking when at max velocity and close enough
-            else if (distFromTarget <= lungeDistancePadding)
-            {
-                _isAttacking = true;
-            }
+            // // Start attacking when at max velocity and close enough
+            // else if (distFromTarget <= lungeDistancePadding)
+            // {
+            //     _isAttacking = true;
+            // }
         }
         else
         {
@@ -95,7 +100,7 @@ public class SpecialHammer : AIBehaviour
         return Vector3.Distance(_targetPosition, transform.position);
     }
 
-    public override void OnUpdate() {}
+    public override void OnStateUpdate() {}
 
     public void SetAttackingTrue()
     {

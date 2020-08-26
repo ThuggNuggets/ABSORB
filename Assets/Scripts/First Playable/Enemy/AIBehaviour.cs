@@ -13,18 +13,34 @@ public abstract class AIBehaviour : MonoBehaviour
     protected Transform transform;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     protected EnemyHandler enemyHandler;
+    protected Vector3 currentDestination = Vector3.zero;
+    protected bool destinationLockedToPlayer = false;
 
     public void InitialiseState(AIBrain brain)
     {
         this.brain = brain;
-        this.player = brain.playerTransform;
+        this.player = brain.PlayerTransform;
         this.rigidbody = brain.GetRigidbody();
         this.transform = brain.GetTransform();
         this.enemyHandler = brain.GetHandler();
     }
 
-    abstract public void OnEnter();
-    abstract public void OnUpdate();
-    abstract public void OnFixedUpdate();
-    abstract public void OnExit();
+    abstract public void OnStateEnter();
+    abstract public void OnStateUpdate();
+    abstract public void OnStateFixedUpdate();
+    abstract public void OnStateExit();
+
+    public void OverrideDestination(Vector3 newDestination, float newDestinationPadding)
+    {
+        destinationLockedToPlayer = false;
+        currentDestination = newDestination;
+        brain.UpdateTargetDestination(this.currentDestination, newDestinationPadding);
+    }
+
+    public void LockDestinationToPlayer(float newDestinationPadding)
+    {
+        destinationLockedToPlayer = true;
+        currentDestination = brain.PlayerTransform.position;
+        brain.UpdateTargetDestination(this.currentDestination, newDestinationPadding);
+    }
 }

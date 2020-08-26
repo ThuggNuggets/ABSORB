@@ -2,14 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AIBrain : MonoBehaviour
 {
-    [Header("References")]
-    // The transom the enemy will target
-    public Transform playerTransform;
-
     // Array list of information to fill the dictionary with
     [System.Serializable]
     public struct AIBehaviourInfo
@@ -17,6 +14,7 @@ public class AIBrain : MonoBehaviour
         public string name;
         public AIBehaviour behaviour;
     }
+    [Header("References")]
     public AIBehaviourInfo[] behaviourInformation;
 
     // The public list of behaviours setup by user
@@ -36,20 +34,32 @@ public class AIBrain : MonoBehaviour
     // This enemy's handler.
     private EnemyHandler _handler;
 
+    // This enemy's Nav Mesh Agent component
+    private NavMeshAgent _navMeshAgent;
+
+    // The transom the enemy will target
+    private Transform _playerTransform;
+
+    // The position which the enemy will target
+    private Vector3 _targetDestination = Vector3.zero;
+
     // Current state ID of the fsm
     private string _currentBehaviourID = "";
+
+    // Last state ID; used to check what state we were in last
+    private string _lastStateID = "";
 
     // Called on initialise
     private void Awake()
     {
-        // Get rigidbody attached to the gameobject
+        // Getting required compoents
         _rigidbody = this.GetComponent<Rigidbody>();
-
-        // Get the transform of the gameobject
         _transform = this.GetComponent<Transform>();
-
-        // Get the enemy handler
         _handler = this.GetComponent<EnemyHandler>();
+        _navMeshAgent = this.GetComponent<NavMeshAgent>();
+        
+        // Find the player's transfrom
+        _playerTransform = FindObjectOfType<PlayerHandler>().GetComponent<Transform>();
 
         // Fill out dictionary
         foreach (AIBehaviourInfo bi in behaviourInformation)
@@ -70,13 +80,13 @@ public class AIBrain : MonoBehaviour
         if (printCurrentState)
             DebugStateMachine();
 
-        _aiBehaviours[_currentBehaviourID].OnUpdate();
+        _aiBehaviours[_currentBehaviourID].OnStateUpdate();
     }
 
     // Called every fixed update
     private void FixedUpdate()
     {
-        _aiBehaviours[_currentBehaviourID].OnFixedUpdate();
+        _aiBehaviours[_currentBehaviourID].OnStateFixedUpdate();
     }
 
     // Sets the current state to the next state, calling exit/enter functions
@@ -87,42 +97,65 @@ public class AIBrain : MonoBehaviour
             return;
 
         // Call OnExit() before the state switch, then call OnEnter() after.
-        _aiBehaviours[_currentBehaviourID].OnExit();
+        _aiBehaviours[_currentBehaviourID].OnStateExit();
         _currentBehaviourID = behaviour;
-        _aiBehaviours[_currentBehaviourID].OnEnter();
+        _aiBehaviours[_currentBehaviourID].OnStateEnter();
 
         // Setting the new current state ID for debugging purposes.
         currentStateReadOnly = _currentBehaviourID;
     }
 
+    // Updates the current destination to the players, if distance is over padding
+    internal void UpdateTargetDestination(Vector3 targetDestination, float padding)
+    {
+        if(Vector3.Distance(_targetDestination, targetDestination) > padding)
+        {
+            _targetDestination = targetDestination;
+            _navMeshAgent.SetDestination(_targetDestination);
+        }
+    }
+
     // Returns the distance from this enemy and the player
     internal float GetDistanceToPlayer()
     {
-        return Vector3.Distance(_transform.position, playerTransform.position);
+        return Vector3.Distance(_transform.position, _playerTransform.position);
     }
 
     // Returns the direction from this enemy to the player
     internal Vector3 GetDirectionToPlayer()
     {
-        return (playerTransform.position - _transform.position).normalized;
+        return (_playerTransform.position - _transform.position).normalized;
     }
 
-    // Returns rigidbody attached to this enemy
+    // Returns the Rigidbody attached to this enemy
     internal Rigidbody GetRigidbody()
     {
         return _rigidbody;
     }
 
-    // Returns transform attached to this enemy
+    // Returns the Transform attached to this enemy
     internal Transform GetTransform()
     {
         return _transform;
     }    
     
-    // Returns this enemy's handler
+    // Returns the EnemyHandler attached to this enemy
     internal EnemyHandler GetHandler()
     {
         return _handler;
+    }
+
+    // Returns the NavMeshAgent attached to this enemy
+    internal NavMeshAgent GetNavMeshAgent()
+    {
+        return _navMeshAgent;
+    }
+
+    // Returns the player's transform
+    public Transform PlayerTransform
+    {
+        get { return _playerTransform; }
+        set { _playerTransform = value;}
     }
 
     // Prints a debug message to unity's console

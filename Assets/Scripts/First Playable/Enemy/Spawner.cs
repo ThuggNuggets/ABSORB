@@ -96,7 +96,7 @@ public class Spawner : MonoBehaviour
             {
                 int spawnNumber = Random.Range(0, spawnerPositions.Count());
                 AIBrain aIBrain = Instantiate(objectToSpawn, spawnerPositions[spawnNumber].transform.position, Quaternion.identity).GetComponent<AIBrain>();
-                aIBrain.playerTransform = playerTransform;
+                aIBrain.PlayerTransform = playerTransform;
                 //aIBrain.GetComponent<EnemyHandler>().SetupSpawner(this); // Clean this up sometime
                 gameObjectsByTag[enemy.tag].Add(aIBrain.gameObject);
                 _checkAmountOfSpawns += 1;

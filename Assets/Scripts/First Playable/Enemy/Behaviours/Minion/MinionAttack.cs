@@ -32,18 +32,18 @@ public class MinionAttack : AIBehaviour
 
     private void Start()
     {
-        _specialParry = this.brain.playerTransform.GetComponent<SpecialParryBlock>();
-        _playerHealth = this.brain.playerTransform.GetComponent<Health>();
+        _specialParry = this.brain.PlayerTransform.GetComponent<SpecialParryBlock>();
+        _playerHealth = this.brain.PlayerTransform.GetComponent<Health>();
     }
 
-    public override void OnEnter()
+    public override void OnStateEnter()
     {
         weaponToEnable.SetActive(true);
         _animator.SetBool("Attacking", true);
         _hasAttacked = false;
     }
 
-    public override void OnExit()
+    public override void OnStateExit()
     {
         weaponToEnable.SetActive(false);
         _animator.SetBool("Attacking", false);
@@ -51,9 +51,9 @@ public class MinionAttack : AIBehaviour
         _canAttack = false;
     }
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() 
+    public override void OnStateUpdate() 
     {
         // Get direction to player
         Vector3 dir = brain.GetDirectionToPlayer();
@@ -77,12 +77,14 @@ public class MinionAttack : AIBehaviour
         }
     }
 
-    public void ActivateCheck()
+    // Activates the collision check on the enemy's weapon
+    public void Key_ActivateMinionAttackCheck()
     {
         _canAttack = true;
     }
 
-    public void DeactivateCheck()
+    // Deactivates the collision check on the enemy's weapon
+    public void Key_DeactivateMinionAttackCheck()
     {
         _canAttack = false;
         brain.SetBehaviour("Movement");

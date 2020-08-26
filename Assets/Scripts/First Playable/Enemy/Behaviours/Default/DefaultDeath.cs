@@ -5,14 +5,14 @@ using UnityEngine;
 public class DefaultDeath : AIBehaviour
 {
     // Currently just destorying the game object.
-    public override void OnEnter()
+    public override void OnStateEnter()
     {
         enemyHandler.Kill();
     }
 
-    public override void OnExit() {}
+    public override void OnStateExit() {}
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() {}
+    public override void OnStateUpdate() {}
 }

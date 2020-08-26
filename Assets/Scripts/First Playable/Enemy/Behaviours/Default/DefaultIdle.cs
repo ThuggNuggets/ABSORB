@@ -7,13 +7,13 @@ public class DefaultIdle : AIBehaviour
     [Header("Properties")]
     public float initialDetectionDistance = 15.0f;
 
-    public override void OnEnter() { }
+    public override void OnStateEnter() { }
 
-    public override void OnExit() { }
+    public override void OnStateExit() { }
 
-    public override void OnFixedUpdate() { }
+    public override void OnStateFixedUpdate() { }
 
-    public override void OnUpdate()
+    public override void OnStateUpdate()
     {
         if (brain.GetDistanceToPlayer() < initialDetectionDistance)
             brain.SetBehaviour("Movement");

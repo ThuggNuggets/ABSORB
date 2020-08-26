@@ -17,19 +17,19 @@ public class EliteAttack : AIBehaviour
     public Transform projectileStartPoint;
     public ParticleSystem waterFireEffect;
 
-    public override void OnEnter() 
+    public override void OnStateEnter() 
     {
         waterFireEffect.Play();
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
-        eliteProjectile.InitialiseProjectile(transform, brain.playerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
+        eliteProjectile.InitialiseProjectile(transform, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 
-    public override void OnExit() {}
+    public override void OnStateExit() {}
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() 
+    public override void OnStateUpdate() 
     {
         // If player gets too close when preparing to fire, the enemy will cancel the attack.
         if (brain.GetDistanceToPlayer() < dashCancelRange)

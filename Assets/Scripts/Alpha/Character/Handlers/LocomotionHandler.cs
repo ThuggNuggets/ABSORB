@@ -17,12 +17,18 @@ public class LocomotionHandler : MonoBehaviour
     private Rigidbody _rigidbody;
     private Transform _transform;
     private Animator _animator;
+    private CapsuleCollider _collider;
 
     [Header("Movement Attributes")]
     public float acceleration = 100.0f;
     public float maxVelocity = 10.0f;
     public float turnSpeed = 0.20f;
+    public float edgeOfWorldRayDistance = 5.0f;
+    public float inAirGravity = 15.0f;
+    public LayerMask edgeOfWorldLayerMask;
     private float _currentAcceleration = 0.0f;
+    private bool _hasHitWall = false;
+    private Vector3 _hasHitPosition = Vector3.zero;
 
     // Awake is called on initialise
     private void Awake()
@@ -41,6 +47,7 @@ public class LocomotionHandler : MonoBehaviour
         _transform = _playerHandler.GetTransform();
         _animator = _playerHandler.GetAnimator();
         _inputManager = _playerHandler.GetInputManager();
+        _collider = this.GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -73,13 +80,24 @@ public class LocomotionHandler : MonoBehaviour
         // Updates the input direction from the scenes input manager
         Vector3 calculatedDirection = GetInputDirection().normalized;
 
-        // Move player via forces
-        if (_rigidbody.velocity.magnitude < maxVelocity)
-            _rigidbody.AddForce(calculatedDirection * _currentAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
-
         // Rotate player to face direction
         if (calculatedDirection.magnitude > 0.1F)
             _transform.rotation = Quaternion.Slerp(_transform.rotation, Quaternion.LookRotation(calculatedDirection), turnSpeed);
+
+
+        // Check if player is in the air, apply gravity if they are
+        if(!CheckIfGrounded())
+            _rigidbody.AddForce(Vector3.down * inAirGravity * Time.fixedDeltaTime, ForceMode.Impulse);
+
+        // Check to see if the player is about to walk out of the map
+        if(CheckForEdgeOfTerrain())
+            return;
+
+        PreventSlidingOnSlope();
+
+        // Move player via forces
+        if (_rigidbody.velocity.magnitude < maxVelocity)
+             _rigidbody.AddForce(calculatedDirection * _currentAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
     }
 
     // Returns the forward direction of the camera.
@@ -91,16 +109,36 @@ public class LocomotionHandler : MonoBehaviour
         Vector3 cameraForward = (_transform.position - camPos).normalized;
 
         // Get the ground forward
-        RaycastHit hit;
-        if (Physics.SphereCast(_transform.position + Vector3.up, 0.2f, Vector3.down, out hit, 1.0f))
-        {
-            // Return calculated forward
-            Vector3 groundForward = Quaternion.AngleAxis(90, mainPlayerCamera.right) * hit.normal;
+        Vector3 groundForward = GetGroundForward(mainPlayerCamera.right);
+        if(CheckIfGrounded() && groundForward.magnitude > 0)
             return cameraForward + groundForward;
-        }
 
         // Return cameras forward
         return cameraForward;
+    }
+
+    private Vector3 GetGroundForward(Vector3 rotAxis)
+    {
+         RaycastHit hit;
+        if (Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f))
+            return Quaternion.AngleAxis(90, rotAxis) * hit.normal;
+
+        return Vector3.zero;
+    }
+
+    // Gets the ground under the player and checks for an incline, restircting any movement without input
+    private void PreventSlidingOnSlope()
+    {
+        // If there is no input
+        if(GetInputDirection().magnitude <= 0)
+        {
+            // Get ground below player
+            RaycastHit hit = GetGroundBelowPlayer();
+
+            // Setting the velocity of the rigidbody to 0 if we are on any incline
+            if(hit.point.magnitude > 0 && hit.normal.y < 1)
+                _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     private Vector3 GetInputDirection()
@@ -112,9 +150,63 @@ public class LocomotionHandler : MonoBehaviour
         return (forward * inputDirection.y) + (right * inputDirection.x);
     }
 
+    // Returns true if player collides with something at their feet
+    private bool CheckIfGrounded()
+    {
+        RaycastHit hit;
+        return Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f);
+    }
+
+    // Returns the collider below the players feet, if there is any
+    private RaycastHit GetGroundBelowPlayer()
+    {
+        RaycastHit hit;
+        if(Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f))
+            return hit;
+
+        return hit;
+    }
+
+    // Returns true if we are close enough to a wall, and have applied the slowdown
+    // TODO: Maybe make this a sphere check around the player, and use the barriers forward to push the player away.
+    private bool CheckForEdgeOfTerrain()
+    {
+        // Calculate the start point to the ray
+        Vector3 start = _transform.position + (Vector3.up * _collider.height);
+
+        // Check if we have hit an EOW barrier by casting a ray infront of the player
+        RaycastHit hit;
+        if(Physics.Raycast(start, _transform.TransformDirection(Vector3.forward), out hit, edgeOfWorldRayDistance, edgeOfWorldLayerMask))
+        {
+            // Get the inital position we hit the wall in
+            if(!_hasHitWall)
+            {
+                _hasHitPosition = _transform.position;
+                _hasHitWall = true;
+            }
+
+            // Get a value between 1 and 0, 1 being far away from the wall and 0 being close.
+            float max = Vector3.Distance(_hasHitPosition, hit.point);
+            float current = Vector3.Distance(_transform.position, hit.point);
+            float value = max / current;
+
+            // Negate the current velocity to slow down the player based on value
+            _rigidbody.AddForce(-_rigidbody.velocity * value * Time.fixedDeltaTime, ForceMode.Impulse);
+
+            // Returning true to declare we have hit the edge
+            return true;
+        }
+        else
+        {
+            // Resetting the hit wall flag, and returning false when we don't connect
+            _hasHitWall = false;
+            return false;
+        }
+    }
+
     #endregion
 
-    #region Slowdown   
+    #region Slowdown
 
     public enum SlowState
     {

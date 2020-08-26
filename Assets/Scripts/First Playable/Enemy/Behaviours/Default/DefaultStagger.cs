@@ -9,17 +9,17 @@ public class DefaultStagger : AIBehaviour
 
     private bool _isStaggered = false;
 
-    public override void OnEnter() 
+    public override void OnStateEnter() 
     {
         if(!_isStaggered)
             StartCoroutine(StaggerSequence());
     }
 
-    public override void OnExit(){}
+    public override void OnStateExit(){}
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() {}
+    public override void OnStateUpdate() {}
 
     private IEnumerator StaggerSequence()
     {

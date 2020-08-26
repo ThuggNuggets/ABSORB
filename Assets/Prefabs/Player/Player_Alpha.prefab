@@ -147,6 +147,11 @@ MonoBehaviour:
   acceleration: 100
   maxVelocity: 12
   turnSpeed: 0.2
+  edgeOfWorldRayDistance: 5
+  inAirGravity: 15
+  edgeOfWorldLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   slowState: 0
   maxSlowAcceleration: 10
   timeToAcceleration: 0.2
@@ -171,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldMeshRenderer: {fileID: 2950940807683710225}
   shieldSphereCollider: {fileID: 2950940807683710224}
-  playerWeapon: {fileID: 0}
+  playerWeapon: {fileID: 3588495120234004701}
   weaponSwingAudio: {fileID: 0}
   minTimeBetweenAttack: 0.01
   maxTimeBetweenAttack: 1
@@ -745,6 +750,12 @@ PrefabInstance:
 --- !u!4 &3234534102040873343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2242148631713200233, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3746689148177363222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3588495120234004701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158202824271425995, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
     type: 3}
   m_PrefabInstance: {fileID: 3746689148177363222}
   m_PrefabAsset: {fileID: 0}

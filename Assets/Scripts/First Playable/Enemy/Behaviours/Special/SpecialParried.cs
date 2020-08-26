@@ -16,10 +16,10 @@ public class SpecialParried : AIBehaviour
 
     private void Start()
     {
-        playerAbililtyManager = brain.playerTransform.GetComponent<AbilityManager>();
+        playerAbililtyManager = brain.PlayerTransform.GetComponent<AbilityManager>();
     }
 
-    public override void OnEnter() 
+    public override void OnStateEnter() 
     {
         _isAbsorbable = true;
         animator.SetBool("Parried", true);
@@ -27,7 +27,7 @@ public class SpecialParried : AIBehaviour
         StartCoroutine(ExitSequence());
     }
 
-    public override void OnExit() 
+    public override void OnStateExit() 
     {
         playerAbililtyManager.LastParriedEnemy = null;
         playerAbililtyManager.SetAbsorbTarget(null);
@@ -35,9 +35,9 @@ public class SpecialParried : AIBehaviour
         _isAbsorbable = false;
     }
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() 
+    public override void OnStateUpdate() 
     {
         if(!_isAbsorbable)
         {

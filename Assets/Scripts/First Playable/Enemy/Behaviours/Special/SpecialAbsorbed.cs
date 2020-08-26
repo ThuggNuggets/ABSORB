@@ -45,10 +45,10 @@ public class SpecialAbsorbed : AIBehaviour
         weaponRenderer.material = Instantiate(weaponMaterial);
 
         // Getting the ability manager from the player
-        _playerAbilityManager = brain.playerTransform.GetComponent<AbilityManager>();
+        _playerAbilityManager = brain.PlayerTransform.GetComponent<AbilityManager>();
     }
 
-    public override void OnEnter()
+    public override void OnStateEnter()
     {
         _animator.enabled = false;
         _cutOutTimer = cutoffMax;
@@ -61,11 +61,11 @@ public class SpecialAbsorbed : AIBehaviour
         absorbGameObject.transform.SetParent(null);
     }
 
-    public override void OnExit() {}
+    public override void OnStateExit() {}
 
-    public override void OnFixedUpdate() {}
+    public override void OnStateFixedUpdate() {}
 
-    public override void OnUpdate() 
+    public override void OnStateUpdate() 
     {
         if (_enabled)
         {
