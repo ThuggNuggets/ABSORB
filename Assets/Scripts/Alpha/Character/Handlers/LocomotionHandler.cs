@@ -86,18 +86,18 @@ public class LocomotionHandler : MonoBehaviour
 
 
         // Check if player is in the air, apply gravity if they are
-        if(!CheckIfGrounded())
+        if (!CheckIfGrounded())
             _rigidbody.AddForce(Vector3.down * inAirGravity * Time.fixedDeltaTime, ForceMode.Impulse);
 
         // Check to see if the player is about to walk out of the map
-        if(CheckForEdgeOfTerrain())
+        if (CheckForEdgeOfTerrain())
             return;
 
         PreventSlidingOnSlope();
 
         // Move player via forces
         if (_rigidbody.velocity.magnitude < maxVelocity)
-             _rigidbody.AddForce(calculatedDirection * _currentAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
+            _rigidbody.AddForce(calculatedDirection * _currentAcceleration * Time.fixedDeltaTime, ForceMode.Impulse);
     }
 
     // Returns the forward direction of the camera.
@@ -110,7 +110,7 @@ public class LocomotionHandler : MonoBehaviour
 
         // Get the ground forward
         Vector3 groundForward = GetGroundForward(mainPlayerCamera.right);
-        if(CheckIfGrounded() && groundForward.magnitude > 0)
+        if (CheckIfGrounded() && groundForward.magnitude > 0)
             return cameraForward + groundForward;
 
         // Return cameras forward
@@ -119,7 +119,7 @@ public class LocomotionHandler : MonoBehaviour
 
     private Vector3 GetGroundForward(Vector3 rotAxis)
     {
-         RaycastHit hit;
+        RaycastHit hit;
         if (Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f))
             return Quaternion.AngleAxis(90, rotAxis) * hit.normal;
 
@@ -130,13 +130,13 @@ public class LocomotionHandler : MonoBehaviour
     private void PreventSlidingOnSlope()
     {
         // If there is no input
-        if(GetInputDirection().magnitude <= 0)
+        if (GetInputDirection().magnitude <= 0)
         {
             // Get ground below player
             RaycastHit hit = GetGroundBelowPlayer();
 
             // Setting the velocity of the rigidbody to 0 if we are on any incline
-            if(hit.point.magnitude > 0 && hit.normal.y < 1)
+            if (hit.point.magnitude > 0 && hit.normal.y < 1)
                 _rigidbody.velocity = Vector3.zero;
         }
     }
@@ -161,7 +161,7 @@ public class LocomotionHandler : MonoBehaviour
     private RaycastHit GetGroundBelowPlayer()
     {
         RaycastHit hit;
-        if(Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f))
+        if (Physics.SphereCast(_transform.position + (Vector3.up * 2), 0.2f, Vector3.down, out hit, 1.0f))
             return hit;
 
         return hit;
@@ -176,10 +176,10 @@ public class LocomotionHandler : MonoBehaviour
 
         // Check if we have hit an EOW barrier by casting a ray infront of the player
         RaycastHit hit;
-        if(Physics.Raycast(start, _transform.TransformDirection(Vector3.forward), out hit, edgeOfWorldRayDistance, edgeOfWorldLayerMask))
+        if (Physics.Raycast(start, _transform.TransformDirection(Vector3.forward), out hit, edgeOfWorldRayDistance, edgeOfWorldLayerMask))
         {
             // Get the inital position we hit the wall in
-            if(!_hasHitWall)
+            if (!_hasHitWall)
             {
                 _hasHitPosition = _transform.position;
                 _hasHitWall = true;
@@ -303,28 +303,6 @@ public class LocomotionHandler : MonoBehaviour
 
     private void UpdateDash()
     {
-        // if (_inputManager.GetDashButtonPress() && _canDash && _playerHandler.GetCombatHandler().shieldState != CombatHandler.ShieldState.Shielding)
-        // {
-        //     _initialVelocity = _rigidbody.velocity;
-        //     _initialPosition = transform.position;
-        //     _rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
-        //     _animator.SetBool("Dash", true);
-        //     _canDash = false;
-        //     StartCoroutine(CoolDownSequence());
-        // }
-
-        // if (!_canDash)
-        // {
-        //     if (Vector3.Distance(transform.position, _initialPosition) > distance && !_haveReset)
-        //     {
-        //         _rigidbody.velocity = _initialVelocity;
-        //         _initialVelocity = Vector3.zero;
-        //         _initialPosition = Vector3.zero;
-        //         _animator.SetBool("Dash", false);
-        //         _haveReset = true;
-        //     }
-        // }
-
         if (_inputManager.GetDashButtonPress() && _canDash && _playerHandler.GetCombatHandler().shieldState != CombatHandler.ShieldState.Shielding)
         {
             _initialVelocity = _rigidbody.velocity;
@@ -362,6 +340,7 @@ public class LocomotionHandler : MonoBehaviour
     private IEnumerator CoolDownSequence()
     {
         yield return new WaitForSecondsRealtime(cooldownTime);
+        _animator.SetBool("Dash", false);
         _canDash = true;
         _haveReset = false;
     }

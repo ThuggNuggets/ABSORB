@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack3 : StateMachineBehaviour
 {
-    // public string parameterName;
-    // public int value;
-
     private PlayerHandler _playerHandler;
     private CombatHandler _combatHandler;
 
