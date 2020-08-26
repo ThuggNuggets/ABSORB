@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : StateMachineBehaviour
 {
+    public string parameterName;
+    public int value;
+
     private PlayerHandler _playerHandler;
     private CombatHandler _combatHandler;
     private InputManager _inputManager;
@@ -29,7 +32,7 @@ public class PlayerAttack : StateMachineBehaviour
         if (_inputManager.GetAttackButtonPress() && _combatHandler.shieldState != CombatHandler.ShieldState.Shielding && _combatHandler.GetAttackTimer() >= _combatHandler.minTimeBetweenAttack)
         {
             _combatHandler.ResetAttackTimer();
-            _combatHandler.attackIndex++;
+            animator.SetInteger(parameterName, value);
             animator.SetBool("Attack2", true);
         }
     }

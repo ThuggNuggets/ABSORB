@@ -75,7 +75,6 @@ public class CombatHandler : MonoBehaviour
     private float _attackTimer = 0.0f;
     private bool _runAttackTimer = false;
     private bool _comboStart = true;
-    public int attackIndex = 0;
 
     private void UpdateAttack()
     {
@@ -83,11 +82,12 @@ public class CombatHandler : MonoBehaviour
         {
             if (_inputManager.GetAttackButtonPress() && shieldState != ShieldState.Shielding && _comboStart)
             {
-                _animator.SetBool("Attack", true);
+                _animator.SetBool("Attack1", true);
+                _animator.SetInteger("ComboNo.", 1);
                 _comboStart = false;
                 _runAttackTimer = true;
                 ResetAttackTimer();
-                attackIndex++;
+
             }
         }
 
@@ -115,8 +115,8 @@ public class CombatHandler : MonoBehaviour
     public void AttackComboFinish()
     {
         _comboStart = true;
-        attackIndex = 0;
-        _animator.SetBool("Attack", false);
+        _animator.SetInteger("ComboNo.", 0);
+        _animator.SetBool("Attack1", false);
         _animator.SetBool("Attack2", false);
         _animator.SetBool("Attack3", false);
         ResetAttackTimer();
@@ -140,7 +140,7 @@ public class CombatHandler : MonoBehaviour
 
     public void Key_SetAttack1Bool()
     {
-        _animator.SetBool("Attack", false);
+        _animator.SetBool("Attack1", false);
     }
 
     public void Key_SetAttack2Bool()
