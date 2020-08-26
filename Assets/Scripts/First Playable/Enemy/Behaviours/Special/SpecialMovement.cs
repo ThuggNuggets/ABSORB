@@ -30,7 +30,17 @@ public class SpecialMovement : AIBehaviour
         this.LockDestinationToPlayer(destinationPadding);
     }
 
-    public override void OnStateEnter() {}
+    public override void OnStateEnter() 
+    {
+        // Checking if the state we came from was the attack behaviour
+        if(brain.GetLastStateID() == "Attack")
+        {
+            Vector3 avoidDirection = (brain.PlayerTransform.position - transform.position).normalized;
+            Vector3 avoidDestination = transform.position - (avoidDirection * avoidDistance);
+            this.OverrideDestination(avoidDestination, 1.0f);
+            _isAvoiding = true;
+        }  
+    }
 
     public override void OnStateUpdate() 
     {           
@@ -47,11 +57,7 @@ public class SpecialMovement : AIBehaviour
             // Enemy will enter attack phase if locked onto player:
             if(this.destinationLockedToPlayer)
             {
-                Vector3 avoidDirection = (brain.PlayerTransform.position - transform.position).normalized;
-                Vector3 avoidDestination = transform.position - (avoidDirection * avoidDistance) * Time.deltaTime;
-                //brain.SetBehaviour("Attack");
-                _isAvoiding = true;
-                this.OverrideDestination(avoidDestination, 1.0f);
+                brain.SetBehaviour("Attack");
                 return;
             }
             else

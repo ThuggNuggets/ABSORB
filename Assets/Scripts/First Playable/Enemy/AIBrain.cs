@@ -96,6 +96,9 @@ public class AIBrain : MonoBehaviour
         if (_currentBehaviourID == "Absorbed")
             return;
 
+        // Setting the last state to be the current state before changing
+        _lastStateID = _currentBehaviourID;
+
         // Call OnExit() before the state switch, then call OnEnter() after.
         _aiBehaviours[_currentBehaviourID].OnStateExit();
         _currentBehaviourID = behaviour;
@@ -149,6 +152,12 @@ public class AIBrain : MonoBehaviour
     internal NavMeshAgent GetNavMeshAgent()
     {
         return _navMeshAgent;
+    }
+
+    // Returns the ID of the state we were last in
+    internal string GetLastStateID()
+    {
+        return _lastStateID;
     }
 
     // Returns the player's transform
