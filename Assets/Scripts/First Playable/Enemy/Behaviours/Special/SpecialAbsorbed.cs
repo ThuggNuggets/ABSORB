@@ -13,7 +13,6 @@ public class SpecialAbsorbed : AIBehaviour
     [Header("VFX Refereneces")]
     public GameObject absorbGameObject;
     public ParticleSystem absorbParticleEffect;
-    private AbilityManager _playerAbilityManager;
     private SpecialParried _specialParried;
     private Animator _animator;
 
@@ -43,9 +42,6 @@ public class SpecialAbsorbed : AIBehaviour
 
         // Creating and assigning a new material
         weaponRenderer.material = Instantiate(weaponMaterial);
-
-        // Getting the ability manager from the player
-        _playerAbilityManager = brain.PlayerTransform.GetComponent<AbilityManager>();
     }
 
     public override void OnStateEnter()
@@ -79,7 +75,6 @@ public class SpecialAbsorbed : AIBehaviour
             else
             {
                 absorbParticleEffect.Stop();
-                _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
                 absorbGameObject.SetActive(true);
                 absorbGameObject.transform.SetParent(this.gameObject.transform);
                 _enabled = false;

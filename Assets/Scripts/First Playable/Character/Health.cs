@@ -81,15 +81,15 @@ public class Health : MonoBehaviour
             Function();
         }
 
-        // Checking if the special enemy hits the player while shielding
-        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon") && collision.collider.gameObject.CompareTag("EnemySpecial"))
-        {
-            EnemyHandler specialEnemy = collision.collider.GetComponentInParent<EnemyHandler>();
-            specialEnemy.PlayHitParryEffect();
-            abilityManager.LastParriedEnemy = specialEnemy.GetBrain();
-            abilityManager.LastParriedEnemy.SetBehaviour("Parried");
-            abilityManager.SetAbsorbTarget(specialEnemy.GetBrain());
-        }
+        // // Checking if the special enemy hits the player while shielding
+        // if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && temp.layer == LayerMask.NameToLayer("EnemyWeapon") && collision.collider.gameObject.CompareTag("EnemySpecial"))
+        // {
+        //     EnemyHandler specialEnemy = collision.collider.GetComponentInParent<EnemyHandler>();
+        //     specialEnemy.PlayHitParryEffect();
+        //     abilityManager.LastParriedEnemy = specialEnemy.GetBrain();
+        //     abilityManager.LastParriedEnemy.SetBehaviour("Parried");
+        //     abilityManager.SetAbsorbTarget(specialEnemy.GetBrain());
+        // }
     }
 
     private void OnTriggerEnter(Collider collision)

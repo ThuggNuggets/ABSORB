@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8066200203845619860}
   - component: {fileID: 2219362132575592719}
   m_Layer: 10
-  m_Name: Special_Weapon_001_Mesh
+  m_Name: Special_Weapon_001
   m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 879f64dbbaa311a4084654957df797d0, type: 3}
+  - {fileID: 2100000, guid: 0927619f10823e3499f6749859ac79aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

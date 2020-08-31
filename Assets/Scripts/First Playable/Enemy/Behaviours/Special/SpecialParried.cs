@@ -12,16 +12,16 @@ public class SpecialParried : AIBehaviour
     public bool lockState = false;
     public string stateReturnName = "Idle";
 
-    private AbilityManager playerAbililtyManager;
-
+    // private AbilityManager playerAbililtyManager;
+    
     private bool _isAbsorbable = false;
 
     private void Start()
     {
-        playerAbililtyManager = brain.PlayerTransform.GetComponent<AbilityManager>();
+        // playerAbililtyManager = brain.PlayerTransform.GetComponent<AbilityManager>();
 
-        if (lockState)
-            playerAbililtyManager.SetAbsorbTarget(brain);
+        //if (lockState)
+            //playerAbililtyManager.SetAbsorbTarget(brain);
     }
 
     public override void OnStateEnter() 
@@ -35,8 +35,8 @@ public class SpecialParried : AIBehaviour
 
     public override void OnStateExit() 
     {
-        playerAbililtyManager.LastParriedEnemy = null;
-        playerAbililtyManager.SetAbsorbTarget(null);
+        // playerAbililtyManager.LastParriedEnemy = null;
+        // playerAbililtyManager.SetAbsorbTarget(null);
         animator?.SetBool("Parried", false);
         _isAbsorbable = false;
     }
@@ -48,8 +48,8 @@ public class SpecialParried : AIBehaviour
         if(!_isAbsorbable)
         {
             brain.SetBehaviour(stateReturnName);
-            playerAbililtyManager.LastParriedEnemy = null;
-            playerAbililtyManager.SetAbsorbTarget(null);
+            // playerAbililtyManager.LastParriedEnemy = null;
+            // playerAbililtyManager.SetAbsorbTarget(null);
         }
     }
 

@@ -33,7 +33,9 @@ public class EnemyHandler : MonoBehaviour
     public float overallFXTime = 1.0f;
 
     [Header("Properties")]
-    public EnemyType typeOfEnemy;
+    [SerializeField] EnemyType typeOfEnemy;
+    [SerializeField] AbilityHandler.AbilityType typeOfAbility = AbilityHandler.AbilityType.NONE;
+
     public float maxHealth = 100.0f;
     public float baseDamage = 10.0f;
 
@@ -42,6 +44,7 @@ public class EnemyHandler : MonoBehaviour
 
     private float _currentHealth = 0.0f;
     private bool _isAlive = true;
+    private SpecialParried _specialParried;
 
     // The collider of this enemies weapon
     public Collider weaponCollider;
@@ -59,6 +62,10 @@ public class EnemyHandler : MonoBehaviour
 
         // Getting the components
         _aiBrain = this.GetComponent<AIBrain>();
+
+        // Getting the special parried script if this enemy is a special
+        if(typeOfEnemy == EnemyType.SPECIAL)
+            _specialParried = this.GetComponent<SpecialParried>();
 
         // Get the particle parent
         _parryParticleParent = parryEffect.transform.parent;
@@ -79,7 +86,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Makes the enemy take damage
-    public void TakeDamage(float damage, AbilityManager.E_Ability e_Ability = AbilityManager.E_Ability.NONE)
+    public void TakeDamage(float damage, AbilityHandler.AbilityType e_Ability = AbilityHandler.AbilityType.NONE)
     {
         _currentHealth -= damage;
 
@@ -89,7 +96,7 @@ public class EnemyHandler : MonoBehaviour
         if (typeOfEnemy != EnemyType.ELITE)
             _aiBrain.SetBehaviour("Stagger");
 
-        else if (e_Ability == AbilityManager.E_Ability.HAMMER)
+        else if (e_Ability == AbilityHandler.AbilityType.HAMMER)
             _aiBrain.SetBehaviour("Stagger");
 
         damageEffect.Play();
@@ -127,6 +134,19 @@ public class EnemyHandler : MonoBehaviour
     public float GetDamage()
     {
         return baseDamage;
+    }
+
+    // Returns true if the enemy is in a parried state
+    public bool IsParried()
+    {
+        // Safety check to make sure we only get the correct status
+        if(typeOfEnemy == EnemyType.SPECIAL)
+            return _specialParried.GetAbsorbable();
+        else
+        {
+            Debug.LogError("ERROR: Tried to get parried status on wrong enemy type.");
+            return false;
+        }
     }
 
     // Activates the weapons collider
@@ -204,5 +224,15 @@ public class EnemyHandler : MonoBehaviour
         deathParticleEffect.transform.SetParent(this.gameObject.transform);
         deathParticleEffect.Stop();
         deathSound.Stop();
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return typeOfEnemy;
+    }
+
+    public AbilityHandler.AbilityType GetAbilityType()
+    {
+        return typeOfAbility;
     }
 }

@@ -31,12 +31,12 @@ public class EliteAttack : AIBehaviour
 
     public override void OnStateUpdate() 
     {
-        // If player gets too close when preparing to fire, the enemy will cancel the attack.
-        if (brain.GetDistanceToPlayer() < dashCancelRange)
-        {
-            brain.SetBehaviour("Movement");
-            return;
-        }
+        // // If player gets too close when preparing to fire, the enemy will cancel the attack.
+        // if (brain.GetDistanceToPlayer() < dashCancelRange)
+        // {
+        //     brain.SetBehaviour("Movement");
+        //     return;
+        // }
 
         // Rotate to face direction
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(brain.GetDirectionToPlayer()), turnSpeed);

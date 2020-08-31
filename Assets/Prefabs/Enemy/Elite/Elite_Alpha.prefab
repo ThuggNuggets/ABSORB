@@ -81448,15 +81448,16 @@ GameObject:
   m_Component:
   - component: {fileID: 7881292569987827310}
   - component: {fileID: 7881292569987827311}
+  - component: {fileID: 4821106894613350574}
   - component: {fileID: 3373173187735456602}
+  - component: {fileID: 5386399238812214453}
+  - component: {fileID: 2874665303854771934}
   - component: {fileID: 7881292569987827304}
   - component: {fileID: 7627168905698802478}
   - component: {fileID: 7881292569987827283}
   - component: {fileID: 7881292569987827282}
   - component: {fileID: 7881292569987827309}
   - component: {fileID: 7881292569987827308}
-  - component: {fileID: 4821106894613350574}
-  - component: {fileID: 5386399238812214453}
   - component: {fileID: 1425529555322950640}
   m_Layer: 9
   m_Name: Elite_Alpha
@@ -81464,7 +81465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7881292569987827310
 Transform:
   m_ObjectHideFlags: 0
@@ -81497,139 +81498,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 2
---- !u!136 &3373173187735456602
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 4.58
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.85, z: 0}
---- !u!114 &7881292569987827304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourInformation:
-  - name: Idle
-    behaviour: {fileID: 7881292569987827283}
-  - name: Movement
-    behaviour: {fileID: 7881292569987827282}
-  - name: Attack
-    behaviour: {fileID: 7881292569987827309}
-  - name: Stagger
-    behaviour: {fileID: 1425529555322950640}
-  - name: Death
-    behaviour: {fileID: 7881292569987827308}
-  printCurrentState: 0
-  currentStateReadOnly: NULL
---- !u!114 &7627168905698802478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageEffect: {fileID: 4715880827498467176}
-  damageEffectAudio: {fileID: 3675908329585257279}
-  hasParryEffect: 0
-  parryEffect: {fileID: 4715880827498467176}
-  parryAudio: {fileID: 3675908329585257279}
-  parryReparentTime: 1
-  deathSound: {fileID: 4821106893052324094}
-  deathSoundLength: 2
-  deathParticleEffect: {fileID: 4715880827498467176}
-  overallFXTime: 1
-  typeOfEnemy: 2
-  maxHealth: 150
-  baseDamage: 10
-  printHealthStats: 0
-  weaponCollider: {fileID: 0}
---- !u!114 &7881292569987827283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a54a9b24c15ec0c4d83ffa7141ce64b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialDetectionDistance: 100
---- !u!114 &7881292569987827282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a95923f2c18de47b6ff7f345e6c604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 75
-  retreatDashAcceleration: 200
-  retreatMaxVelocity: 30
-  maxVelocity: 15
-  turnSpeed: 0.2
-  attackDistance: 20
-  retreatDistance: 15
-  beforeAttackTimer: 1
---- !u!114 &7881292569987827309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96713fdb2a6ccc74b916f3a45eaccb00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 0.5
-  justFiredProjectileTimer: 3
-  projectileSpeed: 50
-  projectileLifeTime: 3
-  projectileDamage: 10
-  dashCancelRange: 12
-  projectilePrefab: {fileID: 8840168797588337650, guid: ffb8b15cf86e8a14b9050cde0f60e0ee,
-    type: 3}
-  projectileStartPoint: {fileID: 5818672935196530878}
-  waterFireEffect: {fileID: 2426741319733744530}
---- !u!114 &7881292569987827308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881292569987827305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 220e8c962d26f4b4999392623d53b049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &4821106894613350574
 Animator:
   serializedVersion: 3
@@ -81649,6 +81517,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &3373173187735456602
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4.58
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.85, z: 0}
 --- !u!82 &5386399238812214453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -81745,6 +81627,140 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &2874665303854771934
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 300
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &7881292569987827304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d41e2e781cbb469a77f76e758de06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourInformation:
+  - name: Idle
+    behaviour: {fileID: 7881292569987827283}
+  - name: Movement
+    behaviour: {fileID: 7881292569987827282}
+  - name: Attack
+    behaviour: {fileID: 7881292569987827309}
+  - name: Stagger
+    behaviour: {fileID: 1425529555322950640}
+  - name: Death
+    behaviour: {fileID: 7881292569987827308}
+  printCurrentState: 0
+  currentStateReadOnly: NULL
+--- !u!114 &7627168905698802478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1b31a04f5083a458b6d1a7306ad72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageEffect: {fileID: 4715880827498467176}
+  damageEffectAudio: {fileID: 3675908329585257279}
+  hasParryEffect: 0
+  parryEffect: {fileID: 4715880827498467176}
+  parryAudio: {fileID: 3675908329585257279}
+  parryReparentTime: 1
+  deathSound: {fileID: 4821106893052324094}
+  deathSoundLength: 2
+  deathParticleEffect: {fileID: 4715880827498467176}
+  overallFXTime: 1
+  typeOfEnemy: 2
+  maxHealth: 150
+  baseDamage: 10
+  printHealthStats: 0
+  weaponCollider: {fileID: 0}
+--- !u!114 &7881292569987827283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54a9b24c15ec0c4d83ffa7141ce64b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialDetectionDistance: 100
+--- !u!114 &7881292569987827282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a95923f2c18de47b6ff7f345e6c604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationPadding: 1
+--- !u!114 &7881292569987827309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96713fdb2a6ccc74b916f3a45eaccb00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 0.5
+  justFiredProjectileTimer: 3
+  projectileSpeed: 50
+  projectileLifeTime: 3
+  projectileDamage: 10
+  dashCancelRange: 12
+  projectilePrefab: {fileID: 8840168797588337650, guid: ffb8b15cf86e8a14b9050cde0f60e0ee,
+    type: 3}
+  projectileStartPoint: {fileID: 5818672935196530878}
+  waterFireEffect: {fileID: 2426741319733744530}
+--- !u!114 &7881292569987827308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881292569987827305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220e8c962d26f4b4999392623d53b049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1425529555322950640
 MonoBehaviour:
   m_ObjectHideFlags: 0
