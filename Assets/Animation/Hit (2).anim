@@ -3460,14 +3460,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: Key_EnablePlayerWeaponObject
+    functionName: Key_EnableBIGPlayerWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.56666666
-    functionName: Key_DisableWeaponObject
+    functionName: Key_EnableBIGPlayerWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

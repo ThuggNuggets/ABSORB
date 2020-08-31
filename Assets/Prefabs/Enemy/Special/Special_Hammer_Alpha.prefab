@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationPadding: 1
+  avoidDistance: 30
 --- !u!114 &7280474130612938097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,14 +457,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684d0a572d4286340ac403540841c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hammerAnimator: {fileID: 2117904859174677523}
-  swingAnimation: Attacking
-  lungeAcceleration: 100
-  lungeMaxVelocity: 20
-  turnSpeed: 0.2
-  lungeDistancePadding: 1
-  startAnimationDistance: 8
-  cancelAndRetreatDistance: 1
+  movementSpeed: 10
+  destinationPadding: 3
+  startSwingDistance: 5
+  animationSequenceTime: 3
+  swingAnimationName: Attacking
 --- !u!114 &2117904859804173804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2117904859174677523}
   exitTime: 2
+  lockState: 0
+  stateReturnName: Idle
 --- !u!114 &2117904859804173805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,6 +1950,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1207088664633079957, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2657928986363669894, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
@@ -2074,6 +2079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450238621035828143, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 13303450, guid: beaf0944877d2be41a542b2bb70f9408, type: 3}

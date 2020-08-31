@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Will/Main_Menu.unity
+    guid: ebd4e53bf97a8a34fa25c054e31ac9a7
+  - enabled: 1
+    path: Assets/Scenes/Will/Loading_Scene.unity
+    guid: f3548459f4deec8468d1661dc80dceb4
+  - enabled: 1
     path: Assets/Scenes/Uriah/Alpha Scene Prep.unity
     guid: d1a3b188a56b8d44eabdd3045e6bdc41
   m_configObjects: {}
