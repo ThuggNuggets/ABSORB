@@ -7,6 +7,7 @@ public class HammerMovement : AIBehaviour
     [Header("Properties")]
     public float destinationPadding = 1.0f;
     public float avoidDistance = 30.0f;
+    public float startSwingDistance = 5.0f;
 
     // A flag to determine if the enemy should avoid the player or not
     private bool _isAvoiding = false;
@@ -25,9 +26,6 @@ public class HammerMovement : AIBehaviour
 
         // Getting the attack range from the nav mesh component
         _attackRange = brain.GetNavMeshAgent().stoppingDistance;
-
-        // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
-        this.LockDestinationToPlayer(destinationPadding);
     }
 
     public override void OnStateEnter() 
@@ -39,6 +37,11 @@ public class HammerMovement : AIBehaviour
             Vector3 avoidDestination = transform.position - (avoidDirection * avoidDistance);
             this.OverrideDestination(avoidDestination, 1.0f);
             _isAvoiding = true;
+        }
+        else
+        {
+            // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
+            this.LockDestinationToPlayer(destinationPadding);
         }  
     }
 
@@ -52,7 +55,7 @@ public class HammerMovement : AIBehaviour
         brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
-        if(brain.GetNavMeshAgent().remainingDistance <= _attackRange)
+        if(brain.GetNavMeshAgent().remainingDistance <= _attackRange + startSwingDistance)
         {
             // Enemy will enter attack phase if locked onto player:
             if(this.destinationLockedToPlayer)

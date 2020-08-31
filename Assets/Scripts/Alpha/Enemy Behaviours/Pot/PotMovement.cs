@@ -26,7 +26,12 @@ public class PotMovement : AIBehaviour
         this.LockDestinationToPlayer(destinationPadding);
     }
 
-    public override void OnStateEnter() {}
+
+    public override void OnStateEnter()
+    {
+        // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
+        this.LockDestinationToPlayer(destinationPadding);
+    }
 
     public override void OnStateUpdate()
     {
@@ -38,10 +43,10 @@ public class PotMovement : AIBehaviour
         brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
-        if(brain.GetNavMeshAgent().remainingDistance <= _attackRange)
+        if (brain.GetNavMeshAgent().remainingDistance <= _attackRange)
         {
             // Enemy will enter attack phase if locked onto player:
-            if(this.destinationLockedToPlayer)
+            if (this.destinationLockedToPlayer)
             {
                 brain.SetBehaviour("Attack");
                 return;
@@ -52,11 +57,11 @@ public class PotMovement : AIBehaviour
                 // so general movement, stuff will go here when
                 // the group system has been worked out
             }
-            
+
         }
     }
 
-    public override void OnStateFixedUpdate() {}
+    public override void OnStateFixedUpdate() { }
 
-    public override void OnStateExit(){}
+    public override void OnStateExit() { }
 }
