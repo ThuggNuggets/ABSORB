@@ -25,7 +25,7 @@ public class Absorb : MonoBehaviour
     [Header("Properties")]
     public float turnSpeed = 0.5F;
     public float animationTime = 2.0f;
-    private bool _isAbosrbing = false;
+    private bool _isAbsorbing = false;
     private PlayerSlowdown playerSlowdown; 
     private InputManager _inputManager;
     private Animator _animator;
@@ -46,7 +46,7 @@ public class Absorb : MonoBehaviour
             return;
 
         // Check if we should start abosrbing
-        if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
+        if (_inputManager.GetSpecialAttackButtonPress() && !_isAbsorbing)
         {
             ActivateAbsorb();
             StartCoroutine(WaitFor(animationTime));
@@ -65,7 +65,7 @@ public class Absorb : MonoBehaviour
         _targetEnemy.SetBehaviour("Absorbed");
         playerSlowdown.SetSlowdown();
         _animator.SetBool("AbsorbPose", true);
-        _isAbosrbing = true;
+        _isAbsorbing = true;
         _targetEnemy = null;
     }
 
@@ -73,12 +73,12 @@ public class Absorb : MonoBehaviour
     {
         playerSlowdown.SetSpeedUp();
         _animator.SetBool("AbsorbPose", false);
-        _isAbosrbing = false;
+        _isAbsorbing = false;
         _targetEnemy = null;
     }
 
     public bool IsActive()
     {
-        return _isAbosrbing;
+        return _isAbsorbing;
     }
 }

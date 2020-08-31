@@ -61,11 +61,11 @@ public class SpecialAbsorbed : AIBehaviour
         absorbGameObject.transform.SetParent(null);
     }
 
-    public override void OnStateExit() {}
+    public override void OnStateExit() { }
 
-    public override void OnStateFixedUpdate() {}
+    public override void OnStateFixedUpdate() { }
 
-    public override void OnStateUpdate() 
+    public override void OnStateUpdate()
     {
         if (_enabled)
         {
@@ -82,8 +82,12 @@ public class SpecialAbsorbed : AIBehaviour
                 _playerAbilityManager.SetAbility(AbilityManager.E_Ability.HAMMER);
                 absorbGameObject.SetActive(true);
                 absorbGameObject.transform.SetParent(this.gameObject.transform);
-                enemyHandler.Kill();
                 _enabled = false;
+
+                if (!_specialParried.lockState)
+                    enemyHandler.Kill();
+                else
+                    Destroy(this.gameObject);
             }
         }
     }

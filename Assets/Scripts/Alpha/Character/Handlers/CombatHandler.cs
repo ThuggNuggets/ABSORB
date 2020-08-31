@@ -51,23 +51,6 @@ public class CombatHandler : MonoBehaviour
         UpdateSlowMo();
     }
 
-    // Updates the shields FSM
-    private void UpdateShieldFSM()
-    {
-        switch (shieldState)
-        {
-            case ShieldState.Default:
-                EnableShield();
-                break;
-            case ShieldState.Shielding:
-                Shielding();
-                break;
-            case ShieldState.Cooldown:
-                Cooldown();
-                break;
-        }
-    }
-
     #region Attacking 
 
     [Header("Attack Attributes")]
@@ -187,6 +170,23 @@ public class CombatHandler : MonoBehaviour
     }
     [HideInInspector]
     public ShieldState shieldState;
+
+    // Updates the shields FSM
+    private void UpdateShieldFSM()
+    {
+        switch (shieldState)
+        {
+            case ShieldState.Default:
+                EnableShield();
+                break;
+            case ShieldState.Shielding:
+                Shielding();
+                break;
+            case ShieldState.Cooldown:
+                Cooldown();
+                break;
+        }
+    }
 
     private void EnableShield()
     {
