@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 194090161513885330}
   - component: {fileID: 7553064282068293540}
   - component: {fileID: 6626818083583258596}
+  - component: {fileID: 1834521502075878319}
   m_Layer: 0
   m_Name: Pew_StandMid3
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1834521502075878319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946441315144005306}
+  m_Material: {fileID: 13400000, guid: 73a3a13306af68049a9f5ac59bcca4fa, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.4656124, y: 1.9605303, z: 1.1909906}
+  m_Center: {x: 0, y: 0.07154533, z: 0}

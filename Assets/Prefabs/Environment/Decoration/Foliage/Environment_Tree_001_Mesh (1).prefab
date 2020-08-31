@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 750159132249495588}
+  - component: {fileID: 112080389390913634}
   m_Layer: 0
   m_Name: Environment_Tree_001_Mesh (1)
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &112080389390913634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81849213235708574}
+  m_Material: {fileID: 13400000, guid: 73a3a13306af68049a9f5ac59bcca4fa, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.02856, y: 6.3022814, z: 3.9625309}
+  m_Center: {x: 0.93455684, y: 2.6511407, z: -0.37977326}
 --- !u!1 &2567987468122081736
 GameObject:
   m_ObjectHideFlags: 0
