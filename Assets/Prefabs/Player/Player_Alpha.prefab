@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2087705576
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2087705577}
-  m_Layer: 0
-  m_Name: ___Characters
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2087705577
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087705576}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000024586914}
-  m_LocalPosition: {x: 7.7997727, y: 95.0026, z: 46.22004}
-  m_LocalScale: {x: 1, y: 1.0010811, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3746689148225198915}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665161598944617839
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +67,6 @@ Transform:
   - {fileID: 3004215445133511561}
   - {fileID: 4439387418131442104}
   - {fileID: 7758845203081270274}
-  - {fileID: 2087705577}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -208,10 +177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldMeshRenderer: {fileID: 2950940807683710225}
   shieldSphereCollider: {fileID: 2950940807683710224}
-  playerWeapon: {fileID: 6560871402086351129}
+  playerWeapon: {fileID: 4553369395600936554}
+  bigPlayerWeapon: {fileID: 7223859372209494740}
   weaponSwingAudio: {fileID: 0}
   minTimeBetweenAttack: 0.01
-  maxTimeBetweenAttack: 1
+  maxTimeBetweenAttack: 1.5
   shieldCooldown: 1
   shieldState: 0
   slowMotionPercentage: 50
@@ -246,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4615561910875096622, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18853027
+      value: 0.18853025
       objectReference: {fileID: 0}
     - target: {fileID: 4615561910875096622, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
@@ -281,22 +251,22 @@ PrefabInstance:
     - target: {fileID: 6737900186884625760, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -9.5011915e-11
+      value: -0.05266769
       objectReference: {fileID: 0}
     - target: {fileID: 6737900186884625760, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -4.9325094e-10
+      value: -0.27348137
       objectReference: {fileID: 0}
     - target: {fileID: 6737900186884625760, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.18910754
+      value: 0.18162535
       objectReference: {fileID: 0}
     - target: {fileID: 6737900186884625760, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9819564
+      value: 0.9431046
       objectReference: {fileID: 0}
     - target: {fileID: 6982589562330941465, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
@@ -311,7 +281,7 @@ PrefabInstance:
     - target: {fileID: 7483921246724621238, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.4645398
+      value: 0.74605316
       objectReference: {fileID: 0}
     - target: {fileID: 7758845203295130275, guid: 7e4b973093e252446a4b253b8fc95ceb,
         type: 3}
@@ -376,9 +346,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 356599457}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6560871402086351129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6560871401897658296, guid: 7e4b973093e252446a4b253b8fc95ceb,
+--- !u!137 &4553369395600936554 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4553369395915425995, guid: 7e4b973093e252446a4b253b8fc95ceb,
+    type: 3}
+  m_PrefabInstance: {fileID: 356599457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7223859372209494740 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7223859372524117109, guid: 7e4b973093e252446a4b253b8fc95ceb,
     type: 3}
   m_PrefabInstance: {fileID: 356599457}
   m_PrefabAsset: {fileID: 0}

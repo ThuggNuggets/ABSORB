@@ -13,7 +13,8 @@ public class CombatHandler : MonoBehaviour
     [Header("References")]
     public MeshRenderer shieldMeshRenderer;
     public Collider shieldSphereCollider;
-    public GameObject playerWeapon;
+    public SkinnedMeshRenderer playerWeapon;
+    public SkinnedMeshRenderer bigPlayerWeapon;
     public AudioSource weaponSwingAudio;
     private PlayerHandler _playerHandler;
     private InputManager _inputManager;
@@ -124,12 +125,22 @@ public class CombatHandler : MonoBehaviour
 
     public void Key_EnablePlayerWeaponObject()
     {
-        playerWeapon.SetActive(true);
+        playerWeapon.enabled = true;
     }
 
     public void Key_DisableWeaponObject()
     {
-        playerWeapon.SetActive(false);
+        playerWeapon.enabled = false;
+    }
+
+    public void Key_EnableBIGPlayerWeaponObject()
+    {
+        bigPlayerWeapon.enabled = true;
+    }
+
+    public void Key_DisableBIGWeaponObject()
+    {
+        bigPlayerWeapon.enabled = false;
     }
 
     public void Key_PlayWeaponSound()
