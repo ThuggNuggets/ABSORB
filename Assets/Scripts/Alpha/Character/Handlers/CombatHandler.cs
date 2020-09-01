@@ -277,17 +277,19 @@ public class CombatHandler : MonoBehaviour
     #endregion
 
     #region Death
+    private bool _respawning = false;
+
 
     private void UpdateDeath()
     {
+        // Make the player fade away as they take damage
+        playerShader.material.SetFloat("_AlphaClip", _playerHandler.GetCurrentHealth());
         // Temp to force the player dead
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             _playerHandler.SetIsAlive(false);
             Debug.Log("Player dead");
         }
-
-        playerShader.material.SetFloat("_AlphaClip", _playerHandler.GetCurrentHealth());
 
         // Update if the player is alive or not
         if (_playerHandler.GetCurrentHealth() <= 0)
@@ -297,9 +299,9 @@ public class CombatHandler : MonoBehaviour
         }
 
         // Is the player is dead
-        if (!_playerHandler.GetIsAlive())
+        if (!_playerHandler.GetIsAlive() && !_respawning)
         {
-            playerShader.material.SetFloat("_AlphaClip", 0.05f);
+            _respawning = true;
             StartCoroutine(GoToMainMenu());
         }
     }
@@ -307,7 +309,11 @@ public class CombatHandler : MonoBehaviour
     private IEnumerator GoToMainMenu()
     {
         yield return new WaitForSeconds(3.0f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main_Menu");
+        // Go to last checkpoint position
+        _playerHandler.RespawnPlayer();
+        _respawning = false;
+        // Go to main menu
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("Main_Menu");
     }
 
     #endregion
