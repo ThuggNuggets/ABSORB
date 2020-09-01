@@ -8,7 +8,7 @@ public class SickleAttack : AIBehaviour
     public string swingAnimationName = "Attacking";
     public int amountOfAttacks = 4;
     public float speedMultiplier = 1.5f;
-    public float cancelAttackDistance = 2.0f;
+    public float cancelAttackDistance = 3.0f;
 
     private int _attackIndex = 0;
     private float _defaultSpeed = 1.0f;
@@ -44,7 +44,7 @@ public class SickleAttack : AIBehaviour
 
     private void Key_DeactivateSwingAnimation()
     {
-        if(_attackIndex < amountOfAttacks)
+        if(_attackIndex < amountOfAttacks && brain.GetDistanceToPlayer() <= cancelAttackDistance)
         {
             _animator.SetBool(swingAnimationName, true);
             _animator.SetFloat("attackSpeed", _animator.GetFloat("attackSpeed") * speedMultiplier);

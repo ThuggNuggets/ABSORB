@@ -37,10 +37,7 @@ public class HammerAttack : AIBehaviour
         _animator.SetBool(swingAnimationName, true);
     }
 
-    public override void OnStateUpdate()
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(brain.GetDirectionToPlayer()), 0.5F);
-    }
+    public override void OnStateUpdate() {}
 
     public override void OnStateFixedUpdate() {}
 

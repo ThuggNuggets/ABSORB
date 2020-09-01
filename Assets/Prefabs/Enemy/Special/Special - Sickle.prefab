@@ -3029,7 +3029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5919911638438754542
 Transform:
   m_ObjectHideFlags: 0
@@ -3246,7 +3246,7 @@ MonoBehaviour:
   swingAnimationName: Attacking
   amountOfAttacks: 4
   speedMultiplier: 1.5
-  cancelAttackDistance: 2
+  cancelAttackDistance: 3
 --- !u!114 &3047529433226205307
 MonoBehaviour:
   m_ObjectHideFlags: 0
