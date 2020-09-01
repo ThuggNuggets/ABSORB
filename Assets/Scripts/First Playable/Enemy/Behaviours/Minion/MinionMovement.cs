@@ -183,13 +183,13 @@ public class MinionMovement : AIBehaviour
     // The "Normal" state update
     private void UpdateNormalState()
     {
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
     }
 
     // The "Sprinting" state update
     private void UpdateSprintingState()
     {
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
     }
 
     // The "Avoid" state update

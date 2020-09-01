@@ -46,35 +46,33 @@ public class SickleMovement : AIBehaviour
 
     public override void OnStateUpdate()
     {
+        // Making the enemy face the player if they are avoiding
+        if (brain.GetHandler().GetEnemyType() == EnemyHandler.EnemyType.ELITE && _isAvoiding)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(brain.GetDirectionToPlayer()), 1.0f);
+
         // Checking if we should be locked onto the player or not...
         if (this.destinationLockedToPlayer)
             this.currentDestination = brain.PlayerTransform.position;
 
-        // Updating the target destination every frame
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        // Updating the target destination 
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
 
-        // If player is within attack range;
-        if (brain.GetNavMeshAgent().remainingDistance <= _attackRange)
+        if(brain.GetNavMeshAgent().hasPath && brain.GetNavMeshAgent().remainingDistance <= _attackRange + 0.1F)
         {
-            // Enemy will enter attack phase if locked onto player:
-            if (this.destinationLockedToPlayer)
+            if(this.destinationLockedToPlayer)
             {
+                brain.GetNavMeshAgent().isStopped = true;
                 brain.SetBehaviour("Attack");
                 return;
             }
             else
             {
-                if (_isAvoiding)
+                if(_isAvoiding)
                 {
                     this.LockDestinationToPlayer(destinationPadding);
                     _isAvoiding = false;
                 }
-
-                // Here is what they'll do when they aren't locked on
-                // so general movement, stuff will go here when
-                // the group system has been worked out
             }
-
         }
     }
 

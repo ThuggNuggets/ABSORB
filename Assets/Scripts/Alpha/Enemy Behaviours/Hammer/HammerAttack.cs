@@ -47,6 +47,7 @@ public class HammerAttack : AIBehaviour
     public override void OnStateExit()
     {
         brain.GetNavMeshAgent().speed = _initialSpeed;
+        _animator.SetBool(swingAnimationName, false);
     }
 
     private void Key_DeactivateSwingAnimation()

@@ -67,9 +67,11 @@ public class SpecialAbsorbed : AIBehaviour
         {
             if (_cutOutTimer > 0.7f)
             {
-                _cutOutTimer -= Time.deltaTime * cutOutSpeed;
                 _cutOffTimer -= Time.deltaTime * cutOffSpeed;
+
+                _cutOutTimer -= Time.deltaTime * cutOutSpeed;
                 bodyRenderer.material.SetFloat("_Cutout", _cutOutTimer);
+
                 weaponRenderer.material.SetFloat("_Cutoff", _cutOffTimer);
             }
             else

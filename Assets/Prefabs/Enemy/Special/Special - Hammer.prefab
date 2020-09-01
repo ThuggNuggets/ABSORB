@@ -344,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6809976860378941605
 Transform:
   m_ObjectHideFlags: 0
@@ -490,6 +490,7 @@ MonoBehaviour:
     behaviour: {fileID: 2804856661870454833}
   printCurrentState: 0
   currentStateReadOnly: NULL
+  pathUpdateCooldownTime: 0.2
 --- !u!114 &6809976860378941592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +547,7 @@ MonoBehaviour:
   destinationPadding: 1
   avoidDistance: 15
   startSwingDistance: 3
+  attackCooldown: 2
 --- !u!114 &6809976860378941600
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,10 @@ public class HammerMovement : AIBehaviour
     public float destinationPadding = 1.0f;
     public float avoidDistance = 30.0f;
     public float startSwingDistance = 5.0f;
+    public float attackCooldown = 2.0f;
+
+    // To check if the enemy is on a cooldown after attacking
+    private bool _isOnCooldown = false;
 
     // A flag to determine if the enemy should avoid the player or not
     private bool _isAvoiding = false;
@@ -28,44 +32,57 @@ public class HammerMovement : AIBehaviour
         _attackRange = brain.GetNavMeshAgent().stoppingDistance;
     }
 
-    public override void OnStateEnter() 
+    public override void OnStateEnter()
     {
         // Checking if the state we came from was the attack behaviour
-        if(brain.GetLastStateID() == "Attack")
+        if (brain.GetLastStateID() == "Attack")
         {
-            Vector3 avoidDirection = (brain.PlayerTransform.position - transform.position).normalized;
-            Vector3 avoidDestination = transform.position - (avoidDirection * avoidDistance);
-            this.OverrideDestination(avoidDestination, 1.0f);
-            _isAvoiding = true;
+            switch (brain.GetHandler().GetEnemyType())
+            {
+                case EnemyHandler.EnemyType.SPECIAL:
+                    Vector3 avoidDirection = (brain.PlayerTransform.position - transform.position).normalized;
+                    Vector3 avoidDestination = transform.position - (avoidDirection * avoidDistance);
+                    this.OverrideDestination(avoidDestination, 1.0f);
+                    _isAvoiding = true;
+                    break;
+
+                case EnemyHandler.EnemyType.ELITE:
+                    StartCoroutine(AttackCooldown());
+                    break;
+            }
         }
         else
         {
             // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
             this.LockDestinationToPlayer(destinationPadding);
-        }  
+        }
     }
 
-    public override void OnStateUpdate() 
-    {           
+    public override void OnStateUpdate()
+    {
+        // Exiting function so the enemy remains still on cooldown
+        if(_isOnCooldown)
+            return;
+
         // Checking if we should be locked onto the player or not...
         if (this.destinationLockedToPlayer)
             this.currentDestination = brain.PlayerTransform.position;
 
         // Updating the target destination every frame
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
-        if(brain.GetNavMeshAgent().remainingDistance <= _attackRange + startSwingDistance)
+        if (brain.GetNavMeshAgent().remainingDistance <= _attackRange + startSwingDistance)
         {
             // Enemy will enter attack phase if locked onto player:
-            if(this.destinationLockedToPlayer)
+            if (this.destinationLockedToPlayer)
             {
                 brain.SetBehaviour("Attack");
                 return;
             }
             else
             {
-                if(_isAvoiding)
+                if (_isAvoiding)
                 {
                     this.LockDestinationToPlayer(destinationPadding);
                     _isAvoiding = false;
@@ -75,13 +92,13 @@ public class HammerMovement : AIBehaviour
                 // so general movement, stuff will go here when
                 // the group system has been worked out
             }
-            
+
         }
     }
 
-    public override void OnStateFixedUpdate() {}
+    public override void OnStateFixedUpdate() { }
 
-    public override void OnStateExit() {}
+    public override void OnStateExit() { }
 
     // Returns a randomized position from the radius around the center of an object
     // This function will be replaced when "Unit Slotting" or "AI Group Control" gets implemented.
@@ -91,9 +108,17 @@ public class HammerMovement : AIBehaviour
         float ang = Random.value * 360;
         Vector3 pos = Vector3.zero;
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.z = center.z;
+        pos.y = center.y;
+        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         return pos;
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        _isOnCooldown = true;
+        yield return new WaitForSecondsRealtime(attackCooldown);
+        _isOnCooldown = false;
+        this.LockDestinationToPlayer(destinationPadding);
     }
 
     /*
@@ -122,7 +147,7 @@ public class HammerMovement : AIBehaviour
     // public float attackDistance = 10.0f;
     // public float beforeAttackTimer = 0.7f;
     // private bool _isWaitingToAttack = false;
-    
+
     // public override void OnStateEnter() {}
 
     // public override void OnStateExit() 
@@ -159,7 +184,7 @@ public class HammerMovement : AIBehaviour
     // }
 
     // public override void OnStateUpdate() { }
-    
+
     // public IEnumerator BeforeAttackTimer()
     // {
     //     _isWaitingToAttack = true;

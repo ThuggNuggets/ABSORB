@@ -30,17 +30,19 @@ public abstract class AIBehaviour : MonoBehaviour
     abstract public void OnStateFixedUpdate();
     abstract public void OnStateExit();
 
+    // Unlocks the NavMeshAgent to move towards new position without targeting player
     public void OverrideDestination(Vector3 newDestination, float newDestinationPadding)
     {
         destinationLockedToPlayer = false;
         currentDestination = newDestination;
-        brain.UpdateTargetDestination(this.currentDestination, newDestinationPadding);
+        brain.SetDestination(this.currentDestination, newDestinationPadding);
     }
 
+    // Locks the NavMeshAgent back onto the player
     public void LockDestinationToPlayer(float newDestinationPadding)
     {
         destinationLockedToPlayer = true;
         currentDestination = brain.PlayerTransform.position;
-        brain.UpdateTargetDestination(this.currentDestination, newDestinationPadding);
+        brain.SetDestination(this.currentDestination, newDestinationPadding);
     }
 }

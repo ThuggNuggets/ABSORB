@@ -21,9 +21,11 @@ public class AIBrain : MonoBehaviour
     public Dictionary<string, AIBehaviour> _aiBehaviours = new Dictionary<string, AIBehaviour>();
 
     // Options to assist with debugging
-    [Header("Debug Options")]
+    [Header("Options")]
     public bool printCurrentState = false;
     public string currentStateReadOnly = "NULL";
+    [Range(0, 1)]
+    public float pathUpdateCooldownTime = 0.2F;
 
     // Rigidbody attached to this object
     private Rigidbody _rigidbody;
@@ -57,7 +59,7 @@ public class AIBrain : MonoBehaviour
         _transform = this.GetComponent<Transform>();
         _handler = this.GetComponent<EnemyHandler>();
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
-        
+
         // Find the player's transfrom
         _playerTransform = FindObjectOfType<PlayerHandler>().GetComponent<Transform>();
 
@@ -108,14 +110,29 @@ public class AIBrain : MonoBehaviour
         currentStateReadOnly = _currentBehaviourID;
     }
 
-    // Updates the current destination to the players, if distance is over padding
-    internal void UpdateTargetDestination(Vector3 targetDestination, float padding)
+    // Updates the current destination to the players, if distance is over padding; only after cooldown time
+    internal void SetDestinationOnCooldown(Vector3 targetDestination, float padding)
     {
-        if(Vector3.Distance(_targetDestination, targetDestination) > padding)
+        if (Vector3.Distance(_targetDestination, targetDestination) > padding)
+            StartCoroutine(SetDestination(targetDestination));
+    }
+
+    // Updates the current destination to the players, if distance is over padding; does instantly
+    internal void SetDestination(Vector3 targetDestination, float padding)
+    {
+        if (Vector3.Distance(_targetDestination, targetDestination) > padding)
         {
             _targetDestination = targetDestination;
             _navMeshAgent.SetDestination(_targetDestination);
         }
+    }
+
+    // Waits a cooldown period before updating path, 
+    public IEnumerator SetDestination(Vector3 targetDestination)
+    {
+        yield return new WaitForSeconds(pathUpdateCooldownTime);
+        _targetDestination = targetDestination;
+        _navMeshAgent.SetDestination(_targetDestination);
     }
 
     // Returns the distance from this enemy and the player
@@ -140,8 +157,8 @@ public class AIBrain : MonoBehaviour
     internal Transform GetTransform()
     {
         return _transform;
-    }    
-    
+    }
+
     // Returns the EnemyHandler attached to this enemy
     internal EnemyHandler GetHandler()
     {
@@ -164,7 +181,7 @@ public class AIBrain : MonoBehaviour
     public Transform PlayerTransform
     {
         get { return _playerTransform; }
-        set { _playerTransform = value;}
+        set { _playerTransform = value; }
     }
 
     // Prints a debug message to unity's console

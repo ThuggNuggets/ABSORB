@@ -21,9 +21,6 @@ public class PotMovement : AIBehaviour
 
         // Getting the attack range from the nav mesh component
         _attackRange = brain.GetNavMeshAgent().stoppingDistance;
-
-        // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
-        this.LockDestinationToPlayer(destinationPadding);
     }
 
 
@@ -40,7 +37,7 @@ public class PotMovement : AIBehaviour
             this.currentDestination = brain.PlayerTransform.position;
 
         // Updating the target destination every frame
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
         if (brain.GetNavMeshAgent().remainingDistance <= _attackRange)

@@ -49,7 +49,7 @@ public class SpecialMovement : AIBehaviour
             this.currentDestination = brain.PlayerTransform.position;
 
         // Updating the target destination every frame
-        brain.UpdateTargetDestination(this.currentDestination, destinationPadding);
+        brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
         if(brain.GetNavMeshAgent().remainingDistance <= _attackRange)
