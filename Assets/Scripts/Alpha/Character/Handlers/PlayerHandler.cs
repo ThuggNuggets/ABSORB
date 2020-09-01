@@ -29,7 +29,7 @@ public class PlayerHandler : MonoBehaviour
     private InputManager _inputManager;
 
     // Flags
-    private bool isAlive = false;
+    private bool isAlive = true;
 
     void Awake()
     {
@@ -50,6 +50,11 @@ public class PlayerHandler : MonoBehaviour
     public bool GetIsAlive()
     {
         return isAlive;
+    }
+
+    public bool SetIsAlive(bool aliveState)
+    {
+        return isAlive = aliveState;
     }
 
     public int GetCurrentHealth()

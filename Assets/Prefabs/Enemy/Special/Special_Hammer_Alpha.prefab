@@ -360,6 +360,7 @@ MonoBehaviour:
   deathParticleEffect: {fileID: 5615478756635981147}
   overallFXTime: 1
   typeOfEnemy: 1
+  typeOfAbility: 0
   maxHealth: 125
   baseDamage: 4
   printHealthStats: 0
@@ -405,7 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54a9b24c15ec0c4d83ffa7141ce64b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDetectionDistance: 30
+  viewConeAngle: 90
+  totalDistance: 20
+  minY: 10
+  maxY: 10
 --- !u!114 &7280474130612938107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destinationPadding: 1
   avoidDistance: 30
+  startSwingDistance: 5
 --- !u!114 &7280474130612938097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,7 +464,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   destinationPadding: 3
-  startSwingDistance: 5
   animationSequenceTime: 3
   swingAnimationName: Attacking
 --- !u!114 &2117904859804173804
@@ -1952,6 +1956,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1207088664633079957, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207088664633079957, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2079,6 +2088,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450238621035828143, guid: beaf0944877d2be41a542b2bb70f9408,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4450238621035828143, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}

@@ -16,6 +16,7 @@ public class CombatHandler : MonoBehaviour
     public SkinnedMeshRenderer playerWeapon;
     public SkinnedMeshRenderer bigPlayerWeapon;
     public AudioSource weaponSwingAudio;
+    public SkinnedMeshRenderer playerShader;
     private PlayerHandler _playerHandler;
     private InputManager _inputManager;
     private Rigidbody _rigidbody;
@@ -49,6 +50,7 @@ public class CombatHandler : MonoBehaviour
         UpdateShieldFSM();
         UpdateAttack();
         UpdateSlowMo();
+        UpdateDeath();
     }
 
     #region Attacking 
@@ -273,6 +275,43 @@ public class CombatHandler : MonoBehaviour
     }
 
     #endregion
+
+    #region Death
+
+    private void UpdateDeath()
+    {
+        // Temp to force the player dead
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            _playerHandler.SetIsAlive(false);
+            Debug.Log("Player dead");
+        }
+
+        playerShader.material.SetFloat("_AlphaClip", _playerHandler.GetCurrentHealth());
+
+        // Update if the player is alive or not
+        if (_playerHandler.GetCurrentHealth() <= 0)
+        {
+            _playerHandler.SetIsAlive(false);
+            Debug.Log("Player dead");
+        }
+
+        // Is the player is dead
+        if (!_playerHandler.GetIsAlive())
+        {
+            playerShader.material.SetFloat("_AlphaClip", 0.05f);
+            StartCoroutine(GoToMainMenu());
+        }
+    }
+
+    private IEnumerator GoToMainMenu()
+    {
+        yield return new WaitForSeconds(3.0f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main_Menu");
+    }
+
+    #endregion
+
     // Function I found online that checks if an animation is currently playing
     // Figured it might be handy sometime
     bool isPlaying(Animator anim, string stateName)
