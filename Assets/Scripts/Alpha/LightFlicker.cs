@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
+    public Renderer emmision;
     public float minLightRange = 5f;
     [Range(0.0f, 100.0f)]
     public float frequencyPercentage = 70.0f;
@@ -36,6 +37,7 @@ public class LightFlicker : MonoBehaviour
             if (randNumber <= frequencyPercentage)
             {
                 lightObject.range = minLightRange;
+                emmision.material.DisableKeyword("_EMISSION");
                 StartCoroutine(Flicker());
             }
         }
@@ -45,6 +47,7 @@ public class LightFlicker : MonoBehaviour
     {
         yield return new WaitForSeconds(flickerTime);
         tempTimer = 0f;
+        emmision.material.EnableKeyword("_EMISSION");
         lightObject.range = maxRange;
     }
 
