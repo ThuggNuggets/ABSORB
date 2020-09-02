@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Drops
   m_Shader: {fileID: 4800000, guid: 972a05a1fafc1c54d8287892f2a939b6, type: 3}
-  m_ShaderKeywords: USE_ALPHA_CLIPING _ZWRITEMODE_ON
+  m_ShaderKeywords: USE_ALPHA_CLIPING USE_MAINTEX _ZWRITEMODE_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 392a1a39647b7bd4f9717e628f0b6a3a, type: 3}
+        m_Texture: {fileID: 2800000, guid: dc7a239154c12c44da23d17d61581bda, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -97,7 +97,7 @@ Material:
     - _UseCutout: 0
     - _UseFresnel: 0
     - _UseHeight: 0
-    - _UseMainTex: 0
+    - _UseMainTex: 1
     - _UseRefractive: 0
     - _UseSoft: 0
     - _ZWrite: 1
@@ -109,4 +109,4 @@ Material:
     - _FresnelColor: {r: 4.0655384, g: 0, b: 6.6753926, a: 1}
     - _HeightUVScrollDistort: {r: 8, g: 12, b: 0, a: 0}
     - _MainColor: {r: 0.035202537, g: 0.016687429, b: 0.14150941, a: 1}
-    - _TintColor: {r: 0.74807304, g: 1, b: 0.60294116, a: 1}
+    - _TintColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
