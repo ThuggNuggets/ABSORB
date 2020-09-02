@@ -302,11 +302,11 @@ public class CombatHandler : MonoBehaviour
         if (!_playerHandler.GetIsAlive() && !_respawning)
         {
             _respawning = true;
-            StartCoroutine(GoToMainMenu());
+            StartCoroutine(Respawn());
         }
     }
 
-    private IEnumerator GoToMainMenu()
+    private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(3.0f);
         // Go to last checkpoint position

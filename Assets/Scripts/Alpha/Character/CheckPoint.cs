@@ -20,7 +20,7 @@ public class CheckPoint : MonoBehaviour
         if (triggerBox.Enabled && triggerBox.Collider.CompareTag("Player"))
         {
             Debug.Log("Player walked through trigger");
-            _playerHandler.SetRespawnPosition(this.spawnPosition);
+            _playerHandler.SetRespawnPosition(this.spawnPosition.position);
         }
     }
 
