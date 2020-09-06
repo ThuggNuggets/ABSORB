@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Enem_MeshEffect 1
   m_Shader: {fileID: 4800000, guid: 972a05a1fafc1c54d8287892f2a939b6, type: 3}
-  m_ShaderKeywords: USE_ALPHA_CLIPING USE_CUTOUT USE_FRESNEL USE_HEIGHT USE_REFRACTIVE
+  m_ShaderKeywords: USE_ALPHA_CLIPING USE_FRESNEL USE_HEIGHT USE_MAINTEX USE_REFRACTIVE
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: eef71c487a8a3044783e0240ad62fddf, type: 3}
+        m_Texture: {fileID: 2800000, guid: dc7a239154c12c44da23d17d61581bda, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -89,7 +89,7 @@ Material:
     - _DstBlend: 0
     - _FPOW: 0.3
     - _FresnelDistort: -300
-    - _FresnelPow: 3
+    - _FresnelPow: 1.45
     - _FresnelR0: -0.2
     - _Glossiness: 0.5
     - _Height: 0
@@ -106,10 +106,10 @@ Material:
     - _UVSec: 0
     - _UseAlphaCliping: 1
     - _UseBlending: 0
-    - _UseCutout: 1
+    - _UseCutout: 0
     - _UseFresnel: 1
     - _UseHeight: 1
-    - _UseMainTex: 0
+    - _UseMainTex: 1
     - _UseRefractive: 1
     - _UseSoft: 0
     - _ZWrite: 1
@@ -119,11 +119,11 @@ Material:
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _DropWavesScale: {r: 1, g: 0.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 24.754717, g: 22.262506, b: 1.284443, a: 1}
-    - _HeightUVScrollDistort: {r: 0, g: 5, b: 0, a: 0}
-    - _MainColor: {r: 0.3027116, g: 0.44832975, b: 1.2583307, a: 1}
+    - _FresnelColor: {r: 31.626795, g: 28.480675, b: 1.6558532, a: 1}
+    - _HeightUVScrollDistort: {r: 0, g: 1, b: 0, a: 0}
+    - _MainColor: {r: 0.11626358, g: 0.07963259, b: 0.3041965, a: 1}
     - _NoiseScale: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _RimColor: {r: 0.057093438, g: 0.06710122, b: 0.08088237, a: 1}
     - _Speed: {r: 2, g: 15, b: 0, a: 8}
-    - _TintColor: {r: 0.9117647, g: 0.9306288, b: 1, a: 1}
+    - _TintColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
