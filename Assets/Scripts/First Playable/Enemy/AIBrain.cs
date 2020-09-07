@@ -189,5 +189,11 @@ public class AIBrain : MonoBehaviour
     {
         Debug.Log(_currentBehaviourID);
     }
+
+    // Returns a specified state of the brain
+    public AIBehaviour GetAIBehaviour(string behaviour)
+    {
+        return _aiBehaviours[behaviour];
+    }
 }
 

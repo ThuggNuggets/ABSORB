@@ -52,6 +52,9 @@ public class EnemyHandler : MonoBehaviour
     // The brain of this enemy
     private AIBrain _aiBrain;
 
+    // The rigidbody attached to this object
+    private Rigidbody _rigidbody;
+
     // Reference to the spawner which created this enemy
     private SpawnerV2 _spawner;
 
@@ -62,9 +65,10 @@ public class EnemyHandler : MonoBehaviour
 
         // Getting the components
         _aiBrain = this.GetComponent<AIBrain>();
+        _rigidbody = this.GetComponent<Rigidbody>();
 
         // Getting the special parried script if this enemy is a special
-        if(typeOfEnemy == EnemyType.SPECIAL)
+        if (typeOfEnemy == EnemyType.SPECIAL)
             _specialParried = this.GetComponent<SpecialParried>();
 
         // Get the particle parent
@@ -109,7 +113,7 @@ public class EnemyHandler : MonoBehaviour
     // Plays the hit parry effect
     public void PlayHitParryEffect()
     {
-        if(hasParryEffect)
+        if (hasParryEffect)
         {
             parryEffect.transform.SetParent(null);
             parryEffect.Play();
@@ -140,7 +144,7 @@ public class EnemyHandler : MonoBehaviour
     public bool IsParried()
     {
         // Safety check to make sure we only get the correct status
-        if(typeOfEnemy == EnemyType.SPECIAL)
+        if (typeOfEnemy == EnemyType.SPECIAL)
             return _specialParried.GetAbsorbable();
         else
         {
@@ -234,5 +238,10 @@ public class EnemyHandler : MonoBehaviour
     public AbilityHandler.AbilityType GetAbilityType()
     {
         return typeOfAbility;
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return _rigidbody;
     }
 }
