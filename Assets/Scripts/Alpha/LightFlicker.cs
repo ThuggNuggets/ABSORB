@@ -11,32 +11,32 @@ public class LightFlicker : MonoBehaviour
     public float flickerTime = 0.3f;
     public float maxTimeBetweenFlickers = 0.5f;
 
-    private Light lightObject;
-    private bool flicker = true;
-    private float maxRange;
-    private float randNumber;
-    private float tempTimer;
+    private Light _lightObject;
+    private bool _flicker = true;
+    private float _maxRange;
+    private float _randNumber;
+    private float _tempTimer;
 
     // Start is called before the first frame update
     void Start()
     {
-        lightObject = this.GetComponent<Light>();
-        maxRange = lightObject.range;
+        _lightObject = this.GetComponent<Light>();
+        _maxRange = _lightObject.range;
     }
 
     // Update is called once per frame
     void Update()
     {
-        tempTimer += Time.deltaTime;
+        _tempTimer += Time.deltaTime;
 
-        if (tempTimer >= maxTimeBetweenFlickers)
+        if (_tempTimer >= maxTimeBetweenFlickers)
         {
             // Get a random number
-            randNumber = CheckForFlicker();
+            _randNumber = CheckForFlicker();
             // if that random number is less than the frequency then flicker
-            if (randNumber <= frequencyPercentage)
+            if (_randNumber <= frequencyPercentage)
             {
-                lightObject.range = minLightRange;
+                _lightObject.range = minLightRange;
                 emmision.material.DisableKeyword("_EMISSION");
                 StartCoroutine(Flicker());
             }
@@ -46,9 +46,9 @@ public class LightFlicker : MonoBehaviour
     private IEnumerator Flicker()
     {
         yield return new WaitForSeconds(flickerTime);
-        tempTimer = 0f;
+        _tempTimer = 0f;
         emmision.material.EnableKeyword("_EMISSION");
-        lightObject.range = maxRange;
+        _lightObject.range = _maxRange;
     }
 
     private float CheckForFlicker()

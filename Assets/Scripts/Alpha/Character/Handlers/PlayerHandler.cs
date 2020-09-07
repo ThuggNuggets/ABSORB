@@ -19,6 +19,7 @@ public class PlayerHandler : MonoBehaviour
     [Header("Attributes")]
     public int maxHealth = 10;
     public float respawnFlyingTime = 5.0f;
+    public float respawnFlyingHeight = 20.0f;
     private int currentHealth = 10;
     public float offset = 10.0f;
 
@@ -31,10 +32,10 @@ public class PlayerHandler : MonoBehaviour
     private InputManager _inputManager;
     private CheckPoint _checkpoints;
     private Vector3 _respawnPosition;
+    private CapsuleCollider _capsule;
 
     Vector3 point = Vector3.zero;
     Vector3 point2 = Vector3.zero;
-
 
     // Flags
     private bool isAlive = true;
@@ -52,6 +53,7 @@ public class PlayerHandler : MonoBehaviour
         _combatHandler = this.GetComponent<CombatHandler>();
         _inputManager = FindObjectOfType<InputManager>();
         _checkpoints = FindObjectOfType<CheckPoint>();
+        _capsule = GetComponent<CapsuleCollider>();
     }
 
     void Start()
@@ -68,31 +70,30 @@ public class PlayerHandler : MonoBehaviour
         // {
         isAlive = true;
         currentHealth = maxHealth;
-        SomeMethodToDoStuff();
-        //StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition()));
+        StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), respawnFlyingHeight, respawnFlyingTime));
         //_transform.rotation = GetRespawnPosition().rotation;
         //}
     }
 
     // Move the player back to checkpoint position over a certain number of seconds
-    private IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
+    private IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float height, float seconds)
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        CapsuleCollider capsule = GetComponent<CapsuleCollider>();
-        capsule.enabled = false;
+        _capsule.enabled = false;
         _locomotionHandler.enabled = false;
         _rigidbody.useGravity = false;
 
         while (elapsedTime < seconds)
         {
-            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
+            //objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
+            objectToMove.transform.position = MathParabola.Parabola(startingPos, end, 20.0f, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         objectToMove.transform.position = end;
         _locomotionHandler.enabled = true;
-        capsule.enabled = true;
+        _capsule.enabled = true;
         _rigidbody.useGravity = true;
     }
 
@@ -120,26 +121,16 @@ public class PlayerHandler : MonoBehaviour
         return offsetPoint;
     }
 
-    void SomeMethodToDoStuff()
-    {
-        Vector3 point = GetPoint(this.transform.position, GetRespawnPosition());
-        Vector3 point2 = GetPoint(point, GetRespawnPosition());
+    // void OnDrawGizmos()
+    // {
+    //     Vector3 point = GetPoint(this.transform.position, GetRespawnPosition());
+    //     Vector3 point2 = GetPoint(point, GetRespawnPosition());
 
-        StartCoroutine(MoveOverSeconds(this.gameObject, point, 2.5f));
-        StartCoroutine(MoveOverSeconds(this.gameObject, point2, 1.5f));
-        StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), 1.0f));
-    }
-
-    void OnDrawGizmos()
-    {
-        Vector3 point = GetPoint(this.transform.position, GetRespawnPosition());
-        Vector3 point2 = GetPoint(point, GetRespawnPosition());
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(point, new Vector3(1.0f, 1.0f));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(point2, new Vector3(1.0f, 1.0f));
-    }
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawCube(point, new Vector3(1.0f, 1.0f));
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawCube(point2, new Vector3(1.0f, 1.0f));
+    // }
 
     #endregion
 
