@@ -44,7 +44,8 @@ public class EnemyHandler : MonoBehaviour
 
     private float _currentHealth = 0.0f;
     private bool _isAlive = true;
-    private SpecialParried _specialParried;
+    private SpecialParried _specialParried = null;
+    private EnemyGroupHandler _groupHandler = null;
 
     // The collider of this enemies weapon
     public Collider weaponCollider;
@@ -243,5 +244,15 @@ public class EnemyHandler : MonoBehaviour
     public Rigidbody GetRigidbody()
     {
         return _rigidbody;
+    }
+
+    public EnemyGroupHandler GetEnemyGroupHandler()
+    {
+        return _groupHandler;
+    }
+
+    public void SetEnemyGroupHandler(EnemyGroupHandler enemyGroupHandler)
+    {
+        _groupHandler = enemyGroupHandler;
     }
 }

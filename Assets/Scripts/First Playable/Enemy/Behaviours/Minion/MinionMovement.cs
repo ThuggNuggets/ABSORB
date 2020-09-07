@@ -80,8 +80,6 @@ public class MinionMovement : AIBehaviour
 
         // Getting the attack range from the nav mesh component
         _attackRange = brain.GetNavMeshAgent().stoppingDistance;
-
-
     }
 
     // Called on enter
@@ -91,7 +89,7 @@ public class MinionMovement : AIBehaviour
         _currentState = MovementState.NORMAL;    
         
         // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
-        this.LockDestinationToPlayer(destinationPadding);
+        //this.LockDestinationToPlayer(destinationPadding);
     }
 
     // Called every frame

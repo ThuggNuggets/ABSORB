@@ -45,4 +45,7 @@ public abstract class AIBehaviour : MonoBehaviour
         currentDestination = brain.PlayerTransform.position;
         brain.SetDestination(this.currentDestination, newDestinationPadding);
     }
+
+    // Returns true if the enemy is locked onto the player
+    public bool IsLockedOntoPlayer() => destinationLockedToPlayer;
 }
