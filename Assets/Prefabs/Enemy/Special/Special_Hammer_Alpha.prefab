@@ -248,7 +248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7280474130612938105
 Transform:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7280474130612938110}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -1965,7 +1965,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: b7124e63c5e0c7c48b547e5813bfa2f4, type: 2}
     - target: {fileID: 2657928986363669894, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
@@ -2100,7 +2100,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: b7124e63c5e0c7c48b547e5813bfa2f4, type: 2}
     m_RemovedComponents:
     - {fileID: 13303450, guid: beaf0944877d2be41a542b2bb70f9408, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: beaf0944877d2be41a542b2bb70f9408, type: 3}
