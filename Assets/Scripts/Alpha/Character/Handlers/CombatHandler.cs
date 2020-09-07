@@ -279,7 +279,6 @@ public class CombatHandler : MonoBehaviour
     #region Death
     private bool _respawning = false;
 
-
     private void UpdateDeath()
     {
         // Make the player fade away as they take damage

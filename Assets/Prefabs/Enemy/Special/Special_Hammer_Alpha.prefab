@@ -394,6 +394,7 @@ MonoBehaviour:
     behaviour: {fileID: 2117904859804173805}
   printCurrentState: 0
   currentStateReadOnly: NULL
+  pathUpdateCooldownTime: 0.2
 --- !u!114 &7280474130612938052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +451,7 @@ MonoBehaviour:
   destinationPadding: 1
   avoidDistance: 30
   startSwingDistance: 5
+  attackCooldown: 2
 --- !u!114 &7280474130612938097
 MonoBehaviour:
   m_ObjectHideFlags: 0

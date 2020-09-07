@@ -24,6 +24,9 @@ public class PlayerHandler : MonoBehaviour
     public float offset = 10.0f;
 
     // References
+    [Header("References")]
+    public SkinnedMeshRenderer abidaroMesh;
+    public GameObject respawnParticle;
     private Animator _animator;
     private Rigidbody _rigidbody;
     private Transform _transform;
@@ -60,6 +63,8 @@ public class PlayerHandler : MonoBehaviour
     {
         // Set the player position as a respawn point
         SetRespawnPosition(this._transform.position); // Might have to rewrite to be Vector3 instead of transform
+        abidaroMesh.enabled = true;
+        respawnParticle.SetActive(false);
     }
 
     #region Player Respawn
@@ -80,9 +85,9 @@ public class PlayerHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        _capsule.enabled = false;
-        _locomotionHandler.enabled = false;
-        _rigidbody.useGravity = false;
+
+        // Stuff to disable while flying
+        DisableReferences();
 
         while (elapsedTime < seconds)
         {
@@ -91,12 +96,15 @@ public class PlayerHandler : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
+        // Turn that stuff back on after flight is complete
+        EnableReferences();
+
+        // Set to end position as a failsafe
         objectToMove.transform.position = end;
-        _locomotionHandler.enabled = true;
-        _capsule.enabled = true;
-        _rigidbody.useGravity = true;
     }
 
+    // Get a mid point between two positions
     private Vector3 GetPoint(Vector3 object1, Vector3 object2)
     {
         //get the positions of our transforms
@@ -119,6 +127,30 @@ public class PlayerHandler : MonoBehaviour
         Vector3 offsetPoint = midPoint + (perpDir * offset);
 
         return offsetPoint;
+    }
+
+    private void DisableReferences()
+    {
+        // TO-DO:
+        // - Disable player mesh
+        // - Enable player death particle effect
+        abidaroMesh.enabled = false;
+        respawnParticle.SetActive(true);
+        _capsule.enabled = false;
+        _locomotionHandler.enabled = false;
+        _rigidbody.useGravity = false;
+    }
+
+    private void EnableReferences()
+    {
+        // TO-DO:
+        // - Enable player mesh
+        // - Disable player death particle effect
+        abidaroMesh.enabled = true;
+        respawnParticle.SetActive(false);
+        _locomotionHandler.enabled = true;
+        _capsule.enabled = true;
+        _rigidbody.useGravity = true;
     }
 
     // void OnDrawGizmos()
