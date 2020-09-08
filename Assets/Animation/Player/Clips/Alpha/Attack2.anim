@@ -13520,14 +13520,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: Key_EnablePlayerWeaponObject
+    functionName: Key_EnableMEDIUMPlayerWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.36666667
-    functionName: Key_DisableWeaponObject
+    functionName: Key_DisableMEDIUMWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

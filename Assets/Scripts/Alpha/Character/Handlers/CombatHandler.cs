@@ -14,6 +14,7 @@ public class CombatHandler : MonoBehaviour
     public MeshRenderer shieldMeshRenderer;
     public Collider shieldSphereCollider;
     public SkinnedMeshRenderer playerWeapon;
+    public SkinnedMeshRenderer playerWeapon2;
     public SkinnedMeshRenderer bigPlayerWeapon;
     public AudioSource weaponSwingAudio;
     public SkinnedMeshRenderer playerShader;
@@ -116,6 +117,16 @@ public class CombatHandler : MonoBehaviour
     public void Key_DisableWeaponObject()
     {
         playerWeapon.enabled = false;
+    }
+
+    public void Key_EnableMEDIUMPlayerWeaponObject()
+    {
+        playerWeapon2.enabled = true;
+    }
+
+    public void Key_DisableMEDIUMWeaponObject()
+    {
+        playerWeapon2.enabled = false;
     }
 
     public void Key_EnableBIGPlayerWeaponObject()
