@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710207296}
   - component: {fileID: 710207295}
+  - component: {fileID: 710207297}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -92,6 +93,23 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &710207297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710207294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ceff2296b848e2418da1e8c1e725209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emmision: {fileID: 4773020657559218072}
+  minLightRange: 5
+  frequencyPercentage: 50
+  flickerTime: 0.05
+  maxTimeBetweenFlickers: 0.05
 --- !u!1 &22283360145975828
 GameObject:
   m_ObjectHideFlags: 0
