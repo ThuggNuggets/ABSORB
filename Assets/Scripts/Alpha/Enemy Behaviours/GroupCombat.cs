@@ -7,36 +7,50 @@ public class GroupCombat : GroupState
     [Header("Properties")]
     public float beginHuddleDistance = 20.0f;
     public float huddleDistance = 10.0f;
+    public float queueTime = 1.5f;
+    private bool queueFlag = false;
+    private Vector3 _positionFix;
+    private List<EnemyHandler> _unitSlots;
+    private int _activeIndex = 0;
 
-    List<EnemyHandler> _slots = new List<EnemyHandler>();
-
-    public override void OnStateEnter() { }
+    public override void OnStateEnter()
+    {
+        // Sorting unit slots by closest to player
+        SortUnitList();
+        _activeIndex = 0;
+    }
 
     public override void OnStateUpdate()
     {
-        if (this.enemyGroupHandler.GetDistanceFromPlayer() <= beginHuddleDistance)
+        if (this.enemyGroupHandler.GetCOMDistanceFromPlayer() <= beginHuddleDistance)
         {
-            // Making each enemy find a position around the player, if not locked on
+            // Queue slot for attack
+            if (!queueFlag)
+                StartCoroutine(QueueAttack());
+
+            // Iterating over the enemy list within the group handler
             for (int i = 0; i < this.enemyGroupHandler.GetEnemies().Count; ++i)
             {
+                // Get the enemy brain at this index
                 AIBrain aiBrain = enemyGroupHandler.GetEnemy(i).GetBrain();
-                if (!aiBrain.GetAIBehaviour("Movement").IsLockedOntoPlayer())
-                {
-                    // Fix the tilt back
-                    Vector3 posFix = aiBrain.PlayerTransform.position;
-                    posFix.y = aiBrain.transform.position.y;
 
-                    // Move enemy into position and make them face player
-                    aiBrain.transform.forward = (posFix - aiBrain.transform.position).normalized; ;
-                    aiBrain.GetAIBehaviour("Movement").OverrideDestination(GetPositionAroundPlayer(i), 1.0f);
+                // Checking if the enemy isn't attacking the player
+                if (!aiBrain.GetAIBehaviour("Movement").IsLockedOntoPlayer() && !aiBrain.GetHandler().IsParried())
+                {
+                    // Forcing the enemy to face the player
+                    _positionFix = aiBrain.PlayerTransform.position;
+                    _positionFix.y = aiBrain.transform.position.y;
+                    aiBrain.transform.forward = (_positionFix - aiBrain.transform.position).normalized;
+
+                    // Move enemy into position around the player according to index
+                    aiBrain.GetAIBehaviour("Movement").OverrideDestination(GetPositionAroundPlayer(aiBrain, i), 1.0f);
                 }
             }
         }
         else
         {
-            // Moving towards the player via flocking calculations
-            this.enemyGroupHandler.SetTargetDestination(this.enemyGroupHandler.playerTransform.position);
-            this.enemyGroupHandler.UpdateAllFlockDestinations();
+            // Returning to chase if not in distance
+            enemyGroupHandler.SetState(EnemyGroupHandler.E_GroupState.CHASE);
         }
     }
 
@@ -44,11 +58,45 @@ public class GroupCombat : GroupState
 
     public override void OnStateExit() { }
 
-    public Vector3 GetPositionAroundPlayer(int index)
+    public Vector3 GetPositionAroundPlayer(AIBrain enemy, int index)
     {
         float degreesPerIndex = 360f / this.enemyGroupHandler.GetEnemies().Count;
         var pos = this.enemyGroupHandler.playerTransform.position;
-        var offset = new Vector3(0f, 0f, huddleDistance);
+        var offset = new Vector3(0f, 0f, huddleDistance + enemy.GetNavMeshAgent().stoppingDistance);
         return pos + (Quaternion.Euler(new Vector3(0f, degreesPerIndex * index, 0f)) * offset);
+    }
+
+    private IEnumerator QueueAttack()
+    {
+        // Attacking the player 
+        queueFlag = true;
+        _unitSlots[_activeIndex].GetBrain().GetAIBehaviour("Movement").LockDestinationToPlayer(1.0f);
+
+        // Waiting a certain amount of time
+        yield return new WaitForSeconds(queueTime);
+        
+        // Move enemy into position and make them face player
+        if(!_unitSlots[_activeIndex].IsParried())
+            _unitSlots[_activeIndex].GetBrain().GetAIBehaviour("Movement").OverrideDestination(GetPositionAroundPlayer(_unitSlots[_activeIndex].GetBrain(), _activeIndex), 1.0f);
+        
+        // Wrapping the index count
+        if(_activeIndex >= _unitSlots.Count - 1)
+            _activeIndex = 0;
+        else
+            _activeIndex++;
+
+        queueFlag = false;
+    }
+
+    public void SortUnitList()
+    {
+        _unitSlots = new List<EnemyHandler>(enemyGroupHandler.GetEnemies());
+        _unitSlots.Sort((u1, u2) => u1.GetBrain().GetDistanceToPlayer().CompareTo(u2.GetBrain().GetDistanceToPlayer()));
+    }
+
+    public void RemoveFromUnitSlot(EnemyHandler enemy)
+    {
+        _unitSlots.Remove(enemy);
+        SortUnitList();
     }
 }

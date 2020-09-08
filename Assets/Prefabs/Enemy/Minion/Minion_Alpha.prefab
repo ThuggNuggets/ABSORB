@@ -19265,6 +19265,7 @@ MonoBehaviour:
   totalDistance: 20
   minY: 3
   maxY: 3
+  autoDetectionRadius: 7.5
 --- !u!114 &4165402235293637487
 MonoBehaviour:
   m_ObjectHideFlags: 0

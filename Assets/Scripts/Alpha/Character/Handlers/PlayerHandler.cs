@@ -246,8 +246,8 @@ public class PlayerHandler : MonoBehaviour
 
     public Vector3 SetRespawnPosition(Vector3 checkpointPosition)
     {
-        Debug.Log("Set new respawn position at: (" + checkpointPosition.x + ", " +
-        checkpointPosition.y + ", " + checkpointPosition.z + ")");
+        // Debug.Log("Set new respawn position at: (" + checkpointPosition.x + ", " +
+        // checkpointPosition.y + ", " + checkpointPosition.z + ")");
         return _respawnPosition = checkpointPosition;
     }
 

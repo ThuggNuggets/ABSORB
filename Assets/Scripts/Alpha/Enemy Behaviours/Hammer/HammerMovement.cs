@@ -22,6 +22,9 @@ public class HammerMovement : AIBehaviour
     // The attack transition range; set from "stopping distance" within the nav mesh component
     private float _attackRange = 0.0f;
 
+    // Can the hammer enter back into attack?
+    private bool _canAttack = true;
+
     // Called before first frame
     private void Start()
     {
@@ -34,6 +37,15 @@ public class HammerMovement : AIBehaviour
 
     public override void OnStateEnter()
     {
+        // Only executing the following code if within group
+        if(brain.GetLastStateID() == "Attack" && 
+           brain.GetHandler().GetEnemyGroupHandler() && 
+           brain.GetDistanceToPlayer() < _attackRange)
+        {
+            _canAttack = false;
+            return;
+        }
+
         // Checking if the state we came from was the attack behaviour
         if (brain.GetLastStateID() == "Attack")
         {
@@ -64,6 +76,13 @@ public class HammerMovement : AIBehaviour
         if(_isOnCooldown)
             return;
 
+        // Checking if we can attack again
+        if(!_canAttack)
+        {
+            if(brain.GetDistanceToPlayer() >= _attackRange)
+                _canAttack = true;
+        }
+
         // Checking if we should be locked onto the player or not...
         if (this.destinationLockedToPlayer)
             this.currentDestination = brain.PlayerTransform.position;
@@ -72,7 +91,7 @@ public class HammerMovement : AIBehaviour
         brain.SetDestinationOnCooldown(this.currentDestination, destinationPadding);
 
         // If player is within attack range;
-        if (brain.GetNavMeshAgent().remainingDistance <= _attackRange + startSwingDistance)
+        if (brain.GetNavMeshAgent().remainingDistance <= _attackRange + startSwingDistance && _canAttack)
         {
             // Enemy will enter attack phase if locked onto player:
             if (this.destinationLockedToPlayer)
@@ -82,10 +101,14 @@ public class HammerMovement : AIBehaviour
             }
             else
             {
-                if (_isAvoiding)
+                if (_isAvoiding && !brain.GetHandler().GetEnemyGroupHandler())
                 {
                     this.LockDestinationToPlayer(destinationPadding);
                     _isAvoiding = false;
+                }
+                else
+                {
+                    
                 }
 
                 // Here is what they'll do when they aren't locked on

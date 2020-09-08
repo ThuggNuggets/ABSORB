@@ -21,7 +21,7 @@ public class AbilityHandler : MonoBehaviour
 
     private Ability[] _abilities;
     private AbilityType _currentAbility = AbilityType.NONE;
-    private List<RaycastHit> _sortedHitList = new List<RaycastHit>();
+    private List<Collider> _sortedHitList = new List<Collider>();
     private PlayerHandler _playerHandler;
     private InputManager _inputManager;
     private LocomotionHandler _locomotionHanlder;
@@ -78,6 +78,8 @@ public class AbilityHandler : MonoBehaviour
                 _animator.SetBool("Absorb", true);
                 _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
                 enemy.GetBrain().SetBehaviour("Absorbed");
+                enemy.GetEnemyGroupHandler().Remove(enemy);
+
                 this.SetAbility(enemy.GetAbilityType());
             }
         }
@@ -107,21 +109,22 @@ public class AbilityHandler : MonoBehaviour
         _sortedHitList.Clear();
 
         // Scan for enemies within radius of player
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, parriedCastRadius, Vector3.up, 0.0f, parriedCastLayer);
-
-        // If we don't hit anything, print a warning then exit this function
-        if (hits.Length <= 0)
-        {
-            Debug.LogWarning("Ability Handler: Sphere cast didn't hit any enemies.");
-            return null;
-        }
+        Collider[] hits = Physics.OverlapSphere(transform.position, parriedCastRadius);
 
         // Populating a list with collided transforms and distances from origin
-        foreach (RaycastHit hit in hits)
-            _sortedHitList.Add(hit);
+        foreach (Collider c in hits)
+        {
+            if(c.CompareTag("EnemySpecial"))
+                _sortedHitList.Add(c);
+        }
+
+        // If we don't hit anything, print a warning then exit this function
+        if (_sortedHitList.Count <= 0)
+            return null;
 
         // Sorting list based on distance
-        _sortedHitList.Sort((h1, h2) => h1.distance.CompareTo(h2.distance));
+        _sortedHitList.Sort((h1, h2) => Vector3.Distance(h1.transform.position, transform.position)
+                             .CompareTo(Vector3.Distance(h2.transform.position, transform.position)));
 
         // Returning the closest enemy that is parried
         for (int i = 0; i < _sortedHitList.Count; ++i)
@@ -132,7 +135,6 @@ public class AbilityHandler : MonoBehaviour
         }
 
         // Returning null and logging an error, since we shouldn't get here
-        Debug.LogError("Ability Handler: GetClosestParriedEnemy() reached end of function without finding an enemy.");
         return null;
     }
 }

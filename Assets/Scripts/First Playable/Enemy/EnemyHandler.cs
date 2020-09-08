@@ -148,10 +148,7 @@ public class EnemyHandler : MonoBehaviour
         if (typeOfEnemy == EnemyType.SPECIAL)
             return _specialParried.GetAbsorbable();
         else
-        {
-            Debug.LogError("ERROR: Tried to get parried status on wrong enemy type.");
             return false;
-        }
     }
 
     // Activates the weapons collider

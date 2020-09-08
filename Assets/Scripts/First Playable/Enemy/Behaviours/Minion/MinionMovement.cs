@@ -86,8 +86,8 @@ public class MinionMovement : AIBehaviour
     public override void OnStateEnter()
     {
         // Setting the entry state to "normal"
-        _currentState = MovementState.NORMAL;    
-        
+        _currentState = MovementState.NORMAL;
+
         // Currently setting the on enter destination to the player; in the future we'll have to set the destination from a "EnemyAI Controller"
         //this.LockDestinationToPlayer(destinationPadding);
     }
@@ -206,7 +206,7 @@ public class MinionMovement : AIBehaviour
             ForceAvoidState();
         }
     }
-    
+
     // Forces the avoid function
     // TODO: Make this check if the destination is on the same Y or something
     // because the minion can run all the way down a platform when trying to avoid

@@ -27,11 +27,17 @@ public class EnemyGroupHandler : MonoBehaviour
     [Header("Combat Engagement Properties")]
     public float engagementDistance = 10.0f;
 
+    [Header("Debug")]
+    public bool debugCurrentState = false;
+
     private GroupState[] _groupStates;
     private E_GroupState _currentState;
 
     // List of enemies within group
     protected List<EnemyHandler> enemies = new List<EnemyHandler>();
+
+    // Reference to the group combat state
+    private GroupCombat _groupCombat;
 
     // The end destination of the group 
     protected Vector3 _targetDestination = Vector3.zero;
@@ -48,6 +54,7 @@ public class EnemyGroupHandler : MonoBehaviour
         _groupStates[(int)E_GroupState.CHASE] = this.GetComponent<GroupChase>();
         _groupStates[(int)E_GroupState.COMBAT] = this.GetComponent<GroupCombat>();
         _groupStates[(int)E_GroupState.RETREAT] = this.GetComponent<GroupRetreat>();
+        _groupCombat = this.GetComponent<GroupCombat>();
 
         // Initialise the parent child connection in all the group states
         foreach (GroupState s in _groupStates)
@@ -65,7 +72,7 @@ public class EnemyGroupHandler : MonoBehaviour
     private void Start()
     {
         // Setting the enemies into their idle state
-        _currentState = E_GroupState.WANDER;
+        SetState(E_GroupState.WANDER);
     }
 
     // Called every frame
@@ -73,6 +80,10 @@ public class EnemyGroupHandler : MonoBehaviour
     {
         // Updating the current state
         _groupStates[(int) _currentState].OnStateUpdate();
+
+        // Printing debug
+        if(debugCurrentState)
+            Debug.Log(_currentState);
     }
 
     // Set the current state of the handler
@@ -88,7 +99,11 @@ public class EnemyGroupHandler : MonoBehaviour
     public void Add(EnemyHandler enemy) => enemies.Add(enemy);
 
     // Removes an enemy from the group
-    public void Remove(EnemyHandler enemy) => enemies.Remove(enemy);
+    public void Remove(EnemyHandler enemy)
+    {
+        enemies.Remove(enemy);
+        _groupCombat.RemoveFromUnitSlot(enemy);
+    }
 
      // Update the target destination of the group
     public void SetTargetDestination(Vector3 position) => _targetDestination = position;
@@ -177,6 +192,9 @@ public class EnemyGroupHandler : MonoBehaviour
     // Returns a specified enemy
     public EnemyHandler GetEnemy(int index) => enemies[index];
 
+    // Returns the amount of enemies within group
+    public int GetEnemyCount() => _groupStates.Length;
+
     // Returns the distance from the center of the group and the player
-    public float GetDistanceFromPlayer() => Vector3.Distance(CalculateCenterOfMass(), playerTransform.position);
+    public float GetCOMDistanceFromPlayer() => Vector3.Distance(CalculateCenterOfMass(), playerTransform.position);
 }

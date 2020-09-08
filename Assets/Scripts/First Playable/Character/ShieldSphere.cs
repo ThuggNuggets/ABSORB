@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class ShieldSphere : MonoBehaviour
 {
-    public SpecialParryBlock player;
-
-    private void OnCollisionEnter(Collision collision)
+    public CombatHandler player;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && 
-            collision.collider.gameObject.layer == LayerMask.NameToLayer("EnemyWeapon"))
-        {
-            //player.specialAttackParried = true;
-            Debug.Log("Attack Parried!");
-        }
+       if (player.shieldState == CombatHandler.ShieldState.Shielding && other.gameObject.CompareTag("EnemyWeapon"))
+       {
+           EnemyHandler enemy = other.GetComponentInParent<EnemyHandler>();
+           switch(enemy.GetEnemyType())
+           {
+               case EnemyHandler.EnemyType.SPECIAL:
+                    enemy.GetBrain().SetBehaviour("Parried");
+               break;
+           }
+       }    
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (player.shieldState == SpecialParryBlock.ShieldState.Shielding && other.gameObject.CompareTag("EnemyWeapon"))
-    //    {
-    //        player.specialAttackParried = true;
-    //        Debug.Log("Attack Parried!");
-    //    }    
-    //}
 }
