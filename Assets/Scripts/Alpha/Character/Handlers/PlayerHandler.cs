@@ -20,7 +20,7 @@ public class PlayerHandler : MonoBehaviour
     public int maxHealth = 10;
     public float respawnFlyingTime = 5.0f;
     public float respawnFlyingHeight = 20.0f;
-    private int currentHealth = 10;
+    private int _currentHealth = 10;
 
     // References
     [Header("References")]
@@ -74,7 +74,7 @@ public class PlayerHandler : MonoBehaviour
         // if (!isAlive)
         // {
         isAlive = true;
-        currentHealth = maxHealth;
+        _currentHealth = maxHealth;
         StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), respawnFlyingHeight, respawnFlyingTime));
         //_transform.rotation = GetRespawnPosition().rotation;
         //}
@@ -180,7 +180,18 @@ public class PlayerHandler : MonoBehaviour
 
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return _currentHealth;
+    }
+
+    // Return the amount of damage the player should take
+    public float TakeDamage(int damageAmount)
+    {
+        //hitParticleSystem.Play();
+        // hitSoundEffect.Play();
+        //collidedObject = null;
+        // if (debug)
+        //     Debug.Log("Player damage taken: " + damageAmount);
+        return _currentHealth -= damageAmount;
     }
 
     public void SetState(PlayerAnimatorState state)

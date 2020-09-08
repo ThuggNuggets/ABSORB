@@ -162,6 +162,19 @@ public class CombatHandler : MonoBehaviour
 
     #endregion
 
+    #region Take Damage
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyWeapon"))
+        {
+            EnemyHandler enemy = other.gameObject.GetComponentInParent<EnemyHandler>();
+            _playerHandler.TakeDamage(enemy.GetDamage());
+        }
+    }
+
+    #endregion
+
     #region Shield
     // Attributes
     [Header("Timers", order = 0)]

@@ -37,7 +37,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField] AbilityHandler.AbilityType typeOfAbility = AbilityHandler.AbilityType.NONE;
 
     public float maxHealth = 100.0f;
-    public float baseDamage = 10.0f;
+    public int baseDamage = 10;
 
     [Header("Debug Options")]
     public bool printHealthStats = false;
@@ -136,7 +136,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Returns the base damage of the enemy.
-    public float GetDamage()
+    public int GetDamage()
     {
         return baseDamage;
     }
