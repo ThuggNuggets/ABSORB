@@ -10,13 +10,20 @@ public class CombatHandler : MonoBehaviour
     */
 
     // References
+
+    [Header("Shield")]
     [Header("References")]
     public MeshRenderer shieldMeshRenderer;
     public Collider shieldSphereCollider;
+    [Header("Weapon")]
     public SkinnedMeshRenderer playerWeapon;
     public SkinnedMeshRenderer playerWeapon2;
-    public SkinnedMeshRenderer bigPlayerWeapon;
+    public SkinnedMeshRenderer playerWeapon3;
+    public Collider playerWeaponColl;
+    public Collider playerWeaponColl2;
+    public Collider playerWeaponColl3;
     public AudioSource weaponSwingAudio;
+    [Header("Body")]
     public SkinnedMeshRenderer playerShader;
     private PlayerHandler _playerHandler;
     private InputManager _inputManager;
@@ -112,31 +119,37 @@ public class CombatHandler : MonoBehaviour
     public void Key_EnablePlayerWeaponObject()
     {
         playerWeapon.enabled = true;
+        playerWeaponColl.enabled = true;
     }
 
     public void Key_DisableWeaponObject()
     {
         playerWeapon.enabled = false;
+        playerWeaponColl.enabled = false;
     }
 
     public void Key_EnableMEDIUMPlayerWeaponObject()
     {
         playerWeapon2.enabled = true;
+        playerWeaponColl2.enabled = true;
     }
 
     public void Key_DisableMEDIUMWeaponObject()
     {
         playerWeapon2.enabled = false;
+        playerWeaponColl2.enabled = false;
     }
 
     public void Key_EnableBIGPlayerWeaponObject()
     {
-        bigPlayerWeapon.enabled = true;
+        playerWeapon3.enabled = true;
+        playerWeaponColl3.enabled = true;
     }
 
     public void Key_DisableBIGWeaponObject()
     {
-        bigPlayerWeapon.enabled = false;
+        playerWeapon3.enabled = false;
+        playerWeaponColl3.enabled = false;
     }
 
     public void Key_PlayWeaponSound()
