@@ -22,7 +22,7 @@ public class PlayerShield : StateMachineBehaviour
         if (_playerHandler != null)
         {
             _playerHandler.GetCombatHandler().shieldMeshRenderer.enabled = true;
-            _playerHandler.GetCombatHandler().enabled = true;
+            _playerHandler.GetCombatHandler().shieldSphereCollider.enabled = true;
         }
         else
             Debug.LogWarning("Player Handler not found.");

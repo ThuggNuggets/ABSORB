@@ -21,10 +21,10 @@ public class PlayerHandler : MonoBehaviour
     public float respawnFlyingTime = 5.0f;
     public float respawnFlyingHeight = 20.0f;
     private int currentHealth = 10;
-    public float offset = 10.0f;
 
     // References
     [Header("References")]
+    private float offset = 10.0f;
     public SkinnedMeshRenderer abidaroMesh;
     public GameObject respawnParticle;
     private Animator _animator;
