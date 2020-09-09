@@ -94,7 +94,7 @@ public class AbilityHandler : MonoBehaviour
                 _animator.SetBool("Absorb", true);
                 _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
                 enemy.GetBrain().SetBehaviour("Absorbed");
-                enemy.GetEnemyGroupHandler().Remove(enemy);
+                enemy.GetEnemyGroupHandler()?.Remove(enemy);
                 this.SetAbility(enemy.GetAbilityType());
                 abilityArms[(int)_currentAbility].enabled = true;
             }
