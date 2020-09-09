@@ -104,6 +104,10 @@ public class AbilityHammer : Ability
                 }
                 hit.transform.gameObject.GetComponent<EnemyHandler>().TakeDamage(damage, AbilityHandler.AbilityType.HAMMER);
             }
+            else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                hit.transform.gameObject.SetActive(false);
+            }
         }
     }
 }
