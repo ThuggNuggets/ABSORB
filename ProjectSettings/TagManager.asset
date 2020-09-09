@@ -21,16 +21,16 @@ TagManager:
   - Player
   - Enemy
   - EnemyWeapon
-  - ArenaBarrier
-  - PlayerWeapon
-  - Shield
-  - EnemyProjectile
   - PlayerMelee
   - Ground
   - EnemyMovementRaycast
   - EOWRayCheck
   - ChapelTerrain
   - SpecialEnemyCast
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

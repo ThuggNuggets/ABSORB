@@ -507,6 +507,7 @@ MonoBehaviour:
   totalDistance: 20
   minY: 3
   maxY: 3
+  autoDetectionRadius: 7.5
 --- !u!114 &6809976860378941607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,7 +1950,7 @@ PrefabInstance:
     - target: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}
       propertyPath: m_TagString
-      value: EnemySpecial
+      value: EnemyWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 846831548710082880, guid: beaf0944877d2be41a542b2bb70f9408,
         type: 3}

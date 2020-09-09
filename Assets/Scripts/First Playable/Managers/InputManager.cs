@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     */
 
     public XboxController controller;
+    [HideInInspector]
     public CinemachineFreeLook cinemachine;
 
     [Header("Attack Button")]

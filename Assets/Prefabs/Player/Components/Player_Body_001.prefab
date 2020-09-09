@@ -1162,6 +1162,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.9959794
       objectReference: {fileID: 0}
+    - target: {fileID: 1105240709263999750, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1465471847663723219, guid: de4dfb6c8c29dbe4db16b2fec5a8a7b3,
         type: 3}
       propertyPath: m_Name
@@ -1632,7 +1637,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1869582312}
+      objectReference: {fileID: 0}
     - target: {fileID: 8469116965315809714, guid: 42fc188a46eef33488230d24ade6207b,
         type: 3}
       propertyPath: m_Enabled
