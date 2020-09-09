@@ -10,9 +10,6 @@ public class AbilityHammer : Ability
 
     [Header("Properties")]
     public float groundSmashReparentTimer = 2.0f;
-    public float damageToMinion = 50.0f;
-    public float damageToSpecial = 20.0f;
-    public float damageToElite = 100.0f;
     public float areaOfEffect = 10.0f;
 
     private Vector3 _groundSmashImpactLocation = Vector3.zero;
@@ -25,31 +22,36 @@ public class AbilityHammer : Ability
     private void Awake()
     {
         _playerHandler = this.GetComponent<PlayerHandler>();
-        _animator = _playerHandler.GetAnimator();
         _groundSmashParent = hammerGameObject.transform.parent;
         _groundSmashImpactLocation = groundSmashTransform.position;
         _groundSmashAudio = groundSmashTransform.GetComponent<AudioSource>();
         _groundSmashParticleSystem = groundSmashTransform.GetComponent<ParticleSystem>();
     }
 
-    public override void OnEnter() 
+    private void Start()
     {
-        hammerGameObject.SetActive(true);
+        _animator = _playerHandler.GetAnimator();
     }
 
-    public override void OnExit() {}
+    public override void OnEnter() { }
+
+    public override void OnExit()
+    {
+        active = false;
+        hammerGameObject.SetActive(true);
+    }
 
     public override void Activate()
     {
         active = true;
-        _animator.SetBool("HammerAttack", true);
+        _animator.SetBool("Hammer", true);
     }
 
     // Key Event: Deactivates the hammer ability; only to be called through animation key event
-    public void Key_Deactivate()
+    public void Key_DeactivateHammerAbility()
     {
         hammerGameObject.SetActive(false);
-        _animator.SetBool("HammerAttack", false);
+        _animator.SetBool("Hammer", false);
         abilityHandler.SetAbility(AbilityHandler.AbilityType.NONE);
     }
 
@@ -57,11 +59,13 @@ public class AbilityHammer : Ability
     public void Key_ActivateHammerGroundSmash()
     {
         // Unparent and play VFX
+        hammerGameObject.SetActive(true);
         groundSmashTransform.SetParent(null);
         _groundSmashParticleSystem.Play();
         _groundSmashAudio.Play();
+        abilityHandler.abilityArms[(int)AbilityHandler.AbilityType.HAMMER].enabled = false;
         StartCoroutine(ReparentGroundSmash());
-        
+
         // Check for any hits
         CheckForEnemyHit();
         active = false;

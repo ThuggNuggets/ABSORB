@@ -75,12 +75,20 @@ public class GroupCombat : GroupState
         // Waiting a certain amount of time
         yield return new WaitForSeconds(queueTime);
         
+        // Check if there are any enemies are left before proceeding
+        if(this.enemyGroupHandler.GetEnemies().Count <= 0)
+        {
+            _activeIndex = 0;
+            queueFlag = false;
+            yield break;
+        }
+
         // Move enemy into position and make them face player
-        if(!_unitSlots[_activeIndex].IsParried())
+        if (!_unitSlots[_activeIndex].IsParried())
             _unitSlots[_activeIndex].GetBrain().GetAIBehaviour("Movement").OverrideDestination(GetPositionAroundPlayer(_unitSlots[_activeIndex].GetBrain(), _activeIndex), 1.0f);
-        
+
         // Wrapping the index count
-        if(_activeIndex >= _unitSlots.Count - 1)
+        if (_activeIndex >= _unitSlots.Count - 1)
             _activeIndex = 0;
         else
             _activeIndex++;
@@ -96,7 +104,14 @@ public class GroupCombat : GroupState
 
     public void RemoveFromUnitSlot(EnemyHandler enemy)
     {
+        StopCoroutine(QueueAttack());
         _unitSlots.Remove(enemy);
         SortUnitList();
+        
+        // Wrapping the index count
+        if (_activeIndex >= _unitSlots.Count - 1)
+            _activeIndex = 0;
+        else
+            _activeIndex++;
     }
 }

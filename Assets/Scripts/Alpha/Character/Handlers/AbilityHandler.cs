@@ -19,6 +19,9 @@ public class AbilityHandler : MonoBehaviour
     public LayerMask parriedCastLayer;
     public float parriedCastRadius = 5.0f;
 
+    [Header("Arm Skin Mesh Renderers")]
+    public List<SkinnedMeshRenderer> abilityArms = new List<SkinnedMeshRenderer>();
+
     private Ability[] _abilities;
     private AbilityType _currentAbility = AbilityType.NONE;
     private List<Collider> _sortedHitList = new List<Collider>();
@@ -26,6 +29,7 @@ public class AbilityHandler : MonoBehaviour
     private InputManager _inputManager;
     private LocomotionHandler _locomotionHanlder;
     private Animator _animator;
+    private bool _isAbosrbing = false;
 
     // Called on initialise
     private void Start()
@@ -34,10 +38,18 @@ public class AbilityHandler : MonoBehaviour
         _playerHandler = this.GetComponent<PlayerHandler>();
 
         // Assign all the abilites
-        _abilities = new Ability[(int) AbilityType.POT + 1];
-        _abilities[(int) AbilityType.SICKLE] = this.GetComponent<AbilitySickle>();
-        _abilities[(int) AbilityType.HAMMER] = this.GetComponent<AbilityHammer>();
-        _abilities[(int) AbilityType.POT]    = this.GetComponent<AbilityPot>();
+        _abilities = new Ability[(int)AbilityType.POT + 1];
+        _abilities[(int)AbilityType.NONE] = null;
+        _abilities[(int)AbilityType.SICKLE] = this.GetComponent<AbilitySickle>();
+        _abilities[(int)AbilityType.HAMMER] = this.GetComponent<AbilityHammer>();
+        _abilities[(int)AbilityType.POT] = this.GetComponent<AbilityPot>();
+
+        // Initialising the handler-child connection
+        foreach (Ability a in _abilities)
+        {
+            if (a != null)
+                a.Initialise(this);
+        }
 
         // Getting the references out of the player handler
         _inputManager = _playerHandler.GetInputManager();
@@ -60,8 +72,11 @@ public class AbilityHandler : MonoBehaviour
         else
         {
             // Checking if the player requests to acitvate their current ability
-            if (_inputManager.GetSpecialAttackButtonPress())
-                _abilities[(int) _currentAbility].Activate();
+            if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
+            {
+                if (!_abilities[(int)_currentAbility].IsActive())
+                    _abilities[(int)_currentAbility].Activate();
+            }
         }
     }
 
@@ -75,12 +90,13 @@ public class AbilityHandler : MonoBehaviour
             EnemyHandler enemy = GetClosestParriedEnemy();
             if (enemy != null)
             {
+                _isAbosrbing = true;
                 _animator.SetBool("Absorb", true);
                 _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
                 enemy.GetBrain().SetBehaviour("Absorbed");
                 enemy.GetEnemyGroupHandler().Remove(enemy);
-
                 this.SetAbility(enemy.GetAbilityType());
+                abilityArms[(int)_currentAbility].enabled = true;
             }
         }
     }
@@ -90,6 +106,7 @@ public class AbilityHandler : MonoBehaviour
     {
         _animator.SetBool("Absorb", false);
         _playerHandler.GetLocomotionHandler().Key_DeactivateSlowdown();
+        _isAbosrbing = false;
     }
 
     // Sets the current ability
@@ -99,7 +116,9 @@ public class AbilityHandler : MonoBehaviour
             _abilities[(int)_currentAbility].OnExit();
 
         _currentAbility = nextAbility;
-        _abilities[(int)_currentAbility].OnEnter();
+
+        if (_currentAbility != AbilityType.NONE)
+            _abilities[(int)_currentAbility].OnEnter();
     }
 
     // Returns the closest parried enemy to the player
@@ -114,7 +133,7 @@ public class AbilityHandler : MonoBehaviour
         // Populating a list with collided transforms and distances from origin
         foreach (Collider c in hits)
         {
-            if(c.CompareTag("EnemySpecial"))
+            if (c.CompareTag("EnemySpecial"))
                 _sortedHitList.Add(c);
         }
 

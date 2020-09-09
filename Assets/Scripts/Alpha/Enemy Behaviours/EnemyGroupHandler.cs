@@ -128,9 +128,6 @@ public class EnemyGroupHandler : MonoBehaviour
             foreach (EnemyHandler enemy in enemies)
                 enemy.GetBrain().GetAIBehaviour("Movement").OverrideDestination(GetFlockDestination(enemy), 1.0f);
         }
-        // Else, print error message; we shouldn't be here.
-        else
-            Debug.LogError("Group Handler Error: Tried to update flock destinations on empty group!");
     }
 
     // Returns the correct direction for the enemy to move towards, considering coherence

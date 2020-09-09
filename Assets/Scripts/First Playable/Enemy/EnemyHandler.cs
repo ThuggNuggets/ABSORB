@@ -187,6 +187,9 @@ public class EnemyHandler : MonoBehaviour
         // Playing death VFX
         PlayDeathFX();
 
+        // Removes enemy from group, if within one
+        _groupHandler?.Remove(this);
+
         // Resetting all stats and adding the enemy back into the object pool
         ResetAndAddToQueue();
     }

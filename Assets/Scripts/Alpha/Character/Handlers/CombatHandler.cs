@@ -331,7 +331,7 @@ public class CombatHandler : MonoBehaviour
         if (_playerHandler.GetCurrentHealth() <= 0)
         {
             _playerHandler.SetIsAlive(false);
-            Debug.Log("Player dead");
+            //Debug.Log("Player dead");
         }
 
         // Is the player is dead

@@ -16,6 +16,6 @@ public class AbilitySickle : Ability
 
     public override void Activate()
     {
-        
+
     }
 }

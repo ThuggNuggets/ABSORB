@@ -303,6 +303,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   parriedCastRadius: 5
+  abilityArms: []
 --- !u!114 &2979130702653761938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646fd4c1e4e7e714889a2ab3db1a714a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToMinion: 50
+  damageToSpecial: 20
+  damageToElite: 100
 --- !u!114 &7320835134947732972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,12 +331,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e88a4e9ac5da974d8b688073abb003d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hammerGameObject: {fileID: 7066650686738381165}
-  groundSmashTransform: {fileID: 3746689148225198915}
-  groundSmashReparentTimer: 2
   damageToMinion: 50
   damageToSpecial: 20
   damageToElite: 100
+  hammerGameObject: {fileID: 7066650686738381165}
+  groundSmashTransform: {fileID: 3746689148225198915}
+  groundSmashReparentTimer: 2
   areaOfEffect: 10
 --- !u!114 &2696885436146177423
 MonoBehaviour:
@@ -346,6 +350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fc04986bc4fe54ca809de4bdbd3840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToMinion: 50
+  damageToSpecial: 20
+  damageToElite: 100
 --- !u!1 &5841077419997293157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1030,7 @@ PrefabInstance:
     - target: {fileID: 7635191120662020030, guid: 3193eb03157bce143891fa698d57fe17,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7635191120662020030, guid: 3193eb03157bce143891fa698d57fe17,
         type: 3}
