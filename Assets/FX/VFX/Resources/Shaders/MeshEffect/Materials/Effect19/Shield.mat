@@ -88,7 +88,7 @@ Material:
     - _FresnelPow: 7.44
     - _FresnelR0: 0.04
     - _Glossiness: 0.5
-    - _Height: 0.2
+    - _Height: 0
     - _InvFade: 3
     - _Metallic: 0
     - _Mode: 0
@@ -114,7 +114,7 @@ Material:
     - _DropWavesScale: {r: 5, g: 0.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0.8867924, g: 0, b: 0.04284119, a: 1}
-    - _HeightUVScrollDistort: {r: 12.54, g: 32.93, b: 17.5, a: 12.67}
+    - _HeightUVScrollDistort: {r: 50, g: 1000000, b: 10, a: 10}
     - _MainColor: {r: 0.7883124, g: 0.59769374, b: 2.8158011, a: 1}
     - _NoiseScale: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.4779412, g: 0.586714, b: 0.7647059, a: 1}

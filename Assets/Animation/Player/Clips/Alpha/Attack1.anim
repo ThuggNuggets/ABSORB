@@ -14921,8 +14921,23 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+<<<<<<< .mine
+  - time: 0.2
+    functionName: Key_PlayWeaponSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.4
+    functionName: Key_DisableWeaponObject
+||||||| .r299
+  - time: 0.4
+    functionName: Key_DeactivateAbsorb
+=======
   - time: 0.46666667
     functionName: Key_DisableWeaponObject
+>>>>>>> .r301
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
