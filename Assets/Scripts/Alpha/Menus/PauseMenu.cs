@@ -7,7 +7,8 @@ using Cinemachine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    //public Slider volumeSlider;
+    public GameObject settingsMenu;
+    public Slider volumeSlider;
     private ReadWriteText readWrite;
     private InputManager _inputManager;
     private bool Paused;
@@ -23,12 +24,12 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenu.SetActive(false);
-        //Time.timeScale = 1f;
+        settingsMenu.SetActive(false);
         readWrite = GetComponent<ReadWriteText>();
         _inputManager = FindObjectOfType<InputManager>();
         _cameraManager = FindObjectOfType<CameraManager>();
         _mainMenu = GetComponent<MainMenu>();
-        //volumeSlider.value = readWrite.volume;
+        volumeSlider.value = readWrite.volume;
     }
 
     // Update is called once per frame
@@ -48,8 +49,9 @@ public class PauseMenu : MonoBehaviour
             Paused = false;
             _inputManager.EnableInput();
             pauseMenu.SetActive(false);
-            //readWrite.volume = volumeSlider.value;
-            //readWrite.OverwriteData();
+            readWrite.volume = volumeSlider.value;
+            readWrite.overrideControls = _inputManager.GetOverrideController();
+            readWrite.OverwriteData();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _cameraManager.EnableCameraMovement();
@@ -74,5 +76,22 @@ public class PauseMenu : MonoBehaviour
     {
         // ADD A "ARE YOU SURE?" FIRST
         Application.Quit();
+    }
+
+    public void OpenSettingsMenu()
+    {
+        pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        pauseMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+    }
+
+    public void ToggleOverrideControls()
+    {
+        _inputManager.SetOverrideController(!_inputManager.GetOverrideController());
     }
 }

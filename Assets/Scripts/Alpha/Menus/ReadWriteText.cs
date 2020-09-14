@@ -9,7 +9,7 @@ public class ReadWriteText : MonoBehaviour
 
     public float volume;
     [HideInInspector]
-    public int highScore;
+    public bool overrideControls;
     //public GameData mData;
 
     void CreateFile()
@@ -35,7 +35,7 @@ public class ReadWriteText : MonoBehaviour
         GameData data = new GameData
         {
             mVolume = volume,
-            //mHighScore = highScore
+            mOverrideControls = overrideControls
         };
 
         bf.Serialize(file, data);
@@ -61,7 +61,7 @@ public class ReadWriteText : MonoBehaviour
             GameData data = (GameData)bf.Deserialize(file);
 
             volume = data.mVolume;
-            //highScore = data.mHighScore;
+            overrideControls = data.mOverrideControls;
             Debug.Log("File Read");
             file.Close();
         }
@@ -75,11 +75,11 @@ public class ReadWriteText : MonoBehaviour
         GameData data = new GameData
         {
             mVolume = volume,
-            //mHighScore = highScore
+            mOverrideControls = overrideControls
         };
 
         bf.Serialize(file, data);
-        Debug.Log("File Overwrite with volume = " + volume /* + " & highscore = " + highScore */);
+        Debug.Log("File Overwrite with volume = " + volume + " & override controls = " + overrideControls);
         file.Close();
     }
 
@@ -90,7 +90,7 @@ public class ReadWriteText : MonoBehaviour
         if (!File.Exists(Application.dataPath + "/gameData.dat"))
         {
             volume = 100;
-            //highScore = 0;
+            overrideControls = false;
             CreateFile();
         }
         else
@@ -101,7 +101,6 @@ public class ReadWriteText : MonoBehaviour
     public class GameData
     {
         public float mVolume = 100;
-        // override controller?
-        //public int mHighScore;
+        public bool mOverrideControls = false;
     }
 }
