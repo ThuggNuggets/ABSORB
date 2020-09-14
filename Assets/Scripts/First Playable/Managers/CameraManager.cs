@@ -5,25 +5,27 @@ using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
-    // Player movement script
-    public LocomotionHandler playerMovement;
-
     // Player cameras
+    public InputManager inputManager;
     public CinemachineFreeLook controllerCamera;
     public CinemachineFreeLook mouseCamera;
-
-    // Input Manager script
-    public InputManager inputManager;
-
-    // Only show on menu when controller is connected?
+    [Header("Only allow Keyboard input")]
     public bool overrideController = false;
 
-    private bool controllerUpdated = false;
-    private bool overrideUpdated = false;
+    private bool _controllerUpdated = false;
+    private bool _overrideUpdated = false;
+
+    // Speed shit, please ignore
+    private float _tempMouseSpeedY;
+    private float _tempMouseSpeedX;
+    private float _tempControllerSpeedY;
+    private float _tempControllerSpeedX;
 
     // Start is called before the first frame update
     void Start()
     {
+        inputManager = FindObjectOfType<InputManager>();
+
         // If controller is connected and not overridden
         if (inputManager.GetControllerConnected() && !overrideController)
             SetControllerCamera();
@@ -31,8 +33,13 @@ public class CameraManager : MonoBehaviour
         else if (!inputManager.GetControllerConnected() || overrideController)
             SetMouseCamera();
 
-        controllerUpdated = inputManager.GetControllerConnected();
-        overrideUpdated = overrideController;
+        _controllerUpdated = inputManager.GetControllerConnected();
+        _overrideUpdated = overrideController;
+
+        _tempMouseSpeedY = mouseCamera.m_YAxis.m_MaxSpeed;
+        _tempMouseSpeedX = mouseCamera.m_XAxis.m_MaxSpeed;
+        _tempControllerSpeedY = controllerCamera.m_YAxis.m_MaxSpeed;
+        _tempControllerSpeedX = controllerCamera.m_XAxis.m_MaxSpeed;
     }
 
     // Update is called once per frame
@@ -41,7 +48,7 @@ public class CameraManager : MonoBehaviour
         // Run when the inputManager and controllerUpdated dont match
         // (Basically this should on run once when a controller is connected/disconnected)
         // Also run if overrideController has been turned on/off
-        if (inputManager.GetControllerConnected() != controllerUpdated || overrideController != overrideUpdated)
+        if (inputManager.GetControllerConnected() != _controllerUpdated || overrideController != _overrideUpdated)
         {
             if (inputManager.GetControllerConnected() && !overrideController)
             {
@@ -58,41 +65,59 @@ public class CameraManager : MonoBehaviour
                 SetMouseCamera();
             }
 
-            overrideUpdated = overrideController;
-            controllerUpdated = inputManager.GetControllerConnected();
+            _overrideUpdated = overrideController;
+            _controllerUpdated = inputManager.GetControllerConnected();
             Debug.LogWarning("Controller changed");
         }
     }
 
-    void SetControllerCamera()
+    public void SetControllerCamera()
     {
-        // Enable/disable correct camera
-        //controllerCamera.gameObject.SetActive(true);
-        //mouseCamera.gameObject.SetActive(false);
+        // Change Camera Priority
         controllerCamera.Priority = 1;
         mouseCamera.Priority = 0;
-
-        // Set player movement cameras
-        //playerMovement.freeLookCamera = controllerCamera;
-        //playerMovement.mainPlayerCamera = controllerCamera.transform;
 
         // Set InputManager camera
         inputManager.cinemachine = controllerCamera;
     }
 
-    void SetMouseCamera()
+    public void SetMouseCamera()
     {
-        // Enable/disable correct camera
-        //mouseCamera.gameObject.SetActive(true);
-        //controllerCamera.gameObject.SetActive(false);
+        // Change Camera Priority
         mouseCamera.Priority = 1;
         controllerCamera.Priority = 0;
 
-        // Set player movement cameras
-        //playerMovement.freeLookCamera = mouseCamera;
-        //playerMovement.mainPlayerCamera = mouseCamera.transform;
-
         // Set InputManager camera
         inputManager.cinemachine = mouseCamera;
+    }
+
+    public void DisableCameraMovement()
+    {
+        // Set the speed of the cameras to 0 so you can't move them
+        if (inputManager.GetControllerConnected())
+        {
+            controllerCamera.m_YAxis.m_MaxSpeed = 0f;
+            controllerCamera.m_XAxis.m_MaxSpeed = 0f;
+        }
+        else
+        {
+            mouseCamera.m_YAxis.m_MaxSpeed = 0f;
+            mouseCamera.m_XAxis.m_MaxSpeed = 0f;
+        }
+    }
+
+    public void EnableCameraMovement()
+    {
+        // Set the speed of the cameras back to default
+        if (inputManager.GetControllerConnected())
+        {
+            controllerCamera.m_YAxis.m_MaxSpeed = _tempControllerSpeedY;
+            controllerCamera.m_XAxis.m_MaxSpeed = _tempControllerSpeedX;
+        }
+        else
+        {
+            mouseCamera.m_YAxis.m_MaxSpeed = _tempMouseSpeedY;
+            mouseCamera.m_XAxis.m_MaxSpeed = _tempMouseSpeedX;
+        }
     }
 }

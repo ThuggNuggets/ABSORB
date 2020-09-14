@@ -43,8 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de75963a83e6bc44b5c1d5e53dfdd23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
   controllerCamera: {fileID: 0}
   mouseCamera: {fileID: 0}
-  inputManager: {fileID: 0}
-  overrideController: 0
+  overrideController: 1

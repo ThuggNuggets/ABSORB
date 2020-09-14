@@ -339,6 +339,7 @@ public class CombatHandler : MonoBehaviour
         if (!_playerHandler.GetIsAlive() && !_respawning)
         {
             _respawning = true;
+            _inputManager.DisableInput();
             StartCoroutine(Respawn());
         }
     }

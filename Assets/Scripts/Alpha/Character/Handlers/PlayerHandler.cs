@@ -131,9 +131,6 @@ public class PlayerHandler : MonoBehaviour
 
     private void DisableReferences()
     {
-        // TO-DO:
-        // - Disable player mesh
-        // - Enable player death particle effect
         abidaroMesh.enabled = false;
         respawnParticle.SetActive(true);
         _capsule.enabled = false;
@@ -143,26 +140,13 @@ public class PlayerHandler : MonoBehaviour
 
     private void EnableReferences()
     {
-        // TO-DO:
-        // - Enable player mesh
-        // - Disable player death particle effect
         abidaroMesh.enabled = true;
         respawnParticle.SetActive(false);
         _locomotionHandler.enabled = true;
         _capsule.enabled = true;
         _rigidbody.useGravity = true;
+        _inputManager.EnableInput();
     }
-
-    // void OnDrawGizmos()
-    // {
-    //     Vector3 point = GetPoint(this.transform.position, GetRespawnPosition());
-    //     Vector3 point2 = GetPoint(point, GetRespawnPosition());
-
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawCube(point, new Vector3(1.0f, 1.0f));
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawCube(point2, new Vector3(1.0f, 1.0f));
-    // }
 
     #endregion
 

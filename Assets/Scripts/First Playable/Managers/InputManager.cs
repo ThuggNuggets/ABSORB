@@ -40,6 +40,7 @@ public class InputManager : MonoBehaviour
     private Vector2 _unityInputDirection = Vector2.zero;
     private Vector2 _xciInputDirection = Vector2.zero;
     private int _queriedNumberOfCtrlrs;
+    private bool _disableInput = false;  // Allow input as long as input isnt disabled
 
 
     // Start is called before the first frame update
@@ -56,12 +57,12 @@ public class InputManager : MonoBehaviour
             _queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
             if (_queriedNumberOfCtrlrs == 0)
             {
-                Debug.Log("No Xbox controllers plugged in!");
+                //Debug.Log("No Xbox controllers plugged in!");
                 isControllerConnected = false;
             }
             else
             {
-                Debug.Log(_queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+                //Debug.Log(_queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
                 isControllerConnected = true;
                 XCI.DEBUG_LogControllerNames();
             }
@@ -71,8 +72,8 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Update isControllerConnected to allow the use of keyboard buttons if there is no controller connected
-        // or if a controller gets reconnected
+        // Update isControllerConnected to allow the use of keyboard buttons 
+        //if there is no controller connected or if a controller gets reconnected
         if (XCI.IsPluggedIn(1))
             isControllerConnected = true;
         else
@@ -81,10 +82,15 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetMovementDirectionFromInput()
     {
-        if (isControllerConnected && !_cameraManager.overrideController)
-            return UpdateXCIInputDirection();
+        if (!GetInputDisabled())
+        {
+            if (isControllerConnected && !_cameraManager.overrideController)
+                return UpdateXCIInputDirection();
+            else
+                return UpdateUnityInputDirection();
+        }
         else
-            return UpdateUnityInputDirection();
+            return Vector2.zero;
     }
 
     public Vector2 UpdateUnityInputDirection()
@@ -104,37 +110,57 @@ public class InputManager : MonoBehaviour
     // Check for Attack button press
     public bool GetAttackButtonPress()
     {
-        if (_cameraManager.overrideController)
-            return Input.GetKeyDown(attackKey);
+        if (!GetInputDisabled())
+        {
+            if (_cameraManager.overrideController)
+                return Input.GetKeyDown(attackKey);
+            else
+                return (isControllerConnected) ? XCI.GetButtonDown(attackXboxKey, XboxController.First) : Input.GetKeyDown(attackKey);
+        }
         else
-            return (isControllerConnected) ? XCI.GetButtonDown(attackXboxKey, XboxController.First) : Input.GetKeyDown(attackKey);
+            return false;
     }
 
     // Check for Special Attack button press
     public bool GetSpecialAttackButtonPress()
     {
-        if (_cameraManager.overrideController)
-            return Input.GetKeyDown(splAttackKey);
+        if (!GetInputDisabled())
+        {
+            if (_cameraManager.overrideController)
+                return Input.GetKeyDown(splAttackKey);
+            else
+                return (isControllerConnected) ? XCI.GetButtonDown(splAttackXboxKey, XboxController.First) : Input.GetKeyDown(splAttackKey);
+        }
         else
-            return (isControllerConnected) ? XCI.GetButtonDown(splAttackXboxKey, XboxController.First) : Input.GetKeyDown(splAttackKey);
+            return false;
     }
 
     // Check for Shield button press
     public bool GetShieldButtonPress()
     {
-        if (_cameraManager.overrideController)
-            return Input.GetKeyDown(shieldKey);
+        if (!GetInputDisabled())
+        {
+            if (_cameraManager.overrideController)
+                return Input.GetKeyDown(shieldKey);
+            else
+                return (isControllerConnected) ? XCI.GetButtonDown(shieldXboxKey, XboxController.First) : Input.GetKeyDown(shieldKey);
+        }
         else
-            return (isControllerConnected) ? XCI.GetButtonDown(shieldXboxKey, XboxController.First) : Input.GetKeyDown(shieldKey);
+            return false;
     }
 
     // Check for Dash button press
     public bool GetDashButtonPress()
     {
-        if (_cameraManager.overrideController)
-            return Input.GetKeyDown(dashKey);
+        if (!GetInputDisabled())
+        {
+            if (_cameraManager.overrideController)
+                return Input.GetKeyDown(dashKey);
+            else
+                return (isControllerConnected) ? XCI.GetButtonDown(dashXboxKey, XboxController.First) : Input.GetKeyDown(dashKey);
+        }
         else
-            return (isControllerConnected) ? XCI.GetButtonDown(dashXboxKey, XboxController.First) : Input.GetKeyDown(dashKey);
+            return false;
     }
 
     // Check for Pause button press
@@ -146,8 +172,37 @@ public class InputManager : MonoBehaviour
             return (isControllerConnected) ? XCI.GetButtonDown(pauseXboxKey, XboxController.First) : Input.GetKeyDown(pauseKey);
     }
 
+    // Check for controller connected
     public bool GetControllerConnected()
     {
         return isControllerConnected;
+    }
+
+    public bool GetOverrideController()
+    {
+        return _cameraManager.overrideController;
+    }
+
+    public bool SetOverrideController(bool @override)
+    {
+        return _cameraManager.overrideController = @override;
+    }
+
+    // Gets the current state of disableInput boolean
+    public bool GetInputDisabled()
+    {
+        return _disableInput;
+    }
+
+    // Changes the disableInput variable to allow key and controller input
+    public bool EnableInput()
+    {
+        return _disableInput = false;
+    }
+
+    // Changes the disableInput variable to disable key and controller input
+    public bool DisableInput()
+    {
+        return _disableInput = true;
     }
 }
