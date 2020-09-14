@@ -415,7 +415,7 @@ MonoBehaviour:
   deathParticleEffect: {fileID: 3619682150783865577}
   overallFXTime: 1
   typeOfEnemy: 1
-  typeOfAbility: 0
+  typeOfAbility: 3
   maxHealth: 125
   baseDamage: 4
   printHealthStats: 0
@@ -466,6 +466,7 @@ MonoBehaviour:
   totalDistance: 20
   minY: 10
   maxY: 10
+  autoDetectionRadius: 7.5
 --- !u!114 &1935687146708632265
 MonoBehaviour:
   m_ObjectHideFlags: 0

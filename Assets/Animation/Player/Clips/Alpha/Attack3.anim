@@ -18062,22 +18062,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.33333334
+  - time: 0.3
     functionName: Key_ActivateSlowMotion
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.33333334
-    functionName: Key_PlayWeaponSound
+  - time: 0.4
+    functionName: Key_DeactivateSlowMotion
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.43333334
-    functionName: Key_DeactivateSlowMotion
+  - time: 0.46666667
+    functionName: Key_PlayWeaponSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

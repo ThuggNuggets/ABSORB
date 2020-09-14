@@ -184,7 +184,11 @@ public class CombatHandler : MonoBehaviour
         {
             EnemyHandler enemy = other.gameObject.GetComponentInParent<EnemyHandler>();
             switch (enemy.GetEnemyType())
-            {
+            {                           
+                case EnemyHandler.EnemyType.MINION:
+                    if (shieldState != ShieldState.Shielding)
+                        _playerHandler.TakeDamage(enemy.GetDamage());
+                    break;    
                 case EnemyHandler.EnemyType.SPECIAL:
                     if (shieldState != ShieldState.Shielding)
                         _playerHandler.TakeDamage(enemy.GetDamage());
