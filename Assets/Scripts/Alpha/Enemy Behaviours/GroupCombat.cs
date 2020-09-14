@@ -22,6 +22,20 @@ public class GroupCombat : GroupState
 
     public override void OnStateUpdate()
     {
+        if (enemyGroupHandler.GetEnemies().Count == 1)
+        {
+            // Get the enemy brain at this index
+            AIBrain aiBrain = enemyGroupHandler.GetEnemy(0).GetBrain();
+
+            // Forcing the enemy to face the player
+            _positionFix = aiBrain.PlayerTransform.position;
+            _positionFix.y = aiBrain.transform.position.y;
+            aiBrain.transform.forward = (_positionFix - aiBrain.transform.position).normalized;
+
+            aiBrain.GetAIBehaviour("Movement").LockDestinationToPlayer(1.0f);
+            return;
+        }
+
         if (this.enemyGroupHandler.GetCOMDistanceFromPlayer() <= beginHuddleDistance)
         {
             // Queue slot for attack
@@ -68,15 +82,18 @@ public class GroupCombat : GroupState
 
     private IEnumerator QueueAttack()
     {
+        if (_unitSlots[_activeIndex].GetBrain().GetHandler().IsParried())
+            yield break;
+
         // Attacking the player 
         queueFlag = true;
         _unitSlots[_activeIndex].GetBrain().GetAIBehaviour("Movement").LockDestinationToPlayer(1.0f);
 
         // Waiting a certain amount of time
         yield return new WaitForSeconds(queueTime);
-        
+
         // Check if there are any enemies are left before proceeding
-        if(this.enemyGroupHandler.GetEnemies().Count <= 0)
+        if (this.enemyGroupHandler.GetEnemies().Count <= 0)
         {
             _activeIndex = 0;
             queueFlag = false;
@@ -107,7 +124,7 @@ public class GroupCombat : GroupState
         StopCoroutine(QueueAttack());
         _unitSlots.Remove(enemy);
         SortUnitList();
-        
+
         // Wrapping the index count
         if (_activeIndex >= _unitSlots.Count - 1)
             _activeIndex = 0;

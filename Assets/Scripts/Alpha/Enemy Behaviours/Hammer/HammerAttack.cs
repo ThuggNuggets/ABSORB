@@ -13,7 +13,6 @@ public class HammerAttack : AIBehaviour
 
     private Animator _animator;
     private float _initialSpeed = 20.0f;
-    private bool _hasStartedSequence = false;
 
     private void Awake()
     {
@@ -49,7 +48,6 @@ public class HammerAttack : AIBehaviour
 
     private void Key_DeactivateSwingAnimation()
     {
-        _hasStartedSequence = false;
         _animator.SetBool(swingAnimationName, false);
         brain.SetBehaviour("Movement");
     }

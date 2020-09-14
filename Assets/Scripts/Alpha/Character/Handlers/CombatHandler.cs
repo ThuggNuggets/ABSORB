@@ -10,9 +10,10 @@ public class CombatHandler : MonoBehaviour
     */
 
     // References
+    [Header("References")]
+    public ParticleSystem hitParticleSystem;
 
     [Header("Shield")]
-    [Header("References")]
     public MeshRenderer shieldMeshRenderer;
     public Collider shieldSphereCollider;
     [Header("Weapon")]
@@ -182,7 +183,37 @@ public class CombatHandler : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyWeapon"))
         {
             EnemyHandler enemy = other.gameObject.GetComponentInParent<EnemyHandler>();
-            _playerHandler.TakeDamage(enemy.GetDamage());
+            switch (enemy.GetEnemyType())
+            {
+                case EnemyHandler.EnemyType.SPECIAL:
+                    if (shieldState != ShieldState.Shielding)
+                        _playerHandler.TakeDamage(enemy.GetDamage());
+                    break;
+
+                case EnemyHandler.EnemyType.ELITE:
+                    _playerHandler.TakeDamage(enemy.GetDamage());
+                    break;
+            }
+
+            hitParticleSystem.Play();
+        }
+
+        else if (other.gameObject.CompareTag("EnemyProjectile"))
+        {
+            EnemyHandler enemy = other.gameObject.GetComponent<EliteProjectile>().GetHandler();
+            switch (enemy.GetEnemyType())
+            {
+                case EnemyHandler.EnemyType.SPECIAL:
+                    if (shieldState != ShieldState.Shielding)
+                        _playerHandler.TakeDamage(enemy.GetDamage());
+                    break;
+
+                case EnemyHandler.EnemyType.ELITE:
+                    _playerHandler.TakeDamage(enemy.GetDamage());
+                    break;
+            }
+
+            hitParticleSystem.Play();
         }
     }
 
@@ -326,7 +357,7 @@ public class CombatHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             _playerHandler.SetIsAlive(false);
-            Debug.Log("Player dead");
+            // Debug.Log("Player dead");
         }
 
         // Update if the player is alive or not

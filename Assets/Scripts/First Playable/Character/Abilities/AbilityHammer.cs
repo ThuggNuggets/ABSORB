@@ -106,7 +106,7 @@ public class AbilityHammer : Ability
             }
             else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                Debug.Log("Hit interactable");
+                //Debug.Log("Hit interactable");
                 hit.transform.gameObject.SetActive(false);
             }
         }

@@ -21,7 +21,7 @@ public class PotAttack : AIBehaviour
     {
         waterFireEffect.Play();
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
-        eliteProjectile.InitialiseProjectile(transform, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
+        eliteProjectile.InitialiseProjectile(enemyHandler, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 
@@ -45,6 +45,7 @@ public class PotAttack : AIBehaviour
     public IEnumerator JustFiredTimer()
     {
         yield return new WaitForSecondsRealtime(justFiredProjectileTimer);
-        brain.SetBehaviour("Movement");
+        if(!brain.GetHandler().IsParried())
+            brain.SetBehaviour("Movement");
     }
 }

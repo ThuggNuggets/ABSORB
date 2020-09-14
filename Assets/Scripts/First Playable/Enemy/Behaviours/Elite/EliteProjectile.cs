@@ -20,6 +20,7 @@ public class EliteProjectile : MonoBehaviour
     private bool _isActive = false;
     private float _lifeTime = 0.0f;
     private Transform _parentTransform;
+    private EnemyHandler _enemyHandler;
     private float _damage;
 
     // Gets called on awake
@@ -29,12 +30,13 @@ public class EliteProjectile : MonoBehaviour
     }
 
     // Sets up the direction for the projectile
-    public void InitialiseProjectile(Transform parentTransform, Transform playerTransform, Transform projectileStartPoint, float speed, float lifeTime, float damage)
+    public void InitialiseProjectile(EnemyHandler enemyHandler, Transform playerTransform, Transform projectileStartPoint, float speed, float lifeTime, float damage)
     {
 
         transform.position = projectileStartPoint.position;
         transform.rotation = projectileStartPoint.rotation;
-        _parentTransform = parentTransform;
+        _enemyHandler = enemyHandler;
+        _parentTransform = enemyHandler.transform;
         _isActive = true;
 
         float distance = Vector3.Distance(playerTransform.position, transform.position);
@@ -52,7 +54,7 @@ public class EliteProjectile : MonoBehaviour
     // Gets called every frame
     private void Update()
     {
-        if(_isActive)
+        if (_isActive)
             _rb.MovePosition(transform.position + _direction * _speed * Time.deltaTime);
     }
 
@@ -71,16 +73,31 @@ public class EliteProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (_enemyHandler.GetEnemyType() == EnemyHandler.EnemyType.SPECIAL && collision.CompareTag("PlayerShield"))
+            _enemyHandler.GetBrain().SetBehaviour("Parried");
+
+        _isActive = false;
         waterHitEffect.Play();
         waterHitAudio.Play();
         waterHitEffectGO.transform.SetParent(null);
-        Destroy(waterHitEffectGO, effectTime);
-        Destroy(this.gameObject);
+        StartCoroutine(Cleanup());
+    }
+
+    public EnemyHandler GetHandler()
+    {
+        return _enemyHandler;
     }
 
     public IEnumerator LifeTimer()
     {
-        yield return new WaitForSecondsRealtime(_lifeTime);
+        yield return new WaitForSeconds(_lifeTime);
+        Destroy(this.gameObject);
+    }
+
+    public IEnumerator Cleanup()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(waterHitEffectGO, effectTime);
         Destroy(this.gameObject);
     }
 }

@@ -16,7 +16,6 @@ public class AbilityHandler : MonoBehaviour
     }
 
     [Header("Parried Check Properties")]
-    public LayerMask parriedCastLayer;
     public float parriedCastRadius = 5.0f;
 
     [Header("Arm Skin Mesh Renderers")]
@@ -95,8 +94,8 @@ public class AbilityHandler : MonoBehaviour
                 _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
                 enemy.GetBrain().SetBehaviour("Absorbed");
                 enemy.GetEnemyGroupHandler()?.Remove(enemy);
-                this.SetAbility(enemy.GetAbilityType());
                 abilityArms[(int)_currentAbility].enabled = true;
+                this.SetAbility(enemy.GetAbilityType());
             }
         }
     }
@@ -114,6 +113,8 @@ public class AbilityHandler : MonoBehaviour
     {
         if (_currentAbility != AbilityType.NONE)
             _abilities[(int)_currentAbility].OnExit();
+        else
+            abilityArms[(int)_currentAbility].enabled = false;
 
         _currentAbility = nextAbility;
 

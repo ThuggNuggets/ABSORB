@@ -22,6 +22,7 @@ public class LocomotionHandler : MonoBehaviour
     [Header("Movement Attributes")]
     public float acceleration = 100.0f;
     public float maxVelocity = 10.0f;
+    [Range(0, 1)]
     public float turnSpeed = 0.20f;
     public float edgeOfWorldRayDistance = 5.0f;
     public float inAirGravity = 15.0f;

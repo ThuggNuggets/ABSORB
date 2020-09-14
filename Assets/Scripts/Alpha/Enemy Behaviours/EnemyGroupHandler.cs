@@ -63,9 +63,12 @@ public class EnemyGroupHandler : MonoBehaviour
         // Populate list of enemies with the children of this gameobject
         foreach (Transform child in transform)
         {
-            EnemyHandler enemy = child.GetComponent<EnemyHandler>();
-            enemy.SetEnemyGroupHandler(this);
-            enemies.Add(enemy);
+            foreach (Transform grandchild in child)
+            {
+                EnemyHandler enemy = grandchild.GetComponent<EnemyHandler>();
+                enemy.SetEnemyGroupHandler(this);
+                enemies.Add(enemy);
+            }
         }
     }
 
@@ -79,10 +82,10 @@ public class EnemyGroupHandler : MonoBehaviour
     private void Update()
     {
         // Updating the current state
-        _groupStates[(int) _currentState].OnStateUpdate();
+        _groupStates[(int)_currentState].OnStateUpdate();
 
         // Printing debug
-        if(debugCurrentState)
+        if (debugCurrentState)
             Debug.Log(_currentState);
     }
 
@@ -90,9 +93,9 @@ public class EnemyGroupHandler : MonoBehaviour
     public void SetState(E_GroupState nextState)
     {
         // Setting the current state
-        _groupStates[(int) _currentState].OnStateExit();
+        _groupStates[(int)_currentState].OnStateExit();
         _currentState = nextState;
-        _groupStates[(int) _currentState].OnStateEnter();
+        _groupStates[(int)_currentState].OnStateEnter();
     }
 
     // Adds an enemy to the group
@@ -105,7 +108,7 @@ public class EnemyGroupHandler : MonoBehaviour
         _groupCombat.RemoveFromUnitSlot(enemy);
     }
 
-     // Update the target destination of the group
+    // Update the target destination of the group
     public void SetTargetDestination(Vector3 position) => _targetDestination = position;
 
     // Returns a flock destination for the specified enemy
@@ -114,26 +117,30 @@ public class EnemyGroupHandler : MonoBehaviour
         cDir = CalculateCoherence(CoM, enemy.transform.position); //incase bug: removed .normalized
         sDir = CalculateSeperation(enemy);
         aDir = CalculateAlignment(enemy.transform.position);
-        return enemy.transform.position + (cDir + sDir + aDir).normalized * _groupStates[(int) _currentState].moveDistance * Time.deltaTime;
+        return enemy.transform.position + (cDir + sDir + aDir).normalized * _groupStates[(int)_currentState].moveDistance * Time.deltaTime;
     }
 
     // Updates flocking destination for every enemy within group
     public void UpdateAllFlockDestinations()
     {
         // If there are enemies within the list
-        if (enemies.Count > 0)
+        if (enemies.Count > 1)
         {
             // Going to update this every frame for now, but might have to delay it on a coroutine if there are perfomace issues!
             CoM = CalculateCenterOfMass();
             foreach (EnemyHandler enemy in enemies)
                 enemy.GetBrain().GetAIBehaviour("Movement").OverrideDestination(GetFlockDestination(enemy), 1.0f);
         }
+        else if (enemies.Count > 0)
+        {
+            enemies[0].GetBrain().GetAIBehaviour("Movement").OverrideDestination(_targetDestination, 1.0f);
+        }
     }
 
     // Returns the correct direction for the enemy to move towards, considering coherence
     private Vector3 CalculateCoherence(Vector3 centerOfMass, Vector3 currentPosition)
     {
-        return (centerOfMass - currentPosition) * _groupStates[(int) _currentState].coherenceFactor;
+        return (centerOfMass - currentPosition) * _groupStates[(int)_currentState].coherenceFactor;
     }
 
     // Returns the correct direction for the enemy to move towards, considering seperation
@@ -148,7 +155,7 @@ public class EnemyGroupHandler : MonoBehaviour
                 continue;
 
             // Calculating the serpation result
-            if (Vector3.Distance(enemy.transform.position, e.transform.position) < _groupStates[(int) _currentState].seperationFactor)
+            if (Vector3.Distance(enemy.transform.position, e.transform.position) < _groupStates[(int)_currentState].seperationFactor)
                 result -= (e.transform.position - enemy.transform.position);
         }
 
@@ -159,7 +166,7 @@ public class EnemyGroupHandler : MonoBehaviour
     // Returns the correct direction for the enemy to move towards, considering alignment
     private Vector3 CalculateAlignment(Vector3 currentPosition)
     {
-        return (_targetDestination - currentPosition).normalized * _groupStates[(int) _currentState].alignmentFactor;
+        return (_targetDestination - currentPosition).normalized * _groupStates[(int)_currentState].alignmentFactor;
     }
 
     // Returns the groups center of mass

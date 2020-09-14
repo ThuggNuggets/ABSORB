@@ -11,7 +11,6 @@ public class GroupWander : GroupState
     public float updatePathTime = 1.0f;
     public float wanderRadius = 15.0f;
     private bool _isWaiting = false;
-    private int _index = 0;
 
     public override void OnStateEnter()
     {

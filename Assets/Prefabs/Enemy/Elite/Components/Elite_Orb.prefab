@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4133530613702595917}
   - component: {fileID: 1117947240453676357}
   - component: {fileID: 4886717474919163629}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: EnemyElite
   m_Icon: {fileID: 0}
@@ -190,9 +190,9 @@ GameObject:
   - component: {fileID: 8840168797588337654}
   - component: {fileID: 1428469120824874813}
   - component: {fileID: 6391154953088306696}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Elite_Orb
-  m_TagString: EnemyElite
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,11 +464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 125038, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 130500, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 418268, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -560,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1213769095096802, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114981097972649144, guid: a67561a23eac9644fb36a13cbb6f880b, type: 3}
@@ -578,9 +578,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8840168797588337655}
     m_Modifications:
+    - target: {fileID: 1035811188309546, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047412673512094, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254517498336676, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1361899032133272, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
       propertyPath: m_Name
       value: Water hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361899032133272, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370341039556166, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547814040472858, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642202830454856, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773169192283568, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4318484539120618, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,7 +33,7 @@ public class EnemyHandler : MonoBehaviour
     public float overallFXTime = 1.0f;
 
     [Header("Properties")]
-    [SerializeField] EnemyType typeOfEnemy;
+    [SerializeField] EnemyType typeOfEnemy = EnemyType.MINION;
     [SerializeField] AbilityHandler.AbilityType typeOfAbility = AbilityHandler.AbilityType.NONE;
 
     public float maxHealth = 100.0f;
@@ -45,6 +45,7 @@ public class EnemyHandler : MonoBehaviour
     private float _currentHealth = 0.0f;
     private bool _isAlive = true;
     private SpecialParried _specialParried = null;
+    private PlayerHandler _playerHandler;
     private EnemyGroupHandler _groupHandler = null;
 
     // The collider of this enemies weapon
@@ -74,6 +75,11 @@ public class EnemyHandler : MonoBehaviour
 
         // Get the particle parent
         _parryParticleParent = parryEffect.transform.parent;
+    }
+
+    private void Start()
+    {
+        _playerHandler = _aiBrain.PlayerTransform.GetComponent<PlayerHandler>();
     }
 
     private void Update()
@@ -220,7 +226,8 @@ public class EnemyHandler : MonoBehaviour
         _aiBrain.SetBehaviour("Idle");
 
 
-        ObjectPooler.Instance.poolDictionary[gameObject.tag].Enqueue(gameObject);
+        //ObjectPooler.Instance.poolDictionary[gameObject.tag].Enqueue(gameObject);
+        gameObject.transform.SetParent(null); //quick error fix
     }
 
     private IEnumerator ReparentVFX()
@@ -254,5 +261,10 @@ public class EnemyHandler : MonoBehaviour
     public void SetEnemyGroupHandler(EnemyGroupHandler enemyGroupHandler)
     {
         _groupHandler = enemyGroupHandler;
+    }
+
+    public PlayerHandler GetPlayerHandler()
+    {
+        return _playerHandler;
     }
 }

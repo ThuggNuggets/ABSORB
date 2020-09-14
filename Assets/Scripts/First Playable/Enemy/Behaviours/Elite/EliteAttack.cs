@@ -11,6 +11,8 @@ public class EliteAttack : AIBehaviour
     public float projectileLifeTime = 4.0f;
     public float projectileDamage = 10.0f;
     public float dashCancelRange = 10.0f;
+    //-private float _timer = 0.0f;
+    //private bool _justFired = false;
 
     [Header("References")]
     public GameObject projectilePrefab;
@@ -21,7 +23,7 @@ public class EliteAttack : AIBehaviour
     {
         waterFireEffect.Play();
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
-        eliteProjectile.InitialiseProjectile(transform, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
+        eliteProjectile.InitialiseProjectile(enemyHandler, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 
@@ -40,6 +42,8 @@ public class EliteAttack : AIBehaviour
 
         // Rotate to face direction
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(brain.GetDirectionToPlayer()), turnSpeed);
+
+        
     }
 
     public IEnumerator JustFiredTimer()

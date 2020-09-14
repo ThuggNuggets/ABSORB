@@ -157,6 +157,11 @@ public class PlayerHandler : MonoBehaviour
         return isAlive;
     }
 
+    public bool GetIsShielding()
+    {
+        return _combatHandler.shieldState == CombatHandler.ShieldState.Shielding;
+    }
+
     public bool SetIsAlive(bool aliveState)
     {
         return isAlive = aliveState;
@@ -175,6 +180,8 @@ public class PlayerHandler : MonoBehaviour
         //collidedObject = null;
         // if (debug)
         //     Debug.Log("Player damage taken: " + damageAmount);
+
+        //Debug.Log("Player damage taken: " + damageAmount);
         return _currentHealth -= damageAmount;
     }
 

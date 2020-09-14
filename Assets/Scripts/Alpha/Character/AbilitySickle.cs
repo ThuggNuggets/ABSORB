@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class AbilitySickle : Ability
 {
-    public override void OnEnter()
-    {
+    [Header("Refereneces")]
+    public GameObject sickleGameObject;
 
+    private PlayerHandler _playerHandler;
+    private Animator _animator;
+
+    public void Awake()
+    {
+        _playerHandler = this.GetComponent<PlayerHandler>();
     }
 
-    public override void OnExit()
+    public void Start()
     {
-
+        _animator = _playerHandler.GetAnimator();
     }
+
+    public override void OnEnter() { }
+
+    public override void OnExit() { }
 
     public override void Activate()
     {
+        _animator.SetBool("Sickle", true);
+        sickleGameObject.SetActive(true);
+    }
 
+    public void Key_DeactivateSickleAbility()
+    {
+        _animator.SetBool("Sickle", false);
+        sickleGameObject.SetActive(false);
+        abilityHandler.SetAbility(AbilityHandler.AbilityType.NONE);
     }
 }
