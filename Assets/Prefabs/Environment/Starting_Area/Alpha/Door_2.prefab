@@ -1669,7 +1669,7 @@ GameObject:
   - component: {fileID: 6706503632241990249}
   - component: {fileID: 4864840620331233995}
   - component: {fileID: 67829305}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Door_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,8 +1703,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11, y: 11, z: 1}
-  m_Center: {x: 0, y: 0, z: -8.4}
+  m_Size: {x: 11, y: 11, z: 0.5}
+  m_Center: {x: 0, y: 0, z: -8.3}
 --- !u!114 &4864840620331233995
 MonoBehaviour:
   m_ObjectHideFlags: 0

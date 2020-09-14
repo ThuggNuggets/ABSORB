@@ -15,7 +15,7 @@ public class TempBoulderTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerMelee"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
         {
             animator.SetBool("DoorTriggered", true);
             boxCollider.enabled = false;
