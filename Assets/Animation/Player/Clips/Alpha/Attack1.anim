@@ -14921,8 +14921,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: Key_DeactivateAbsorb
+  - time: 0.46666667
+    functionName: Key_DisableWeaponObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
