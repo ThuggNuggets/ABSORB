@@ -37,12 +37,16 @@ public class AbilityPot : Ability
     public void Key_ActivateOrbHitVFX()
     {
         waterHit.Play();
-
+        waterHitAudio.Play();
+        potOrbObject.SetActive(false);
+        potAim.SetActive(false);
     }
 
     public void Key_DeactivatePotAbility()
     {
         playerAnimator.SetBool("Pot", false);
+        orbAnimator.SetBool("Attack", false);
+        abilityHandler.SetAbility(AbilityHandler.AbilityType.NONE);
     }
 
     public void Update()
