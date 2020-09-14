@@ -2022,35 +2022,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: Joints/ROOT_JNT/PELVIS_JNT/R_HIP_JNT/R_KNEE_JNT/R_ANKLE_JNT
-  m_FloatCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1.3726839
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Center.x
-    path: Mesh/Rig/Mesh/Character_Player_Weapon
-    classID: 65
-    script: {fileID: 0}
+  m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 30
   m_WrapMode: 0
@@ -2155,13 +2127,6 @@ AnimationClip:
       attribute: 2
       script: {fileID: 0}
       typeID: 4
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1696126757
-      attribute: 605858901
-      script: {fileID: 0}
-      typeID: 65
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
@@ -10508,34 +10473,6 @@ AnimationClip:
     path: Joints/ROOT_JNT/PELVIS_JNT/R_HIP_JNT/R_KNEE_JNT/R_ANKLE_JNT
     classID: 4
     script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1.3726839
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Center.x
-    path: Mesh/Rig/Mesh/Character_Player_Weapon
-    classID: 65
-    script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2
@@ -14921,23 +14858,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-<<<<<<< .mine
-  - time: 0.2
+  - time: 0.23333333
     functionName: Key_PlayWeaponSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: Key_DisableWeaponObject
-||||||| .r299
-  - time: 0.4
-    functionName: Key_DeactivateAbsorb
-=======
   - time: 0.46666667
     functionName: Key_DisableWeaponObject
->>>>>>> .r301
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
