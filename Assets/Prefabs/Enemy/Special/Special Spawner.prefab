@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4911677703678131138
 Transform:
   m_ObjectHideFlags: 0
@@ -78,19 +78,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  objectToSpawn: {fileID: 8677661987734016590, guid: d99e7a3ca18ca9c4199d4aeef584dea6,
+  objectToSpawn: {fileID: 6809976860378941602, guid: 2db86ddd54d09834fa285f803bf2d4c7,
     type: 3}
   numberOfEnemies: 1
   maxNumberOfSpawns: 1
   addNumberOfEnemies: 0
-  timeBetweenEachEnemySpawn: 5
+  timeBetweenEachEnemySpawn: 3
   setSpawnAmount: 0
   waitForSpawn: 0
   spawnerPositions:
   - {fileID: 4911677705079426473}
-  - {fileID: 4911677703678131138}
-  - {fileID: 4911677705026580197}
-  - {fileID: 4911677704767799639}
   numberOfTaggedObjects: 0
 --- !u!1 &4911677704767799632
 GameObject:
@@ -107,7 +104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4911677704767799639
 Transform:
   m_ObjectHideFlags: 0
@@ -137,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4911677705026580197
 Transform:
   m_ObjectHideFlags: 0
@@ -176,7 +173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911677705079426474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28, y: 0, z: 17.57}
+  m_LocalPosition: {x: -0.07, y: 1.42, z: 0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4911677704292951086}
