@@ -87,8 +87,6 @@ public class AbilityHammer : Ability
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaOfEffect, Vector3.up, 0.0f);
         foreach (RaycastHit hit in hits)
         {
-            Debug.Log(hit.transform.gameObject.name);
-
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 float damage = 0.0f;

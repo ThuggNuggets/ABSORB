@@ -55,4 +55,12 @@ public class LightFlicker : MonoBehaviour
     {
         return Random.Range(0.0f, 100.0f);
     }
+
+    public void Disable()
+    {
+        StopCoroutine(Flicker());
+        _lightObject.range = minLightRange;
+        emmision.material.DisableKeyword("_EMISSION");
+        this.enabled = false;
+    }
 }

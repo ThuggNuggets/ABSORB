@@ -159,9 +159,22 @@ public class AbilityHandler : MonoBehaviour
         // Returning the closest enemy that is parried
         for (int i = 0; i < _sortedHitList.Count; ++i)
         {
-            EnemyHandler enemyHandler = _sortedHitList[i].transform.GetComponent<EnemyHandler>();
-            if (enemyHandler.IsParried())
-                return enemyHandler;
+            //EnemyHandler enemyHandler = _sortedHitList[i].transform.GetComponent<EnemyHandler>();
+            EnemyHandler enemyHandler;
+            AbsorbInteractable absorbInteractable;
+            if (_sortedHitList[i].transform.TryGetComponent(out enemyHandler))
+            {
+                if (enemyHandler.IsParried())
+                    return enemyHandler;
+            }
+            else if (_sortedHitList[i].transform.TryGetComponent(out absorbInteractable))
+            {
+                _isAbosrbing = true;
+                _animator.SetBool("Absorb", true);
+                _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
+                absorbInteractable.Activate();
+                return null;
+            }
         }
 
         // Returning null and logging an error, since we shouldn't get here
