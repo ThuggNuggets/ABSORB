@@ -19,12 +19,11 @@ public class PlayerHandler : MonoBehaviour
     [Header("Attributes")]
     public int maxHealth = 100;
     public float respawnFlyingTime = 5.0f;
-    public float respawnFlyingHeight = 20.0f;
+    public float respawnFlyingOffset = 20.0f;
     private int _currentHealth = 100;
 
     // References
     [Header("References")]
-    private float offset = 10.0f;
     public SkinnedMeshRenderer abidaroMesh;
     public GameObject respawnParticle;
     public ParticleSystem hitParticleSystem;
@@ -38,6 +37,9 @@ public class PlayerHandler : MonoBehaviour
     private CheckPoint _checkpoints;
     private Vector3 _respawnPosition;
     private CapsuleCollider _capsule;
+    private float offset = 10.0f;
+    private float _checkPointYLevel;
+    private float _playerYLevel;
 
     Vector3 point = Vector3.zero;
     Vector3 point2 = Vector3.zero;
@@ -79,7 +81,7 @@ public class PlayerHandler : MonoBehaviour
         // {
         isAlive = true;
         _currentHealth = maxHealth;
-        StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), respawnFlyingHeight, respawnFlyingTime));
+        StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), respawnFlyingOffset, respawnFlyingTime));
         //_transform.rotation = GetRespawnPosition().rotation;
         //}
     }
@@ -90,13 +92,21 @@ public class PlayerHandler : MonoBehaviour
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
 
+        float dynamicRespawnHeight = end.y;                                             // Get the Y level of the respawn point
+        dynamicRespawnHeight = height + (_transform.position.y - dynamicRespawnHeight); // Compare the player & checkpoint height levels and add the offset
+        if (dynamicRespawnHeight < 0)                                                   // If it turns out negative than multiply the offset x2 (Makes it look better, trust me)
+        {
+            dynamicRespawnHeight = (height * 2) + (_transform.position.y - dynamicRespawnHeight);
+            Debug.Log("Dynamic height less than 0, increasing height");
+        }
+
         // Stuff to disable while flying
         DisableReferences();
 
         while (elapsedTime < seconds)
         {
-            //objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-            objectToMove.transform.position = MathParabola.Parabola(startingPos, end, 20.0f, (elapsedTime / seconds));
+            objectToMove.transform.position = MathParabola.Parabola(startingPos, end, 
+            (dynamicRespawnHeight < 0) ? -dynamicRespawnHeight : dynamicRespawnHeight, (elapsedTime / seconds));    // This is just so we don't have an inverted parabola
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
