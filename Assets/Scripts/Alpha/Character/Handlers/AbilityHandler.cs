@@ -21,6 +21,9 @@ public class AbilityHandler : MonoBehaviour
     [Header("Arm Skin Mesh Renderers")]
     public List<SkinnedMeshRenderer> abilityArms = new List<SkinnedMeshRenderer>();
 
+    [Header("Debug Options")]
+    public AbilityType startingAbility = AbilityType.NONE;
+
     private Ability[] _abilities;
     private AbilityType _currentAbility = AbilityType.NONE;
     private List<Collider> _sortedHitList = new List<Collider>();
@@ -31,7 +34,7 @@ public class AbilityHandler : MonoBehaviour
     private bool _isAbosrbing = false;
 
     // Called on initialise
-    private void Start()
+    private void Awake()
     {
         // Getting the player handler
         _playerHandler = this.GetComponent<PlayerHandler>();
@@ -49,11 +52,18 @@ public class AbilityHandler : MonoBehaviour
             if (a != null)
                 a.Initialise(this);
         }
+    }
 
+    // Called on initialise
+    private void Start()
+    {
         // Getting the references out of the player handler
         _inputManager = _playerHandler.GetInputManager();
         _locomotionHanlder = _playerHandler.GetLocomotionHandler();
         _animator = _playerHandler.GetAnimator();
+
+        // Setting the starting ability
+        SetAbility(startingAbility);
     }
 
     // Called every frame
@@ -83,7 +93,7 @@ public class AbilityHandler : MonoBehaviour
     private void CheckForAbosrb()
     {
         // Checking if player has inputed the absorb
-        if (_inputManager.GetSpecialAttackButtonPress())
+        if (_inputManager.GetSpecialAttackButtonPress() && !_isAbosrbing)
         {
             // Get the closest enemy, then set them to the absorbed state
             EnemyHandler enemy = GetClosestParriedEnemy();

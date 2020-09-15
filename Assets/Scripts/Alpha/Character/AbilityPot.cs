@@ -8,11 +8,20 @@ public class AbilityPot : Ability
     public GameObject potAim;
     public GameObject potOrbObject;
     public ParticleSystem waterHit;
-    public AudioSource waterHitAudio;
-    public Animator orbAnimator;
     public Animator playerAnimator;
     public Camera mainCamera;
+
+    private AudioSource _waterHitAudio;
+    private Animator _orbAnimator;
     private bool _aimActive = false;
+    private Trigger _impactTrigger;
+
+    private void Awake()
+    {
+        _impactTrigger = potAim.GetComponent<Trigger>();
+        _orbAnimator = potAim.GetComponent<Animator>();
+        _waterHitAudio = waterHit.GetComponent<AudioSource>();
+    }
 
     public override void OnEnter()
     {
@@ -23,7 +32,6 @@ public class AbilityPot : Ability
     public override void OnExit()
     {
         _aimActive = false;
-        potAim.SetActive(false);
     }
 
     public override void Activate()
@@ -31,21 +39,21 @@ public class AbilityPot : Ability
         _aimActive = false;
         potOrbObject.SetActive(true);
         playerAnimator.SetBool("Pot", true);
-        orbAnimator.SetBool("Attack", true);
+        _orbAnimator.SetBool("Attack", true);
     }
 
     public void Key_ActivateOrbHitVFX()
     {
         waterHit.Play();
-        waterHitAudio.Play();
+        _waterHitAudio.Play();
         potOrbObject.SetActive(false);
-        potAim.SetActive(false);
+        StartCoroutine(DeactivateAim());
     }
 
     public void Key_DeactivatePotAbility()
     {
         playerAnimator.SetBool("Pot", false);
-        orbAnimator.SetBool("Attack", false);
+        _orbAnimator.SetBool("Attack", false);
         abilityHandler.SetAbility(AbilityHandler.AbilityType.NONE);
     }
 
@@ -60,5 +68,11 @@ public class AbilityPot : Ability
                 potAim.transform.up = hit.normal;
             }
         }
+    }
+
+    private IEnumerator DeactivateAim()
+    {
+        yield return new WaitForSeconds(1.0F);
+        potAim.SetActive(false);
     }
 }

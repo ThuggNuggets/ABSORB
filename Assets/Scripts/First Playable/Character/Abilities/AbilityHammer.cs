@@ -7,12 +7,13 @@ public class AbilityHammer : Ability
     [Header("References")]
     public GameObject hammerGameObject;
     public Transform groundSmashTransform;
+    public Transform impactLocation;
 
     [Header("Properties")]
     public float groundSmashReparentTimer = 2.0f;
     public float areaOfEffect = 10.0f;
 
-    private Vector3 _groundSmashImpactLocation = Vector3.zero;
+    private Vector3 _groundSmashPosition = Vector3.zero;
     private Animator _animator;
     private PlayerHandler _playerHandler;
     private Transform _groundSmashParent;
@@ -23,7 +24,7 @@ public class AbilityHammer : Ability
     {
         _playerHandler = this.GetComponent<PlayerHandler>();
         _groundSmashParent = hammerGameObject.transform.parent;
-        _groundSmashImpactLocation = groundSmashTransform.position;
+        _groundSmashPosition = groundSmashTransform.position;
         _groundSmashAudio = groundSmashTransform.GetComponent<AudioSource>();
         _groundSmashParticleSystem = groundSmashTransform.GetComponent<ParticleSystem>();
     }
@@ -60,6 +61,8 @@ public class AbilityHammer : Ability
     {
         // Unparent and play VFX
         hammerGameObject.SetActive(true);
+        groundSmashTransform.position = impactLocation.position;
+        groundSmashTransform.rotation = impactLocation.rotation;
         groundSmashTransform.SetParent(null);
         _groundSmashParticleSystem.Play();
         _groundSmashAudio.Play();
@@ -75,7 +78,7 @@ public class AbilityHammer : Ability
     {
         yield return new WaitForSecondsRealtime(groundSmashReparentTimer);
         groundSmashTransform.SetParent(_groundSmashParent);
-        groundSmashTransform.transform.localPosition = _groundSmashImpactLocation;
+        groundSmashTransform.transform.localPosition = _groundSmashPosition;
         groundSmashTransform.transform.localRotation = Quaternion.identity;
     }
 
@@ -84,6 +87,8 @@ public class AbilityHammer : Ability
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaOfEffect, Vector3.up, 0.0f);
         foreach (RaycastHit hit in hits)
         {
+            Debug.Log(hit.transform.gameObject.name);
+
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 float damage = 0.0f;
