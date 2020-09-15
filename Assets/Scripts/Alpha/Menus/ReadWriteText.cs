@@ -43,7 +43,7 @@ public class ReadWriteText : MonoBehaviour
 
             volume = data.mVolume;
             overrideControls = data.mOverrideControls;
-            Debug.Log("File Read");
+            //Debug.Log("File Read");
             file.Close();
         }
     }

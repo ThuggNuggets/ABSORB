@@ -113,6 +113,7 @@ public class AbilityHandler : MonoBehaviour
     // Key Event: Deactivates abosrb once activated; only to be called through animation
     public void Key_DeactivateAbsorb()
     {
+        Debug.Log("Deactivating absorb");
         _animator.SetBool("Absorb", false);
         _playerHandler.GetLocomotionHandler().Key_DeactivateSlowdown();
         _isAbosrbing = false;
@@ -167,12 +168,15 @@ public class AbilityHandler : MonoBehaviour
                 if (enemyHandler.IsParried())
                     return enemyHandler;
             }
-            else if (_sortedHitList[i].transform.TryGetComponent(out absorbInteractable))
+            else if (_sortedHitList[i].transform.TryGetComponent(out absorbInteractable) && !_isAbosrbing)
             {
-                _isAbosrbing = true;
-                _animator.SetBool("Absorb", true);
-                _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
-                absorbInteractable.Activate();
+                if (absorbInteractable.IsAbsorbable())
+                {
+                    _isAbosrbing = true;
+                    _animator.SetBool("Absorb", true);
+                    _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
+                    absorbInteractable.Activate();
+                }
                 return null;
             }
         }
