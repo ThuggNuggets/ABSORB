@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2226473657562639847}
   - component: {fileID: 2635682266350211788}
   - component: {fileID: 433242163637555608}
+  - component: {fileID: 5924324794814282567}
   m_Layer: 0
-  m_Name: pCube4
+  m_Name: Cliff 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5924324794814282567
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6166229571371270396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3861478300804232965, guid: 4687da98118dc4948816994ec8f5ed29, type: 3}
