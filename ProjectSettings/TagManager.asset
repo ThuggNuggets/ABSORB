@@ -9,6 +9,8 @@ TagManager:
   - EnemySpecial
   - EnemyElite
   - PlayerMelee
+  - PlayerShield
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

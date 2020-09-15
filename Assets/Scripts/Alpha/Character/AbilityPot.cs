@@ -11,10 +11,14 @@ public class AbilityPot : Ability
     public Animator playerAnimator;
     public Camera mainCamera;
 
+    [Header("Properties")]
+    public float sphereCastRadius = 2.0f;
+
     private AudioSource _waterHitAudio;
     private Animator _orbAnimator;
     private bool _aimActive = false;
     private Trigger _impactTrigger;
+    private Vector3 _lastValidPosition = Vector3.zero;
 
     private void Awake()
     {
@@ -25,6 +29,7 @@ public class AbilityPot : Ability
 
     public override void OnEnter()
     {
+        potAim.transform.SetParent(null);
         _aimActive = true;
         potAim.SetActive(true);
     }
@@ -62,10 +67,19 @@ public class AbilityPot : Ability
         if (_aimActive)
         {
             RaycastHit hit;
-            if (Physics.Raycast(mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f)), out hit, 1000.0f))
+            //if (Physics.Raycast(mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f)), out hit, 1000.0f))
+            if (Physics.SphereCast(mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f)), sphereCastRadius, out hit, 1000.0f))
             {
-                potAim.transform.position = hit.point;
-                potAim.transform.up = hit.normal;
+                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    potAim.transform.position = hit.point;
+                    potAim.transform.up = hit.normal;
+                    _lastValidPosition = hit.point; 
+                }
+                else
+                {
+                    potAim.transform.position = _lastValidPosition;
+                }
             }
         }
     }
@@ -74,5 +88,6 @@ public class AbilityPot : Ability
     {
         yield return new WaitForSeconds(1.0F);
         potAim.SetActive(false);
+        potAim.transform.SetParent(this.transform);
     }
 }
