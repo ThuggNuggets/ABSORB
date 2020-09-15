@@ -58,7 +58,7 @@ public class EnemyHandler : MonoBehaviour
     private Rigidbody _rigidbody;
 
     // Reference to the spawner which created this enemy
-    private SpawnerV2 _spawner;
+    private Spawner _spawner;
 
     private void Awake()
     {
@@ -170,7 +170,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Sets up the spawner
-    public void SetupSpawner(SpawnerV2 spawner)
+    public void SetupSpawner(Spawner spawner)
     {
         _spawner = spawner;
     }
@@ -182,7 +182,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Returns the spawner
-    public SpawnerV2 GetSpawner()
+    public Spawner GetSpawner()
     {
         return _spawner;
     }
@@ -192,6 +192,8 @@ public class EnemyHandler : MonoBehaviour
     {
         // Playing death VFX
         PlayDeathFX();
+
+        _spawner?.RemoveEnemy(this.gameObject);
 
         // Removes enemy from group, if within one
         _groupHandler?.Remove(this);
@@ -214,6 +216,7 @@ public class EnemyHandler : MonoBehaviour
 
     public void ResetAndAddToQueue()
     {
+
         _currentHealth = maxHealth;
         _isAlive = true;
 

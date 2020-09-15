@@ -37,7 +37,7 @@ public class ObjectPooler : MonoBehaviour
                 GameObject obj = Instantiate(pool.prefab);
                 AIBrain aIBrain = obj.GetComponent<AIBrain>();
                 aIBrain.PlayerTransform = spawner.playerTransform;
-                aIBrain.GetComponent<EnemyHandler>().SetupSpawner(spawner);
+                //aIBrain.GetComponent<EnemyHandler>().SetupSpawner(spawner);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
