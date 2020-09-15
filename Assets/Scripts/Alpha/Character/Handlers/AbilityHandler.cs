@@ -113,7 +113,7 @@ public class AbilityHandler : MonoBehaviour
     // Key Event: Deactivates abosrb once activated; only to be called through animation
     public void Key_DeactivateAbsorb()
     {
-        Debug.Log("Deactivating absorb");
+        //Debug.Log("Deactivating absorb");
         _animator.SetBool("Absorb", false);
         _playerHandler.GetLocomotionHandler().Key_DeactivateSlowdown();
         _isAbosrbing = false;
