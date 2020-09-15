@@ -9,10 +9,6 @@ public class CombatHandler : MonoBehaviour
         player controller.  
     */
 
-    // References
-    [Header("References")]
-    public ParticleSystem hitParticleSystem;
-
     [Header("Shield")]
     public MeshRenderer shieldMeshRenderer;
     public Collider shieldSphereCollider;
@@ -180,6 +176,8 @@ public class CombatHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Terrible, needs rework
+
         if (other.gameObject.CompareTag("EnemyWeapon"))
         {
             EnemyHandler enemy = other.gameObject.GetComponentInParent<EnemyHandler>();
@@ -188,7 +186,8 @@ public class CombatHandler : MonoBehaviour
                 case EnemyHandler.EnemyType.MINION:
                     if (shieldState != ShieldState.Shielding)
                         _playerHandler.TakeDamage(enemy.GetDamage());
-                    break;    
+                    break; 
+                       
                 case EnemyHandler.EnemyType.SPECIAL:
                     if (shieldState != ShieldState.Shielding)
                         _playerHandler.TakeDamage(enemy.GetDamage());
@@ -198,8 +197,6 @@ public class CombatHandler : MonoBehaviour
                     _playerHandler.TakeDamage(enemy.GetDamage());
                     break;
             }
-
-            hitParticleSystem.Play();
         }
 
         else if (other.gameObject.CompareTag("EnemyProjectile"))
@@ -216,8 +213,6 @@ public class CombatHandler : MonoBehaviour
                     _playerHandler.TakeDamage(enemy.GetDamage());
                     break;
             }
-
-            hitParticleSystem.Play();
         }
     }
 

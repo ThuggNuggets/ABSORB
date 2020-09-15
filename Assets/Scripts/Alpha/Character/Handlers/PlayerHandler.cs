@@ -17,16 +17,17 @@ public class PlayerHandler : MonoBehaviour
 
     // Attributes
     [Header("Attributes")]
-    public int maxHealth = 10;
+    public int maxHealth = 100;
     public float respawnFlyingTime = 5.0f;
     public float respawnFlyingHeight = 20.0f;
-    private int _currentHealth = 10;
+    private int _currentHealth = 100;
 
     // References
     [Header("References")]
     private float offset = 10.0f;
     public SkinnedMeshRenderer abidaroMesh;
     public GameObject respawnParticle;
+    public ParticleSystem hitParticleSystem;
     private Animator _animator;
     private Rigidbody _rigidbody;
     private Transform _transform;
@@ -59,6 +60,7 @@ public class PlayerHandler : MonoBehaviour
         _cameraManager = FindObjectOfType<CameraManager>();
         _checkpoints = FindObjectOfType<CheckPoint>();
         _capsule = GetComponent<CapsuleCollider>();
+        _currentHealth = maxHealth;
     }
 
     void Start()
@@ -180,7 +182,7 @@ public class PlayerHandler : MonoBehaviour
     // Return the amount of damage the player should take
     public float TakeDamage(int damageAmount)
     {
-        //hitParticleSystem.Play();
+        hitParticleSystem.Play();
         // hitSoundEffect.Play();
         //collidedObject = null;
         // if (debug)
