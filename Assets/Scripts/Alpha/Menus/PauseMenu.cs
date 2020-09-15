@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public Slider volumeSlider;
+    public Toggle toggleButton;
     private ReadWriteText readWrite;
     private InputManager _inputManager;
     private bool Paused;
@@ -30,15 +31,21 @@ public class PauseMenu : MonoBehaviour
         _cameraManager = FindObjectOfType<CameraManager>();
         _mainMenu = GetComponent<MainMenu>();
         volumeSlider.value = readWrite.volume;
+        toggleButton.isOn = readWrite.overrideControls;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Make sure you can't pause when you die or the game is over
-        if (Input.GetKeyDown(KeyCode.Escape) && !_mainMenu.inMainMenu)
+        if (Input.GetKeyDown(KeyCode.Escape) && !_mainMenu.inMainMenu && !settingsMenu.activeInHierarchy)
         {
             Pause();
+        }
+        // Check if you're in the settings menu
+        else if (Input.GetKeyDown(KeyCode.Escape) && settingsMenu.activeInHierarchy)
+        {
+            CloseSettingsMenu();
         }
     }
 
@@ -49,9 +56,6 @@ public class PauseMenu : MonoBehaviour
             Paused = false;
             _inputManager.EnableInput();
             pauseMenu.SetActive(false);
-            readWrite.volume = volumeSlider.value;
-            readWrite.overrideControls = _inputManager.GetOverrideController();
-            readWrite.OverwriteData();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _cameraManager.EnableCameraMovement();
@@ -84,8 +88,12 @@ public class PauseMenu : MonoBehaviour
         settingsMenu.SetActive(true);
     }
 
+    // Close the settings menu and write the changes to the file despite if a change was made or not
     public void CloseSettingsMenu()
     {
+        readWrite.volume = volumeSlider.value;
+        readWrite.overrideControls = toggleButton.isOn;
+        readWrite.OverwriteData();
         pauseMenu.SetActive(true);
         settingsMenu.SetActive(false);
     }

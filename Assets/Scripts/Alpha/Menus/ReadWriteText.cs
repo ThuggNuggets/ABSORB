@@ -6,29 +6,14 @@ using System.IO;
 
 public class ReadWriteText : MonoBehaviour
 {
-
-    public float volume;
+    [Header("Default Parameters")]
     [HideInInspector]
-    public bool overrideControls;
-    //public GameData mData;
+    public float volume = 100f;
+    [HideInInspector]
+    public bool overrideControls = false;
 
     void CreateFile()
     {
-        //// Path of the file
-        //string path = Application.dataPath + "/Log.txt";
-
-        //// Create File if it doesn't exist
-        //if (!File.Exists(path))
-        //{
-        //    File.WriteAllText(path, "Testing \n\n");
-        //}
-
-        //// Content of the file
-        //string content = "Testing content: " + System.DateTime.Now + "\n";
-
-        //// Add some text to it
-        //File.AppendAllText(path, content);
-
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.dataPath + "/gameData.dat");
 
@@ -45,10 +30,6 @@ public class ReadWriteText : MonoBehaviour
 
     void ReadFile()
     {
-        //string path = "/Log.txt";
-
-        //// Read the text directly from the .txt file
-        //File.ReadAllText(path);
         if (new FileInfo(Application.dataPath + "/gameData.dat").Length == 0)
         {
             Debug.Log("File is empty @ " + Application.dataPath + "/gameData.dat");
@@ -86,7 +67,6 @@ public class ReadWriteText : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
         if (!File.Exists(Application.dataPath + "/gameData.dat"))
         {
             volume = 100;

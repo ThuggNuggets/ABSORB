@@ -1044,6 +1044,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 3822759567910527937}
   settingsMenu: {fileID: 5585063238259219923}
   volumeSlider: {fileID: 2658891059284731582}
+  toggleButton: {fileID: 504072609921231334}
 --- !u!114 &8717547865747671642
 MonoBehaviour:
   m_ObjectHideFlags: 0

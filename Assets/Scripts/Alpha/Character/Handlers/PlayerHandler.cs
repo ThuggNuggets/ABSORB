@@ -68,7 +68,7 @@ public class PlayerHandler : MonoBehaviour
     void Start()
     {
         // Set the player position as a respawn point
-        SetRespawnPosition(this._transform.position); // Might have to rewrite to be Vector3 instead of transform
+        SetRespawnPosition(this._transform.position);
         abidaroMesh.enabled = true;
         respawnParticle.SetActive(false);
     }
@@ -77,13 +77,10 @@ public class PlayerHandler : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        // if (!isAlive)
-        // {
         isAlive = true;
         _currentHealth = maxHealth;
         StartCoroutine(MoveOverSeconds(this.gameObject, GetRespawnPosition(), respawnFlyingOffset, respawnFlyingTime));
         //_transform.rotation = GetRespawnPosition().rotation;
-        //}
     }
 
     // Move the player back to checkpoint position over a certain number of seconds
