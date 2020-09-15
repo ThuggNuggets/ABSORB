@@ -19,6 +19,9 @@ public class CombatHandler : MonoBehaviour
     public Collider playerWeaponColl;
     public Collider playerWeaponColl2;
     public Collider playerWeaponColl3;
+    public int playerWeaponDamage = 25;
+    public int playerWeaponDamage2 = 50;
+    public int playerWeaponDamage3 = 100;
     public AudioSource weaponSwingAudio;
     [Header("Body")]
     public SkinnedMeshRenderer playerShader;

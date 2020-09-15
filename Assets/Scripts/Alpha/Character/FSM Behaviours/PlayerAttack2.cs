@@ -21,6 +21,7 @@ public class PlayerAttack2 : StateMachineBehaviour
     {
         _combatHandler = _playerHandler.GetCombatHandler();
         _inputManager = _playerHandler.GetInputManager();
+        _playerHandler.SetPrimaryAttackDamage(_playerHandler.GetCombatHandler().playerWeaponDamage2);
         // Setting the current state within the player handler
         _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.ATTACK);
     }

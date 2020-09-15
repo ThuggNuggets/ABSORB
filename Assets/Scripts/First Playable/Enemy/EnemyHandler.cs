@@ -93,7 +93,7 @@ public class EnemyHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PlayerMelee") && other.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
-            TakeDamage(25.0f);
+            TakeDamage(_playerHandler.GetPrimaryAttackDamage());
     }
 
     // Makes the enemy take damage

@@ -17,19 +17,27 @@ public class PotAttack : AIBehaviour
     public Transform projectileStartPoint;
     public ParticleSystem waterFireEffect;
 
-    public override void OnStateEnter() 
+    private Animator _animator;
+
+    public void Awake()
     {
+        _animator = this.GetComponent<Animator>();
+    }
+
+    public override void OnStateEnter()
+    {
+        _animator.SetBool("Attacking", true);
         waterFireEffect.Play();
         EliteProjectile eliteProjectile = Instantiate(projectilePrefab, null).GetComponent<EliteProjectile>();
         eliteProjectile.InitialiseProjectile(enemyHandler, brain.PlayerTransform, projectileStartPoint, projectileSpeed, projectileLifeTime, projectileDamage);
         StartCoroutine(JustFiredTimer());
     }
 
-    public override void OnStateExit() {}
+    public override void OnStateExit() { }
 
-    public override void OnStateFixedUpdate() {}
+    public override void OnStateFixedUpdate() { }
 
-    public override void OnStateUpdate() 
+    public override void OnStateUpdate()
     {
         // // If player gets too close when preparing to fire, the enemy will cancel the attack.
         // if (brain.GetDistanceToPlayer() < dashCancelRange)
@@ -45,7 +53,10 @@ public class PotAttack : AIBehaviour
     public IEnumerator JustFiredTimer()
     {
         yield return new WaitForSecondsRealtime(justFiredProjectileTimer);
-        if(!brain.GetHandler().IsParried())
+        if (!brain.GetHandler().IsParried())
+        {
+            _animator.SetBool("Attacking", false);
             brain.SetBehaviour("Movement");
+        }
     }
 }

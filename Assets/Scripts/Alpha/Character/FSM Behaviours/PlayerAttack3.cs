@@ -16,6 +16,8 @@ public class PlayerAttack3 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _combatHandler = _playerHandler.GetComponent<CombatHandler>();
+        _playerHandler.SetPrimaryAttackDamage(_playerHandler.GetCombatHandler().playerWeaponDamage3);
+
         // Setting the current state within the player handler
         _playerHandler.SetState(PlayerHandler.PlayerAnimatorState.ATTACK);
     }
@@ -23,6 +25,7 @@ public class PlayerAttack3 : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _playerHandler.ResetPrimaryAttackDamage();
         // Call the reset function upon animation finish
         _combatHandler.AttackComboFinish();
     }

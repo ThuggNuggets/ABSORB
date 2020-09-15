@@ -18,6 +18,7 @@ public class PlayerHandler : MonoBehaviour
     // Attributes
     [Header("Attributes")]
     public int maxHealth = 100;
+    public int primaryAttackDamage = 25;
     public float respawnFlyingTime = 5.0f;
     public float respawnFlyingOffset = 20.0f;
     private int _currentHealth = 100;
@@ -40,6 +41,7 @@ public class PlayerHandler : MonoBehaviour
     private float offset = 10.0f;
     private float _checkPointYLevel;
     private float _playerYLevel;
+    private int _defaultDamage;
 
     Vector3 point = Vector3.zero;
     Vector3 point2 = Vector3.zero;
@@ -63,6 +65,7 @@ public class PlayerHandler : MonoBehaviour
         _checkpoints = FindObjectOfType<CheckPoint>();
         _capsule = GetComponent<CapsuleCollider>();
         _currentHealth = maxHealth;
+        _defaultDamage = primaryAttackDamage;
     }
 
     void Start()
@@ -259,6 +262,21 @@ public class PlayerHandler : MonoBehaviour
         // Debug.Log("Set new respawn position at: (" + checkpointPosition.x + ", " +
         // checkpointPosition.y + ", " + checkpointPosition.z + ")");
         return _respawnPosition = checkpointPosition;
+    }
+
+    public int GetPrimaryAttackDamage()
+    {
+        return primaryAttackDamage;
+    }
+
+    public void SetPrimaryAttackDamage(int newDamage)
+    {
+        primaryAttackDamage = newDamage;
+    }
+
+    public void ResetPrimaryAttackDamage()
+    {
+        primaryAttackDamage = _defaultDamage;
     }
 
     #endregion
