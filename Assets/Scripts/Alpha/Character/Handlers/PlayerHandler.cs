@@ -33,6 +33,7 @@ public class PlayerHandler : MonoBehaviour
     private LocomotionHandler _locomotionHandler;
     private CombatHandler _combatHandler;
     private InputManager _inputManager;
+    private CameraManager _cameraManager;
     private CheckPoint _checkpoints;
     private Vector3 _respawnPosition;
     private CapsuleCollider _capsule;
@@ -55,6 +56,7 @@ public class PlayerHandler : MonoBehaviour
         _locomotionHandler = this.GetComponent<LocomotionHandler>();
         _combatHandler = this.GetComponent<CombatHandler>();
         _inputManager = FindObjectOfType<InputManager>();
+        _cameraManager = FindObjectOfType<CameraManager>();
         _checkpoints = FindObjectOfType<CheckPoint>();
         _capsule = GetComponent<CapsuleCollider>();
     }
@@ -135,6 +137,7 @@ public class PlayerHandler : MonoBehaviour
         respawnParticle.SetActive(true);
         _capsule.enabled = false;
         _locomotionHandler.enabled = false;
+        _cameraManager.deathCamera.Priority = 2;
         _rigidbody.useGravity = false;
     }
 
@@ -143,9 +146,11 @@ public class PlayerHandler : MonoBehaviour
         abidaroMesh.enabled = true;
         respawnParticle.SetActive(false);
         _locomotionHandler.enabled = true;
+        _cameraManager.deathCamera.Priority = 0;
         _capsule.enabled = true;
         _rigidbody.useGravity = true;
         _inputManager.EnableInput();
+        _cameraManager.EnableCameraMovement(); // TEMPORARY FOR NOW
     }
 
     #endregion
@@ -203,6 +208,11 @@ public class PlayerHandler : MonoBehaviour
     public InputManager GetInputManager()
     {
         return _inputManager;
+    }
+
+    public CameraManager GetCameraManager()
+    {
+        return _cameraManager;
     }
 
     public Rigidbody GetRigidbody()

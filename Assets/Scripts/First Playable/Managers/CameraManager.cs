@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public InputManager inputManager;
     public CinemachineFreeLook controllerCamera;
     public CinemachineFreeLook mouseCamera;
+    public CinemachineVirtualCamera deathCamera;
     [Header("Only allow Keyboard input")]
     public bool overrideController = false;
 
@@ -35,6 +36,7 @@ public class CameraManager : MonoBehaviour
 
         _controllerUpdated = inputManager.GetControllerConnected();
         _overrideUpdated = overrideController;
+        deathCamera.Priority = 0;
 
         _tempMouseSpeedY = mouseCamera.m_YAxis.m_MaxSpeed;
         _tempMouseSpeedX = mouseCamera.m_XAxis.m_MaxSpeed;

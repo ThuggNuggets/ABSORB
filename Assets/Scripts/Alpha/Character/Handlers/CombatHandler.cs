@@ -375,6 +375,7 @@ public class CombatHandler : MonoBehaviour
         {
             _respawning = true;
             _inputManager.DisableInput();
+            _playerHandler.GetCameraManager().DisableCameraMovement(); // TEMPORARY FOR NOW
             StartCoroutine(Respawn());
         }
     }

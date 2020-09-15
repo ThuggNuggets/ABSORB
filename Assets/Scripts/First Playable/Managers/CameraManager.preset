@@ -26,7 +26,7 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: playerMovement
+    propertyPath: inputManager
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -38,10 +38,10 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: inputManager
+    propertyPath: deathCamera
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: overrideController
-    value: 0
+    value: 1
     objectReference: {fileID: 0}

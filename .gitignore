@@ -68,3 +68,5 @@ ProjectSettings/
 .vscode/
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
+
+Assets/gameData.dat
