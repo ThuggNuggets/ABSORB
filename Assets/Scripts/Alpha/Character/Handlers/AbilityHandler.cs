@@ -104,7 +104,7 @@ public class AbilityHandler : MonoBehaviour
                 _playerHandler.GetLocomotionHandler().Key_ActivateSlowdown();
                 enemy.GetBrain().SetBehaviour("Absorbed");
                 enemy.GetEnemyGroupHandler()?.Remove(enemy);
-                abilityArms[(int)_currentAbility].enabled = true;
+                abilityArms[(int)_currentAbility - 1].enabled = true;
                 this.SetAbility(enemy.GetAbilityType());
             }
         }
@@ -125,7 +125,7 @@ public class AbilityHandler : MonoBehaviour
         if (_currentAbility != AbilityType.NONE)
             _abilities[(int)_currentAbility].OnExit();
         else
-            abilityArms[(int)_currentAbility].enabled = false;
+            abilityArms[(int)_currentAbility - 1].enabled = false;
 
         _currentAbility = nextAbility;
 
